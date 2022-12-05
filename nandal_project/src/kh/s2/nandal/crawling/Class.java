@@ -12,6 +12,8 @@ public class Class {
 		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/32019";
 		//페이지 dom
 		Document doc = Jsoup.connect(crawlingURL).get();
+		//줄바꿈 유지 셋팅
+		doc.outputSettings().prettyPrint(false);
 		//클래스 소개
 		Elements classIntro = doc.select("#class_info > div.class_info > p");
 		System.out.println(classIntro.html());
