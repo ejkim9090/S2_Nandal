@@ -8,16 +8,23 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.*;
 
+import kh.s2.nandal.crawling.model.service.ClassService;
+import kh.s2.nandal.crawling.model.vo.ClassDto;
+
 
 
 public class Class {
+	private static ClassService svc = new ClassService();
+	private static int fileNum = 1;
+	
 	public static void main(String[] args) throws IOException {
+		
 		//URL 주소
 		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/32010";
 		//페이지 dom
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 		WebDriver drv = new ChromeDriver();   // 크롬창이 열림을 확인함.
-		WebDriverWait w = new WebDriverWait(drv, 100);
+		WebDriverWait w = new WebDriverWait(drv, 1000);
 		JavascriptExecutor jexe = (JavascriptExecutor)drv;
 		
 		drv.get(crawlingURL);  // 이동하고 싶은 url
@@ -81,26 +88,57 @@ public class Class {
 		String classAdress = classAdressEle.getText();
 		System.out.println(classAdress);
 		
-		System.out.println("---------------------시/군/구-----------------------");
-		WebElement classAreaEle = drv.findElement(By.cssSelector("body > div.content.opened > div.container.no-lr-padding > div.class-abbr-info-area > div > div:nth-child(1) > div > div > span"));
-		String classArea = classAreaEle.getText();
-		System.out.println(classArea);
+		System.out.println("---------------------시도코드-----------------------");
+		WebElement areaNameEle = drv.findElement(By.cssSelector("#map > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(2) > div > div.overlay_title"));
+		String[] areaNameArr = areaNameEle.getText().split(" ");
+		String areaName = areaNameArr[0]; //시도명만 가져오기
+		System.out.println(areaName);
+		int areaCode = svc.selectArea(areaName); // 시도코드
+		System.out.println(areaCode);
 		
 		//가격
 		System.out.println("---------------------가격-----------------------");
 		WebElement classPriceEle = drv.findElement(By.cssSelector("#price-bar > div.row > div.detail_txt.col-xs-6 > div > span.price01"));
-		String classPrice = classPriceEle.getText().replaceAll(",", "");
+		String classPricestr = classPriceEle.getText().replaceAll(",", "");
+		int classPrice = Integer.parseInt(classPricestr);
 		System.out.println(classPrice);
 		//난이도
 		
 		//최소,최대 인원
 		System.out.println("---------------------최소/최대 인원-----------------------");
 		WebElement classPeopleEle = drv.findElement(By.cssSelector("body > div.content.opened > div.container.no-lr-padding > div.class-abbr-info-area > div > div:nth-child(4) > div > div > div:nth-child(2)"));
-		String[] classPeople = classPeopleEle.getText().split(Pattern.quote("("))[0].split(Pattern.quote("-"));
-		String classMin = classPeople[0];
-		String classMax = classPeople[1];			
-		System.out.println("최소인원: "+classMin);	
-		System.out.println("최대인원: "+classMax);
+		String[] classPeople = classPeopleEle.getText().split(Pattern.quote("\n"))[0].split(Pattern.quote("-"));
+		String classMinstr = classPeople[0];
+		String classMaxstr = classPeople[1];		
+		int classMin = Integer.parseInt(classMinstr);
+		int classMax = Integer.parseInt(classMaxstr);	
+		//클래스 대표이미지
+		System.out.println("---------------------클래스 대표이미지-----------------------");
+		List<WebElement> classImgEleAll = drv.findElements(By.cssSelector("#class_info > div.class_info > div.clsas-complete-piece-area.list-type-3 > ul > li"));
+		WebElement classImgEleli = classImgEleAll.get(0);
+		WebElement classImgEle = classImgEleli.findElement(By.cssSelector("div > a"));
+		String	classImgUrl = classImgEle.getAttribute("style").split("\"")[1];
+		System.out.println(classImgUrl);
+        try {
+            int check = svc.getImageUrl(classImgUrl, fileNum);
+            if(check == 1) {
+            	fileNum++;
+            }
+        } catch (IOException e) {
+        	  // 예외처리
+            e.printStackTrace();
+        }
+		
+		
+		//db에 insert하기
+		int classCode = 1;
+		int categoryCode = 1;
+		int classLevel = 1;
+		String classImg = "./images/class/"+fileNum+".jpg";
+		ClassDto dto = new ClassDto(classCode,  categoryCode, className, classImg, classIntro,
+			 classCur, classHost, classAlltime, classPrd, classAtt, areaCode,
+			 classAdress, classPrice, classLevel, classMin, classMax);
+		svc.insertMember(dto);
 	}
 
 }
