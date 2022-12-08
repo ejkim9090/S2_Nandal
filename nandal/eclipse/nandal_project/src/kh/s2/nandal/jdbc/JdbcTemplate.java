@@ -1,4 +1,4 @@
-package kh.s2.nandal.crawling.jdbc;
+package kh.s2.nandal.jdbc;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -52,7 +52,7 @@ public class JdbcTemplate {
 	
 	public static void close(Connection conn) {
 		try {
-			if (conn != null)
+			if (conn != null && !conn.isClosed())
 				conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

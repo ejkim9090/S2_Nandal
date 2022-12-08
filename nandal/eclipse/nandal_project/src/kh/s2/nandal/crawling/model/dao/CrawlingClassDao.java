@@ -11,13 +11,37 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import kh.s2.nandal.crawling.jdbc.JdbcTemplate;
-import kh.s2.nandal.crawling.model.vo.ClassDto;
+import kh.s2.nandal.crawling.model.vo.CrawlingClassDto;
+import kh.s2.nandal.crawling.model.vo.CrawlingClassPhotoDto;
+import kh.s2.nandal.jdbc.JdbcTemplate;
 
 
-public class ClassDao {
-	public int insertClass(Connection conn, ClassDto dto) {
-		System.out.println("insertClass()");
+public class CrawlingClassDao {
+	public int insertClassPhoto(Connection conn, CrawlingClassPhotoDto dto) {
+		System.out.println("insertClassPhoto()");
+		
+		int result = 0;
+		String sql = "insert into class_photo values(?,?,?)"; // ""안에 ; 는 없어야함
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getClassCode());
+			pstmt.setString(2, dto.getCpRoute());
+			pstmt.setInt(3, dto.getCpType()); 
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//정보를 dao에서 받아왔으니 db와의 연결을 끊는 부분
+			JdbcTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertClass(Connection conn, CrawlingClassDto dto) {
+		System.out.println("insertClassdaO()");
 		
 		int result = 0;
 		String sql = "insert into class values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; // ""안에 ; 는 없어야함

@@ -1,6 +1,6 @@
 package kh.s2.nandal.crawling.model.vo;
 
-public class ClassDto {
+public class CrawlingClassDto {
 //	CLASS_CODE    NOT NULL NUMBER         
 //	CATEGORY_CODE NOT NULL NUMBER(2)      
 //	CLASS_NAME    NOT NULL VARCHAR2(200)  
@@ -34,11 +34,11 @@ public class ClassDto {
 	private int classMin;
 	private int classMax;
 	
-	public ClassDto() {
+	public CrawlingClassDto() {
 		super();
 	}
-
-	public ClassDto(int classCode, int categoryCode, String className, String classImg, String classIntro,
+	
+	public CrawlingClassDto(int classCode, int categoryCode, String className, String classImg, String classIntro,
 			String classCur, String classHost, String classAlltime, String classPrd, String classAtt, int areaCode,
 			String classAdress, int classPrice, int classLevel, int classMin, int classMax) {
 		super();
@@ -59,142 +59,113 @@ public class ClassDto {
 		this.classMin = classMin;
 		this.classMax = classMax;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "ClassDto [classCode=" + classCode + ", CategoryCode=" + categoryCode + ", className=" + className
-				+ ", classImg=" + classImg + ", classIntro=" + classIntro + ", classCur=" + classCur + ", classHost="
-				+ classHost + ", classAlltime=" + classAlltime + ", classPrd=" + classPrd + ", classAtt=" + classAtt
-				+ ", areaCode=" + areaCode + ", classAdress=" + classAdress + ", classPrice=" + classPrice
-				+ ", classLevel=" + classLevel + ", classMin=" + classMin + ", classMax=" + classMax + "]";
+		return "CrawlingClassDto [classCode=" + classCode + ", categoryCode=" + categoryCode + ", className="
+				+ className + ", classImg=" + classImg + ", classIntro=" + classIntro + ", classCur=" + classCur
+				+ ", classHost=" + classHost + ", classAlltime=" + classAlltime + ", classPrd=" + classPrd
+				+ ", classAtt=" + classAtt + ", areaCode=" + areaCode + ", classAdress=" + classAdress + ", classPrice="
+				+ classPrice + ", classLevel=" + classLevel + ", classMin=" + classMin + ", classMax=" + classMax + "]";
 	}
-
+	
 	public int getClassCode() {
 		return classCode;
 	}
-
 	public void setClassCode(int classCode) {
 		this.classCode = classCode;
 	}
-
 	public int getCategoryCode() {
 		return categoryCode;
 	}
-
 	public void setCategoryCode(int categoryCode) {
-		categoryCode = categoryCode;
+		this.categoryCode = categoryCode;
 	}
-
 	public String getClassName() {
 		return className;
 	}
-
 	public void setClassName(String className) {
 		this.className = className;
 	}
-
 	public String getClassImg() {
 		return classImg;
 	}
-
 	public void setClassImg(String classImg) {
 		this.classImg = classImg;
 	}
-
 	public String getClassIntro() {
 		return classIntro;
 	}
-
 	public void setClassIntro(String classIntro) {
 		this.classIntro = classIntro;
 	}
-
 	public String getClassCur() {
 		return classCur;
 	}
-
 	public void setClassCur(String classCur) {
 		this.classCur = classCur;
 	}
-
 	public String getClassHost() {
 		return classHost;
 	}
-
 	public void setClassHost(String classHost) {
 		this.classHost = classHost;
 	}
-
 	public String getClassAlltime() {
 		return classAlltime;
 	}
-
 	public void setClassAlltime(String classAlltime) {
 		this.classAlltime = classAlltime;
 	}
-
 	public String getClassPrd() {
 		return classPrd;
 	}
-
 	public void setClassPrd(String classPrd) {
 		this.classPrd = classPrd;
 	}
-
 	public String getClassAtt() {
 		return classAtt;
 	}
-
 	public void setClassAtt(String classAtt) {
 		this.classAtt = classAtt;
 	}
-
 	public int getAreaCode() {
 		return areaCode;
 	}
-
 	public void setAreaCode(int areaCode) {
 		this.areaCode = areaCode;
 	}
-
 	public String getClassAdress() {
 		return classAdress;
 	}
-
 	public void setClassAdress(String classAdress) {
 		this.classAdress = classAdress;
 	}
-
 	public int getClassPrice() {
 		return classPrice;
 	}
-
 	public void setClassPrice(int classPrice) {
 		this.classPrice = classPrice;
 	}
-
 	public int getClassLevel() {
 		return classLevel;
 	}
-
 	public void setClassLevel(int classLevel) {
 		this.classLevel = classLevel;
 	}
-
 	public int getClassMin() {
 		return classMin;
 	}
-
 	public void setClassMin(int classMin) {
 		this.classMin = classMin;
 	}
-
 	public int getClassMax() {
 		return classMax;
 	}
-
 	public void setClassMax(int classMax) {
 		this.classMax = classMax;
 	}
+	
+	
 	
 }

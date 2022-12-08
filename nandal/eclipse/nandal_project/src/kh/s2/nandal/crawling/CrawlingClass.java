@@ -8,28 +8,41 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.*;
 
-import kh.s2.nandal.crawling.model.service.ClassService;
-import kh.s2.nandal.crawling.model.vo.ClassDto;
+import kh.s2.nandal.crawling.model.service.CrawlingClassService;
+import kh.s2.nandal.crawling.model.vo.CrawlingClassDto;
+import kh.s2.nandal.crawling.model.vo.CrawlingClassPhotoDto;
 
 
 
-public class Class {
-	private static ClassService svc = new ClassService();
-	private static int fileNum = 1;
+public class CrawlingClass {
+	private CrawlingClassService svc = new CrawlingClassService();
+	private CrawlingClassDto dto = new CrawlingClassDto();
 	
 	public static void main(String[] args) throws IOException {
+		new CrawlingClass().crawling();
+//		System.out.println(cla.fileNum);
+	}
+	public void crawling() throws IOException {
+		//클래스 목록 페이지에서 자동 구현하기 TODO
+//		String crawlingListURL = "https://www.sssd.co.kr/m/search/class/category?midx=1";
 		
-		//URL 주소
-		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/32010";
+		//URL 클래스 상세페이지
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/32010";
+		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/23538";
 		//페이지 dom
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 		WebDriver drv = new ChromeDriver();   // 크롬창이 열림을 확인함.
-		WebDriverWait w = new WebDriverWait(drv, 1000);
+		WebDriverWait w = new WebDriverWait(drv, 3000);
 		JavascriptExecutor jexe = (JavascriptExecutor)drv;
 		
-		drv.get(crawlingURL);  // 이동하고 싶은 url
 		
-		//줄바꿈 유지 셋팅
+		drv.get(crawlingURL);  // 클래스 페이지로 이동
+		
+		//클래스 코드 추출
+		String[] urlstrArr = crawlingURL.split("/");
+		String classCodestr = urlstrArr[urlstrArr.length-1];
+		int classCode = Integer.parseInt(classCodestr);
+		
 		//클래스 명
 		System.out.println("---------------------클래스 명-----------------------");
 		WebElement classNameEle = drv.findElement(By.cssSelector("body > div.content.opened > div.container.no-lr-padding > div.title-text-area > div.title-subject"));
@@ -110,35 +123,66 @@ public class Class {
 		String[] classPeople = classPeopleEle.getText().split(Pattern.quote("\n"))[0].split(Pattern.quote("-"));
 		String classMinstr = classPeople[0];
 		String classMaxstr = classPeople[1];		
+		System.out.println(classMinstr);
+		System.out.println(classMaxstr);
 		int classMin = Integer.parseInt(classMinstr);
 		int classMax = Integer.parseInt(classMaxstr);	
-		//클래스 대표이미지
-		System.out.println("---------------------클래스 대표이미지-----------------------");
-		List<WebElement> classImgEleAll = drv.findElements(By.cssSelector("#class_info > div.class_info > div.clsas-complete-piece-area.list-type-3 > ul > li"));
-		WebElement classImgEleli = classImgEleAll.get(0);
-		WebElement classImgEle = classImgEleli.findElement(By.cssSelector("div > a"));
-		String	classImgUrl = classImgEle.getAttribute("style").split("\"")[1];
-		System.out.println(classImgUrl);
-        try {
-            int check = svc.getImageUrl(classImgUrl, fileNum);
-            if(check == 1) {
-            	fileNum++;
-            }
-        } catch (IOException e) {
-        	  // 예외처리
-            e.printStackTrace();
-        }
 		
+		//클래스 이미지
+		System.out.println("---------------------클래스 대표이미지 및 클래스 이미지-----------------------");
+		List<WebElement> classImgEleAll = drv.findElements(By.cssSelector("body > div.content.opened > div.container.no-lr-padding > div.detail-title.class-detail-img-area > div:nth-child(2) > div > div"));
+		String	classImgUrl = null;
+		for(int i = 0; i < classImgEleAll.size(); i++) {
+//			classImgUrl = classImgEleAll.get(i).getAttribute("style").split("\"")[1];
+			classImgUrl = classImgEleAll.get(i).getAttribute("data-src");
+			System.out.println("서브이미지"+i+": "+classImgUrl);
+			try {
+				//추출 대표/서브 이미지 파일 저장
+				String fileName = classCodestr+i;
+	        	svc.getImageUrl(classImgUrl, fileName);
+	        	if(i == 0) {
+	        		//class 테이블에 데이터 insert
+	        		int categoryCode = 1;
+	        		int classLevel = (int)(Math.random()*3) + 1;
+	        		String classImg = "./images/class/"+fileName+".jpg";
+	        		dto = new CrawlingClassDto(classCode,  categoryCode, className, classImg, classIntro,
+	        			 classCur, classHost, classAlltime, classPrd, classAtt, areaCode,
+	        			 classAdress, classPrice, classLevel, classMin, classMax);
+	        		svc.insertClass(dto);
+	        	} else {
+	        		//class_photo 테이블에 데이터 insert
+	        		String cpRoute = "./images/class/"+fileName+".jpg";
+	        		CrawlingClassPhotoDto cpDto = new CrawlingClassPhotoDto(classCode, cpRoute, 0);
+	        		svc.insertClassPhoto(cpDto);
+	        	}
+	        } catch (IOException e) {
+	        	  // 예외처리
+	            e.printStackTrace();
+	        }
+		}
 		
-		//db에 insert하기
-		int classCode = 1;
-		int categoryCode = 1;
-		int classLevel = 1;
-		String classImg = "./images/class/"+fileNum+".jpg";
-		ClassDto dto = new ClassDto(classCode,  categoryCode, className, classImg, classIntro,
-			 classCur, classHost, classAlltime, classPrd, classAtt, areaCode,
-			 classAdress, classPrice, classLevel, classMin, classMax);
-		svc.insertMember(dto);
+		//클래스 상세내용 이미지
+		List<WebElement> classImgEleAll2 = drv.findElements(By.cssSelector("#class_info > div.class_info > div:last-of-type > ul > li"));
+		String classImgUrl2 = null;
+		for(int i = 0; i < classImgEleAll2.size(); i++) {
+			WebElement classImgEle2 = classImgEleAll2.get(i).findElement(By.cssSelector("div.list-photo > a"));
+			classImgUrl2 = classImgEle2.getAttribute("style").split("\"")[1];
+			System.out.println("상세내용 이미지"+i+": "+classImgUrl2);
+			try {
+				//이미지 파일 저장
+				int fileNum = i+classImgEleAll.size();
+				String fileName = classCodestr+fileNum;
+	        	svc.getImageUrl(classImgUrl2, fileName);
+
+	        	//class_photo 테이블에 데이터 insert
+	        	String cpRoute = "./images/class/"+fileName+".jpg";
+	    		CrawlingClassPhotoDto cpDto = new CrawlingClassPhotoDto(classCode, cpRoute, 1);
+	    		svc.insertClassPhoto(cpDto);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 }

@@ -6,19 +6,42 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 public class Test {
 
-    public static void main(String[] args) {
-        // 불러올 이미지 URL
-        String imageUrl = "https://d1x9f5mf11b8gz.cloudfront.net/class%2F20221205%2Fa5c68947-f579-457e-8bf8-6e350925b860.jpg";
-
-        try {
-            getImageUrl(imageUrl);
-
-        } catch (IOException e) {
-        	  // 예외처리
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws IOException {
+//        // 불러올 이미지 URL
+//        String imageUrl = "https://d1x9f5mf11b8gz.cloudfront.net/class%2F20221205%2Fa5c68947-f579-457e-8bf8-6e350925b860.jpg";
+//
+//        try {
+//            getImageUrl(imageUrl);
+//
+//        } catch (IOException e) {
+//        	  // 예외처리
+//            e.printStackTrace();
+//        }
+    	
+			//URL 주소
+			String crawlingURL = "https://www.sssd.co.kr/m/class/detail/32010";
+			//페이지 dom
+			System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+			WebDriver drv = new ChromeDriver();   // 크롬창이 열림을 확인함.
+			WebDriverWait w = new WebDriverWait(drv, 1000);
+			JavascriptExecutor jexe = (JavascriptExecutor)drv;
+			
+			drv.get(crawlingURL);  // 이동하고 싶은 url
+			
+			System.out.println("---------------------클래스 명-----------------------");
+			WebElement classNameEle = drv.findElement(By.cssSelector("body > div.content.opened > div.container.no-lr-padding > div.detail-title.class-detail-img-area > div:nth-child(1) > div > div:nth-child(1)"));
+//			String className = classNameEle.getText();
+//			System.out.println(className);
+			System.out.println(classNameEle.getAttribute("style"));
     }
 
     private static void getImageUrl(String imageUrl) throws IOException {
