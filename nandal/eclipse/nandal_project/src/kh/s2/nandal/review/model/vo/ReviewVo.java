@@ -3,8 +3,7 @@ package kh.s2.nandal.review.model.vo;
 import java.sql.Timestamp;
 
 public class ReviewVo {
-//	REVIEW_CODE       NOT NULL NUMBER         
-//	CA_CODE           NOT NULL NUMBER         
+//	REVIEW_CODE       NOT NULL NUMBER          
 //	REVIEW_TIME       NOT NULL TIMESTAMP(6)   
 //	REVIEW_CONT       NOT NULL VARCHAR2(1000) 
 //	REVIEW_GRADE      NOT NULL NUMBER(2,1)    
@@ -14,7 +13,6 @@ public class ReviewVo {
 //	REVIEW_LEVEL      NOT NULL NUMBER(1)      
 //	REVIEW_GROUP      NOT NULL NUMBER(1)    
 	private int reviewCode;
-	private int caCode;
 	private Timestamp reviewTime;
 	private String reviewCont;
 	private int reviewGrade;
@@ -26,7 +24,7 @@ public class ReviewVo {
 	
 	@Override
 	public String toString() {
-		return "ReviewVo [reviewCode=" + reviewCode + ", caCode=" + caCode + ", reviewTime=" + reviewTime
+		return "ReviewVo [reviewCode=" + reviewCode + ", reviewTime=" + reviewTime
 				+ ", reviewCont=" + reviewCont + ", reviewGrade=" + reviewGrade + ", reviewKind=" + reviewKind
 				+ ", reviewComponent=" + reviewComponent + ", reviewFacility=" + reviewFacility + ", reviewLevel="
 				+ reviewLevel + ", reviewGroup=" + reviewGroup + "]";
@@ -37,12 +35,6 @@ public class ReviewVo {
 	}
 	public void setReviewCode(int reviewCode) {
 		this.reviewCode = reviewCode;
-	}
-	public int getCaCode() {
-		return caCode;
-	}
-	public void setCaCode(int caCode) {
-		this.caCode = caCode;
 	}
 	public Timestamp getReviewTime() {
 		return reviewTime;

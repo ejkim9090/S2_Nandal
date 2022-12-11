@@ -14,20 +14,19 @@ public class ReviewDao {
 	public int insert(Connection conn, ReviewVo vo) {
 		System.out.println(">>> ReviewDao insert param vo : " + vo);
 		int result = 0;
-		String sql = "insert into review (REVIEW_CODE,CA_CODE,REVIEW_CONT,REVIEW_GRADE,REVIEW_KIND,REVIEW_COMPONENT,REVIEW_FACILITY,REVIEW_LEVEL,REVIEW_GROUP) values(?,?,?,?,?,?,?,?,?)"; // ""안에 ; 는 없어야함
+		String sql = "insert into review (REVIEW_CODE,REVIEW_CONT,REVIEW_GRADE,REVIEW_KIND,REVIEW_COMPONENT,REVIEW_FACILITY,REVIEW_LEVEL,REVIEW_GROUP) values(?,?,?,?,?,?,?,?)"; // ""안에 ; 는 없어야함
 		PreparedStatement pstmt = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, vo.getReviewCode());
-			pstmt.setInt(2, vo.getCaCode());
-			pstmt.setString(3, vo.getReviewCont());
-			pstmt.setInt(4, vo.getReviewGrade());
-			pstmt.setInt(5, vo.getReviewKind());
-			pstmt.setInt(6, vo.getReviewComponent());
-			pstmt.setInt(7, vo.getReviewFacility());
-			pstmt.setInt(8, vo.getReviewLevel());
-			pstmt.setInt(9, vo.getReviewGroup());
+			pstmt.setString(2, vo.getReviewCont());
+			pstmt.setInt(3, vo.getReviewGrade());
+			pstmt.setInt(4, vo.getReviewKind());
+			pstmt.setInt(5, vo.getReviewComponent());
+			pstmt.setInt(6, vo.getReviewFacility());
+			pstmt.setInt(7, vo.getReviewLevel());
+			pstmt.setInt(8, vo.getReviewGroup());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
