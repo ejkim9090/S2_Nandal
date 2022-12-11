@@ -14,7 +14,7 @@ public class ClassApplyDao {
 	public int insert(Connection conn, ClassApplyVo vo) {
 		System.out.println(">>> ClassApplyService insert param : " + vo);
 		int result = 0;
-		String sql = "insert into class_apply (CA_CODE,MEMBER_ID,CA_TOTAL,CO_CODE,CS_CODE,CLASS_CODE) values(?,?,?,?,?,?)"; // ""안에 ; 는 없어야함
+		String sql = "insert into class_apply (CA_CODE,MEMBER_ID,CA_TOTAL,CA_DATE,CO_CODE,CS_CODE,CLASS_CODE) values(?,?,?,?,?,?,?)"; // ""안에 ; 는 없어야함
 		PreparedStatement pstmt = null;
 		
 		try {
@@ -22,9 +22,10 @@ public class ClassApplyDao {
 			pstmt.setInt(1, vo.getCaCode());
 			pstmt.setString(2, vo.getMemberid());
 			pstmt.setInt(3, vo.getCatotal());
-			pstmt.setInt(4, vo.getCoCode());
-			pstmt.setInt(5, vo.getCsCode());
-			pstmt.setInt(6, vo.getClassCode());
+			pstmt.setDate(4, vo.getCaDate());
+			pstmt.setInt(5, vo.getCoCode());
+			pstmt.setInt(6, vo.getCsCode());
+			pstmt.setInt(7, vo.getClassCode());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
