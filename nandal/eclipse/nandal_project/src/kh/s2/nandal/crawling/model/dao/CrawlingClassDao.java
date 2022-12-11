@@ -11,13 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import kh.s2.nandal.crawling.model.vo.CrawlingClassDto;
-import kh.s2.nandal.crawling.model.vo.CrawlingClassPhotoDto;
+import kh.s2.nandal.classdata.model.vo.ClassVo;
+import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
 import kh.s2.nandal.jdbc.JdbcTemplate;
 
 
 public class CrawlingClassDao {
-	public int insertClassPhoto(Connection conn, CrawlingClassPhotoDto dto) {
+	public int insertClassPhoto(Connection conn, ClassPhotoVo dto) {
 		System.out.println("insertClassPhoto()");
 		
 		int result = 0;
@@ -40,7 +40,7 @@ public class CrawlingClassDao {
 		return result;
 	}
 	
-	public int insertClass(Connection conn, CrawlingClassDto dto) {
+	public int insertClass(Connection conn, ClassVo dto) {
 		System.out.println("insertClassdaO()");
 		
 		int result = 0;

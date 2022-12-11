@@ -8,23 +8,21 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.*;
 
+import kh.s2.nandal.classdata.model.vo.ClassVo;
+import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
 import kh.s2.nandal.crawling.model.service.CrawlingClassService;
-import kh.s2.nandal.crawling.model.vo.CrawlingClassDto;
-import kh.s2.nandal.crawling.model.vo.CrawlingClassPhotoDto;
 
 
 
 public class CrawlingClass {
 	private CrawlingClassService svc = new CrawlingClassService();
-	private CrawlingClassDto dto = new CrawlingClassDto();
+	private ClassVo dto = new ClassVo();
 	
 	public static void main(String[] args) throws IOException {
 		new CrawlingClass().crawling();
 //		System.out.println(cla.fileNum);
 	}
 	public void crawling() throws IOException {
-		//클래스 목록 페이지에서 자동 구현하기 TODO
-//		String crawlingListURL = "https://www.sssd.co.kr/m/search/class/category?midx=1";
 		
 		//URL 클래스 상세페이지
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/32010";
@@ -32,11 +30,22 @@ public class CrawlingClass {
 		//페이지 dom
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 		WebDriver drv = new ChromeDriver();   // 크롬창이 열림을 확인함.
-		WebDriverWait w = new WebDriverWait(drv, 3000);
+		WebDriverWait w = new WebDriverWait(drv, 100);
 		JavascriptExecutor jexe = (JavascriptExecutor)drv;
+
+		//클래스 목록 페이지에서 자동 구현하기 TODO
+//		String crawlingListURL = "https://www.sssd.co.kr/m/search/class/category?midx=1";
+//		drv.get(crawlingListURL);  // 클래스 목록페이지로 이동
+//		jexe.executeScript("window.scrollTo(0, 1500)",drv.findElement(By.cssSelector("body > div.search-container > div.search-result-panel > div")));
+//		//클래스 명
+//		System.out.println("---------------------클래스 상세주소 가져오기-----------------------");
+//		List<WebElement> classCategoryEleAll = drv.findElements(By.cssSelector("body > div.search-container > div.search-result-panel > div > div:nth-child(2) > ul > li"));
+//		WebElement classCategoryEle = classCategoryEleAll.get(0).findElement(By.cssSelector("a"));
+//		String classHref = classCategoryEle.getAttribute("href");
+//		System.out.println(classHref);
+//		System.out.println(classCategoryEleAll.size());
 		
-		
-		drv.get(crawlingURL);  // 클래스 페이지로 이동
+		drv.get(crawlingURL);  // 클래스 상세페이지로 이동
 		
 		//클래스 코드 추출
 		String[] urlstrArr = crawlingURL.split("/");
@@ -145,14 +154,14 @@ public class CrawlingClass {
 	        		int categoryCode = 1;
 	        		int classLevel = (int)(Math.random()*3) + 1;
 	        		String classImg = "./images/class/"+fileName+".jpg";
-	        		dto = new CrawlingClassDto(classCode,  categoryCode, className, classImg, classIntro,
+	        		dto = new ClassVo(classCode,  categoryCode, className, classImg, classIntro,
 	        			 classCur, classHost, classAlltime, classPrd, classAtt, areaCode,
 	        			 classAdress, classPrice, classLevel, classMin, classMax);
 	        		svc.insertClass(dto);
 	        	} else {
 	        		//class_photo 테이블에 데이터 insert
 	        		String cpRoute = "./images/class/"+fileName+".jpg";
-	        		CrawlingClassPhotoDto cpDto = new CrawlingClassPhotoDto(classCode, cpRoute, 0);
+	        		ClassPhotoVo cpDto = new ClassPhotoVo(classCode, cpRoute, 0);
 	        		svc.insertClassPhoto(cpDto);
 	        	}
 	        } catch (IOException e) {
@@ -176,13 +185,12 @@ public class CrawlingClass {
 
 	        	//class_photo 테이블에 데이터 insert
 	        	String cpRoute = "./images/class/"+fileName+".jpg";
-	    		CrawlingClassPhotoDto cpDto = new CrawlingClassPhotoDto(classCode, cpRoute, 1);
+	    		ClassPhotoVo cpDto = new ClassPhotoVo(classCode, cpRoute, 1);
 	    		svc.insertClassPhoto(cpDto);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
 	}
 
 }

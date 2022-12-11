@@ -28,8 +28,8 @@ public class JdbcTemplate {
 					prop.getProperty("db.pwe"));
 
 			// 2. 기존방법
-			Class.forName("oracle.jdbc.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "S2", "S2");
+//			Class.forName("oracle.jdbc.OracleDriver");
+//			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "S2", "S2");
 
 			if (conn == null) {
 				System.out.println("== DB 연결 실패!!");

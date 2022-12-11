@@ -8,15 +8,15 @@ import java.net.URL;
 import java.sql.Connection;
 
 import kh.s2.nandal.crawling.model.dao.CrawlingClassDao;
-import kh.s2.nandal.crawling.model.vo.CrawlingClassDto;
-import kh.s2.nandal.crawling.model.vo.CrawlingClassPhotoDto;
+import kh.s2.nandal.classdata.model.vo.ClassVo;
+import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
 import kh.s2.nandal.jdbc.JdbcTemplate;
 
 
 public class CrawlingClassService {
 	private CrawlingClassDao dao = new CrawlingClassDao();
 	
-	public int insertClassPhoto(CrawlingClassPhotoDto dto) {
+	public int insertClassPhoto(ClassPhotoVo dto) {
 		System.out.println("insertClassPhoto()");
 		
 		int result = 0;
@@ -38,7 +38,7 @@ public class CrawlingClassService {
 		return result;
 	}
 	
-	public int insertClass(CrawlingClassDto dto) {
+	public int insertClass(ClassVo dto) {
 		System.out.println("insertClass()");
 		
 		int result = 0;
