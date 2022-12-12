@@ -21,7 +21,7 @@ public class ReviewDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, vo.getReviewCode());
 			pstmt.setString(2, vo.getReviewCont());
-			pstmt.setInt(3, vo.getReviewGrade());
+			pstmt.setDouble(3, vo.getReviewGrade());
 			pstmt.setInt(4, vo.getReviewKind());
 			pstmt.setInt(5, vo.getReviewComponent());
 			pstmt.setInt(6, vo.getReviewFacility());
@@ -48,7 +48,7 @@ public class ReviewDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getReviewCont());
-			pstmt.setInt(2, vo.getReviewGrade());
+			pstmt.setDouble(2, vo.getReviewGrade());
 			pstmt.setInt(3, vo.getReviewKind());
 			pstmt.setInt(4, vo.getReviewComponent());
 			pstmt.setInt(5, vo.getReviewFacility());

@@ -15,7 +15,7 @@ public class ReviewVo {
 	private int reviewCode;
 	private Timestamp reviewTime;
 	private String reviewCont;
-	private int reviewGrade;
+	private double reviewGrade;
 	private int reviewKind;
 	private int reviewComponent;
 	private int reviewFacility;
@@ -48,10 +48,10 @@ public class ReviewVo {
 	public void setReviewCont(String reviewCont) {
 		this.reviewCont = reviewCont;
 	}
-	public int getReviewGrade() {
+	public double getReviewGrade() {
 		return reviewGrade;
 	}
-	public void setReviewGrade(int reviewGrade) {
+	public void setReviewGrade(double reviewGrade) {
 		this.reviewGrade = reviewGrade;
 	}
 	public int getReviewKind() {
