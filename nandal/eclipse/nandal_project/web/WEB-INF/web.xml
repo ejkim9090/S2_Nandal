@@ -20,14 +20,14 @@
   		<url-pattern>*.woff</url-pattern>
   </servlet-mapping>
   
-  <filter>
+  <!--<filter>
   		<filter-name>EncodingFilter</filter-name>
   		<filter-class>common.filter.EncodingFilter</filter-class>
   </filter>
   <filter-mapping>
   		<filter-name>EncodingFilter</filter-name>
   		<url-pattern>/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping>-->
   
   <!-- JDBC DBCP(Database Connection Pool)-->
   
