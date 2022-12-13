@@ -20,8 +20,8 @@ public class ClassApplyDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, vo.getCaCode());
-			pstmt.setString(2, vo.getMemberid());
-			pstmt.setInt(3, vo.getCatotal());
+			pstmt.setString(2, vo.getMemberId());
+			pstmt.setInt(3, vo.getCaTotal());
 			pstmt.setDate(4, vo.getCaDate());
 			pstmt.setInt(5, vo.getCoCode());
 			pstmt.setInt(6, vo.getCsCode());

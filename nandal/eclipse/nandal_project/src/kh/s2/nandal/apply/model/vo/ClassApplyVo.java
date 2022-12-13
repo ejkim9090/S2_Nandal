@@ -6,27 +6,27 @@ import java.sql.Timestamp;
 public class ClassApplyVo {
 //	CA_CODE    NOT NULL NUMBER       
 //	MEMBER_ID  NOT NULL VARCHAR2(50) 
-//	CA_TOTAL   NOT NULL NUMBER(2)    
-//	CA_DATE	   NOT NULL
-//	CA_TIME    NOT NULL TIMESTAMP(6) 
-//	CO_CODE             NUMBER(2)    
-//	CS_CODE    NOT NULL NUMBER       
 //	CLASS_CODE NOT NULL NUMBER       
-//	CA_CANCEL  NOT NULL CHAR(1)  
+//	CA_TOTAL   NOT NULL NUMBER(2)    
+//	CA_DATE    NOT NULL DATE         
+//	CA_TIME    NOT NULL TIMESTAMP(6) 
+//	CA_CANCEL  NOT NULL CHAR(1)      
+//	CO_CODE    NOT NULL NUMBER(2)    
+//	CS_CODE    NOT NULL NUMBER    
 	private int caCode;
-	private String memberid;
-	private int catotal;
+	private String memberId;
+	private int classCode;
+	private int caTotal;
 	private Date caDate;
 	private Timestamp caTime;
+	private String caCancel;
 	private int coCode;
 	private int csCode;
-	private int classCode;
-	private String caCancel;
 	@Override
 	public String toString() {
-		return "ClassApplyVo [caCode=" + caCode + ", memberid=" + memberid + ", catotal=" + catotal + ", caDate="
-				+ caDate + ", caTime=" + caTime + ", coCode=" + coCode + ", csCode=" + csCode + ", classCode="
-				+ classCode + ", caCancel=" + caCancel + "]";
+		return "ClassApplyVo [caCode=" + caCode + ", memberId=" + memberId + ", classCode=" + classCode + ", caTotal="
+				+ caTotal + ", caDate=" + caDate + ", caTime=" + caTime + ", caCancel=" + caCancel + ", coCode="
+				+ coCode + ", csCode=" + csCode + "]";
 	}
 	public int getCaCode() {
 		return caCode;
@@ -34,17 +34,23 @@ public class ClassApplyVo {
 	public void setCaCode(int caCode) {
 		this.caCode = caCode;
 	}
-	public String getMemberid() {
-		return memberid;
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setMemberid(String memberid) {
-		this.memberid = memberid;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
-	public int getCatotal() {
-		return catotal;
+	public int getClassCode() {
+		return classCode;
 	}
-	public void setCatotal(int catotal) {
-		this.catotal = catotal;
+	public void setClassCode(int classCode) {
+		this.classCode = classCode;
+	}
+	public int getCaTotal() {
+		return caTotal;
+	}
+	public void setCaTotal(int caTotal) {
+		this.caTotal = caTotal;
 	}
 	public Date getCaDate() {
 		return caDate;
@@ -58,6 +64,12 @@ public class ClassApplyVo {
 	public void setCaTime(Timestamp caTime) {
 		this.caTime = caTime;
 	}
+	public String getCaCancel() {
+		return caCancel;
+	}
+	public void setCaCancel(String caCancel) {
+		this.caCancel = caCancel;
+	}
 	public int getCoCode() {
 		return coCode;
 	}
@@ -69,17 +81,5 @@ public class ClassApplyVo {
 	}
 	public void setCsCode(int csCode) {
 		this.csCode = csCode;
-	}
-	public int getClassCode() {
-		return classCode;
-	}
-	public void setClassCode(int classCode) {
-		this.classCode = classCode;
-	}
-	public String getCaCancel() {
-		return caCancel;
-	}
-	public void setCaCancel(String caCancel) {
-		this.caCancel = caCancel;
 	}
 }
