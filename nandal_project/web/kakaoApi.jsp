@@ -13,9 +13,9 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.theme.min.css">
 <!--datepicker 테마 css -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datepicker_theme.css">
- //제이쿼리 js
+<!--  제이쿼리 js -->
  <script src="<%=request.getContextPath()%>/js/jquery-3.6.1.js"></script>
- //제이쿼리 ui js
+ <!-- 제이쿼리 ui js -->
  <script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
  <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
  
