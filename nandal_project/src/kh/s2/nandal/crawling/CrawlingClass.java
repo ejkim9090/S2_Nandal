@@ -1,6 +1,7 @@
 package kh.s2.nandal.crawling;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -9,6 +10,8 @@ import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.*;
 
 import kh.s2.nandal.classdata.model.vo.ClassVo;
+import kh.s2.nandal.classdata.model.service.ClassOptionService;
+import kh.s2.nandal.classdata.model.vo.ClassOptionVo;
 import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
 import kh.s2.nandal.crawling.model.service.CrawlingClassService;
 
@@ -17,6 +20,7 @@ import kh.s2.nandal.crawling.model.service.CrawlingClassService;
 public class CrawlingClass {
 	private CrawlingClassService svc = new CrawlingClassService();
 	private ClassVo dto = new ClassVo();
+	private ClassOptionService coSvc = new ClassOptionService();
 	
 	public static void main(String[] args) throws IOException {
 		new CrawlingClass().crawling();
@@ -148,7 +152,7 @@ public class CrawlingClass {
 			try {
 				//추출 대표/서브 이미지 파일 저장
 				String fileName = classCodestr+i;
-	        	svc.getImageUrl(classImgUrl, fileName);
+//	        	svc.getImageUrl(classImgUrl, fileName);
 	        	if(i == 0) {
 	        		//class 테이블에 데이터 insert
 	        		int categoryCode = 1;
@@ -157,20 +161,21 @@ public class CrawlingClass {
 	        		dto = new ClassVo(classCode,  categoryCode, className, classImg, classIntro,
 	        			 classCur, classHost, classAlltime, classPrd, classAtt, areaCode,
 	        			 classAdress, classPrice, classLevel, classMin, classMax);
-	        		svc.insertClass(dto);
+//	        		svc.insertClass(dto);
 	        	} else {
 	        		//class_photo 테이블에 데이터 insert
 	        		String cpRoute = "./images/class/"+fileName+".jpg";
 	        		ClassPhotoVo cpDto = new ClassPhotoVo(classCode, cpRoute, 0);
 	        		svc.insertClassPhoto(cpDto);
 	        	}
-	        } catch (IOException e) {
+	        } catch (/*IO*/Exception e) {
 	        	  // 예외처리
 	            e.printStackTrace();
 	        }
 		}
 		
 		//클래스 상세내용 이미지
+		System.out.println("---------------------클래스 상세내용 이미지-----------------------");
 		List<WebElement> classImgEleAll2 = drv.findElements(By.cssSelector("#class_info > div.class_info > div:last-of-type > ul > li"));
 		String classImgUrl2 = null;
 		for(int i = 0; i < classImgEleAll2.size(); i++) {
@@ -181,15 +186,57 @@ public class CrawlingClass {
 				//이미지 파일 저장
 				int fileNum = i+classImgEleAll.size();
 				String fileName = classCodestr+fileNum;
-	        	svc.getImageUrl(classImgUrl2, fileName);
+//	        	svc.getImageUrl(classImgUrl2, fileName);
 
 	        	//class_photo 테이블에 데이터 insert
 	        	String cpRoute = "./images/class/"+fileName+".jpg";
 	    		ClassPhotoVo cpDto = new ClassPhotoVo(classCode, cpRoute, 1);
-	    		svc.insertClassPhoto(cpDto);
-			} catch (IOException e) {
+//	    		svc.insertClassPhoto(cpDto);
+			} catch (/*IO*/Exception e) {
 				e.printStackTrace();
 			}
+		}
+		
+		//클래스 옵션 추가
+		System.out.println("---------------------클래스 옵션-----------------------");
+		int optionCnt = (int)(Math.random()*4) + 2;
+		for(int i = 0; i< optionCnt; i++) {
+			int coPrice = ((int)(Math.random()*9) + 1)*1000;
+			String nEng = null;
+			switch(i) {
+				case 0 : nEng = "A"; break;
+				case 1 : nEng = "B"; break;
+				case 2 : nEng = "C"; break;
+				case 3 : nEng = "D"; break;
+			}
+			String coName = "옵션"+nEng;
+			int coCode = i;
+			
+			ClassOptionVo coVo = new ClassOptionVo();
+			coVo.setCoCode(coCode);
+			coVo.setClassCode(classCode);
+			coVo.setCoName(coName);
+			coVo.setCoPrice(coPrice);
+//			coSvc.insert(coVo);
+		}
+		//클래스 일정 추가
+		System.out.println("---------------------클래스 일정-----------------------");
+		int scheduleCnt = (int)(Math.random()*3) + 1;
+		for(int i = 0; i < scheduleCnt; i++) {
+			int csDay = 0;			//요일
+			String csStime = null;  //시작시간
+			String csFtime = null; 	//종료시간
+			Date csSdate = null;	//시작날짜
+			Date csFdate = null;	//종료날짜
+		}
+		
+		//리뷰 정보 저장
+		List<WebElement> reviewPhotoDivAll = drv.findElements(By.cssSelector("#class_info > div.class-reply-info-area > div.main-reply-list-area > div.user-reply-img-gallery.main-thumb-reply-img-list > li"));
+		
+		for(int i = 0; i < 3; i++) {
+			WebElement reviewPhotoDiv = reviewPhotoDivAll.get(i);
+			WebElement reviewPhotoA = reviewPhotoDiv.findElement(By.cssSelector("div > a"));
+			String reviewPhoto = reviewPhotoA.getAttribute("style").split("\"")[1];
 		}
 	}
 
