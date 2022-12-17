@@ -11,8 +11,10 @@ import org.openqa.selenium.support.ui.*;
 
 import kh.s2.nandal.classdata.model.vo.ClassVo;
 import kh.s2.nandal.classdata.model.service.ClassOptionService;
+import kh.s2.nandal.classdata.model.service.ClassScheduleService;
 import kh.s2.nandal.classdata.model.vo.ClassOptionVo;
 import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
+import kh.s2.nandal.classdata.model.vo.ClassScheduleVo;
 import kh.s2.nandal.crawling.model.service.CrawlingClassService;
 
 
@@ -21,6 +23,7 @@ public class CrawlingClass {
 	private CrawlingClassService svc = new CrawlingClassService();
 	private ClassVo dto = new ClassVo();
 	private ClassOptionService coSvc = new ClassOptionService();
+	private ClassScheduleService csSvc = new ClassScheduleService();
 	
 	public static void main(String[] args) throws IOException {
 		new CrawlingClass().crawling();
@@ -166,7 +169,7 @@ public class CrawlingClass {
 	        		//class_photo 테이블에 데이터 insert
 	        		String cpRoute = "./images/class/"+fileName+".jpg";
 	        		ClassPhotoVo cpDto = new ClassPhotoVo(classCode, cpRoute, 0);
-	        		svc.insertClassPhoto(cpDto);
+//	        		svc.insertClassPhoto(cpDto);
 	        	}
 	        } catch (/*IO*/Exception e) {
 	        	  // 예외처리
@@ -200,14 +203,14 @@ public class CrawlingClass {
 		//클래스 옵션 추가
 		System.out.println("---------------------클래스 옵션-----------------------");
 		int optionCnt = (int)(Math.random()*4) + 2;
-		for(int i = 0; i< optionCnt; i++) {
+		for(int i = 1; i< optionCnt; i++) {
 			int coPrice = ((int)(Math.random()*9) + 1)*1000;
 			String nEng = null;
 			switch(i) {
-				case 0 : nEng = "A"; break;
-				case 1 : nEng = "B"; break;
-				case 2 : nEng = "C"; break;
-				case 3 : nEng = "D"; break;
+				case 1 : nEng = "A"; break;
+				case 2 : nEng = "B"; break;
+				case 3 : nEng = "C"; break;
+				case 4 : nEng = "D"; break;
 			}
 			String coName = "옵션"+nEng;
 			int coCode = i;
@@ -217,23 +220,68 @@ public class CrawlingClass {
 			coVo.setClassCode(classCode);
 			coVo.setCoName(coName);
 			coVo.setCoPrice(coPrice);
+			System.out.println(coVo.toString());
 //			coSvc.insert(coVo);
 		}
 		//클래스 일정 추가
 		System.out.println("---------------------클래스 일정-----------------------");
-		int scheduleCnt = (int)(Math.random()*3) + 1;
-		for(int i = 0; i < scheduleCnt; i++) {
-			int csDay = 0;			//요일
+		int csDay = 0;			//요일
+		int scheduleCnt = (int)(Math.random()*5) + 1; 
+		
+		for(int i = 1; i < scheduleCnt; i++) {
 			String csStime = null;  //시작시간
 			String csFtime = null; 	//종료시간
-			Date csSdate = null;	//시작날짜
-			Date csFdate = null;	//종료날짜
+			String fdate = null;
+			int dayRandom = (int)(Math.random()*5) + 1;
+			switch(dayRandom) {
+				case 1 :	csDay = 10;	break; //화,목
+				case 2 :	csDay = 21;	break; //월,수,금
+				case 3 :	csDay = 31;	break; //월~금
+				case 4 :	csDay = 96;	break; //토~일
+				case 5 :	csDay = 127; break; //월~일
+			}
+			
+			switch(i) {
+			case 1 : 
+				csStime = "10:30"; csFtime = "12:00"; 
+				fdate = "2023-02-17";
+				break;
+			case 2 : 
+				csStime = "13:00"; csFtime = "14:30"; 
+				fdate = "2023-03-20";
+				break;
+			case 3 : 
+				csStime = "15:00"; csFtime = "16:30"; 
+				fdate = "2023-04-18";
+				break;
+			case 4 : 
+				csStime = "17:00"; csFtime = "18:30"; 
+				fdate = "2023-01-23";
+				break;
+			}
+			Date csSdate = Date.valueOf("2022-12-20");	//시작날짜
+			Date csFdate = Date.valueOf(fdate);	//종료날짜
+			ClassScheduleVo csVo = new ClassScheduleVo();
+			csVo.setCsCode(i);
+			csVo.setClassCode(classCode);
+			csVo.setCsDay(csDay);
+			csVo.setCsStime(csStime);
+			csVo.setCsFtime(csFtime);
+			csVo.setCsSdate(csSdate);
+			csVo.setCsFdate(csFdate);
+			System.out.println(csVo.toString());
 		}
+		//신청 클래스
+		
 		
 		//리뷰 정보 저장
+		System.out.println("---------------------리뷰 정보 저장-----------------------");
 		List<WebElement> reviewPhotoDivAll = drv.findElements(By.cssSelector("#class_info > div.class-reply-info-area > div.main-reply-list-area > div.user-reply-img-gallery.main-thumb-reply-img-list > li"));
 		
 		for(int i = 0; i < 3; i++) {
+			
+			int RcoCode = (int)(Math.random()*(optionCnt+1)) + 0;
+			int RcsCode = (int)(Math.random()*scheduleCnt) + 1; 
 			WebElement reviewPhotoDiv = reviewPhotoDivAll.get(i);
 			WebElement reviewPhotoA = reviewPhotoDiv.findElement(By.cssSelector("div > a"));
 			String reviewPhoto = reviewPhotoA.getAttribute("style").split("\"")[1];
