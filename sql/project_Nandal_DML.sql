@@ -36,3 +36,19 @@ insert into category values(class_sequence.nextval ,'라이프스타일');
 commit;
 select * from category;
 
+--회원 데이터 insert
+insert all
+    into MEMBER values('user1@user.com','user0203!','배인숙','010-1234-5678','./images/member/basic.jpg')
+    into MEMBER values('user2@user.com','user0203!','류유현','010-1234-5678','./images/member/basic.jpg')
+    into MEMBER values('user3@user.com','user0203!','신인숙','010-1234-5678','./images/member/basic.jpg')
+    into MEMBER values('user4@user.com','user0203!','강남지','010-1234-5678','./images/member/basic.jpg')
+    into MEMBER values('user5@user.com','user0203!','오미르','010-1234-5678','./images/member/basic.jpg')
+    into MEMBER values('user6@user.com','user0203!','탁가을','010-1234-5678','./images/member/basic.jpg')
+    into MEMBER values('user7@user.com','user0203!','윤노을','010-1234-5678','./images/member/basic.jpg')
+    into MEMBER values('user8@user.com','user0203!','최나래','010-1234-5678','./images/member/basic.jpg')
+    into MEMBER values('user9@user.com','user0203!','김노웅','010-1234-5678','./images/member/basic.jpg')
+    into MEMBER values('user10@user.com','user0203!','김시언','010-1234-5678','./images/member/basic.jpg')
+    select * from dual;
+commit;
+    
+select * from member;
