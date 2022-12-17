@@ -6,18 +6,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.min.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.min.css"> --%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.structure.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.structure.min.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.structure.min.css"> --%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.theme.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.theme.min.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.theme.min.css"> --%>
 <!--datepicker 테마 css -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datepicker_theme.css">
 <!--  제이쿼리 js -->
  <script src="<%=request.getContextPath()%>/js/jquery-3.6.1.js"></script>
  <!-- 제이쿼리 ui js -->
  <script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
- <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
+ <%-- <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script> --%>
  
  <script>
  	$.datepicker.setDefaults({
