@@ -33,3 +33,16 @@ desc CLASS_APPLY;
 desc APPLY_CANCEL;
 desc REVIEW;
 desc REVIEW_PHOTO;
+
+-- 저장된 데이터 확인용
+select * from CATEGORY; 
+select * from CLASS;
+select * from CLASS_PHOTO; 
+select * from area; 
+select * from CLASS_SCHEDULE;
+select * from CLASS_OPTION;
+select * from MEMBER;
+select * from CLASS_APPLY;
+select * from APPLY_CANCEL;
+select * from REVIEW;
+select * from REVIEW_PHOTO;
