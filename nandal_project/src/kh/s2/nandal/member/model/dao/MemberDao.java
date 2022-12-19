@@ -10,6 +10,37 @@ import kh.s2.nandal.jdbc.JdbcTemplate;
 import kh.s2.nandal.member.model.vo.MemberVo;
 
 public class MemberDao {
+	
+	public MemberVo login(Connection conn, String memberId, String memberPwd){
+		System.out.println(">>> MemberDao login param memberId : " + memberId);
+		System.out.println(">>> MemberDao login param memberPwd : " + memberPwd);
+		MemberVo vo = null;
+		
+		String sql = "select * from member where member_id=? and member_pwd=?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberPwd);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo = new MemberVo();
+				vo.setMemberId(rs.getString("member_id"));
+				vo.setMemberPwd(rs.getString("member_pwd"));
+				vo.setMemberName(rs.getString("member_name"));
+				vo.setMemberPhone(rs.getString("member_phone"));
+				vo.setMemberImg(rs.getString("member_img"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println(">>> MemberDao login return : " + vo);
+		return vo;
+	}
 //	insert
 	public int insert(Connection conn, MemberVo vo) {
 		System.out.println(">>> MemberDao insert param : " + vo);

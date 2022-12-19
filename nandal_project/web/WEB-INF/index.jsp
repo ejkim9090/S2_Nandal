@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,8 +34,15 @@
                                     <button type="button"><img src="./images/search_logo.svg"></button>
                                 </div>
                                 <div class="header_log">
-                                    <a href="#">My</a>
-                                    <a href="#">Logout</a>
+                                	<c:choose>
+                                		<c:when test="${empty loginSsInfo}">
+                                    	<a href="${pageContext.request.contextPath }/login">Login</a>
+                                		</c:when>
+                                		<c:otherwise>
+                                    	<a href="#">My</a>
+                                    	<a href="#">Logout</a>
+                                		</c:otherwise>
+                                	</c:choose>
                                 </div>
                             </div>
                         </div>
@@ -156,7 +164,7 @@
                 <!-- 맨위 상단 섹션-->
                 <div>
                     <div class="main_img_wrap">
-                        <img class="main_img" src="./images/메인섹션 맨상단1.avif">
+                        <img class="main_img" src=" ">
                     </div>
                 </div>
                 <!-- 첫번째 섹션 -->

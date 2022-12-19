@@ -154,7 +154,7 @@
             <div id="section_child_1">
                 <div class="login_area f_20_b login_txt">로그인</div>
                 <div class="login_area login_user_area">
-                    <form action="#" method="post">
+                    <form action="<%=request.getContextPath()%>/login.do" method="post">
                         <div class="input_area">
                             <input type="text" id="login_Id" name="memberId" placeholder="아이디를 입력해주세요">
                             <input type="password" id="login_Pwd" name="memberPwd" placeholder="비밀번호를 입력해주세요">

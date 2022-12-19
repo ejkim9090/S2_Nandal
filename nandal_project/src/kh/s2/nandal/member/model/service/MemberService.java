@@ -10,6 +10,16 @@ import kh.s2.nandal.member.model.vo.MemberVo;
 public class MemberService {
 	private MemberDao dao = new MemberDao();
 	// 최소 5개 CRUD
+	public MemberVo login(String memberId, String memberPwd) {
+		System.out.println(">> MemberService login param memberId :" + memberId);
+		System.out.println(">> MemberService login param memberPwd :" + memberPwd);
+		Connection conn = JdbcTemplate.getConnection();
+		MemberVo vo = null;
+		vo = dao.login(conn, memberId,memberPwd);
+		JdbcTemplate.close(conn);
+		System.out.println(">> MemberService login return :" + vo);
+		return vo;
+	}
 //	insert
 	public int insert(MemberVo vo) {
 		System.out.println(">> MemberService insert param vo :" + vo);
