@@ -14,7 +14,7 @@
 
  .ui-datepicker .ui-datepicker-title { margin: 0 0em; line-height: 16px; text-align: center; font-size: 14px; padding: 0px; font-weight: bold; } 
 
- .ui-datepicker { display: none; background-color: #fff; border-radius: 4px; margin-top: 10px; margin-left: 0px; margin-right: 0px; padding: 20px; padding-bottom: 10px; width: 300px; box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1); } 
+ .ui-datepicker { display: none; background-color: #fff; border-radius: 4px; margin-top: 10px; margin-left: 0px; margin-right: 0px; padding: 20px; padding-bottom: 10px; width: 300px; box-shadow: 10px 10px 40px rgba(144, 90, 243, 0.1); } 
 
  .ui-widget.ui-widget-content { border: 1px solid #eee; } 
 
@@ -73,7 +73,12 @@
  .inp:focus { outline: none; background-color: #eee; } 
  
 /*선택한 날짜 배경색상 변경*/
- .ui-datepicker-current-day {
- 	background-color: red;
- }
+.ui-datepicker-current-day {
+	background-color: #b49bf788;
+}
+#datepicker, #datepicker div, #datepicker ul, #datepicker tr, #datepicker td, 
+#datepicker table, #datepicker a, #datepicker thead, #datepicker tbody, 
+#datepicker th, #datepicker span {
+	box-sizing: content-box;
+}
  

@@ -1,0 +1,106 @@
+
+/* 메인 각 섹션의 wrap */
+.main_section > div{
+    height: 100%;
+}
+/* 맨위 상단 섹션 */
+.main_img_wrap {
+    padding-bottom: 30px;
+}
+.main_img {
+    width: 100%;
+    min-width: 1050px;
+    height: 450px;
+    object-fit: cover;
+}
+/* 메인 섹션 첫번째 추천*/
+.rmd_title_wrap {
+    margin-bottom: 27px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rmd_title_text{
+    color: rgb(51, 51, 51);
+    font-size: 28px;
+    line-height: 1.15;
+    font-weight: 500;
+}
+
+
+/* 메신 섹션 상품 리스트 */
+.rmd {
+    margin-top: 200px;
+}
+.rmd_list {
+    position: relative;
+}
+
+.rmd_left_btn{
+    display: none;
+    overflow: visible;
+    position: absolute;
+    z-index: 2;
+    border: 0px;
+    outline: 0px;
+    width: 60px;
+    height: 60px;
+    background: url(../images/list_button.svg) 50% 50%;
+    top: calc(50%);
+    left: 0px;
+    transform: translate(-50%, -50%);
+}
+.rmd_right_btn{
+    overflow: visible;
+    position: absolute;
+    z-index: 2;
+    border: 0px;
+    outline: 0px;
+    width: 60px;
+    height: 60px;
+    background: url(../images/list_button.svg) 50% 50% no-repeat;
+    top: calc(50%);
+    right: 0px;
+    transform: translate(50%, -50%) rotate(180deg);
+}
+.rmd_list_swiper_wrap{
+    overflow: hidden;
+    width: 1050px;
+    z-index: 1;
+}
+.rmd_list_swiper{
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    box-sizing: content-box;
+    transform: translate3d(0px, 0px, 0px);
+    transition-duration: 300ms; 
+}
+.list_class{
+    cursor: pointer;
+    margin-right: 89px;
+}
+.list_class_img_wrap{
+    height: 220px;
+    background-color: rgb(245, 245, 245);
+}
+.list_class_img_wrap > img{
+    width: 290px;
+    height: 100%;
+    object-fit: cover;
+}
+.list_class_info_wrap{
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.list_review_text{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: #cbbbf7;
+    width: 290px;
+    padding: 5px;
+}

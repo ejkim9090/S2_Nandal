@@ -1,0 +1,218 @@
+/* 스크롤이동 부드럽게 */
+html{
+    scroll-behavior: smooth;
+}
+#section {
+    margin-top: 96px;
+}
+#header_nav {
+    box-shadow: rgba(125, 58, 248, 0.17) 0 7px 4px -4px;
+    background-color: white;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    top: 0px;
+}
+.wrap_1050 {
+    width: 1050px;
+    margin: 0 auto;
+}
+.header_first {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 타이틀 로고 */
+.header_title {
+    align-items: center;
+    height: 65px;
+    display: flex;
+    padding: 40px 30px;
+}
+.header_title > img  {
+    height: 65px;
+}
+
+/* 검샘창 및,로그 */
+.search_log_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 350px;
+    margin-right: 20px;
+}
+
+/* 검색창 */
+.header_search {
+    width: 250px;
+    height: 35px;
+    padding-left: 10px;
+    border: 1px solid #9169ff;
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+}
+.header_search > input {
+    width: 100%;
+    border: 0px;
+    outline: none;
+}
+.header_search > button > img {
+    height: 100%;
+}
+
+/* heaer 카테고리 부분*/
+.header_category {
+    display: flex;
+    flex-direction: column;
+}
+.category_over {
+    display: flex;
+    align-items: center;
+    margin-left: 40px;
+    width: 80px;
+    cursor: pointer;
+}
+.category_img {
+    width: 12px;
+    height: 11px;
+    margin-right: 5px;
+    background: url(../images/category_logo.svg) 0px 0px / 12px 11px no-repeat;
+}
+.category_over:hover > .category_img {
+    background: url(../images/category_logo_hover.svg) 0px 0px / 12px 11px no-repeat;
+}
+.category_over:hover > .category_text {
+    color: rgb(183, 128, 201);
+}
+.category_list {
+    height: 120px;
+    width: 100%;
+    padding-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    display: none;
+}
+.category_li {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    width: 100px;
+}
+.category_li > label {
+    cursor: pointer;
+}
+.category_li > div > img {
+    width: 70px;
+    height: 70px;
+}
+
+/* 유형선택 부분 */
+.header_check {
+    display: flex;
+    flex-direction: column;
+    display: none;
+}
+.check_wrap {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 65px 0 170px;
+}
+.check_wrap p {
+    display: inline-block;
+}
+.check_btn > div > input[type="checkbox"] {
+    display: none;
+}
+.check_btn > div > label {
+    cursor: pointer;
+}
+.check_admin {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    padding-bottom: 20px;
+}
+/* 유형 선택 칸 */
+
+.c_line {
+    border: 1px solid #9169ff;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(158, 105, 255, 0.4);
+}
+.c_size {
+    display: inline-block;
+    width: 65px;
+    height: 33px;
+    line-height: 30px;
+}
+.c_size_select {
+    display: inline-block;
+    width: 88px;
+    height: 33px;
+    line-height: 30px;
+}
+.c_color {
+    color: #fff;
+    background-color: #9169ff;
+}
+
+
+
+
+
+/* footer */
+#footer {
+    padding-top: 30px;
+    border-top: 1px solid rgb(247, 247, 247);
+    background-color: rgba(215, 210, 210, 0.1);
+}
+.nandal_wrap {
+    display: flex;
+    justify-content: space-between;
+}
+.nanadal_info {
+    /* 각 div안에 아이템들의 정렬방식 위에서 아래로 */
+    display: flex;
+    flex-direction: column;
+}
+.nanadal_info > ul {
+    display: flex;
+    flex-direction: row;
+}
+
+.nanadal_info > ul:first-of-type {
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.nanadal_info > ul > li {
+    margin-left: 14px;
+}
+
+.nanadal_info > ul > li:first-of-type {
+    margin-left: 0px;
+}
+
+.nanadal_info > div {
+    margin-bottom: 40px;
+    line-height: 18px;
+    color: rgba(55, 54, 54, 0.72);
+}
+
+.nanadal_info > div a {
+    color: #9169ff;
+}
+
+.nanadla_cos>p {
+    color: #333333
+}
+
+.nanadla_cos > P > span {
+    margin-left: 8px;
+    color: rgba(55, 54, 54, 0.72);
+}
