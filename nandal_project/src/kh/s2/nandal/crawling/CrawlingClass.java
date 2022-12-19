@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.tomcat.jni.Time;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.*;
@@ -17,6 +18,10 @@ import kh.s2.nandal.classdata.model.vo.ClassOptionVo;
 import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
 import kh.s2.nandal.classdata.model.vo.ClassScheduleVo;
 import kh.s2.nandal.crawling.model.service.CrawlingClassService;
+import kh.s2.nandal.review.model.service.ReviewPhotoService;
+import kh.s2.nandal.review.model.service.ReviewService;
+import kh.s2.nandal.review.model.vo.ReviewPhotoVo;
+import kh.s2.nandal.review.model.vo.ReviewVo;
 
 
 
@@ -25,6 +30,8 @@ public class CrawlingClass {
 	private ClassVo dto = new ClassVo();
 	private ClassOptionService coSvc = new ClassOptionService();
 	private ClassScheduleService csSvc = new ClassScheduleService();
+	private ReviewService rSvc = new ReviewService();
+	private ReviewPhotoService rpSvc = new ReviewPhotoService();
 	
 	public static void main(String[] args) throws IOException {
 		new CrawlingClass().crawling();
@@ -37,7 +44,7 @@ public class CrawlingClass {
 		//페이지 dom
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 		WebDriver drv = new ChromeDriver();   // 크롬창이 열림을 확인함.
-		WebDriverWait w = new WebDriverWait(drv, 1000);
+		WebDriverWait w = new WebDriverWait(drv, 500);
 		JavascriptExecutor jexe = (JavascriptExecutor)drv;
 
 		//클래스 목록 페이지에서 자동 구현하기 TODO
@@ -54,6 +61,8 @@ public class CrawlingClass {
 		
 		drv.get(crawlingURL);  // 클래스 상세페이지로 이동
 		
+		drv.findElement(By.cssSelector("body > div.common-bottom-slide-layer.app-install-propose-layer.open > div > div.btn-area > div > button.install-cancel-btn")).click();
+
 		//클래스 코드 추출
 		String[] urlstrArr = crawlingURL.split("/");
 		String classCodestr = urlstrArr[urlstrArr.length-1];
@@ -155,7 +164,7 @@ public class CrawlingClass {
 			try {
 				//추출 대표/서브 이미지 파일 저장
 				String fileName = classCodestr+i;
-//	        	svc.getImageUrl(classImgUrl, fileName);
+	        	svc.getImageUrl(classImgUrl, fileName);
 	        	if(i == 0) {
 	        		//class 테이블에 데이터 insert
 	        		int categoryCode = 1;
@@ -164,12 +173,12 @@ public class CrawlingClass {
 	        		dto = new ClassVo(classCode,  categoryCode, className, classImg, classIntro,
 	        			 classCur, classHost, classAlltime, classPrd, classAtt, areaCode,
 	        			 classAddress, classPrice, classLevel, classMin, classMax);
-//	        		svc.insertClass(dto);
+	        		svc.insertClass(dto);
 	        	} else {
 	        		//class_photo 테이블에 데이터 insert
 	        		String cpRoute = "./images/class/"+fileName+".jpg";
 	        		ClassPhotoVo cpDto = new ClassPhotoVo(classCode, cpRoute, 0);
-//	        		svc.insertClassPhoto(cpDto);
+	        		svc.insertClassPhoto(cpDto);
 	        	}
 	        } catch (/*IO*/Exception e) {
 	        	  // 예외처리
@@ -189,12 +198,12 @@ public class CrawlingClass {
 				//이미지 파일 저장
 				int fileNum = i+classImgEleAll.size();
 				String fileName = classCodestr+fileNum;
-//	        	svc.getImageUrl(classImgUrl2, fileName);
+	        	svc.getImageUrl(classImgUrl2, fileName);
 
 	        	//class_photo 테이블에 데이터 insert
 	        	String cpRoute = "./images/class/"+fileName+".jpg";
 	    		ClassPhotoVo cpDto = new ClassPhotoVo(classCode, cpRoute, 1);
-//	    		svc.insertClassPhoto(cpDto);
+	    		svc.insertClassPhoto(cpDto);
 			} catch (/*IO*/Exception e) {
 				e.printStackTrace();
 			}
@@ -221,7 +230,7 @@ public class CrawlingClass {
 			coVo.setCoName(coName);
 			coVo.setCoPrice(coPrice);
 			System.out.println(coVo.toString());
-//			coSvc.insert(coVo);
+			coSvc.insert(coVo);
 		}
 		//클래스 일정 추가
 		System.out.println("---------------------클래스 일정-----------------------");
@@ -275,9 +284,21 @@ public class CrawlingClass {
 			csVo.setCsSdate(csSdate);
 			csVo.setCsFdate(csFdate);
 			System.out.println(csVo.toString());
-			System.out.println("ddddd");
-			//csSvc.insert(csVo);
+			csSvc.insert(csVo);
 		}
+		//리뷰 사진 가져오기
+		System.out.println("---------------------리뷰용 사진 3개씩 저장 하기 -----------------------");
+		List<WebElement> reviewPhotoDivAll = drv.findElements(By.cssSelector("#class_info > div.class-reply-info-area > div.main-reply-list-area > div.user-reply-img-gallery.main-thumb-reply-img-list > li"));
+		for(int i = 0; i < 3; i++) {
+			WebElement reviewPhotoDiv = reviewPhotoDivAll.get(i);
+			WebElement reviewPhotoA = reviewPhotoDiv.findElement(By.cssSelector("div > a"));
+			String reviewPhoto = reviewPhotoA.getAttribute("style").split("\"")[1];
+			System.out.println(reviewPhoto);
+			String fileName = classCode + String.valueOf(i);
+        	svc.getReviewImageUrl(classImgUrl2, fileName); //리뷰 사진 파일 저장
+		}
+		
+		
 		//신청 클래스
 		System.out.println("---------------------신청 클래스-----------------------");
 		int caTotal = classMin; //신청 인원수 - 해당 클래스 최소 인원수
@@ -323,23 +344,83 @@ public class CrawlingClass {
 			caVo.setCoCode(coCode);
 			caVo.setCsCode(csCode);
 			System.out.println(caVo.toString());
-			//svc.insertClassApply(caVo);
+			svc.insertClassApply(caVo);
+			
+			//각 일정별 리뷰 정보 추가
+			System.out.println("--------각 신청일정 리뷰 정보 추가 ---------");
+			int reviewCode = caCode;
+			String reviewCont = null;
+			int reviewcnt = (int)(Math.random()*8) + 1;
+			switch(reviewcnt) {
+			case 1 : reviewCont = "친절하게 가르쳐주시고 좋은추억만들어서 좋았습니다!"; break;
+			case 2 : reviewCont = "전날 연락드렸는데도 수강할수 있도록 도와주셔서 감사했어요. 강사님이 잘 이끌어주셔서 원데이로 완성할 수 있었습니다. ㅎㅎ"; break;
+			case 3 : reviewCont = "똥손인 내가 처음하는데도 너무 나도 만족스러운 결과물이에요!!! 시간도 진짜 빨리지나가고 재밌어요!!! 강추"; break;
+			case 4 : reviewCont = "정말 좋아요 ㅎㅎ 굿굿!!"; break;
+			case 5 : reviewCont = "완성품 이쁘게 나와서 너무 좋았어요!!!찾아가는 길도 문자로 상세하게 보내주시고 수업 시간 전체적으로 친절하게 설명해주셔서 너무 만족합니당~~~"; break;
+			case 6 : reviewCont = "너무 쉽게 잘 알려주시고 재밌게 잘하고 왔습니다!ㅎ"; break;
+			case 7 : reviewCont = "재밋어요><"; break;
+			case 8 : reviewCont = "강사님 너무 유쾌하시고 꼼꼼하게 알려주셨어요. 실습할때 컨디션이 안좋아 잘 못 따라가는데도 기다려 주시고 잘 지도해 주셔서 감사합니다!"; break;
+			}
+			int reviewKind = (int)(Math.random()*4) + 2; // 친절도 평점 각 2~5 랜덤
+			int reviewComponent = (int)(Math.random()*3) + 3; //수업구성 평점 각 3~5 랜덤
+			int reviewFacility = (int)(Math.random()*3) + 3; //시설 평점 각 3~5 랜덤
+			int reviewLevel = (int)(Math.random()*4) + 2;  // 난이도적합 평점 2~5 랜덤
+			int reviewGroup = (int)(Math.random()*5) + 0; // 0~4 랜덤
+			double grade = (reviewKind+reviewComponent+reviewFacility+reviewLevel) / 4.0; // 평균값 구하기
+			double reviewGrade = Math.round(grade*10) / 10.0; //평균값 소수 첫재짜리까지 반올림
+			
+			ReviewVo reVo = new ReviewVo();
+			reVo.setReviewCode(reviewCode);
+			reVo.setReviewCont(reviewCont);
+			reVo.setReviewGrade(reviewGrade);
+			reVo.setReviewKind(reviewKind);
+			reVo.setReviewComponent(reviewComponent);
+			reVo.setReviewFacility(reviewFacility);
+			reVo.setReviewLevel(reviewLevel);
+			reVo.setReviewGroup(reviewGroup);
+			rSvc.insert(reVo);
+			System.out.println(reVo.toString());
+			System.out.println("----------------");
+			
+			//각 리뷰마다 사진 리뷰사진 추가
+			System.out.println("--------각 리뷰마다 사진 추가 ---------");
+			System.out.println();
+			ReviewPhotoVo rpVo = new ReviewPhotoVo();
+			rpVo.setReviewCode(reviewCode);
+			String rfileName = null;
+			if(applyCnt == 3) {
+				if(i == 1) {
+					System.out.println("--리뷰 2개일때 첫 리뷰한쪽에 사진2개--");
+					rfileName = classCode + String.valueOf(i);
+					rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
+					rpSvc.insert(rpVo);
+					System.out.println(rpVo.toString());
+
+					rfileName = classCode + String.valueOf(i+1);
+					rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
+					rpSvc.insert(rpVo);
+					System.out.println(rpVo.toString());
+				} else {
+					System.out.println("--리뷰 2개일때 두번째 리뷰한쪽에 사진1개--");
+					rfileName = classCode + String.valueOf(i+1);
+					rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
+					rpSvc.insert(rpVo);
+					System.out.println(rpVo.toString());
+				}
+			} else {
+				System.out.println("--리뷰 3개일때 각 사진 한개씩--");
+				rfileName = classCode + String.valueOf(i);
+				rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
+				rpSvc.insert(rpVo);
+				System.out.println(rpVo.toString());
+			}
+			
+			
 		}
 		
 		
 		
-		//리뷰 사진 가져오기
-		System.out.println("---------------------리뷰용 사진가져오기 -----------------------");
-		List<WebElement> reviewPhotoDivAll = drv.findElements(By.cssSelector("#class_info > div.class-reply-info-area > div.main-reply-list-area > div.user-reply-img-gallery.main-thumb-reply-img-list > li"));
-		for(int i = 0; i < 3; i++) {
-			int rcCode = 0;
-			WebElement reviewPhotoDiv = reviewPhotoDivAll.get(i);
-			WebElement reviewPhotoA = reviewPhotoDiv.findElement(By.cssSelector("div > a"));
-			String reviewPhoto = reviewPhotoA.getAttribute("style").split("\"")[1];
-			System.out.println(reviewPhoto);
-			String fileName = rcCode + String.valueOf(i);
-        	svc.getReviewImageUrl(classImgUrl2, fileName);
-		}
+		
 	}
 
 }
