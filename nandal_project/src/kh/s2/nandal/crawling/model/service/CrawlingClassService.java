@@ -111,7 +111,7 @@ public class CrawlingClassService {
             in = url.openStream();
 
             // 컴퓨터 또는 서버의 저장할 경로(절대패스로 지정해 주세요.)
-            out = new FileOutputStream("E:/z_workspace/java/nandal_project/web/images/class/"+fileName+".jpg");
+            out = new FileOutputStream("C:/Users/ghals/Documents/GitHub/S2_Nandal/nandal_project/web/images/class/"+fileName+".jpg");
 
             while (true) {
                 // 루프를 돌면서 이미지데이터를 읽어들이게 됩니다.
@@ -155,7 +155,7 @@ public class CrawlingClassService {
             in = url.openStream();
 
             // 컴퓨터 또는 서버의 저장할 경로(절대패스로 지정해 주세요.)
-            out = new FileOutputStream("E:/z_workspace/java/nandal_project/web/images/review/"+fileName+".jpg");
+            out = new FileOutputStream("C:/Users/ghals/Documents/GitHub/S2_Nandal/nandal_project/web/images/review/"+fileName+".jpg");
 
             while (true) {
                 // 루프를 돌면서 이미지데이터를 읽어들이게 됩니다.

@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.tomcat.jni.Time;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.*;
@@ -295,7 +294,7 @@ public class CrawlingClass {
 			String reviewPhoto = reviewPhotoA.getAttribute("style").split("\"")[1];
 			System.out.println(reviewPhoto);
 			String fileName = classCode + String.valueOf(i);
-        	svc.getReviewImageUrl(classImgUrl2, fileName); //리뷰 사진 파일 저장
+        	svc.getReviewImageUrl(reviewPhoto, fileName); //리뷰 사진 파일 저장
 		}
 		
 		
