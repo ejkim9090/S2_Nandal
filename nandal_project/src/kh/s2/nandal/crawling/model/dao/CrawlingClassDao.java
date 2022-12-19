@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import kh.s2.nandal.classdata.model.vo.ClassVo;
+import kh.s2.nandal.apply.model.vo.ClassApplyVo;
 import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
 import kh.s2.nandal.jdbc.JdbcTemplate;
 
@@ -29,6 +30,33 @@ public class CrawlingClassDao {
 			pstmt.setInt(1, dto.getClassCode());
 			pstmt.setString(2, dto.getCpRoute());
 			pstmt.setInt(3, dto.getCpType()); 
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//정보를 dao에서 받아왔으니 db와의 연결을 끊는 부분
+			JdbcTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertClassApply(Connection conn, ClassApplyVo vo) {
+		System.out.println("insertClassApply()");
+		
+		int result = 0;
+		String sql = "insert into class_apply(ca_code,member_id,class_code,ca_total,CA_DATE,CO_CODE,CS_CODE) values(?,?,?,?,?,?,?)"; // ""안에 ; 는 없어야함
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql); 
+			pstmt.setInt(1, vo.getCaCode());
+			pstmt.setString(2, vo.getMemberId());
+			pstmt.setInt(3, vo.getClassCode());
+			pstmt.setInt(4, vo.getCaTotal());
+			pstmt.setDate(5, vo.getCaDate());
+			pstmt.setInt(6, vo.getCoCode());
+			pstmt.setInt(7, vo.getCsCode());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {

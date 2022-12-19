@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.*;
 
 import kh.s2.nandal.classdata.model.vo.ClassVo;
+import kh.s2.nandal.apply.model.vo.ClassApplyVo;
 import kh.s2.nandal.classdata.model.service.ClassOptionService;
 import kh.s2.nandal.classdata.model.service.ClassScheduleService;
 import kh.s2.nandal.classdata.model.vo.ClassOptionVo;
@@ -32,12 +33,11 @@ public class CrawlingClass {
 	public void crawling() throws IOException {
 		
 		//URL 클래스 상세페이지
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/32010";
 		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/23538";
 		//페이지 dom
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 		WebDriver drv = new ChromeDriver();   // 크롬창이 열림을 확인함.
-		WebDriverWait w = new WebDriverWait(drv, 100);
+		WebDriverWait w = new WebDriverWait(drv, 1000);
 		JavascriptExecutor jexe = (JavascriptExecutor)drv;
 
 		//클래스 목록 페이지에서 자동 구현하기 TODO
@@ -226,7 +226,9 @@ public class CrawlingClass {
 		//클래스 일정 추가
 		System.out.println("---------------------클래스 일정-----------------------");
 		int csDay = 0;			//요일
-		int scheduleCnt = (int)(Math.random()*5) + 1; 
+		int scheduleCnt = (int)(Math.random()*4) + 2; 
+		
+		int sday = 0;
 		
 		for(int i = 1; i < scheduleCnt; i++) {
 			String csStime = null;  //시작시간
@@ -259,6 +261,9 @@ public class CrawlingClass {
 				fdate = "2023-01-23";
 				break;
 			}
+			
+			sday = dayRandom; //클래스 신청 시 날짜 선별용
+			
 			Date csSdate = Date.valueOf("2022-12-20");	//시작날짜
 			Date csFdate = Date.valueOf(fdate);	//종료날짜
 			ClassScheduleVo csVo = new ClassScheduleVo();
@@ -270,21 +275,70 @@ public class CrawlingClass {
 			csVo.setCsSdate(csSdate);
 			csVo.setCsFdate(csFdate);
 			System.out.println(csVo.toString());
+			System.out.println("ddddd");
+			//csSvc.insert(csVo);
 		}
 		//신청 클래스
+		System.out.println("---------------------신청 클래스-----------------------");
+		int caTotal = classMin; //신청 인원수 - 해당 클래스 최소 인원수
+		Date caDate = null;
 		
+		switch(sday) {
+		case 1: caDate = Date.valueOf("2023-02-07"); break; //화요일
+		case 2: 
+		case 3:
+		case 5: caDate = Date.valueOf("2023-02-10"); break; //금요일
+		case 4: caDate = Date.valueOf("2023-02-11"); break;//토요일
+		}
 		
-		//리뷰 정보 저장
-		System.out.println("---------------------리뷰 정보 저장-----------------------");
-		List<WebElement> reviewPhotoDivAll = drv.findElements(By.cssSelector("#class_info > div.class-reply-info-area > div.main-reply-list-area > div.user-reply-img-gallery.main-thumb-reply-img-list > li"));
-		
-		for(int i = 0; i < 3; i++) {
+		int membercheck = 0;
+		int membercheck2 = 0;
+		int applyCnt = (int)(Math.random()*2) + 3; //3~4랜덤
+		for(int i = 1; i < applyCnt; i++) { //신청 데이터 개수 2~3랜덤
+			int caCode = i;//신청 코드 - 클래스 코드 넘버 + 뒤에 i 순
+			int coCode = (int)(Math.random()*(optionCnt-1)) + 1; //옵션 코드 - 옵션코드 개수용 cnt에서 -1
+			int csCode = (int)(Math.random()*(scheduleCnt-1)) + 1; //일정 코드 - 일정코드 개수용 cnt에서 -1
+			int memberIdCnt = (int)(Math.random()*10) + 1; //멤버 랜덤 지정용 
 			
-			int RcoCode = (int)(Math.random()*(optionCnt+1)) + 0;
-			int RcsCode = (int)(Math.random()*scheduleCnt) + 1; 
+			if(i == 1) {
+				while(membercheck == memberIdCnt) {
+					memberIdCnt = (int)(Math.random()*10) + 1;
+					membercheck2 = memberIdCnt;
+				} 
+			} else if(i == 2) {
+				while(memberIdCnt == membercheck || memberIdCnt == membercheck2) {
+					memberIdCnt = (int)(Math.random()*10) + 1;
+				} 
+			} else {
+				membercheck = memberIdCnt;
+			}
+			String memberId = "user"+memberIdCnt+"@user.com"; //신청한 멤버 아이디
+			
+			ClassApplyVo caVo = new ClassApplyVo();
+			caVo.setCaCode(caCode);
+			caVo.setMemberId(memberId);
+			caVo.setClassCode(classCode);
+			caVo.setCaTotal(caTotal);
+			caVo.setCaDate(caDate);
+			caVo.setCoCode(coCode);
+			caVo.setCsCode(csCode);
+			System.out.println(caVo.toString());
+			//svc.insertClassApply(caVo);
+		}
+		
+		
+		
+		//리뷰 사진 가져오기
+		System.out.println("---------------------리뷰용 사진가져오기 -----------------------");
+		List<WebElement> reviewPhotoDivAll = drv.findElements(By.cssSelector("#class_info > div.class-reply-info-area > div.main-reply-list-area > div.user-reply-img-gallery.main-thumb-reply-img-list > li"));
+		for(int i = 0; i < 3; i++) {
+			int rcCode = 0;
 			WebElement reviewPhotoDiv = reviewPhotoDivAll.get(i);
 			WebElement reviewPhotoA = reviewPhotoDiv.findElement(By.cssSelector("div > a"));
 			String reviewPhoto = reviewPhotoA.getAttribute("style").split("\"")[1];
+			System.out.println(reviewPhoto);
+			String fileName = rcCode + String.valueOf(i);
+        	svc.getReviewImageUrl(classImgUrl2, fileName);
 		}
 	}
 
