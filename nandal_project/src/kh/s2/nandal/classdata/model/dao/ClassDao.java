@@ -30,7 +30,7 @@ public class ClassDao {
 			pstmt.setString(9, vo.getClassPrd()); 
 			pstmt.setString(10, vo.getClassAtt()); 
 			pstmt.setInt(11, vo.getAreaCode()); 
-			pstmt.setString(12, vo.getClassAdress()); 
+			pstmt.setString(12, vo.getClassAddress()); 
 			pstmt.setInt(13, vo.getClassPrice()); 
 			pstmt.setInt(14, vo.getClassLevel()); 
 			pstmt.setInt(15, vo.getClassMin()); 

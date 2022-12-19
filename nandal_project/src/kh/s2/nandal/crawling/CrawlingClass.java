@@ -113,9 +113,9 @@ public class CrawlingClass {
 		
 		//상세주소
 		System.out.println("---------------------주소-----------------------");
-		WebElement classAdressEle = drv.findElement(By.cssSelector("#map > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(2) > div > div.overlay_title"));
-		String classAdress = classAdressEle.getText();
-		System.out.println(classAdress);
+		WebElement classAddressEle = drv.findElement(By.cssSelector("#map > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(2) > div > div.overlay_title"));
+		String classAddress = classAddressEle.getText();
+		System.out.println(classAddress);
 		
 		System.out.println("---------------------시도코드-----------------------");
 		WebElement areaNameEle = drv.findElement(By.cssSelector("#map > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(2) > div > div.overlay_title"));
@@ -163,7 +163,7 @@ public class CrawlingClass {
 	        		String classImg = "./images/class/"+fileName+".jpg";
 	        		dto = new ClassVo(classCode,  categoryCode, className, classImg, classIntro,
 	        			 classCur, classHost, classAlltime, classPrd, classAtt, areaCode,
-	        			 classAdress, classPrice, classLevel, classMin, classMax);
+	        			 classAddress, classPrice, classLevel, classMin, classMax);
 //	        		svc.insertClass(dto);
 	        	} else {
 	        		//class_photo 테이블에 데이터 insert

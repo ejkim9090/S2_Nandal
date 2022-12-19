@@ -28,7 +28,7 @@ public class ClassVo {
 	private String classPrd;
 	private String classAtt;
 	private int areaCode;
-	private String classAdress;
+	private String classAddress;
 	private int classPrice;
 	private int classLevel;
 	private int classMin;
@@ -40,7 +40,7 @@ public class ClassVo {
 	
 	public ClassVo(int classCode, int categoryCode, String className, String classImg, String classIntro,
 			String classCur, String classHost, String classAlltime, String classPrd, String classAtt, int areaCode,
-			String classAdress, int classPrice, int classLevel, int classMin, int classMax) {
+			String classAddress, int classPrice, int classLevel, int classMin, int classMax) {
 		super();
 		this.classCode = classCode;
 		this.categoryCode = categoryCode;
@@ -53,7 +53,7 @@ public class ClassVo {
 		this.classPrd = classPrd;
 		this.classAtt = classAtt;
 		this.areaCode = areaCode;
-		this.classAdress = classAdress;
+		this.classAddress = classAddress;
 		this.classPrice = classPrice;
 		this.classLevel = classLevel;
 		this.classMin = classMin;
@@ -65,7 +65,7 @@ public class ClassVo {
 		return "CrawlingClassDto [classCode=" + classCode + ", categoryCode=" + categoryCode + ", className="
 				+ className + ", classImg=" + classImg + ", classIntro=" + classIntro + ", classCur=" + classCur
 				+ ", classHost=" + classHost + ", classAlltime=" + classAlltime + ", classPrd=" + classPrd
-				+ ", classAtt=" + classAtt + ", areaCode=" + areaCode + ", classAdress=" + classAdress + ", classPrice="
+				+ ", classAtt=" + classAtt + ", areaCode=" + areaCode + ", classAdress=" + classAddress + ", classPrice="
 				+ classPrice + ", classLevel=" + classLevel + ", classMin=" + classMin + ", classMax=" + classMax + "]";
 	}
 	
@@ -135,11 +135,11 @@ public class ClassVo {
 	public void setAreaCode(int areaCode) {
 		this.areaCode = areaCode;
 	}
-	public String getClassAdress() {
-		return classAdress;
+	public String getClassAddress() {
+		return classAddress;
 	}
-	public void setClassAdress(String classAdress) {
-		this.classAdress = classAdress;
+	public void setClassAddress(String classAddress) {
+		this.classAddress = classAddress;
 	}
 	public int getClassPrice() {
 		return classPrice;

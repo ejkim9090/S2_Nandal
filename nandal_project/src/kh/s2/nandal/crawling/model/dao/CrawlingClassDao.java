@@ -60,7 +60,7 @@ public class CrawlingClassDao {
 			pstmt.setString(9, dto.getClassPrd()); 
 			pstmt.setString(10, dto.getClassAtt()); 
 			pstmt.setInt(11, dto.getAreaCode()); 
-			pstmt.setString(12, dto.getClassAdress()); 
+			pstmt.setString(12, dto.getClassAddress()); 
 			pstmt.setInt(13, dto.getClassPrice()); 
 			pstmt.setInt(14, dto.getClassLevel()); 
 			pstmt.setInt(15, dto.getClassMin()); 
