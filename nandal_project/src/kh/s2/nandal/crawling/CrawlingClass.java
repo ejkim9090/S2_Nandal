@@ -89,6 +89,7 @@ public class CrawlingClass {
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/6207";
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/28799";
 		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/27339";
+	
 		//라이프스타일 8
 	
 		
@@ -350,7 +351,7 @@ public class CrawlingClass {
 				WebElement reviewPhotoA = reviewPhotoDiv.findElement(By.cssSelector("div > a"));
 				String reviewPhoto = reviewPhotoA.getAttribute("style").split("\"")[1];
 				System.out.println(reviewPhoto);
-				String fileName = classCode + String.valueOf(i);
+				String fileName = classCode + String.valueOf(i+1);
 	        	svc.getReviewImageUrl(reviewPhoto, fileName); //리뷰 사진 파일 저장
 			}
 		}
