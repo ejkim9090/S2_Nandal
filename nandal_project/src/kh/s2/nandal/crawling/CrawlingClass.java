@@ -43,32 +43,31 @@ public class CrawlingClass {
 		//URL 클래스 상세페이지
 		
 		//요리 1- 완료
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/23538";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/31007";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/17171";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/19477";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/11257";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/29825";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/23922";
+		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/23538"; //2  8
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/31007"; //1 6
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/17171"; // 2 6
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/19477"; //2 8
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/11257"; // 2 8
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/29825"; // 2 5
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/23922"; //10
 		
 		//수공예 2
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/20047";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/25156";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/20861";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/26851";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/32201";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/20047"; //4
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/25156"; //4
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/20861"; //4
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/26851"; //4
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/32201"; //10
 		
 		//플라워 3
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/31914";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/22912";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/31781";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/15711";
-		
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/31914"; //8
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/22912"; //5
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/31781"; //3
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/15711"; //4
 		
 		//미술 4
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/17452";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/23950";
-//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/18960";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/17452"; //6
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/23950"; //4
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/18960"; 
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/18957";
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/15207";
 		
@@ -77,24 +76,23 @@ public class CrawlingClass {
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/20721";
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/28199";
 		
-		
 		//액티비티 6
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/27375";
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/10358";
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/3375";
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/27070";
 		
-		
 		//뷰티 7
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/6207";
 //		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/28799";
-		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/27339";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/27339";
 	
 		//라이프스타일 8
 	
+		int categoryCode = 1; //카테고리 코드
+		int classMin = 2; //최소 인원
+		int classMax = 8; //최대 인원
 		
-
-		int categoryCode = 6; //카테고리 코드
 		
 		//페이지 dom
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
@@ -143,14 +141,23 @@ public class CrawlingClass {
 		List<WebElement> classCurEle = drv.findElements(By.cssSelector("#class_info > div.class_curriculum > div > ul > li"));
 		String classCur = "";
 		for(int i = 0; i < classCurEle.size(); i++) {
-			classCur = classCur.concat(classCurEle.get(i).getText()+ "\n");
+			String ccur = classCurEle.get(i).getText();
+			String[] ccurArr = ccur.split("\n");
+			for(int j = 0; j < ccurArr.length; j++) {
+				classCur = classCur.concat(ccurArr[j] + "%%");
+			}
 		}
 		System.out.println(classCur);
 		
 		//호스트 소개
 		System.out.println("---------------------호스트 소개-----------------------");
 		WebElement classHostEle = drv.findElement(By.cssSelector("#introductions"));
-		String classHost = classHostEle.getText();
+		String classHost = "";
+			String hcur = classHostEle.getText();
+			String[] hcurArr = hcur.split("\n");
+			for(int j = 0; j < hcurArr.length; j++) {
+				classHost = classHost.concat(hcurArr[j] + "%%");
+			}
 		System.out.println(classHost);
 		
 		//총소요시간
@@ -164,7 +171,11 @@ public class CrawlingClass {
 		List<WebElement> classPrdEle = drv.findElements(By.cssSelector("#class_info > div:nth-child(7) > div"));
 		String classPrd = "";
 		for(int i = 0; i < classPrdEle.size(); i++) {
-			classPrd = classPrd.concat(classPrdEle.get(i).getText()+ "\n");
+			String ccur = classPrdEle.get(i).getText();
+			String[] ccurArr = ccur.split("\n");
+			for(int j = 0; j < ccurArr.length; j++) {
+				classPrd = classPrd.concat(ccurArr[j] + "%%");
+			}
 		}
 		System.out.println(classPrd);
 		
@@ -200,13 +211,17 @@ public class CrawlingClass {
 //		System.out.println(classMaxstr);
 //		int classMin = Integer.parseInt(classMinstr);
 //		int classMax = Integer.parseInt(classMaxstr);	
-		int classMin = 1;
-		int classMax = 3;	
+		
 		
 		//클래스 소개
 		System.out.println("---------------------클래스 소개-----------------------");
 		WebElement classIntroEle = drv.findElement(By.cssSelector("#class_info > div.class_info > p"));
-		String classIntro = classIntroEle.getText();
+		String classIntro = "";
+		String icur = classIntroEle.getText();
+		String[] icurArr = icur.split("\n");
+		for(int j = 0; j < icurArr.length; j++) {
+			classIntro = classIntro.concat(icurArr[j] + "%%");
+		}
 		System.out.println(classIntro);
 		
 		//클래스 이미지
@@ -310,19 +325,19 @@ public class CrawlingClass {
 			
 			switch(i) {
 			case 1 : 
-				csStime = "10:30"; csFtime = "12:30"; 
+				csStime = "10:30"; csFtime = "12:20"; 
 				fdate = "2023-02-17";
 				break;
 			case 2 : 
-				csStime = "13:00"; csFtime = "15:00"; 
+				csStime = "13:00"; csFtime = "14:50"; 
 				fdate = "2023-03-20";
 				break;
 			case 3 : 
-				csStime = "15:00"; csFtime = "17:00"; 
+				csStime = "15:00"; csFtime = "16:50"; 
 				fdate = "2023-04-18";
 				break;
 			case 4 : 
-				csStime = "17:00"; csFtime = "19:00"; 
+				csStime = "17:00"; csFtime = "18:50"; 
 				fdate = "2023-01-23";
 				break;
 			}
@@ -409,7 +424,7 @@ public class CrawlingClass {
 			System.out.println("--------각 신청일정 리뷰 정보 추가 ---------");
 			int reviewCode = caCode;
 			String reviewCont = null;
-			int reviewcnt = (int)(Math.random()*8) + 1;
+			int reviewcnt = (int)(Math.random()*9) + 1;
 			switch(reviewcnt) {
 			case 1 : reviewCont = "친절하게 가르쳐주시고 좋은추억만들어서 좋았습니다!"; break;
 			case 2 : reviewCont = "전날 연락드렸는데도 수강할수 있도록 도와주셔서 감사했어요. 강사님이 잘 이끌어주셔서 원데이로 완성할 수 있었습니다. ㅎㅎ"; break;
@@ -419,6 +434,7 @@ public class CrawlingClass {
 			case 6 : reviewCont = "너무 쉽게 잘 알려주시고 재밌게 잘하고 왔습니다!ㅎ"; break;
 			case 7 : reviewCont = "재밋어요><"; break;
 			case 8 : reviewCont = "강사님 너무 유쾌하시고 꼼꼼하게 알려주셨어요. 실습할때 컨디션이 안좋아 잘 못 따라가는데도 기다려 주시고 잘 지도해 주셔서 감사합니다!"; break;
+			case 9 : reviewCont = "좋은 시간보냈습니다ㅎ"; break;
 			}
 			int reviewKind = (int)(Math.random()*4) + 2; // 친절도 평점 각 2~5 랜덤
 			int reviewComponent = (int)(Math.random()*3) + 3; //수업구성 평점 각 3~5 랜덤
