@@ -13,6 +13,7 @@ import kh.s2.nandal.classdata.model.service.ClassService;
 import kh.s2.nandal.classdata.model.vo.ClassVo;
 import kh.s2.nandal.review.model.service.ReviewService;
 import kh.s2.nandal.review.model.vo.ReviewAllVo;
+import kh.s2.nandal.review.model.vo.ReviewMainListVo;
 
 /**
  * Servlet implementation class MainController
@@ -49,7 +50,7 @@ public class MainController extends HttpServlet {
 		List<ClassVo> classlist3 = claService.groupList(4);
 		request.setAttribute("classlist3", classlist3);
 		//리뷰 추천 목록
-		List<ReviewAllVo> reviewlist = reService.selectList(4);
+		List<ReviewMainListVo> reviewlist = reService.selectList(4);
 		request.setAttribute("reviewlist", reviewlist);
 		System.out.println("/main 컨트롤러");
 		String viewPage="/WEB-INF/index.jsp";

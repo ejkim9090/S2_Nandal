@@ -52,7 +52,7 @@
 	                   				</c:when> 
 	                   				<c:otherwise>
 		                   				<c:forEach items="${classlist1}" var="vo">
-			                   				<div class="list_class">
+			                   				<a href="${pageContext.request.contextPath }/info/${vo.classCode}" class="list_class">
 		                                        <div class="list_class_img_wrap">
 		                                            <img src="${vo.classImg}" alt="클래스 이미지">
 		                                        </div>
@@ -67,7 +67,7 @@
 		                                                ${vo.classPrice}원
 		                                            </span>
 		                                        </div>
-		                                    </div>
+		                                    </a>
 		                   				</c:forEach>
 	                   				</c:otherwise>
                                 </c:choose>  
@@ -98,7 +98,7 @@
 	                   				</c:when> 
 	                   				<c:otherwise>
 		                   				<c:forEach items="${classlist2}" var="vo">
-			                   				<div class="list_class">
+			                   				<a href="${pageContext.request.contextPath }/info/${vo.classCode}" class="list_class">
 		                                        <div class="list_class_img_wrap">
 		                                            <img src="${vo.classImg}" alt="클래스 이미지">
 		                                        </div>
@@ -113,7 +113,7 @@
 		                                                ${vo.classPrice}원
 		                                            </span>
 		                                        </div>
-		                                    </div>
+		                                    </a>
 		                   				</c:forEach>
 	                   				</c:otherwise>
                                 </c:choose>      
@@ -144,7 +144,7 @@
 	                   				</c:when> 
 	                   				<c:otherwise>
 		                   				<c:forEach items="${classlist3}" var="vo">
-			                   				<div class="list_class">
+			                   				<a href="${pageContext.request.contextPath }/info/${vo.classCode}" class="list_class">
 		                                        <div class="list_class_img_wrap">
 		                                            <img src="${vo.classImg}" alt="클래스 이미지">
 		                                        </div>
@@ -159,7 +159,7 @@
 		                                                ${vo.classPrice}원
 		                                            </span>
 		                                        </div>
-		                                    </div>
+		                                    </a>
 		                   				</c:forEach>
 	                   				</c:otherwise>
                                 </c:choose>      
@@ -190,16 +190,16 @@
 	                                </c:when>
 	                                <c:otherwise>
 		                                <c:forEach items="${reviewlist}" var="vo">
-		                                	<div class="list_class">
+		                                	<a href="${pageContext.request.contextPath }/info/${vo.classCode}" class="list_class">
 		                                        <div class="list_class_img_wrap">
-		                                            <img src="${vo.rpRoute[0]}" alt="리뷰 이미지">
+		                                            <img src="${vo.rpRoute}" alt="리뷰 이미지">
 		                                        </div>
 		                                        <div class="list_review_text">
 		                                            <span class="f_12">
 		                                                ${vo.reviewCont}
 		                                            </span>
 		                                        </div>
-		                                    </div>
+		                                    </a>
 		                                </c:forEach>
 	                                </c:otherwise>
                                 </c:choose>   

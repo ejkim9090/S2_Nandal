@@ -9,6 +9,7 @@ import java.util.List;
 
 import kh.s2.nandal.jdbc.JdbcTemplate;
 import kh.s2.nandal.review.model.vo.ReviewAllVo;
+import kh.s2.nandal.review.model.vo.ReviewMainListVo;
 import kh.s2.nandal.review.model.vo.ReviewVo;
 
 public class ReviewDao {
@@ -107,12 +108,13 @@ public class ReviewDao {
 	}
 	
 //	selectList - 메인화면 리뷰 목록 조회
-	public List<ReviewAllVo> selectList(Connection conn,int reviewGrade){
-		List<ReviewAllVo> volist = null;
+	public List<ReviewMainListVo> selectList(Connection conn,int reviewGrade){
+		List<ReviewMainListVo> volist = null;
 		
-		String sql = "select distinct first_value(rp.RP_ROUTE)  over(partition by review_code) a, r.REVIEW_CONT "
+		String sql = "select  distinct first_value(rp.RP_ROUTE)  over(partition by review_code) a, r.REVIEW_CONT, REVIEW_CODE, ca.class_code "
 				+ "    from review r join review_photo rp using(review_code) "
-				+ "     where review_grade > ? ";
+				+ "                        join CLASS_APPLY ca on review_code = ca.ca_code "
+				+ "     where review_grade > ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -120,13 +122,13 @@ public class ReviewDao {
 			pstmt.setInt(1, reviewGrade);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				volist = new ArrayList<ReviewAllVo>();
+				volist = new ArrayList<ReviewMainListVo>();
 				do {
-					ReviewAllVo vo = new ReviewAllVo();
-					List<String> route = new ArrayList<String>();
-					route.add(rs.getString(1));
-					vo.setRpRoute(route);
+					ReviewMainListVo vo = new ReviewMainListVo();
+					vo.setRpRoute(rs.getString(1));
 					vo.setReviewCont(rs.getString(2));
+					vo.setReviewCode(rs.getInt(3));
+					vo.setClassCode(rs.getInt(4));
 					volist.add(vo);
 				}while(rs.next());
 			}
