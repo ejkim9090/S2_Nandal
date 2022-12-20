@@ -214,9 +214,8 @@
     padding: 48px 0 88px;
 }
 .info_h2 {
-    text-decoration: underline 5px solid #b49bf788;
-    text-align: center;
-    margin: 20px 0;
+    text-decoration: underline 7px solid #b49bf788;
+    margin: 20px 0 40px;
 }
 
 /* 해당 클래스 리뷰 토탈 점수 */
