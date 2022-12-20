@@ -53,6 +53,8 @@ window.onload = function() {
         if(c == -1157*2) {
             document.getElementsByClassName("rmd_right_btn")[2].style.display = "none";
         }
+        console.log(document.getElementsByClassName("rmd_right_btn")[3]);
+        console.log("ㅎㅇㅎㅇㅎ");
     }
     document.getElementsByClassName("rmd_left_btn")[2].onclick = function () {
         c += +1157;
@@ -62,6 +64,29 @@ window.onload = function() {
         document.getElementsByClassName("rmd_right_btn")[2].style.display = "inline-block";
         if(c == 0) {
             document.getElementsByClassName("rmd_left_btn")[2].style.display = "none";
+        }
+        console.log(document.getElementsByClassName("rmd_right_btn")[3]);
+        console.log("ㅎㅇㅎㅇㅎ");
+    }
+    var d = 0;
+    document.getElementsByClassName("rmd_right_btn")[3].onclick = function () {
+        d += -1157;
+        var t_value = "translate3d(" + d +"px, 0px, 0px)";
+        document.getElementsByClassName("rmd_list_swiper")[3].style.transform = t_value;
+
+        document.getElementsByClassName("rmd_left_btn")[3].style.display = "inline-block";
+        if(d == -1157*2) {
+            document.getElementsByClassName("rmd_right_btn")[3].style.display = "none";
+        }
+    }
+    document.getElementsByClassName("rmd_left_btn")[3].onclick = function () {
+        d += +1157;
+        var t_value = "translate3d(" + d +"px, 0px, 0px)";
+        document.getElementsByClassName("rmd_list_swiper")[3].style.transform = t_value;
+
+        document.getElementsByClassName("rmd_right_btn")[3].style.display = "inline-block";
+        if(d == 0) {
+            document.getElementsByClassName("rmd_left_btn")[3].style.display = "none";
         }
     }
 }
