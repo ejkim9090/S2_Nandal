@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import kh.s2.nandal.jdbc.JdbcTemplate;
+import kh.s2.nandal.review.model.vo.ReviewAllVo;
 import kh.s2.nandal.review.model.vo.ReviewVo;
 
 public class ReviewDao {
@@ -103,6 +105,42 @@ public class ReviewDao {
 		System.out.println(">>> ReviewDao selectList return : " + volist);
 		return volist;
 	}
+	
+//	selectList - 메인화면 리뷰 목록 조회
+	public List<ReviewAllVo> selectList(Connection conn,int reviewGrade){
+		List<ReviewAllVo> volist = null;
+		
+		String sql = "select distinct first_value(rp.RP_ROUTE)  over(partition by review_code) a, r.REVIEW_CONT "
+				+ "    from review r join review_photo rp using(review_code) "
+				+ "     where review_grade > ? ";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewGrade);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				volist = new ArrayList<ReviewAllVo>();
+				do {
+					ReviewAllVo vo = new ReviewAllVo();
+					List<String> route = new ArrayList<String>();
+					route.add(rs.getString(1));
+					vo.setRpRoute(route);
+					vo.setReviewCont(rs.getString(2));
+					volist.add(vo);
+				}while(rs.next());
+			}
+			//TODO
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println(">>> ReviewDao selectList return : " + volist);
+		return volist;
+	}
+	
 //	selectOne - 상세조회
 	public ReviewVo selectOne(Connection conn, int reviewCode){
 		System.out.println(">>> ReviewDao selectOne param reviewCode : " + reviewCode);

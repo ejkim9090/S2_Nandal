@@ -5,6 +5,7 @@ import java.util.List;
 
 import kh.s2.nandal.jdbc.JdbcTemplate;
 import kh.s2.nandal.review.model.dao.ReviewDao;
+import kh.s2.nandal.review.model.vo.ReviewAllVo;
 import kh.s2.nandal.review.model.vo.ReviewVo;
 
 public class ReviewService {
@@ -45,6 +46,15 @@ public class ReviewService {
 			Connection conn = JdbcTemplate.getConnection();
 			List<ReviewVo> volist = null;
 			volist = dao.selectList(conn);
+			JdbcTemplate.close(conn);
+			System.out.println(">> ReviewService selectList return :" + volist);
+			return volist;
+		}
+//		selectList - 메인화면 리뷰 목록 조회
+		public List<ReviewAllVo> selectList(int reviewGrade){
+			Connection conn = JdbcTemplate.getConnection();
+			List<ReviewAllVo> volist = null;
+			volist = dao.selectList(conn, reviewGrade);
 			JdbcTemplate.close(conn);
 			System.out.println(">> ReviewService selectList return :" + volist);
 			return volist;

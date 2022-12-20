@@ -50,6 +50,27 @@ public class ClassService {
 		System.out.println(">> ClassService selectList return :" + volist);
 		return volist;
 	}
+
+//	selectList - 리뷰 추천유형 해당 목록
+	public List<ClassVo> groupList(int group){
+		Connection conn = JdbcTemplate.getConnection();
+		List<ClassVo> volist = null;
+		volist = dao.groupList(conn,group);
+		JdbcTemplate.close(conn);
+		System.out.println(">> ClassService groupList return :" + volist);
+		return volist;
+	}	
+	
+//	selectList - keyword 검색
+	public List<ClassVo> keywordList(String keyword){
+		Connection conn = JdbcTemplate.getConnection();
+		List<ClassVo> volist = null;
+		volist = dao.keywordList(conn,keyword);
+		JdbcTemplate.close(conn);
+		System.out.println(">> ClassService keywordList return :" + volist);
+		return volist;
+	}	
+	
 //	selectOne
 	public ClassVo selectOne(int classCode){
 		System.out.println(">> ClassService selectOne param classCode :" + classCode);
@@ -59,5 +80,16 @@ public class ClassService {
 		JdbcTemplate.close(conn);
 		System.out.println(">> ClassService selectOne return :" + vo);
 		return vo;
+	}
+//	selectOne - 클래스 수
+	public int selectKeyword(String keyword) {
+		System.out.println(">> ClassService selectKeyword param keyword :" + keyword);
+		Connection conn = JdbcTemplate.getConnection();
+		int result = 0;
+		result = dao.selectKeyword(conn, keyword);
+		
+		JdbcTemplate.close(conn);
+		System.out.println(">> ClassService selectKeyword return :" + keyword);
+		return result;
 	}
 }

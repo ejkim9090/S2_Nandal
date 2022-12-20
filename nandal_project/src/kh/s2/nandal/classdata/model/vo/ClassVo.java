@@ -9,8 +9,7 @@ public class ClassVo {
 //	CLASS_CUR     NOT NULL VARCHAR2(3000) 
 //	CLASS_HOST    NOT NULL VARCHAR2(2000) 
 //	CLASS_ALLTIME NOT NULL VARCHAR2(30)   
-//	CLASS_PRD              VARCHAR2(600)  
-//	CLASS_ATT              VARCHAR2(600)  
+//	CLASS_PRD              VARCHAR2(1000)  
 //	AREA_CODE     NOT NULL NUMBER(2)      
 //	CLASS_ADRESS  NOT NULL VARCHAR2(300)  
 //	CLASS_PRICE   NOT NULL NUMBER(10)     
@@ -26,21 +25,18 @@ public class ClassVo {
 	private String classHost;
 	private String classAlltime;
 	private String classPrd;
-	private String classAtt;
 	private int areaCode;
 	private String classAddress;
 	private int classPrice;
 	private int classLevel;
 	private int classMin;
 	private int classMax;
-	
 	public ClassVo() {
 		super();
 	}
-	
 	public ClassVo(int classCode, int categoryCode, String className, String classImg, String classIntro,
-			String classCur, String classHost, String classAlltime, String classPrd, String classAtt, int areaCode,
-			String classAddress, int classPrice, int classLevel, int classMin, int classMax) {
+			String classCur, String classHost, String classAlltime, String classPrd, int areaCode, String classAddress,
+			int classPrice, int classLevel, int classMin, int classMax) {
 		super();
 		this.classCode = classCode;
 		this.categoryCode = categoryCode;
@@ -51,7 +47,6 @@ public class ClassVo {
 		this.classHost = classHost;
 		this.classAlltime = classAlltime;
 		this.classPrd = classPrd;
-		this.classAtt = classAtt;
 		this.areaCode = areaCode;
 		this.classAddress = classAddress;
 		this.classPrice = classPrice;
@@ -59,16 +54,14 @@ public class ClassVo {
 		this.classMin = classMin;
 		this.classMax = classMax;
 	}
-	
 	@Override
 	public String toString() {
-		return "CrawlingClassDto [classCode=" + classCode + ", categoryCode=" + categoryCode + ", className="
-				+ className + ", classImg=" + classImg + ", classIntro=" + classIntro + ", classCur=" + classCur
-				+ ", classHost=" + classHost + ", classAlltime=" + classAlltime + ", classPrd=" + classPrd
-				+ ", classAtt=" + classAtt + ", areaCode=" + areaCode + ", classAdress=" + classAddress + ", classPrice="
-				+ classPrice + ", classLevel=" + classLevel + ", classMin=" + classMin + ", classMax=" + classMax + "]";
+		return "ClassVo [classCode=" + classCode + ", categoryCode=" + categoryCode + ", className=" + className
+				+ ", classImg=" + classImg + ", classIntro=" + classIntro + ", classCur=" + classCur + ", classHost="
+				+ classHost + ", classAlltime=" + classAlltime + ", classPrd=" + classPrd + ", areaCode=" + areaCode
+				+ ", classAddress=" + classAddress + ", classPrice=" + classPrice + ", classLevel=" + classLevel
+				+ ", classMin=" + classMin + ", classMax=" + classMax + "]";
 	}
-	
 	public int getClassCode() {
 		return classCode;
 	}
@@ -123,12 +116,6 @@ public class ClassVo {
 	public void setClassPrd(String classPrd) {
 		this.classPrd = classPrd;
 	}
-	public String getClassAtt() {
-		return classAtt;
-	}
-	public void setClassAtt(String classAtt) {
-		this.classAtt = classAtt;
-	}
 	public int getAreaCode() {
 		return areaCode;
 	}
@@ -165,6 +152,8 @@ public class ClassVo {
 	public void setClassMax(int classMax) {
 		this.classMax = classMax;
 	}
+	
+	
 	
 	
 	
