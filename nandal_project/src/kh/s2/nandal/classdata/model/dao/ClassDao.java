@@ -108,10 +108,10 @@ public class ClassDao {
 	public List<ClassVo> groupList(Connection conn,int group){
 		List<ClassVo> volist = null;
 		
-		String sql = "select CLASS_IMG, CLASS_NAME, CLASS_ADDRESS, CLASS_PRICE\r\n"
-				+ "    from CLASS \r\n"
-				+ "    where class_code in (select ca.CLASS_CODE\r\n"
-				+ "                                from review r join CLASS_APPLY ca on r.REVIEW_CODE = ca.CA_CODE\r\n"
+		String sql = "select CLASS_CODE, CLASS_IMG, CLASS_NAME, CLASS_ADDRESS, CLASS_PRICE "
+				+ "    from CLASS "
+				+ "    where class_code in (select ca.CLASS_CODE "
+				+ "                                from review r join CLASS_APPLY ca on r.REVIEW_CODE = ca.CA_CODE "
 				+ "                                where r.REVIEW_GROUP = ?)";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -123,6 +123,7 @@ public class ClassDao {
 				volist = new ArrayList<ClassVo>();
 				do {
 					ClassVo vo = new ClassVo();
+					vo.setClassCode(rs.getInt("CLASS_CODE"));
 					vo.setClassImg(rs.getString("CLASS_IMG"));
 					vo.setClassName(rs.getString("CLASS_NAME"));
 					String[] addressArr = rs.getString("CLASS_ADDRESS").split("\\s");
@@ -145,7 +146,7 @@ public class ClassDao {
 	public List<ClassVo> keywordList(Connection conn,String keyword){
 		List<ClassVo> volist = null;
 		
-		String sql = "select CLASS_IMG, CLASS_NAME, CLASS_ADDRESS, CLASS_PRICE from CLASS where CLASS_NAME Like '%"+keyword+"%'";
+		String sql = "select CLASS_CODE, CLASS_IMG, CLASS_NAME, CLASS_ADDRESS, CLASS_PRICE from CLASS where CLASS_NAME Like '%"+keyword+"%'";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -155,6 +156,7 @@ public class ClassDao {
 				volist = new ArrayList<ClassVo>();
 				do {
 					ClassVo vo = new ClassVo();
+					vo.setClassCode(rs.getInt("CLASS_CODE"));
 					vo.setClassImg(rs.getString("CLASS_IMG"));
 					vo.setClassName(rs.getString("CLASS_NAME"));
 					String[] addressArr = rs.getString("CLASS_ADDRESS").split("\\s");
@@ -185,6 +187,24 @@ public class ClassDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, classCode);
 			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo = new ClassVo();
+				vo.setClassCode(rs.getInt("class_code"));
+				vo.setCategoryCode(rs.getInt("CATEGORY_CODE"));
+				vo.setClassName(rs.getString("CLASS_NAME"));
+				vo.setClassImg(rs.getString("CLASS_IMG"));
+				vo.setClassIntro(rs.getString("CLASS_INTRO"));
+				vo.setClassCur(rs.getString("CLASS_CUR"));
+				vo.setClassHost(rs.getString("CLASS_HOST"));
+				vo.setClassAlltime(rs.getString("CLASS_ALLTIME"));
+				vo.setClassPrd(rs.getString("CLASS_PRD"));
+				vo.setAreaCode(rs.getInt("AREA_CODE"));
+				vo.setClassAddress(rs.getString("CLASS_ADDRESS"));
+				vo.setClassPrice(rs.getInt("CLASS_PRICE"));
+				vo.setClassLevel(rs.getInt("CLASS_LEVEL"));
+				vo.setClassMin(rs.getInt("class_min"));
+				vo.setClassMax(rs.getInt("class_max"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

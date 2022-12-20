@@ -85,12 +85,12 @@
                             </div>
                         </div>
                         <div class="top_info_wrap"> <!-- 상단 클래스 요약 정보 -->
-                            <div class="f_20_b">클래스 명 클래스 명 클래스 명 클래스 명 클래스 명 클래스 명</div>
+                            <div class="f_20_b">${classVo.className}</div>
                             <div>
-                                <div class="top_info_text"><img src="">총소요시간</div>
-                                <div class="top_info_text"><img src="">난이도</div>
-                                <div class="top_info_text"><img src="">최소~최대인원</div>
-                                <div class="top_info_text"><img src="">위치 요약</div>
+                                <div class="top_info_text"><img src="">${classVo.classAlltime}</div>
+                                <div class="top_info_text"><img src="">${classVo.classLevel}</div>
+                                <div class="top_info_text"><img src="">${classVo.classMin}~${classVo.classMax}</div>
+                                <div class="top_info_text"><img src="">${classVo.classAddress}</div>
                             </div>
                         </div>
                         <div id="intro"></div>
@@ -161,51 +161,65 @@
                     <div> <!-- 클래스 소개-->
                         <h2 class="info_h2">클래스 소개</h2>
                         <div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
+                        <c:if test="${not empty introList}">
+                        	<c:forEach items="${introList}" var="intro">
+                            	<p>${intro}</p>
+                            	<br>
+                        	</c:forEach>
+                        </c:if>
                         </div>
                         <div id="cur"></div>
                     </div>
                     <div> <!-- 커리큘럼-->
                         <h2 class="info_h2">커리큘럼</h2>
                         <div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
+                        <c:if test="${not empty curList}">
+                        	<c:forEach items="${curList}" var="cur">
+                            	<p>${cur}</p>
+                            	<br>
+                        	</c:forEach>
+                        </c:if>
                         </div>
                         <div id="host"></div>
                     </div>
                     <div> <!-- 호스트 소개-->
                         <h2 class="info_h2">호스트 소개</h2>
                         <div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
+	                        <c:if test="${not empty hostList}">
+	                        	<c:forEach items="${hostList}" var="host">
+	                            	<p>${host}</p>
+	                            	<br>
+	                        	</c:forEach>
+	                        </c:if>
                         </div>
                         <div id="prd"></div>
                     </div>
                     <div> <!-- 제공 및 유의사항-->
-                        <h2 class="info_h2">제공사항</h2>
+                        <h2 class="info_h2">기타 제공사항</h2>
                         <div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                        </div>
-                        <h2 class="info_h2">유의사항</h2>
-                        <div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
+                        <c:if test="${not empty prdList}">
+                        	<c:forEach items="${prdList}" var="prd">
+                            	<p>${prd}</p>
+                            	<br>
+                        	</c:forEach>
+                        </c:if>
                         </div>
                         <div id="address"></div>
                     </div>
                     <div> <!-- 위치-->
                         <h2 class="info_h2">위치</h2>
+                            <p>${classVo.classAddress}</p>
+                        <div id="map" style="width: 90%;height:500px; margin:0 auto;"></div>
+						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=22e814de5ddfa7ab67223da7c1c400b9"></script>
+							<script>
+								var container = document.getElementById('map');
+								var options = {
+									center: new kakao.maps.LatLng(33.450701, 126.570667),
+									level: 3
+								};
+						
+								var map = new kakao.maps.Map(container, options);
+							</script>
                         <div id="review"></div>
                     </div>
                     <div> <!-- 후기-->
