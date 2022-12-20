@@ -40,11 +40,11 @@ public class ClassPhotoService {
 		System.out.println(">> ClassPhotoService delete return :" + result);
 		return result;
 	}
-//	selectList
-	public List<ClassPhotoVo> selectList(){
+//	selectList - 해당 클래스의 사진 가져오기 0이면 서브사진, 1이면 내용사진
+	public List<ClassPhotoVo> selectList(int classCode,int cpType){
 		Connection conn = JdbcTemplate.getConnection();
 		List<ClassPhotoVo> volist = null;
-		volist = dao.selectList(conn);
+		volist = dao.selectList(conn,classCode,cpType);
 		JdbcTemplate.close(conn);
 		System.out.println(">> ClassPhotoService selectList return :" + volist);
 		return volist;

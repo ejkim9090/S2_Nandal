@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
@@ -67,17 +68,29 @@ public class ClassPhotoDao {
 		
 		return result;
 	}
-//	selectList - 목록조회
-	public List<ClassPhotoVo> selectList(Connection conn){
+//	selectList - 해당 클래스의 사진 가져오기 0이면 서브사진, 1이면 내용사진
+	public List<ClassPhotoVo> selectList(Connection conn,int classCode,int cpType){
 		List<ClassPhotoVo> volist = null;
 		
-		String sql = "select * from class_photo";
+		String sql = "select * from CLASS_PHOTO "
+				+ "    where class_code = ? and CP_TYPE = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, classCode);
+			pstmt.setInt(2, cpType);
 			rs = pstmt.executeQuery();
-			//TODO
+			if(rs.next()) {
+				volist = new ArrayList<ClassPhotoVo>();
+				do {
+					ClassPhotoVo vo = new ClassPhotoVo();
+					vo.setClassCode(rs.getInt("class_code"));
+					vo.setCpRoute(rs.getString("cp_route"));
+					vo.setCpType(rs.getInt("cp_type"));
+					volist.add(vo);
+				} while(rs.next());
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

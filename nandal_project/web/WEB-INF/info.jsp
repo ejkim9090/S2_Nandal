@@ -59,26 +59,21 @@
                         <div class="info_top_first">         
                             <div class="top_class_img"> <!--상단 이미지 -->
                                 <div class="top_img_wrap">
-                                    <img class="top_img" src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg">
+                                    <img class="top_img" src=".${classVo.classImg}">
                                 </div>
                                 <div class="sub_list">
                                     <div class="sub_list_swiper_wrap">
                                         <div class="sub_list_swiper">     
                                             <div class="sub_img_list">
-                                                <img class="sub_img" src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="">
+                                                <img class="sub_img" src=".${classVo.classImg}" alt="대표 이미지">
                                             </div>
-                                            <div class="sub_img_list">
-                                                <img class="sub_img" src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="">
-                                            </div>
-                                            <div class="sub_img_list">
-                                                <img class="sub_img" src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="">
-                                            </div>
-                                            <div class="sub_img_list">
-                                                <img class="sub_img" src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="">
-                                            </div>
-                                            <div class="sub_img_list">
-                                                <img class="sub_img" src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="">
-                                            </div>
+                                            <c:if test="${not empty cpSubList}">
+                                            	<c:forEach items="${cpSubList}" var="vo">
+                                            		<div class="sub_img_list">
+		                                                <img class="sub_img" src=".${vo.cpRoute}" alt="서브 이미지">
+		                                            </div>
+                                            	</c:forEach>
+                                            </c:if>
                                         </div>
                                     </div>
                                 </div> 
@@ -90,7 +85,7 @@
                                 <div class="top_info_text"><img src="">${classVo.classAlltime}</div>
                                 <div class="top_info_text"><img src="">${classVo.classLevel}</div>
                                 <div class="top_info_text"><img src="">${classVo.classMin}~${classVo.classMax}</div>
-                                <div class="top_info_text"><img src="">${classVo.classAddress}</div>
+                                <div class="top_info_text"><img src="">${sumAddress}</div>
                             </div>
                         </div>
                         <div id="intro"></div>
@@ -168,6 +163,13 @@
                         	</c:forEach>
                         </c:if>
                         </div>
+                        <div>
+                        <c:if test="${not empty cpIntroList}">
+                        	<c:forEach items="${cpIntroList}" var="vo">
+                            	<img class="intro_img" src=".${vo.cpRoute}" alt="소개 이미지">
+                        	</c:forEach>
+                        </c:if>
+                        </div>
                         <div id="cur"></div>
                     </div>
                     <div> <!-- 커리큘럼-->
@@ -209,7 +211,7 @@
                     <div> <!-- 위치-->
                         <h2 class="info_h2">위치</h2>
                             <p>${classVo.classAddress}</p>
-                        <div id="map" style="width: 90%;height:500px; margin:0 auto;"></div>
+                        <div id="map"></div>
 						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=22e814de5ddfa7ab67223da7c1c400b9"></script>
 							<script>
 								var container = document.getElementById('map');
