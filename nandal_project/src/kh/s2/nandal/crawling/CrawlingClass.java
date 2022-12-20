@@ -3,8 +3,10 @@ package kh.s2.nandal.crawling;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+import org.apache.tomcat.jni.Time;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.*;
@@ -39,13 +41,72 @@ public class CrawlingClass {
 	public void crawling() throws IOException {
 		
 		//URL 클래스 상세페이지
-		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/23538";
+		
+		//요리 1- 완료
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/23538";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/31007";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/17171";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/19477";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/11257";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/29825";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/23922";
+		
+		//수공예 2
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/20047";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/25156";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/20861";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/26851";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/32201";
+		
+		//플라워 3
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/31914";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/22912";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/31781";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/15711";
+		
+		
+		//미술 4
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/17452";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/23950";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/18960";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/18957";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/15207";
+		
+		//음악 5
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/28613";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/20721";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/28199";
+		
+		
+		//액티비티 6
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/27375";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/10358";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/3375";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/27070";
+		
+		
+		//뷰티 7
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/6207";
+//		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/28799";
+		String crawlingURL = "https://www.sssd.co.kr/m/class/detail/27339";
+		//라이프스타일 8
+	
+		
+
+		int categoryCode = 6; //카테고리 코드
+		
 		//페이지 dom
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 		WebDriver drv = new ChromeDriver();   // 크롬창이 열림을 확인함.
 		WebDriverWait w = new WebDriverWait(drv, 500);
-		JavascriptExecutor jexe = (JavascriptExecutor)drv;
-
+//		ChromeOptions options = new ChromeOptions();
+//		options.addArguments("--disable-popup-blocking");
+		
+//		JavascriptExecutor js = (JavascriptExecutor)drv;
+		
+		
+//		WebElement clickEle = drv.findElement(By.cssSelector("body > div.common-bottom-slide-layer.app-install-propose-layer.open > div > div.btn-area > div > button.install-cancel-btn"));
+		
 		//클래스 목록 페이지에서 자동 구현하기 TODO
 //		String crawlingListURL = "https://www.sssd.co.kr/m/search/class/category?midx=1";
 //		drv.get(crawlingListURL);  // 클래스 목록페이지로 이동
@@ -59,9 +120,10 @@ public class CrawlingClass {
 //		System.out.println(classCategoryEleAll.size());
 		
 		drv.get(crawlingURL);  // 클래스 상세페이지로 이동
+		drv.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
-		drv.findElement(By.cssSelector("body > div.common-bottom-slide-layer.app-install-propose-layer.open > div > div.btn-area > div > button.install-cancel-btn")).click();
-
+		
+		
 		//클래스 코드 추출
 		String[] urlstrArr = crawlingURL.split("/");
 		String classCodestr = urlstrArr[urlstrArr.length-1];
@@ -73,11 +135,7 @@ public class CrawlingClass {
 		String className = classNameEle.getText();
 		System.out.println(className);
 		
-		//클래스 소개
-		System.out.println("---------------------클래스 소개-----------------------");
-		WebElement classIntroEle = drv.findElement(By.cssSelector("#class_info > div.class_info > p"));
-		String classIntro = classIntroEle.getText();
-		System.out.println(classIntro);
+		
 		
 		//커리큘럼
 		System.out.println("---------------------커리큘럼-----------------------");
@@ -101,23 +159,13 @@ public class CrawlingClass {
 		System.out.println(classAlltime);
 		
 		//제공사항
-		System.out.println("---------------------제공사항-----------------------");
+		System.out.println("---------------------제공 및 유의사항-----------------------");
 		List<WebElement> classPrdEle = drv.findElements(By.cssSelector("#class_info > div:nth-child(7) > div"));
 		String classPrd = "";
 		for(int i = 0; i < classPrdEle.size(); i++) {
 			classPrd = classPrd.concat(classPrdEle.get(i).getText()+ "\n");
 		}
 		System.out.println(classPrd);
-		
-		//유의사항
-		System.out.println("---------------------유의 사항-----------------------");
-		List<WebElement> classAttEle = drv.findElements(By.cssSelector("#class_info > div:nth-child(6) > p.conv_add"));
-		String classAtt = "";
-		for(int i = 0; i < classAttEle.size(); i++) {
-			classAtt = classAtt.concat(classAttEle.get(i).getText()+ "\n");
-		}
-		System.out.println(classAtt);
-
 		
 		//상세주소
 		System.out.println("---------------------주소-----------------------");
@@ -143,20 +191,29 @@ public class CrawlingClass {
 		
 		//최소,최대 인원
 		System.out.println("---------------------최소/최대 인원-----------------------");
-		WebElement classPeopleEle = drv.findElement(By.cssSelector("body > div.content.opened > div.container.no-lr-padding > div.class-abbr-info-area > div > div:nth-child(4) > div > div > div:nth-child(2)"));
-		String[] classPeople = classPeopleEle.getText().split(Pattern.quote("\n"))[0].split(Pattern.quote("-"));
-		String classMinstr = classPeople[0];
-		String classMaxstr = classPeople[1];		
-		System.out.println(classMinstr);
-		System.out.println(classMaxstr);
-		int classMin = Integer.parseInt(classMinstr);
-		int classMax = Integer.parseInt(classMaxstr);	
+//		WebElement classPeopleEle = drv.findElement(By.cssSelector("body > div.content.opened > div.container.no-lr-padding > div.class-abbr-info-area > div > div:nth-child(4) > div > div > div:nth-child(2)"));
+//		String[] classPeople = classPeopleEle.getText().split(Pattern.quote("\n"))[0].split(Pattern.quote("-"));
+//		String classMinstr = classPeople[0];
+//		String classMaxstr = classPeople[1];		
+//		System.out.println(classMinstr);
+//		System.out.println(classMaxstr);
+//		int classMin = Integer.parseInt(classMinstr);
+//		int classMax = Integer.parseInt(classMaxstr);	
+		int classMin = 1;
+		int classMax = 3;	
+		
+		//클래스 소개
+		System.out.println("---------------------클래스 소개-----------------------");
+		WebElement classIntroEle = drv.findElement(By.cssSelector("#class_info > div.class_info > p"));
+		String classIntro = classIntroEle.getText();
+		System.out.println(classIntro);
 		
 		//클래스 이미지
 		System.out.println("---------------------클래스 대표이미지 및 클래스 이미지-----------------------");
 		List<WebElement> classImgEleAll = drv.findElements(By.cssSelector("body > div.content.opened > div.container.no-lr-padding > div.detail-title.class-detail-img-area > div:nth-child(2) > div > div"));
 		String	classImgUrl = null;
 		for(int i = 0; i < classImgEleAll.size(); i++) {
+//		for(int i = 0; i < 6; i++) {
 //			classImgUrl = classImgEleAll.get(i).getAttribute("style").split("\"")[1];
 			classImgUrl = classImgEleAll.get(i).getAttribute("data-src");
 			System.out.println("서브이미지"+i+": "+classImgUrl);
@@ -166,11 +223,10 @@ public class CrawlingClass {
 	        	svc.getImageUrl(classImgUrl, fileName);
 	        	if(i == 0) {
 	        		//class 테이블에 데이터 insert
-	        		int categoryCode = 1;
 	        		int classLevel = (int)(Math.random()*3) + 1;
 	        		String classImg = "./images/class/"+fileName+".jpg";
 	        		dto = new ClassVo(classCode,  categoryCode, className, classImg, classIntro,
-	        			 classCur, classHost, classAlltime, classPrd, classAtt, areaCode,
+	        			 classCur, classHost, classAlltime, classPrd, areaCode,
 	        			 classAddress, classPrice, classLevel, classMin, classMax);
 	        		svc.insertClass(dto);
 	        	} else {
@@ -253,19 +309,19 @@ public class CrawlingClass {
 			
 			switch(i) {
 			case 1 : 
-				csStime = "10:30"; csFtime = "12:00"; 
+				csStime = "10:30"; csFtime = "12:30"; 
 				fdate = "2023-02-17";
 				break;
 			case 2 : 
-				csStime = "13:00"; csFtime = "14:30"; 
+				csStime = "13:00"; csFtime = "15:00"; 
 				fdate = "2023-03-20";
 				break;
 			case 3 : 
-				csStime = "15:00"; csFtime = "16:30"; 
+				csStime = "15:00"; csFtime = "17:00"; 
 				fdate = "2023-04-18";
 				break;
 			case 4 : 
-				csStime = "17:00"; csFtime = "18:30"; 
+				csStime = "17:00"; csFtime = "19:00"; 
 				fdate = "2023-01-23";
 				break;
 			}
@@ -288,14 +344,17 @@ public class CrawlingClass {
 		//리뷰 사진 가져오기
 		System.out.println("---------------------리뷰용 사진 3개씩 저장 하기 -----------------------");
 		List<WebElement> reviewPhotoDivAll = drv.findElements(By.cssSelector("#class_info > div.class-reply-info-area > div.main-reply-list-area > div.user-reply-img-gallery.main-thumb-reply-img-list > li"));
-		for(int i = 0; i < 3; i++) {
-			WebElement reviewPhotoDiv = reviewPhotoDivAll.get(i);
-			WebElement reviewPhotoA = reviewPhotoDiv.findElement(By.cssSelector("div > a"));
-			String reviewPhoto = reviewPhotoA.getAttribute("style").split("\"")[1];
-			System.out.println(reviewPhoto);
-			String fileName = classCode + String.valueOf(i);
-        	svc.getReviewImageUrl(reviewPhoto, fileName); //리뷰 사진 파일 저장
+		if(reviewPhotoDivAll.size() > 0) {
+			for(int i = 0; i < 3; i++) {
+				WebElement reviewPhotoDiv = reviewPhotoDivAll.get(i);
+				WebElement reviewPhotoA = reviewPhotoDiv.findElement(By.cssSelector("div > a"));
+				String reviewPhoto = reviewPhotoA.getAttribute("style").split("\"")[1];
+				System.out.println(reviewPhoto);
+				String fileName = classCode + String.valueOf(i);
+	        	svc.getReviewImageUrl(reviewPhoto, fileName); //리뷰 사진 파일 저장
+			}
 		}
+		
 		
 		
 		//신청 클래스
@@ -315,7 +374,7 @@ public class CrawlingClass {
 		int membercheck2 = 0;
 		int applyCnt = (int)(Math.random()*2) + 3; //3~4랜덤
 		for(int i = 1; i < applyCnt; i++) { //신청 데이터 개수 2~3랜덤
-			int caCode = i;//신청 코드 - 클래스 코드 넘버 + 뒤에 i 순
+			int caCode = Integer.parseInt(classCodestr + i);//신청 코드 - 클래스 코드 넘버 + 뒤에 i 순
 			int coCode = (int)(Math.random()*(optionCnt-1)) + 1; //옵션 코드 - 옵션코드 개수용 cnt에서 -1
 			int csCode = (int)(Math.random()*(scheduleCnt-1)) + 1; //일정 코드 - 일정코드 개수용 cnt에서 -1
 			int memberIdCnt = (int)(Math.random()*10) + 1; //멤버 랜덤 지정용 
@@ -382,37 +441,41 @@ public class CrawlingClass {
 			System.out.println("----------------");
 			
 			//각 리뷰마다 사진 리뷰사진 추가
-			System.out.println("--------각 리뷰마다 사진 추가 ---------");
-			System.out.println();
-			ReviewPhotoVo rpVo = new ReviewPhotoVo();
-			rpVo.setReviewCode(reviewCode);
-			String rfileName = null;
-			if(applyCnt == 3) {
-				if(i == 1) {
-					System.out.println("--리뷰 2개일때 첫 리뷰한쪽에 사진2개--");
+			if(reviewPhotoDivAll.size() > 0) {
+				System.out.println("--------각 리뷰마다 사진 추가 ---------");
+				System.out.println();
+				ReviewPhotoVo rpVo = new ReviewPhotoVo();
+				rpVo.setReviewCode(reviewCode);
+				String rfileName = null;
+				if(applyCnt == 3) {
+					if(i == 1) {
+						System.out.println("--리뷰 2개일때 첫 리뷰한쪽에 사진2개--");
+						rfileName = classCode + String.valueOf(i);
+						rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
+						rpSvc.insert(rpVo);
+						System.out.println(rpVo.toString());
+
+						rfileName = classCode + String.valueOf(i+1);
+						rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
+						rpSvc.insert(rpVo);
+						System.out.println(rpVo.toString());
+					} 
+					if(i == 2) {
+						System.out.println("--리뷰 2개일때 두번째 리뷰한쪽에 사진1개--");
+						rfileName = classCode + String.valueOf(i+1);
+						rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
+						rpSvc.insert(rpVo);
+						System.out.println(rpVo.toString());
+					}
+				} else {
+					System.out.println("--리뷰 3개일때 각 사진 한개씩--");
 					rfileName = classCode + String.valueOf(i);
 					rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
 					rpSvc.insert(rpVo);
 					System.out.println(rpVo.toString());
-
-					rfileName = classCode + String.valueOf(i+1);
-					rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
-					rpSvc.insert(rpVo);
-					System.out.println(rpVo.toString());
-				} else {
-					System.out.println("--리뷰 2개일때 두번째 리뷰한쪽에 사진1개--");
-					rfileName = classCode + String.valueOf(i+1);
-					rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
-					rpSvc.insert(rpVo);
-					System.out.println(rpVo.toString());
 				}
-			} else {
-				System.out.println("--리뷰 3개일때 각 사진 한개씩--");
-				rfileName = classCode + String.valueOf(i);
-				rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
-				rpSvc.insert(rpVo);
-				System.out.println(rpVo.toString());
 			}
+			
 			
 			
 		}

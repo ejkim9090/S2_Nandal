@@ -72,7 +72,7 @@ public class CrawlingClassDao {
 		System.out.println("insertClassdaO()");
 		
 		int result = 0;
-		String sql = "insert into class values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; // ""안에 ; 는 없어야함
+		String sql = "insert into class values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; // ""안에 ; 는 없어야함
 		PreparedStatement pstmt = null;
 		
 		try {
@@ -85,14 +85,13 @@ public class CrawlingClassDao {
 			pstmt.setString(6, dto.getClassCur()); 
 			pstmt.setString(7, dto.getClassHost()); 
 			pstmt.setString(8, dto.getClassAlltime()); 
-			pstmt.setString(9, dto.getClassPrd()); 
-			pstmt.setString(10, dto.getClassAtt()); 
-			pstmt.setInt(11, dto.getAreaCode()); 
-			pstmt.setString(12, dto.getClassAddress()); 
-			pstmt.setInt(13, dto.getClassPrice()); 
-			pstmt.setInt(14, dto.getClassLevel()); 
-			pstmt.setInt(15, dto.getClassMin()); 
-			pstmt.setInt(16, dto.getClassMax()); 
+			pstmt.setString(9, dto.getClassPrd());
+			pstmt.setInt(10, dto.getAreaCode()); 
+			pstmt.setString(11, dto.getClassAddress()); 
+			pstmt.setInt(12, dto.getClassPrice()); 
+			pstmt.setInt(13, dto.getClassLevel()); 
+			pstmt.setInt(14, dto.getClassMin()); 
+			pstmt.setInt(15, dto.getClassMax()); 
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
