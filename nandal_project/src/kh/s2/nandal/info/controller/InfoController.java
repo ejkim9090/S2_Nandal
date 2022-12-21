@@ -66,16 +66,23 @@ public class InfoController extends HttpServlet {
 			sumAddress = sumAddress.concat(adrArr[1]);
 			request.setAttribute("sumAddress", sumAddress);
 			
-			//출력시 줄바꿈을 위해 클래스 소개,커리큘럼,호스트소개,기타제공사항을 배열로 변경 후 추가  
-			vo.getClassIntro().replaceAll("%%", "<br>");
-			String[] introList = vo.getClassIntro().split("%%");
-			String[] curList = vo.getClassCur().split("%%");
-			String[] hostList = vo.getClassHost().split("%%");
-			String[] prdList = vo.getClassPrd().split("%%");
-			request.setAttribute("introList", introList);
-			request.setAttribute("curList", curList);
-			request.setAttribute("hostList", hostList);
-			request.setAttribute("prdList", prdList);
+			//출력시 줄바꿈을 위해 클래스 소개,커리큘럼,호스트소개,기타제공사항에 replace 처리 
+			String classIntro = vo.getClassIntro().replaceAll("%%", "<br>");
+			vo.setClassIntro(classIntro); 
+			String classCur = vo.getClassCur().replaceAll("%%", "<br>");
+			vo.setClassCur(classCur);
+			String classHost = vo.getClassHost().replaceAll("%%", "<br>");
+			vo.setClassHost(classHost);
+			String classPrd = vo.getClassPrd().replaceAll("%%", "<br>");
+			vo.setClassPrd(classPrd);
+//			String[] introList = vo.getClassIntro().split("%%");
+//			String[] curList = vo.getClassCur().split("%%");
+//			String[] hostList = vo.getClassHost().split("%%");
+//			String[] prdList = vo.getClassPrd().split("%%");
+//			request.setAttribute("introList", introList);
+//			request.setAttribute("curList", curList);
+//			request.setAttribute("hostList", hostList);
+//			request.setAttribute("prdList", prdList);
 			
 			//해당 클래스의 사진 서브사진,소개사진 가져오기
 			ClassPhotoService cpService = new ClassPhotoService();

@@ -217,12 +217,7 @@
                     <div> <!-- 클래스 소개-->
                         <h2 class="info_h2">클래스 소개</h2>
                         <div>
-                        <c:if test="${not empty introList}">
-                        	<c:forEach items="${introList}" var="intro">
-                            	<p>${intro}</p>
-                            	<br>
-                        	</c:forEach>
-                        </c:if>
+                        ${classVo.classIntro}
                         </div>
                         <div>
                         <c:if test="${not empty cpIntroList}">
@@ -236,36 +231,21 @@
                     <div> <!-- 커리큘럼-->
                         <h2 class="info_h2">커리큘럼</h2>
                         <div>
-                        <c:if test="${not empty curList}">
-                        	<c:forEach items="${curList}" var="cur">
-                            	<p>${cur}</p>
-                            	<br>
-                        	</c:forEach>
-                        </c:if>
+                        ${classVo.classCur}
                         </div>
                         <div id="host"></div>
                     </div>
                     <div> <!-- 호스트 소개-->
                         <h2 class="info_h2">호스트 소개</h2>
                         <div>
-	                        <c:if test="${not empty hostList}">
-	                        	<c:forEach items="${hostList}" var="host">
-	                            	<p>${host}</p>
-	                            	<br>
-	                        	</c:forEach>
-	                        </c:if>
+                        ${classVo.classHost}
                         </div>
                         <div id="prd"></div>
                     </div>
                     <div> <!-- 제공 및 유의사항-->
                         <h2 class="info_h2">기타 제공사항</h2>
                         <div>
-                        <c:if test="${not empty prdList}">
-                        	<c:forEach items="${prdList}" var="prd">
-                            	<p>${prd}</p>
-                            	<br>
-                        	</c:forEach>
-                        </c:if>
+                        ${classVo.classPrd}
                         </div>
                         <div id="address"></div>
                     </div>
