@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kh.s2.nandal.jdbc.JdbcTemplate;
-import kh.s2.nandal.review.model.vo.ReviewAllVo;
+import kh.s2.nandal.review.model.vo.ClassReviewVo;
 import kh.s2.nandal.review.model.vo.ReviewMainListVo;
 import kh.s2.nandal.review.model.vo.ReviewVo;
 
@@ -86,24 +86,44 @@ public class ReviewDao {
 		System.out.println(">>> ReviewDao delete return : " + result);
 		return result;
 	}
-//	selectList - 목록조회
-	public List<ReviewVo> selectList(Connection conn){
-		List<ReviewVo> volist = null;
+//	selectList - 상세페이지 해당 클래스의 리뷰 목록 가져오기
+	public List<ClassReviewVo> selectClassList(Connection conn,int classCode){
+		List<ClassReviewVo> volist = null;
 		
-		String sql = "select * from review";
+		String sql = "select r.*, member_name "
+				+ "    from class_apply ca join REVIEW r on ca.CA_CODE = r.REVIEW_CODE "
+				+ "                                join member m using(member_id)"
+				+ "    where class_code = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, classCode);
 			rs = pstmt.executeQuery();
-			//TODO
+			if(rs.next()) {
+				volist = new ArrayList<ClassReviewVo>();
+				do {
+					ClassReviewVo vo = new ClassReviewVo();
+					vo.setReviewCode(rs.getInt("REVIEW_CODE"));
+					vo.setReviewTime(rs.getTimestamp("REVIEW_TIME"));
+					vo.setReviewCont(rs.getString("REVIEW_CONT"));
+					vo.setReviewGrade(rs.getDouble("REVIEW_GRADE"));
+					vo.setReviewKind(rs.getInt("REVIEW_KIND"));
+					vo.setReviewComponent(rs.getInt("REVIEW_COMPONENT"));
+					vo.setReviewFacility(rs.getInt("REVIEW_FACILITY"));
+					vo.setReviewLevel(rs.getInt("REVIEW_LEVEL"));
+					vo.setReviewGroup(rs.getInt("REVIEW_GROUP"));
+					vo.setMemberName(rs.getString("member_name"));
+					volist.add(vo);
+				} while(rs.next());
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JdbcTemplate.close(rs);
 			JdbcTemplate.close(pstmt);
 		}
-		System.out.println(">>> ReviewDao selectList return : " + volist);
+		System.out.println(">>> ReviewDao selectClassList return : " + volist);
 		return volist;
 	}
 	

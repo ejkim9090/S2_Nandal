@@ -41,10 +41,10 @@ public class ReviewPhotoService {
 		return result;
 	}
 //	selectList
-	public List<ReviewPhotoVo> selectList(){
+	public List<ReviewPhotoVo> selectList(int reviewCode){
 		Connection conn = JdbcTemplate.getConnection();
 		List<ReviewPhotoVo> volist = null;
-		volist = dao.selectList(conn);
+		volist = dao.selectList(conn,reviewCode);
 		JdbcTemplate.close(conn);
 		System.out.println(">> ReviewPhotoService selectList return :" + volist);
 		return volist;

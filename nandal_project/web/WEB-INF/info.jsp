@@ -35,7 +35,7 @@
      function buyTimeClickHandler() {
     	 console.log("라벨 클릭됨");
    	    // 다른 prod_tab에서 selected 삭제
-   	    $(".time_check").not($(this)).css("background-color","rgba(105,108,255,.85)");
+   	    $(".buy_time").not($(this)).css("background-color","rgba(105,108,255,.85)");
    	    // 클릭한 prod_tab에서 selected 추가
    	    $(this).css("background-color","rgba(105,108,255,1)");
      }
@@ -84,6 +84,8 @@
      					} else {
      						$buyTime.html("<label class='buy_time'><h4 class='time_text'>해당 날짜에 일정이 없습니다.</h4></label>");
      					}
+     			     	//일정에 시간대 선택 시
+     			       $(".buy_time").on("click",buyTimeClickHandler);
      				 },
      		error : function(request, status, error){
      					console.log(request);	
@@ -275,10 +277,32 @@
                     </div>
                     <div> <!-- 후기-->
                         <h2 class="info_h2">후기</h2>
+                        <c:choose>
+                        <c:when test="${empty reList}">
                         <div class="review_total">
                             <div class="review_score_wrap">
                                 <img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
-                                <p class="review_score f_16">4.7(2)</p>
+                                <p class="review_score f_16">0.0</p>
+                                <img class="review_arrow" src="<%=request.getContextPath()%>/images/review_arrow.webp">
+                                <div class="score_detail_wrap">
+                                    <div class="score_detail"><label class="f_16_b">친절도</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 0.0</p></div>
+                                    <div class="score_detail"><label class="f_16_b">시설</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 0.0</p></div>
+                                    <div class="score_detail"><label class="f_16_b">수업구성</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 0.0</p></div>
+                                    <div class="score_detail"><label class="f_16_b">난이도 안내</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 0.0</p></div>
+                                </div>
+                            </div>
+                            <div class="review_total_rmd"><label class="f_12_b total_rmd">추천:</label><p class="f_12">혼자(0) 연인(0) 친구(0) 가족(0)</p></div>
+                        </div>
+                        	<div class="review_wrap">
+	                            <p class="f_16_b">리뷰 목록이 없습니다.</p>
+	                        </div>
+                        </c:when>
+                        <c:otherwise>
+                        <div class="review_total">
+                            <div class="review_score_wrap">
+                                <img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
+                                <p class="review_score f_16">
+                                </p>
                                 <img class="review_arrow" src="<%=request.getContextPath()%>/images/review_arrow.webp">
                                 <div class="score_detail_wrap">
                                     <div class="score_detail"><label class="f_16_b">친절도</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 4.8</p></div>
@@ -289,25 +313,39 @@
                             </div>
                             <div class="review_total_rmd"><label class="f_12_b total_rmd">추천:</label><p class="f_12">혼자(0) 연인(0) 친구(0) 가족(0)</p></div>
                         </div>
-                        <div class="review_wrap">
-                            <p class="f_16_b">김*수</p>
-                            <div class="review_score_wrap">
-                                <img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
-                                <p class="review_score f_16">4.7(2)</p>
-                                <img class="review_arrow" src="<%=request.getContextPath()%>/images/review_arrow.webp">
-                                <div class="score_detail_wrap">
-                                    <div class="score_detail"><label class="f_16_b">친절도</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 4.8</p></div>
-                                    <div class="score_detail"><label class="f_16_b">시설</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 4.8</p></div>
-                                    <div class="score_detail"><label class="f_16_b">수업구성</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 4.8</p></div>
-                                    <div class="score_detail"><label class="f_16_b">난이도 안내</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 4.8</p></div>
-                                </div>
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Curabitur in magna libero.Sed nec pharetra nunc.    
-                            </p>
-                            <img src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="리뷰이미지">          
-                        </div>
+                        	<c:forEach items="${reList}" var="vo">
+                        		<div class="review_wrap">
+		                            <p class="f_16_b">${vo.memberName}</p>
+		                            <div class="review_score_wrap">
+		                                <img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
+		                                <p class="review_score f_16">${vo.reviewGrade}</p>
+		                                <img class="review_arrow" src="<%=request.getContextPath()%>/images/review_arrow.webp">
+		                                <div class="score_detail_wrap">
+		                                    <div class="score_detail">
+		                                    	<label class="f_16_b">친절도</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">${vo.reviewKind}</p>
+		                                    </div>
+		                                    <div class="score_detail">
+		                                    	<label class="f_16_b">시설</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">${vo.reviewComponent}</p>
+		                                    </div>
+		                                    <div class="score_detail">
+		                                    	<label class="f_16_b">수업구성</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">${vo.reviewFacility}</p>
+		                                    </div>
+		                                    <div class="score_detail">
+		                                    	<label class="f_16_b">난이도 안내</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">${vo.reviewLevel}</p>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                            <p>${vo.reviewCont}</p>
+		                            
+		                            <c:if test="${not empty vo.rpRoute}">
+		                            	<c:forEach items="${vo.rpRoute}" var="rpVo">
+		                            		<img src=".${rpVo}" alt="리뷰이미지">
+		                            	</c:forEach>
+		                            </c:if>   
+		                        </div>
+                        	</c:forEach>
+                        </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>

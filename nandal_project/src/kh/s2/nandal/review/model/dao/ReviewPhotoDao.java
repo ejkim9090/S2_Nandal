@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import kh.s2.nandal.jdbc.JdbcTemplate;
@@ -66,16 +67,24 @@ public class ReviewPhotoDao {
 		return result;
 	}
 //	selectList - 목록조회
-	public List<ReviewPhotoVo> selectList(Connection conn){
+	public List<ReviewPhotoVo> selectList(Connection conn,int reviewCode){
 		List<ReviewPhotoVo> volist = null;
 		
-		String sql = "select * from review_photo";
+		String sql = "select RP_ROUTE from review_photo where REVIEW_CODE = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewCode);
 			rs = pstmt.executeQuery();
-			//TODO
+			if(rs.next()) {
+				volist = new ArrayList<ReviewPhotoVo>();
+				do {
+					ReviewPhotoVo vo = new ReviewPhotoVo();
+					vo.setRpRoute(rs.getString("RP_ROUTE"));
+					volist.add(vo);
+				} while(rs.next());
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

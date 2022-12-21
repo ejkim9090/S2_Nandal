@@ -1,16 +1,20 @@
 package kh.s2.nandal.review.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import kh.s2.nandal.jdbc.JdbcTemplate;
 import kh.s2.nandal.review.model.dao.ReviewDao;
-import kh.s2.nandal.review.model.vo.ReviewAllVo;
+import kh.s2.nandal.review.model.dao.ReviewPhotoDao;
+import kh.s2.nandal.review.model.vo.ClassReviewVo;
 import kh.s2.nandal.review.model.vo.ReviewMainListVo;
+import kh.s2.nandal.review.model.vo.ReviewPhotoVo;
 import kh.s2.nandal.review.model.vo.ReviewVo;
 
 public class ReviewService {
 	private ReviewDao dao = new ReviewDao();
+	private ReviewPhotoDao rpDao = new ReviewPhotoDao();
 	// 최소 5개 CRUD
 //		insert
 		public int insert(ReviewVo vo) {
@@ -42,15 +46,26 @@ public class ReviewService {
 			System.out.println(">> ReviewService delete return :" + result);
 			return result;
 		}
-//		selectList
-		public List<ReviewVo> selectList(){
+//		selectList - 상세페이지 해당 클래스의 리뷰 목록 가져오기
+		public List<ClassReviewVo> selectClassList(int classCode){
 			Connection conn = JdbcTemplate.getConnection();
-			List<ReviewVo> volist = null;
-			volist = dao.selectList(conn);
+			List<ClassReviewVo> volist = null;
+			volist = dao.selectClassList(conn,classCode);
+			for(int i = 0; i < volist.size(); i++) {
+				List<ReviewPhotoVo> rplist = rpDao.selectList(conn, volist.get(i).getReviewCode()); 
+				if(rplist != null) {
+					List<String> rpRoute = new ArrayList<String>();
+					for(int j = 0; j < rplist.size(); j++) {
+						rpRoute.add(rplist.get(j).getRpRoute());
+					}
+					volist.get(i).setRpRoute(rpRoute);
+				}
+			}
 			JdbcTemplate.close(conn);
-			System.out.println(">> ReviewService selectList return :" + volist);
+			System.out.println(">> ReviewService selectClassList return :" + volist);
 			return volist;
 		}
+		
 //		selectList - 메인화면 리뷰 목록 조회
 		public List<ReviewMainListVo> selectList(int reviewGrade){
 			Connection conn = JdbcTemplate.getConnection();
@@ -60,6 +75,7 @@ public class ReviewService {
 			System.out.println(">> ReviewService selectList return :" + volist);
 			return volist;
 		}
+		
 //		selectOne
 		public ReviewVo selectOne(int reviewCode){
 			System.out.println(">> ReviewService selectOne param reviewCode :" + reviewCode);
