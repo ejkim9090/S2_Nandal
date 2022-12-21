@@ -29,8 +29,6 @@
      $( function() {
        $("#datepicker").on("change",datepickerClick);
        $("#buy_btn").on("click",classBuyHandler);
-     	//일정에 시간대 선택 시
-       $(".time_check").on("click",buyTimeClickHandler);
      });
      function buyTimeClickHandler() {
     	 console.log("라벨 클릭됨");
