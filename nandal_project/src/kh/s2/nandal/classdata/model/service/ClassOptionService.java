@@ -40,11 +40,11 @@ public class ClassOptionService {
 		System.out.println(">> ClassOptionService delete return :" + result);
 		return result;
 	}
-//	selectList
-	public List<ClassOptionVo> selectList(){
+//	selectList -- 상세 페이지 해당 옵션 가져오기
+	public List<ClassOptionVo> selectList(int classCode){
 		Connection conn = JdbcTemplate.getConnection();
 		List<ClassOptionVo> volist = null;
-		volist = dao.selectList(conn);
+		volist = dao.selectList(conn, classCode);
 		JdbcTemplate.close(conn);
 		System.out.println(">> ClassOptionService selectList return :" + volist);
 		return volist;

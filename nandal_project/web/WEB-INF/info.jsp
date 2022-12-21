@@ -21,23 +21,81 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/info.css">
     
     <script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
-    <script src="<%=request.getContextPath()%>/js/info.js"></script>
     <script src="<%=request.getContextPath()%>/js/info_api.js"></script>
+    <script src="<%=request.getContextPath()%>/js/info.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=22e814de5ddfa7ab67223da7c1c400b9&libraries=services,clusterer,drawing"></script>
-
-    
 
     <script>
      $( function() {
-       $("#datepicker").on("change",function(){
-           var selected = $(this).val();
-           console.log("선택날짜 : " + selected);
-           
-           //선택된 날짜의 요일 구하기 일:0,월:1,화:2,수:3, ...
-           var today_num = new Date(selected).getDay();
-           console.log(today_num);
-       });
+       $("#datepicker").on("change",datepickerClick);
+       $("#buy_btn").on("click",classBuyHandler);
+     	//일정에 시간대 선택 시
+       $(".time_check").on("click",buyTimeClickHandler);
      });
+     function buyTimeClickHandler() {
+    	 console.log("라벨 클릭됨");
+   	    // 다른 prod_tab에서 selected 삭제
+   	    $(".time_check").not($(this)).css("background-color","rgba(105,108,255,.85)");
+   	    // 클릭한 prod_tab에서 selected 추가
+   	    $(this).css("background-color","rgba(105,108,255,1)");
+     }
+     function classBuyHandler() {
+    	 var formQuery = $("#buy_form").serialize();
+    	 console.log(formQuery);
+     }
+     function datepickerClick() {
+    	 var selected = $(this).val();
+         console.log("선택날짜 : " + selected);
+         
+         //선택된 날짜의 요일 구하기 일:0,월:1,화:2,수:3, ...
+         var today_num = new Date(selected).getDay();
+         console.log(today_num);
+         var day = 0;
+         switch(today_num) {
+         case 0: day = 64; break; 
+         case 1: day = 1; break; 
+         case 2: day = 2; break; 
+         case 3: day = 4; break; 
+         case 4: day = 8; break; 
+         case 5: day = 16; break; 
+         case 6: day = 32; break; 
+         }
+         console.log(day);
+         
+         var $buyTime = $("#buy_time_wrap");
+         console.log($buyTime);
+         $.ajax({
+     		url : "<%=request.getContextPath()%>/date.lo",
+     		type : "post",
+     		data:
+     		 	{
+	     			classCode : ${classVo.classCode},
+	   	   		  	date : selected,
+	   	   		  	day : day,
+     			  }, 
+     	 	dataType : "json",  
+     		success: function(data){ 
+     					if(data != null) {
+     						let addHtml = "";
+     						for(var i = 0; i < data.length; i++) {
+     							addHtml += "<input type='radio' name='csCode' value='"+data[i].csCode+"' id='csCode"+data[i].csCode+"'>"+"<label class='buy_time' for='csCode"+data[i].csCode+"'><h4 class='time_text'>"+data[i].csStime+" - "+data[i].csFtime+"<p class='f_12'>최대수강인원 "+${classVo.classMax}+"명</p></h4><p class='time_check'>선택</p></label>";
+     						}
+     						$buyTime.html(addHtml);
+     					} else {
+     						$buyTime.html("<label class='buy_time'><h4 class='time_text'>해당 날짜에 일정이 없습니다.</h4></label>");
+     					}
+     				 },
+     		error : function(request, status, error){
+     					console.log(request);	
+     					console.log(status);	
+     					console.log(error);	
+     					alert("code:"+request.status+"\n"
+     							+"message"+request.responseText+"\n"
+     							+"error"+error);
+     				}
+     	});
+     }
+     
      </script>
     <title>상세페이지</title>
 </head>
@@ -110,38 +168,47 @@
                 </div>
                 <div class="buy_pick_wrap" > <!--일정 선택-->
                     <div class="buy_pick">
-                            <div id="datepicker"></div>
-                            <div class="buy_time_wrap">
-                                <input type="radio" name="csCode" value="1" id="csCode1">
-                                <label class="buy_time" for="csCode1"><h4 class="time_text">15:30 - 17:30<p class="f_12">최대수강인원 4명</p></h4><p class="time_check">선택</p></label>
-                                <input type="radio" name="csCode" value="2" id="csCode2">
-                                <label class="buy_time" for="csCode2"><h4 class="time_text">15:30 - 17:30<p class="f_12">최대수강인원 4명</p></h4><p class="time_check">선택</p></label>
-                                <input type="radio" name="csCode" value="3" id="csCode3">
-                                <label class="buy_time" for="csCode3"><h4 class="time_text">15:30 - 17:30<p class="f_12">최대수강인원 4명</p></h4><p class="time_check">선택</p></label>
-                            </div>
-                            <div>
-                                <div class="option_label_wrap">
-                                    <label class="f_14_b">세부옵션</label>
-                                    <label class="f_14_b">인원</label>
-                                </div>
-                                <div class="option_select_wrap">
-                                    <select name="buyOption" class="c_line buy_option">
-                                        <option value="N">세부옵션 선택</option>
-                                        <option value="A">옵션A 3000원</option>
-                                        <option value="B">옵션B 4000원</option>
-                                        <option value="C">옵션C 5000원</option>
-                                    </select>
-                                    <select name="buyNum" class="c_line buy_num">
-                                        <option value="0">인원 선택</option>
-                                        <option value="1">1명</option>
-                                        <option value="2">2명</option>
-                                        <option value="3">3명</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <button type="submit" id="buy_btn">
-                                <span class="f_16_b">클래스 신청</span>
-                            </button>
+	                    <form id="buy_form">
+	                            <div id="datepicker"></div>
+	                            <div id="buy_time_wrap">
+	                            	<label class='buy_time'><h4 class='time_text'>날짜를 선택해주세요.</h4></label>
+	                            </div>
+	                            <div>
+	                                <div class="option_label_wrap">
+	                                    <label class="f_14_b">세부옵션</label>
+	                                    <label class="f_14_b">인원</label>
+	                                </div>
+	                                <div class="option_select_wrap">
+	                                    <select name="buyOption" class="c_line buy_option">
+	                                        <option value="0">세부옵션 선택</option>
+	                                        <c:if test="${empty coList}">
+	                                        	<option value="99">옵션이 없습니다</option>
+	                                        </c:if>
+	                                        <c:if test="${not empty coList}">
+					                        	<c:forEach items="${coList}" var="vo">
+	                                       			 <option value="${vo.coCode}">${vo.coName} ${vo.coPrice}원</option>
+					                        	</c:forEach>
+					                        </c:if>
+					                        </div>
+					                        <div>
+					                        <c:if test="${not empty cpIntroList}">
+					                        	<c:forEach items="${cpIntroList}" var="vo">
+					                            	<img class="intro_img" src=".${vo.cpRoute}" alt="소개 이미지">
+					                        	</c:forEach>
+					                        </c:if>
+	                                    </select>
+	                                    <select name="buyNum" class="c_line buy_num">
+	                                        <option value="0">인원 선택</option>
+	                                        <c:forEach var="num" begin="${classVo.classMin}" end="${classVo.classMax}" step="1">
+	                                       		 <option value="${num}">${num}명</option>
+	                                        </c:forEach>
+	                                    </select>
+	                                </div>
+	                            </div>
+	                            <button type="button" id="buy_btn">
+	                                <span class="f_16_b">클래스 신청</span>
+	                            </button>
+		                </form>
                     </div>
                 </div>
                 <div class="wrap_1050 info_wrap">

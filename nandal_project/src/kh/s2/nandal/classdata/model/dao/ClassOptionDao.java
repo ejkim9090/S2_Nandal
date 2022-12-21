@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import kh.s2.nandal.classdata.model.vo.ClassOptionVo;
@@ -73,15 +74,26 @@ public class ClassOptionDao {
 		return result;
 	}
 //	selectList - 목록조회
-	public List<ClassOptionVo> selectList(Connection conn){
+	public List<ClassOptionVo> selectList(Connection conn,int classCode){
 		List<ClassOptionVo> volist = null;
 		
-		String sql = "select * from class_option";
+		String sql = "select CO_CODE, CO_NAME, CO_PRICE from class_option where class_code = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, classCode);
 			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				volist = new ArrayList<ClassOptionVo>();
+				do {
+					ClassOptionVo vo = new ClassOptionVo();
+					vo.setCoCode(rs.getInt("CO_CODE"));
+					vo.setCoName(rs.getString("CO_NAME"));
+					vo.setCoPrice(rs.getInt("CO_PRICE"));
+					volist.add(vo);
+				} while(rs.next());
+			}
 			//TODO
 		} catch (SQLException e) {
 			e.printStackTrace();
