@@ -3,7 +3,15 @@ $(function() {
     $(".prod_tab span").click(prodTabClickHandler);
     $(window).scroll(infoScrollAction);
     $("#nav_buy").click(navBuyClickHandler);
+    $(".sub_img").click(topImgClickHandler);
 });
+function topImgClickHandler() {
+	//클릭된 서브 이미지의 파일 경로 가져오기
+    var $link = $(this).attr("src");
+    //해당 src 값으로 큰 이미지의 경로를 변경
+    $(".top_img").attr("src", $link);
+}
+
 function prodTabClickHandler() {
     // 다른 prod_tab에서 selected 삭제
     $(".prod_tab span").not($(this)).css("color","black");
