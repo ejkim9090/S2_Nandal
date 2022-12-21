@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
-public class ReviewAllVo {
+public class ClassReviewVo {
 //	REVIEW_CODE       NOT NULL NUMBER          
 //	REVIEW_TIME       NOT NULL TIMESTAMP(6)   
 //	REVIEW_CONT       NOT NULL VARCHAR2(1000) 
@@ -23,15 +23,16 @@ public class ReviewAllVo {
 	private int reviewFacility;
 	private int reviewLevel;
 	private int reviewGroup;
+	private String memberName;
 	
 	private List<String> rpRoute;
 
 	@Override
 	public String toString() {
-		return "ReviewAllVo [reviewCode=" + reviewCode + ", reviewTime=" + reviewTime + ", reviewCont=" + reviewCont
+		return "ClassReviewVo [reviewCode=" + reviewCode + ", reviewTime=" + reviewTime + ", reviewCont=" + reviewCont
 				+ ", reviewGrade=" + reviewGrade + ", reviewKind=" + reviewKind + ", reviewComponent=" + reviewComponent
 				+ ", reviewFacility=" + reviewFacility + ", reviewLevel=" + reviewLevel + ", reviewGroup=" + reviewGroup
-				+ ", rpRoute=" + rpRoute + "]";
+				+ ", memberName=" + memberName + ", rpRoute=" + rpRoute + "]";
 	}
 
 	public int getReviewCode() {
@@ -106,6 +107,14 @@ public class ReviewAllVo {
 		this.reviewGroup = reviewGroup;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
 	public List<String> getRpRoute() {
 		return rpRoute;
 	}
@@ -114,6 +123,4 @@ public class ReviewAllVo {
 		this.rpRoute = rpRoute;
 	}
 
-	
-	
 }

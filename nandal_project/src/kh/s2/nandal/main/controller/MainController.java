@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kh.s2.nandal.classdata.model.service.ClassService;
 import kh.s2.nandal.classdata.model.vo.ClassVo;
 import kh.s2.nandal.review.model.service.ReviewService;
-import kh.s2.nandal.review.model.vo.ReviewAllVo;
+import kh.s2.nandal.review.model.vo.ClassReviewVo;
 import kh.s2.nandal.review.model.vo.ReviewMainListVo;
 
 /**

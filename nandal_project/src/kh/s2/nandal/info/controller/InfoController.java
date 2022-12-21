@@ -16,7 +16,7 @@ import kh.s2.nandal.classdata.model.vo.ClassOptionVo;
 import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
 import kh.s2.nandal.classdata.model.vo.ClassVo;
 import kh.s2.nandal.review.model.service.ReviewService;
-import kh.s2.nandal.review.model.vo.ReviewAllVo;
+import kh.s2.nandal.review.model.vo.ClassReviewVo;
 
 /**
  * Servlet implementation class InfoController
@@ -67,6 +67,7 @@ public class InfoController extends HttpServlet {
 			request.setAttribute("sumAddress", sumAddress);
 			
 			//출력시 줄바꿈을 위해 클래스 소개,커리큘럼,호스트소개,기타제공사항을 배열로 변경 후 추가  
+			vo.getClassIntro().replaceAll("%%", "<br>");
 			String[] introList = vo.getClassIntro().split("%%");
 			String[] curList = vo.getClassCur().split("%%");
 			String[] hostList = vo.getClassHost().split("%%");
@@ -88,13 +89,15 @@ public class InfoController extends HttpServlet {
 			//해당 클래스의 옵션 가져오기
 			ClassOptionService coService = new ClassOptionService();
 			List<ClassOptionVo> coList = coService.selectList(vo.getClassCode());
-			request.setAttribute("coList", coList);	
+			request.setAttribute("coList", coList);
 			
+			//해당 클래스의 리뷰 가져오기
+			ReviewService reService = new ReviewService();
+			List<ClassReviewVo> reList = reService.selectClassList(vo.getClassCode());
+			request.setAttribute("reList", reList);
 			
 			System.out.println("/info 컨트롤러");
 			viewPage="/WEB-INF/info.jsp";
-			
-			
 			
 		} else {
 //			System.out.println("읽을 수 없는 상세 페이지 번호");
