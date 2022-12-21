@@ -1,5 +1,4 @@
 --시도코드 엑셀파일로 임포트 완료--
-DESC AREA;
 INSERT INTO AREA (AREA_CODE, AREA_NAME) VALUES (11.0, '서울');
 INSERT INTO AREA (AREA_CODE, AREA_NAME) VALUES (21.0, '부산');
 INSERT INTO AREA (AREA_CODE, AREA_NAME) VALUES (22.0, '대구');
@@ -18,11 +17,10 @@ INSERT INTO AREA (AREA_CODE, AREA_NAME) VALUES (37.0, '경상북도');
 INSERT INTO AREA (AREA_CODE, AREA_NAME) VALUES (38.0, '경상남도');
 INSERT INTO AREA (AREA_CODE, AREA_NAME) VALUES (39.0, '제주도');
 commit;
-SELECT * FROM AREA;
-SELECT * FROM AREA WHERE AREA_NAME LIKE '%경기%';
+--SELECT * FROM AREA;
+--SELECT * FROM AREA WHERE AREA_NAME LIKE '%경기%';
 
 -- 카테고리 데이터 insert
-desc category;
 drop sequence class_sequence;
 create SEQUENCE class_sequence start with 1 INCREMENT BY 1;
 insert into category values(class_sequence.nextval ,'요리');
@@ -34,7 +32,7 @@ insert into category values(class_sequence.nextval ,'액티비티');
 insert into category values(class_sequence.nextval ,'뷰티');
 insert into category values(class_sequence.nextval ,'라이프스타일');
 commit;
-select * from category;
+--select * from category;
 
 --회원 데이터 insert
 insert all
@@ -51,4 +49,4 @@ insert all
     select * from dual;
 commit;
     
-select * from member;
+--select * from member;
