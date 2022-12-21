@@ -22,30 +22,22 @@
     
     <script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
     <script src="<%=request.getContextPath()%>/js/info.js"></script>
+    <script src="<%=request.getContextPath()%>/js/info_api.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=22e814de5ddfa7ab67223da7c1c400b9&libraries=services,clusterer,drawing"></script>
 
     
 
     <script>
-        $.datepicker.setDefaults({
-             dateFormat: 'yy-mm-dd',
-             prevText: '이전 달',
-             nextText: '다음 달',
-            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-             monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-             dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-             dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-             dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-             showMonthAfterYear: true,
-             yearSuffix: '년'
-       });
      $( function() {
-        $( "#datepicker" ).datepicker();
-
        $("#datepicker").on("change",function(){
            var selected = $(this).val();
-           alert(selected);
+           console.log("선택날짜 : " + selected);
+           
+           //선택된 날짜의 요일 구하기 일:0,월:1,화:2,수:3, ...
+           var today_num = new Date(selected).getDay();
+           console.log(today_num);
        });
-     } );
+     });
      </script>
     <title>상세페이지</title>
 </head>
@@ -210,18 +202,8 @@
                     </div>
                     <div> <!-- 위치-->
                         <h2 class="info_h2">위치</h2>
-                            <p>${classVo.classAddress}</p>
+                            <p id = "address_text">${classVo.classAddress}</p>
                         <div id="map"></div>
-						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=22e814de5ddfa7ab67223da7c1c400b9"></script>
-							<script>
-								var container = document.getElementById('map');
-								var options = {
-									center: new kakao.maps.LatLng(33.450701, 126.570667),
-									level: 3
-								};
-						
-								var map = new kakao.maps.Map(container, options);
-							</script>
                         <div id="review"></div>
                     </div>
                     <div> <!-- 후기-->
