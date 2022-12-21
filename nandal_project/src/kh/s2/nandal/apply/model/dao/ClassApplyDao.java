@@ -116,4 +116,30 @@ public class ClassApplyDao {
 		System.out.println(">>> ClassApplyService selectOne return : " + vo);
 		return vo;
 	}
+//	selectOne - insert 전 해당 클래스 마지막 caCode 조회
+	public int lastCaCode(Connection conn, int classCode){
+		System.out.println(">>> ClassApplyService lastCaCode param classCode : " + classCode);
+		int result = 0;
+		
+		String sql = "select distinct last_value(CA_CODE)  over() a"
+				+ "    from class_apply "
+				+ "    where class_code = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, classCode);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println(">>> ClassApplyService lastCaCode return : " + result);
+		return result;
+	}
 }

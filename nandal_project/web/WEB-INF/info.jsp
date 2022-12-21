@@ -26,7 +26,8 @@
     <script src="<%=request.getContextPath()%>/js/info_api.js"></script>
     <script src="<%=request.getContextPath()%>/js/info.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=22e814de5ddfa7ab67223da7c1c400b9&libraries=services,clusterer,drawing"></script>
-
+	
+	<c:set var="memberId" value="${loginSsInfo.memberId}"/>
     <script>
      $( function() {
        $("#datepicker").on("change",datepickerClick);
@@ -39,14 +40,40 @@
    	    // 클릭한 prod_tab에서 selected 추가
    	    $(this).css("background-color","rgba(105,108,255,1)");
      }
+     var date = "";
      function classBuyHandler() {
-    	 var formQuery = $("#buy_form").serialize();
-    	 console.log(formQuery);
+    	 var $formQuery = $("#buy_form").serialize() 
+    	 					+ "&classCode=" + ${classVo.classCode} 
+    	 					+ "&caDate=" + date;
+    	 console.log($formQuery);
+    	 
+    	$.ajax({
+      		url : "<%=request.getContextPath()%>/buy.lo",
+      		type : "post",
+      		data: $formQuery, 
+      		success: function(data){ 
+      					if(data == 1) {
+      						alert("클래스가 신청되었습니다.")
+      					} else if(data == 99) {
+      						alert("로그인이 필요합니다.")
+      					} else {
+      						alert("클래스 신청이 실패했습니다.")
+      					}
+      				 },
+      		error : function(request, status, error){
+      					console.log(request);	
+      					console.log(status);	
+      					console.log(error);	
+      					alert("code:"+request.status+"\n"
+      							+"message"+request.responseText+"\n"
+      							+"error"+error);
+      				}
+      	});  
      }
      function datepickerClick() {
     	 var selected = $(this).val();
          console.log("선택날짜 : " + selected);
-         
+         date = selected;
          //선택된 날짜의 요일 구하기 일:0,월:1,화:2,수:3, ...
          var today_num = new Date(selected).getDay();
          console.log(today_num);
@@ -172,7 +199,7 @@
                     <div class="buy_pick">
 	                    <form id="buy_form">
 	                            <div id="datepicker"></div>
-	                            <div id="buy_time_wrap">
+	                            <div id="buy_time_wrap" >
 	                            	<label class='buy_time'><h4 class='time_text'>날짜를 선택해주세요.</h4></label>
 	                            </div>
 	                            <div>

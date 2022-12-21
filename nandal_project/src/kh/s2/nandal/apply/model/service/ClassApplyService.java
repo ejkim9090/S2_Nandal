@@ -15,7 +15,31 @@ public class ClassApplyService {
 		System.out.println(">> ClassApplyService insert param vo :" + vo);
 		Connection conn = JdbcTemplate.getConnection();
 		int result = 0;
+		//해당 클래스 마지막 caCode 조회
+		int lastCaCode = dao.lastCaCode(conn, vo.getClassCode());
+		
+		int caCode = 0;
+		if(lastCaCode == 0) {
+			caCode = vo.getClassCode()*10 + 1;
+			vo.setCaCode(caCode);
+		} else {
+			int check1 = lastCaCode%10;
+			int check2 = lastCaCode/10;
+			if(check1 == 9) {
+				caCode = check2*100 + 10;
+			} else {
+				caCode = check2*10 + (check2+1);
+			}
+			vo.setCaCode(caCode);
+		}
 		result = dao.insert(conn, vo);
+		if(result > 0) {
+			JdbcTemplate.commit(conn); // 커밋
+			System.out.println("커밋성공");
+		} else {
+			JdbcTemplate.rollback(conn); // 롤백
+			System.out.println("커밋실패");
+		}
 		System.out.println(">> ClassApplyService insert return :" + result);
 		return result;
 	}
