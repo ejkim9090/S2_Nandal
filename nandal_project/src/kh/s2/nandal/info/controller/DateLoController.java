@@ -1,4 +1,4 @@
-package kh.s2.nandal.list.controller;
+package kh.s2.nandal.info.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
