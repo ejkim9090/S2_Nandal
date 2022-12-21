@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import kh.s2.nandal.classdata.model.vo.ClassScheduleVo;
@@ -78,16 +79,32 @@ public class ClassScheduleDao {
 		System.out.println(">>> ClassScheduleDao delete return : " + result);
 		return result;
 	}
-//	selectList - 목록조회
-	public List<ClassScheduleVo> selectList(Connection conn){
+//	selectList - 상세페이지 날짜별 일정 조회
+	public List<ClassScheduleVo> selectList(Connection conn,int classCode, int day,String date){
 		List<ClassScheduleVo> volist = null;
 		
-		String sql = "select * from class_schedule";
+		String sql = "select CS_CODE, CS_STIME, CS_FTIME "
+				+ "    from CLASS_SCHEDULE "
+				+ "    where CLASS_CODE = ? and BITAND(cs_day, ?) = ? and TO_DATE(?, 'YYYY-MM-DD') between cs_sdate and cs_fdate";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, classCode);
+			pstmt.setInt(2, day);
+			pstmt.setInt(3, day);
+			pstmt.setString(4, date);
 			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				volist = new ArrayList<ClassScheduleVo>();
+				do {
+					ClassScheduleVo vo = new ClassScheduleVo();
+					vo.setCsCode(rs.getInt("CS_CODE"));
+					vo.setCsStime(rs.getString("CS_STIME"));
+					vo.setCsFtime(rs.getString("CS_FTIME"));
+					volist.add(vo);
+				} while(rs.next());
+			}
 			//TODO
 		} catch (SQLException e) {
 			e.printStackTrace();

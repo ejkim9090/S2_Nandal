@@ -42,11 +42,11 @@ public class ClassScheduleService {
 		System.out.println(">> ClassScheduleService delete return :" + result);
 		return result;
 	}
-//	selectList
-	public List<ClassScheduleVo> selectList(){
+//	selectList - 상세페이지 날짜별 일정 조회
+	public List<ClassScheduleVo> selectList(int classCode, int day,String dates){
 		Connection conn = JdbcTemplate.getConnection();
 		List<ClassScheduleVo> volist = null;
-		volist = dao.selectList(conn);
+		volist = dao.selectList(conn,classCode,day,dates);
 		JdbcTemplate.close(conn);
 		System.out.println(">> ClassScheduleService selectList return :" + volist);
 		return volist;

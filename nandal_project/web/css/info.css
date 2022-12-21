@@ -72,7 +72,7 @@
 
 
 /* 시간 선택 부분 */
-.buy_time_wrap {
+#buy_time_wrap {
     margin-top: 10px;
     width: 100%;
     height: 100px;
@@ -81,12 +81,12 @@
     border: 1px solid #6437e188;
     border-radius: 5px;
 }
-.buy_time_wrap::-webkit-scrollbar {
+#buy_time_wrap::-webkit-scrollbar {
     width: 10px;
     height: 0;
     background-color: #b49bf788;
 }
-.buy_time_wrap::-webkit-scrollbar-thumb {
+#buy_time_wrap::-webkit-scrollbar-thumb {
     background-color: #855df4d6;
 }
 .buy_time {
@@ -114,8 +114,8 @@
     text-align: right;
     border-left: 1px solid rgb(104, 34, 244);
 }
-.buy_time_wrap > input[type="radio"] {
-    display: none;
+#buy_time_wrap > input[type="radio"] {
+    /* display: none; */
 }
 
 /* 옵션,인원 선택 */
