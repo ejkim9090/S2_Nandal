@@ -115,7 +115,7 @@
     border-left: 1px solid rgb(104, 34, 244);
 }
 #buy_time_wrap > input[type="radio"] {
-    /* display: none; */
+    display: none;
 }
 
 /* 옵션,인원 선택 */
@@ -243,9 +243,10 @@
 .review_star {
     width: 17px;
     height: 17px;
+    margin-right: 3px;
 }
 .review_score {
-    margin: 0 5px;
+    margin: 0 5px 0 2px;
 }
 .review_arrow {
     width: 9px;
@@ -268,7 +269,7 @@
     position: absolute;
     top:20px;
     padding: 10px;
-
+	z-index : 1;
     border: 1px solid #792cc5;
     background-color: white;
     border-radius: 10px;
@@ -286,6 +287,10 @@
 }
 .score_detail > label {
     width: 90px;
+}
+.score_detail > p {
+    display: flex;
+    align-items: center;
 }
 
 
