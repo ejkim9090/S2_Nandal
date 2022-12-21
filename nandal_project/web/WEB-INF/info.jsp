@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -277,40 +279,130 @@
                         <h2 class="info_h2">후기</h2>
                         <c:choose>
                         <c:when test="${empty reList}">
-                        <div class="review_total">
-                            <div class="review_score_wrap">
-                                <img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
-                                <p class="review_score f_16">0.0</p>
-                                <img class="review_arrow" src="<%=request.getContextPath()%>/images/review_arrow.webp">
-                                <div class="score_detail_wrap">
-                                    <div class="score_detail"><label class="f_16_b">친절도</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 0.0</p></div>
-                                    <div class="score_detail"><label class="f_16_b">시설</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 0.0</p></div>
-                                    <div class="score_detail"><label class="f_16_b">수업구성</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 0.0</p></div>
-                                    <div class="score_detail"><label class="f_16_b">난이도 안내</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 0.0</p></div>
-                                </div>
-                            </div>
-                            <div class="review_total_rmd"><label class="f_12_b total_rmd">추천:</label><p class="f_12">혼자(0) 연인(0) 친구(0) 가족(0)</p></div>
-                        </div>
+	                        <div class="review_total">
+	                            <div class="review_score_wrap">
+	                                <img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
+	                                <p class="review_score f_16">0.0</p>
+	                                <img class="review_arrow" src="<%=request.getContextPath()%>/images/review_arrow.webp">
+	                                <div class="score_detail_wrap">
+	                                    <div class="score_detail"><label class="f_16_b">친절도</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 0.0</p></div>
+	                                    <div class="score_detail"><label class="f_16_b">시설</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 0.0</p></div>
+	                                    <div class="score_detail"><label class="f_16_b">수업구성</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 0.0</p></div>
+	                                    <div class="score_detail"><label class="f_16_b">난이도 안내</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 0.0</p></div>
+	                                </div>
+	                            </div>
+	                            <div class="review_total_rmd"><label class="f_12_b total_rmd">추천:</label><p class="f_12">혼자(0) 연인(0) 친구(0) 가족(0)</p></div>
+	                        </div>
                         	<div class="review_wrap">
 	                            <p class="f_16_b">리뷰 목록이 없습니다.</p>
 	                        </div>
                         </c:when>
                         <c:otherwise>
-                        <div class="review_total">
-                            <div class="review_score_wrap">
-                                <img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
-                                <p class="review_score f_16">
-                                </p>
-                                <img class="review_arrow" src="<%=request.getContextPath()%>/images/review_arrow.webp">
-                                <div class="score_detail_wrap">
-                                    <div class="score_detail"><label class="f_16_b">친절도</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 4.8</p></div>
-                                    <div class="score_detail"><label class="f_16_b">시설</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 4.8</p></div>
-                                    <div class="score_detail"><label class="f_16_b">수업구성</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 4.8</p></div>
-                                    <div class="score_detail"><label class="f_16_b">난이도 안내</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"> 4.8</p></div>
-                                </div>
-                            </div>
-                            <div class="review_total_rmd"><label class="f_12_b total_rmd">추천:</label><p class="f_12">혼자(0) 연인(0) 친구(0) 가족(0)</p></div>
-                        </div>
+	                        <div class="review_total">
+	                            <div class="review_score_wrap">
+	                                <img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
+	                                <p class="review_score f_16">
+	                                <!-- 리뷰 총점 평균 -->
+	                                <c:set var="gradeNum" value="0"/>
+	                                <c:set var="grade" value="0.0"/>
+	                                <c:forEach items="${reList}" var="vo">
+	                                	<c:set var="gradeNum" value="${gradeNum + 1}" />
+	                                	<c:set var="grade" value="${grade + vo.reviewGrade}" />
+	                                </c:forEach>
+	                                <c:set var="grade" value="${grade div gradeNum}"/>
+	                                <fmt:formatNumber var="grade" value="${grade}" pattern=".0"/>
+	                                ${grade}(${gradeNum})
+	                                </p>
+	                                <img class="review_arrow" src="<%=request.getContextPath()%>/images/review_arrow.webp">
+	                                <div class="score_detail_wrap">
+	                                    <div class="score_detail">
+	                                    	<label class="f_16_b">친절도</label>
+	                                    	<p>&#9867;&#9867;&#9867;&#9867;&#9867;</p>
+	                                    	<p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
+	                                		<!-- 친절도 총점 평균 -->
+	                                    	<c:set var="kindNum" value="0"/>
+			                                <c:set var="kind" value="0.0"/>
+			                                <c:forEach items="${reList}" var="vo">
+			                                	<c:set var="kindNum" value="${kindNum + 1}" />
+			                                	<c:set var="kind" value="${kind + vo.reviewKind}" />
+			                                </c:forEach>
+			                                <c:set var="kind" value="${kind div kindNum}"/>
+			                                <fmt:formatNumber var="kind" value="${kind}" pattern=".0"/>
+			                                ${kind}
+	                                    	</p>
+	                                    </div>
+	                                    <div class="score_detail">
+	                                    	<label class="f_16_b">시설</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p>
+	                                    	<p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
+	                                    	<!-- 시설 총점 평균 -->
+	                                    	<c:set var="componentNum" value="0"/>
+			                                <c:set var="component" value="0.0"/>
+			                                <c:forEach items="${reList}" var="vo">
+			                                	<c:set var="componentNum" value="${componentNum + 1}" />
+			                                	<c:set var="component" value="${component + vo.reviewComponent}" />
+			                                </c:forEach>
+			                                <c:set var="component" value="${component div componentNum}"/>
+			                                <fmt:formatNumber var="component" value="${component}" pattern=".0"/>
+			                                ${component}
+	                                    	</p>
+	                                    </div>
+	                                    <div class="score_detail">
+	                                    	<label class="f_16_b">수업구성</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p>
+	                                    	<p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
+	                                    	<!-- 수업구성 총점 평균 -->
+	                                    	<c:set var="facilityNum" value="0"/>
+			                                <c:set var="facility" value="0.0"/>
+			                                <c:forEach items="${reList}" var="vo">
+			                                	<c:set var="facilityNum" value="${facilityNum + 1}" />
+			                                	<c:set var="facility" value="${facility + vo.reviewFacility}" />
+			                                </c:forEach>
+			                                <c:set var="facility" value="${facility div facilityNum}"/>
+			                                <fmt:formatNumber var="facility" value="${facility}" pattern=".0"/>
+			                                ${facility}
+			                                </p>
+	                                    </div>
+	                                    <div class="score_detail">
+	                                    	<label class="f_16_b">난이도 안내</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p>
+	                                    	<p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
+	                                    	<!-- 난이도 총점 평균 -->
+	                                    	<c:set var="levelNum" value="0"/>
+			                                <c:set var="level" value="0.0"/>
+			                                <c:forEach items="${reList}" var="vo">
+			                                	<c:set var="levelNum" value="${levelNum + 1}" />
+			                                	<c:set var="level" value="${level + vo.reviewLevel}" />
+			                                </c:forEach>
+			                                <c:set var="level" value="${level div levelNum}"/>
+			                                <fmt:formatNumber var="level" value="${level}" pattern=".0"/>
+			                                ${level}
+	                                    	</p>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="review_total_rmd"><label class="f_12_b total_rmd">추천:</label>
+	                            <p class="f_12">
+	                            <c:set var="one" value="0"/>
+	                            <c:set var="two" value="0"/>
+	                            <c:set var="three" value="0"/>
+	                            <c:set var="four" value="0"/>
+	                            <c:forEach items="${reList}" var="vo">
+	                            	<c:choose>
+	                                	<c:when test="${vo.reviewGroup eq 1}">
+	                                		<c:set var="one" value="${one + 1}"/>
+	                                	</c:when>
+	                                	<c:when test="${vo.reviewGroup eq 2}">
+	                                		<c:set var="two" value="${two + 1}"/>
+	                                	</c:when>
+	                                	<c:when test="${vo.reviewGroup eq 3}">
+	                                		<c:set var="three" value="${three + 1}"/>
+	                                	</c:when>
+	                                	<c:when test="${vo.reviewGroup eq 4}">
+	                                		<c:set var="four" value="${four + 1}"/>
+	                                	</c:when>
+	                                </c:choose>
+	                            </c:forEach>
+	                            혼자(${one}) 연인(${three}) 친구(${two}) 가족(${four})
+	                            </p></div>
+	                        </div>
                         	<c:forEach items="${reList}" var="vo">
                         		<div class="review_wrap">
 		                            <p class="f_16_b">${vo.memberName}</p>
@@ -318,6 +410,23 @@
 		                                <img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">
 		                                <p class="review_score f_16">${vo.reviewGrade}</p>
 		                                <img class="review_arrow" src="<%=request.getContextPath()%>/images/review_arrow.webp">
+		                                <c:if test="${vo.reviewGroup ne 0}">
+			                                <c:choose>
+			                                	<c:when test="${vo.reviewGroup eq 1}">
+			                                		<c:set var="group" value="혼자"/>
+			                                	</c:when>
+			                                	<c:when test="${vo.reviewGroup eq 2}">
+			                                		<c:set var="group" value="친구"/>
+			                                	</c:when>
+			                                	<c:when test="${vo.reviewGroup eq 3}">
+			                                		<c:set var="group" value="연인"/>
+			                                	</c:when>
+			                                	<c:when test="${vo.reviewGroup eq 4}">
+			                                		<c:set var="group" value="가족"/>
+			                                	</c:when>
+			                                </c:choose>
+			                                	&nbsp;&nbsp;${group}
+		                                </c:if>
 		                                <div class="score_detail_wrap">
 		                                    <div class="score_detail">
 		                                    	<label class="f_16_b">친절도</label><p>&#9867;&#9867;&#9867;&#9867;&#9867;</p><p><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png">${vo.reviewKind}</p>
