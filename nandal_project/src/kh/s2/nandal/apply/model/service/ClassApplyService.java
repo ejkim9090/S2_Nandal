@@ -21,14 +21,19 @@ public class ClassApplyService {
 		int caCode = 0;
 		if(lastCaCode == 0) {
 			caCode = vo.getClassCode()*10 + 1;
+			System.out.println("@@@@들어갈 caCode : " + caCode);
 			vo.setCaCode(caCode);
 		} else {
 			int check1 = lastCaCode%10;
 			int check2 = lastCaCode/10;
+			System.out.println("@@@@마지막 번호의 나머지 값 : " + check1);
+			System.out.println("@@@@마지막 번호의 나눈 값 : " + check2);
 			if(check1 == 9) {
 				caCode = check2*100 + 10;
+				System.out.println("@@@@들어갈 caCode : " + caCode);
 			} else {
-				caCode = check2*10 + (check2+1);
+				caCode = check2*10 + (check1+1);
+				System.out.println("@@@@들어갈 caCode : " + caCode);
 			}
 			vo.setCaCode(caCode);
 		}
