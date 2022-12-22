@@ -1,4 +1,4 @@
-package kh.s2.nandal.jdbc;
+package common.jdbc;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
