@@ -3,9 +3,9 @@ package kh.s2.nandal.classdata.model.service;
 import java.sql.Connection;
 import java.util.List;
 
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.classdata.model.dao.ClassDao;
 import kh.s2.nandal.classdata.model.vo.ClassVo;
-import kh.s2.nandal.jdbc.JdbcTemplate;
 
 
 public class ClassService {

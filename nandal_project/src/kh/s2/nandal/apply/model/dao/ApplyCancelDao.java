@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.apply.model.vo.ApplyCancelVo;
-import kh.s2.nandal.jdbc.JdbcTemplate;
 
 public class ApplyCancelDao {
 //	insert

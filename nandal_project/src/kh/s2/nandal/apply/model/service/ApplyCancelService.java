@@ -3,9 +3,9 @@ package kh.s2.nandal.apply.model.service;
 import java.sql.Connection;
 import java.util.List;
 
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.apply.model.dao.ApplyCancelDao;
 import kh.s2.nandal.apply.model.vo.ApplyCancelVo;
-import kh.s2.nandal.jdbc.JdbcTemplate;
 
 public class ApplyCancelService {
 	private ApplyCancelDao dao = new ApplyCancelDao();

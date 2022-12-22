@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
-import kh.s2.nandal.jdbc.JdbcTemplate;
 
 public class ClassPhotoDao {
 //	insert

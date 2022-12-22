@@ -3,9 +3,9 @@ package kh.s2.nandal.classdata.model.service;
 import java.sql.Connection;
 import java.util.List;
 
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.classdata.model.dao.ClassPhotoDao;
 import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
-import kh.s2.nandal.jdbc.JdbcTemplate;
 
 public class ClassPhotoService {
 	private ClassPhotoDao dao = new ClassPhotoDao();

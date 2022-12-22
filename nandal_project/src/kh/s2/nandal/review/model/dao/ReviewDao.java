@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kh.s2.nandal.jdbc.JdbcTemplate;
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.review.model.vo.ClassReviewVo;
 import kh.s2.nandal.review.model.vo.ReviewMainListVo;
 import kh.s2.nandal.review.model.vo.ReviewVo;

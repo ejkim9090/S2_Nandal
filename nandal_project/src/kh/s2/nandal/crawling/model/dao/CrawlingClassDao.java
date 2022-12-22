@@ -11,10 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.classdata.model.vo.ClassVo;
 import kh.s2.nandal.apply.model.vo.ClassApplyVo;
 import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
-import kh.s2.nandal.jdbc.JdbcTemplate;
 
 
 public class CrawlingClassDao {

@@ -3,9 +3,9 @@ package kh.s2.nandal.classdata.model.service;
 import java.sql.Connection;
 import java.util.List;
 
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.classdata.model.dao.AreaDao;
 import kh.s2.nandal.classdata.model.vo.AreaVo;
-import kh.s2.nandal.jdbc.JdbcTemplate;
 
 public class AreaService {
 	private AreaDao dao = new AreaDao();

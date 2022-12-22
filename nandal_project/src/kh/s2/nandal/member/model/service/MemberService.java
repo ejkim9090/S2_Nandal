@@ -3,7 +3,7 @@ package kh.s2.nandal.member.model.service;
 import java.sql.Connection;
 import java.util.List;
 
-import kh.s2.nandal.jdbc.JdbcTemplate;
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.member.model.dao.MemberDao;
 import kh.s2.nandal.member.model.vo.MemberVo;
 

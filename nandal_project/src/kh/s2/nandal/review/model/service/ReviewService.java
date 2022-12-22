@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import kh.s2.nandal.jdbc.JdbcTemplate;
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.review.model.dao.ReviewDao;
 import kh.s2.nandal.review.model.dao.ReviewPhotoDao;
 import kh.s2.nandal.review.model.vo.ClassReviewVo;

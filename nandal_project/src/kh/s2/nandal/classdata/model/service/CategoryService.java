@@ -3,9 +3,9 @@ package kh.s2.nandal.classdata.model.service;
 import java.sql.Connection;
 import java.util.List;
 
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.classdata.model.dao.CategoryDao;
 import kh.s2.nandal.classdata.model.vo.CategoryVo;
-import kh.s2.nandal.jdbc.JdbcTemplate;
 
 public class CategoryService {
 	private CategoryDao dao = new CategoryDao();

@@ -7,11 +7,11 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.sql.Connection;
 
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.crawling.model.dao.CrawlingClassDao;
 import kh.s2.nandal.classdata.model.vo.ClassVo;
 import kh.s2.nandal.apply.model.vo.ClassApplyVo;
 import kh.s2.nandal.classdata.model.vo.ClassPhotoVo;
-import kh.s2.nandal.jdbc.JdbcTemplate;
 
 
 public class CrawlingClassService {

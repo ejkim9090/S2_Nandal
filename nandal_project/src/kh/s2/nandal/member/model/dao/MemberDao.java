@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import kh.s2.nandal.jdbc.JdbcTemplate;
+import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.member.model.vo.MemberVo;
 
 public class MemberDao {
