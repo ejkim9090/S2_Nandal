@@ -56,6 +56,7 @@
       						alert("클래스가 신청되었습니다.")
       					} else if(data == 99) {
       						alert("로그인이 필요합니다.")
+      						location.href = "<%=request.getContextPath()%>/login";
       					} else {
       						alert("클래스 신청이 실패했습니다.")
       					}
