@@ -1,0 +1,200 @@
+.profile_wrap {
+    background-color: #8080800d;
+    padding: 20px 0;
+}
+.profile_data {
+    display: flex;
+    margin-top: 20px;
+}
+.profile_img {
+    width: 130px;
+    height: 130px;
+}
+.profile_text {
+    height: 130px;
+    padding: 10px 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#btn_profile {
+    cursor: pointer;
+    border: 1px solid #9169ff63;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #9169ff63;
+    padding: 5px;
+    margin-left: 15px;
+}
+
+.my_list {
+    margin-top: 20px;
+    display: flex;
+}
+.my_list_nav {
+    width: 17%;
+    padding-right: 25px;
+}
+.my_list_nav > h2 {
+    margin-bottom: 20px;
+}
+.my_nav {
+    cursor: pointer;
+    width: 100%;
+    height: 38px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    padding-right: 5px;
+    background-color: white;
+}
+.my_nav:not(div:last-of-type) {
+    border-bottom: 0;
+}
+
+.my_arrow {
+    width: 15px;
+    height: 15px;
+}
+.list_data_nav {
+    width: 100%;
+}
+.nav_text_wrap {
+    border-bottom: 1px solid black;
+}
+#nav_text {
+    margin: 7px 0 20px 0;
+}
+
+/* 신청 내역 목록 */
+.apply_list {
+    display: flex;
+    justify-content: space-between;
+    border : 2px solid #9169ffe7;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+/* 왼쪽 div */
+.myList_left {
+    padding: 15px;
+    width: 690px;
+}
+.myList_left > div:not(div.reCont) {
+    display: flex;
+    margin-top: 10px;
+}
+.myList_left > div > p {
+    margin-right: 10px;
+}
+.my_img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+/* 리뷰 내용 */
+.reCont {
+    flex-direction: column;
+    display: none;
+}
+.reCont_text {
+    cursor: pointer;
+}
+.reCont_arrow {
+    transform: rotate(0deg);
+}
+.reCont_img {
+    width: 130px;
+    height: 130px;
+}
+
+/* 오른쪽 div */
+.myList_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 10px 10px;
+}
+.myList_right > div {
+    display: flex;
+    justify-content: right;
+}
+.myList_right > p {
+    text-align: right;
+}
+.myList_btn {
+    padding: 5px;
+    margin-left: 5px;
+}
+
+/* 모달창 */
+div.modal {
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(1, 5, 22, 0.2);
+    z-index: 101;
+}
+div.modal.a {
+    display: none;
+}
+div.modal.b {
+    display: none;
+}
+div.modal.c {
+    display: none;
+}
+.modal_content {
+    position: relative;
+    top: 10%;
+    margin: auto;
+    width: 480px;
+    height: 760px;
+    background-color: white;
+    border-radius: 10px;
+    
+}
+.model_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    height: 100%;
+}
+.form_cont > h2 {
+    text-align: center;
+}
+.form_cont > h3 {
+    text-decoration: underline 1.5px;
+    margin: 10px 0;
+}
+.form_cont > textarea {
+    width: 450px;
+    height: 200px;
+    border-radius: 5px;
+    outline: none;
+}
+.form_cont > h4 {
+    margin: 5px 0;
+}
+.form_cont.b  input {
+    width: 300px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 16px;
+    outline: none;
+}
+.model_btn_wrap {
+    display: flex;
+    justify-content: center;
+}
+.model_btn {
+    padding: 5px 15px;
+    margin: 0 3px;
+}
+
