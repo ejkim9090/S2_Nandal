@@ -162,10 +162,24 @@
                         <div class="top_info_wrap"> <!-- 상단 클래스 요약 정보 -->
                             <div class="f_20_b">${classVo.className}</div>
                             <div>
-                                <div class="top_info_text"><img src="">${classVo.classAlltime}</div>
-                                <div class="top_info_text"><img src="">${classVo.classLevel}</div>
-                                <div class="top_info_text"><img src="">${classVo.classMin}~${classVo.classMax}</div>
-                                <div class="top_info_text"><img src="">${sumAddress}</div>
+                                <div class="top_info_text"><img class="top_info_img" src="../images/clock.png">${classVo.classAlltime}</div>
+                                <div class="top_info_text"><img class="top_info_img" src="../images/level.png">
+                                <c:set var="toplevel" value ="난이도 없음"/>
+                                <c:choose>
+                                	<c:when test="${classVo.classLevel eq 1}">
+                                		<c:set var="toplevel" value ="초급"/>
+                                	</c:when>
+                                	<c:when test="${classVo.classLevel eq 2}">
+                                		<c:set var="toplevel" value ="중급"/>
+                                	</c:when>
+                                	<c:when test="${classVo.classLevel eq 3}">
+                                		<c:set var="toplevel" value ="고급"/>
+                                	</c:when>
+                                </c:choose>
+                                ${toplevel}
+                                </div>
+                                <div class="top_info_text"><img class="top_info_img" src="../images/user.png">${classVo.classMin}~${classVo.classMax}</div>
+                                <div class="top_info_text"><img class="top_info_img" src="../images/marker.png">${sumAddress}</div>
                             </div>
                         </div>
                         <div id="intro"></div>
