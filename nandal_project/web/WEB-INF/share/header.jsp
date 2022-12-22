@@ -11,7 +11,12 @@
                             <div class="search_log_wrap">
                                 <div class="header_search">
                                     <input id="keyword" class="f_12" type="text" placeholder="검색어를 입력해주세요.">
-                                    <button type="button"><img src="<%=request.getContextPath()%>/images/search_logo.svg"></button>
+                                    <button type="button" id="btn_search"><img src="<%=request.getContextPath()%>/images/search_logo.svg"></button>
+<script>
+	$("#btn_search").click(function(){
+		location.href = "notice?search="+$("#keyword").val();
+	});
+</script>
                                 </div>
                                 <div class="header_log">
                                 	<c:choose>
@@ -20,7 +25,7 @@
                                 		</c:when>
                                 		<c:otherwise>
                                     	<a href="${pageContext.request.contextPath }/my">My</a>
-                                    	<a href="#">Logout</a>
+                                    	<a href="${pageContext.request.contextPath }/logout">Logout</a>
                                 		</c:otherwise>
                                 	</c:choose>
                                 </div>
