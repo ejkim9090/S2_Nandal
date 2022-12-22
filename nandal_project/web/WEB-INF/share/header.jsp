@@ -6,7 +6,7 @@
                     <form>
                         <div class="header_first">
                             <div class="header_title">
-                                <img src="<%=request.getContextPath()%>/images/title.png" alt="main_title">
+                                <a href="${pageContext.request.contextPath }/main"><img src="<%=request.getContextPath()%>/images/title.png" alt="main_title"></a>
                             </div>
                             <div class="search_log_wrap">
                                 <div class="header_search">

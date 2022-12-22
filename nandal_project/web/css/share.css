@@ -30,7 +30,7 @@ html{
     display: flex;
     padding: 40px 30px;
 }
-.header_title > img  {
+.header_title > a > img  {
     height: 65px;
 }
 
