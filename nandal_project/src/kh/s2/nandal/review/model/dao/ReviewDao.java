@@ -90,7 +90,7 @@ public class ReviewDao {
 	public List<ClassReviewVo> MyReviewList(Connection conn,String memberId){
 		List<ClassReviewVo> volist = null;
 		
-		String sql = "select  c.CLASS_NAME, r.* "
+		String sql = "select c.CLASS_NAME, r.REVIEW_CODE,r.REVIEW_COMPONENT,r.REVIEW_CONT,r.REVIEW_FACILITY,r.REVIEW_GRADE,r.REVIEW_GROUP,r.REVIEW_KIND,r.REVIEW_LEVEL,TO_CHAR(r.REVIEW_TIME,'YYYY-MM-DD HH24:MI:SS') as REVIEW_TIME"
 				+ "    from (select CA_CODE,CLASS_CODE "
 				+ "                from CLASS_APPLY "
 				+ "                where MEMBER_ID = ? and CA_CANCEL = 'N') ca "
@@ -107,7 +107,7 @@ public class ReviewDao {
 				do {
 					ClassReviewVo vo = new ClassReviewVo();
 					vo.setReviewCode(rs.getInt("REVIEW_CODE"));
-					vo.setReviewTime(rs.getTimestamp("REVIEW_TIME"));
+					vo.setReviewTime(rs.getString("REVIEW_TIME"));
 					vo.setReviewCont(rs.getString("REVIEW_CONT"));
 					vo.setReviewGrade(rs.getDouble("REVIEW_GRADE"));
 					vo.setReviewKind(rs.getInt("REVIEW_KIND"));
@@ -132,7 +132,7 @@ public class ReviewDao {
 	public List<ClassReviewVo> selectClassList(Connection conn,int classCode){
 		List<ClassReviewVo> volist = null;
 		
-		String sql = "select r.*, member_name "
+		String sql = "select r.REVIEW_CODE,r.REVIEW_COMPONENT,r.REVIEW_CONT,r.REVIEW_FACILITY,r.REVIEW_GRADE,r.REVIEW_GROUP,r.REVIEW_KIND,r.REVIEW_LEVEL,TO_CHAR(r.REVIEW_TIME,'YYYY-MM-DD HH24:MI:SS') as REVIEW_TIME, member_name "
 				+ "    from class_apply ca join REVIEW r on ca.CA_CODE = r.REVIEW_CODE "
 				+ "                                join member m using(member_id)"
 				+ "    where class_code = ?";
@@ -147,7 +147,7 @@ public class ReviewDao {
 				do {
 					ClassReviewVo vo = new ClassReviewVo();
 					vo.setReviewCode(rs.getInt("REVIEW_CODE"));
-					vo.setReviewTime(rs.getTimestamp("REVIEW_TIME"));
+					vo.setReviewTime(rs.getString("REVIEW_TIME"));
 					vo.setReviewCont(rs.getString("REVIEW_CONT"));
 					vo.setReviewGrade(rs.getDouble("REVIEW_GRADE"));
 					vo.setReviewKind(rs.getInt("REVIEW_KIND"));

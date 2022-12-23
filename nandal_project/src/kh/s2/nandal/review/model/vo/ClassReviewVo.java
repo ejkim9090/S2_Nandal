@@ -15,7 +15,7 @@ public class ClassReviewVo {
 //	REVIEW_LEVEL      NOT NULL NUMBER(1)      
 //	REVIEW_GROUP      NOT NULL NUMBER(1)    
 	private int reviewCode;
-	private Timestamp reviewTime;
+	private String reviewTime;
 	private String reviewCont;
 	private double reviewGrade;
 	private int reviewKind;
@@ -44,11 +44,11 @@ public class ClassReviewVo {
 		this.reviewCode = reviewCode;
 	}
 
-	public Timestamp getReviewTime() {
+	public String getReviewTime() {
 		return reviewTime;
 	}
 
-	public void setReviewTime(Timestamp reviewTime) {
+	public void setReviewTime(String reviewTime) {
 		this.reviewTime = reviewTime;
 	}
 
