@@ -24,6 +24,7 @@ public class ClassReviewVo {
 	private int reviewLevel;
 	private int reviewGroup;
 	private String memberName;
+	private String className;
 	
 	private List<String> rpRoute;
 
@@ -32,7 +33,7 @@ public class ClassReviewVo {
 		return "ClassReviewVo [reviewCode=" + reviewCode + ", reviewTime=" + reviewTime + ", reviewCont=" + reviewCont
 				+ ", reviewGrade=" + reviewGrade + ", reviewKind=" + reviewKind + ", reviewComponent=" + reviewComponent
 				+ ", reviewFacility=" + reviewFacility + ", reviewLevel=" + reviewLevel + ", reviewGroup=" + reviewGroup
-				+ ", memberName=" + memberName + ", rpRoute=" + rpRoute + "]";
+				+ ", memberName=" + memberName + ", className=" + className + ", rpRoute=" + rpRoute + "]";
 	}
 
 	public int getReviewCode() {
@@ -115,6 +116,14 @@ public class ClassReviewVo {
 		this.memberName = memberName;
 	}
 
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
 	public List<String> getRpRoute() {
 		return rpRoute;
 	}
@@ -122,5 +131,7 @@ public class ClassReviewVo {
 	public void setRpRoute(List<String> rpRoute) {
 		this.rpRoute = rpRoute;
 	}
+
+	
 
 }

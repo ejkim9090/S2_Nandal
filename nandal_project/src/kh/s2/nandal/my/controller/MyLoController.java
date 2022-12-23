@@ -17,6 +17,7 @@ import kh.s2.nandal.apply.model.service.ClassApplyService;
 import kh.s2.nandal.apply.model.vo.MyApplyVo;
 import kh.s2.nandal.member.model.vo.MemberVo;
 import kh.s2.nandal.review.model.service.ReviewService;
+import kh.s2.nandal.review.model.vo.ClassReviewVo;
 
 /**
  * Servlet implementation class MyLoController
@@ -37,6 +38,8 @@ public class MyLoController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		//gson
 		PrintWriter out = response.getWriter();
 		Gson gson = new Gson();
@@ -62,6 +65,7 @@ public class MyLoController extends HttpServlet {
 			
 			//json으로 데이터 변경
 			result = gson.toJson(calist);
+			out.println(result);
 			break;
 		case "my_cancel" : 
 			System.out.println("취소 내역");
@@ -70,14 +74,20 @@ public class MyLoController extends HttpServlet {
 			
 			//json으로 데이터 변경
 			result = gson.toJson(aclist);
+			out.println(result);//json형태로 넣은 데이터 추가
 			break;
 		case "my_review" : 
 			System.out.println("리뷰 관리");
 			ReviewService reService = new ReviewService();
+			List<ClassReviewVo> relist = reService.MyReviewList(memberId);
+			System.out.println(relist.toString());
+			
+			result = gson.toJson(relist);
+			out.println(result);//json형태로 넣은 데이터 추가
 			break;
 		}
-		
-		out.println(result); //json형태로 넣은 데이터 추가
+
+		System.out.println(result); 
 		
 		out.flush(); //3번상태
 		out.close(); //4번 - 데이터 전달

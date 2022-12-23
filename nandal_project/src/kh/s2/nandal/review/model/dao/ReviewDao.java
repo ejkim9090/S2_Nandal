@@ -86,6 +86,48 @@ public class ReviewDao {
 		System.out.println(">>> ReviewDao delete return : " + result);
 		return result;
 	}
+//	selectList - 마이페이지 리뷰 목록 가져오기
+	public List<ClassReviewVo> MyReviewList(Connection conn,String memberId){
+		List<ClassReviewVo> volist = null;
+		
+		String sql = "select  c.CLASS_NAME, r.* "
+				+ "    from (select CA_CODE,CLASS_CODE "
+				+ "                from CLASS_APPLY "
+				+ "                where MEMBER_ID = ? and CA_CANCEL = 'N') ca "
+				+ "                join REVIEW r on ca.CA_CODE = r.review_code "
+				+ "                join class  c using(class_code)";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				volist = new ArrayList<ClassReviewVo>();
+				do {
+					ClassReviewVo vo = new ClassReviewVo();
+					vo.setReviewCode(rs.getInt("REVIEW_CODE"));
+					vo.setReviewTime(rs.getTimestamp("REVIEW_TIME"));
+					vo.setReviewCont(rs.getString("REVIEW_CONT"));
+					vo.setReviewGrade(rs.getDouble("REVIEW_GRADE"));
+					vo.setReviewKind(rs.getInt("REVIEW_KIND"));
+					vo.setReviewComponent(rs.getInt("REVIEW_COMPONENT"));
+					vo.setReviewFacility(rs.getInt("REVIEW_FACILITY"));
+					vo.setReviewLevel(rs.getInt("REVIEW_LEVEL"));
+					vo.setReviewGroup(rs.getInt("REVIEW_GROUP"));
+					vo.setClassName(rs.getString("CLASS_NAME"));
+					volist.add(vo);
+				} while(rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println(">>> ReviewDao MyReviewList return : " + volist);
+		return volist;
+	}
 //	selectList - 상세페이지 해당 클래스의 리뷰 목록 가져오기
 	public List<ClassReviewVo> selectClassList(Connection conn,int classCode){
 		List<ClassReviewVo> volist = null;

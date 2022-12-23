@@ -46,6 +46,25 @@ public class ReviewService {
 			System.out.println(">> ReviewService delete return :" + result);
 			return result;
 		}
+//		selectList - 마이페이지 리뷰 목록 가져오기
+		public List<ClassReviewVo> MyReviewList(String memberId){
+			Connection conn = JdbcTemplate.getConnection();
+			List<ClassReviewVo> volist = null;
+			volist = dao.MyReviewList(conn,memberId);
+			for(int i = 0; i < volist.size(); i++) {
+				List<ReviewPhotoVo> rplist = rpDao.selectList(conn, volist.get(i).getReviewCode()); 
+				if(rplist != null) {
+					List<String> rpRoute = new ArrayList<String>();
+					for(int j = 0; j < rplist.size(); j++) {
+						rpRoute.add(rplist.get(j).getRpRoute());
+					}
+					volist.get(i).setRpRoute(rpRoute);
+				}
+			}
+			JdbcTemplate.close(conn);
+			System.out.println(">> ReviewService selectClassList return :" + volist);
+			return volist;
+		}
 //		selectList - 상세페이지 해당 클래스의 리뷰 목록 가져오기
 		public List<ClassReviewVo> selectClassList(int classCode){
 			Connection conn = JdbcTemplate.getConnection();
