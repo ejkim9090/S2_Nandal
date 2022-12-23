@@ -27,11 +27,28 @@
 	    $(".my_nav").on("click",myNavHandler);
 	});
 	function myNavHandler() {
-	    $(".my_nav").not($(this)).css("background-color", "white");
-	    $(this).css("background-color", "#9169ff63");
+	    $(".my_nav").not($(this)).removeClass("my_nav_select");
+	    $(this).addClass("my_nav_select");
 	    $("#nav_text").text($(this).text());
 	    
-	    var navId = $(this).attr("id");
+	    var $navId = $(this).attr("id");
+	    console.log($navId);
+	    $.ajax({
+      		url : "<%=request.getContextPath()%>/my.lo",
+      		type : "post",
+      		data: "navId="+$navId, 
+      		success: function(data){ 
+      					
+      				 },
+      		error : function(request, status, error){
+      					console.log(request);	
+      					console.log(status);	
+      					console.log(error);	
+      					alert("code:"+request.status+"\n"
+      							+"message"+request.responseText+"\n"
+      							+"error"+error);
+      				}
+      	});  
 	    
 	}
 	</script>
@@ -49,9 +66,9 @@
                     <div class="profile_data">
                         <div><img class="profile_img" src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="프로필 이미지"></div>
                         <div class="profile_text">
-                            <p class="f_20_b">김덕팔님</p>
-                            <p class="f_20_b">이메일 : user1@user.com</p>
-                            <p class="f_20_b">전화번호 : 010-1234-5678</p>
+                            <p class="f_20_b">${loginSsInfo.memberName}님</p>
+                            <p class="f_20_b">이메일(ID) : ${loginSsInfo.memberId}</p>
+                            <p class="f_20_b">전화번호 : ${loginSsInfo.memberPhone}</p>
                         </div>
                     </div>
                     <div><button class="f_14_b" id="btn_profile">회원정보 수정</button></div>
@@ -60,7 +77,7 @@
             <div class="wrap_1050 my_list"><!--신청/취소 내역, 리뷰 관리-->
                 <div class="my_list_nav">
                     <h2>클래스</h2>
-                    <div class="my_nav" id="my_apply"><p>신청 내역</p><img class="my_arrow" src="<%=request.getContextPath()%>/images/my_arrow.png" alt="화살표"></div>
+                    <div class="my_nav my_nav_select" id="my_apply"><p>신청 내역</p><img class="my_arrow" src="<%=request.getContextPath()%>/images/my_arrow.png" alt="화살표"></div>
                     <div class="my_nav" id="my_cancel"><p>취소 내역</p><img class="my_arrow" src="<%=request.getContextPath()%>/images/my_arrow.png" alt="화살표"></div>
                     <div class="my_nav" id="my_review"><p>리뷰 관리</p><img class="my_arrow" src="<%=request.getContextPath()%>/images/my_arrow.png" alt="화살표"></div>
                 </div>
@@ -210,7 +227,7 @@
                     <h3>프로필 사진 변경</h3>
                     <input type="file">
                     <h3>아이디(이메일)</h3>
-                    <input type="text" name="memberId" value="user1@user.com" readonly>
+                    <input type="text" name="memberId" value="${loginSsInfo.memberId}" readonly>
                     <h3>비밀번호 확인</h3>
                     <input type="text" name="pwdChek">
                     <p class="f_10">*필수</p>
@@ -221,7 +238,7 @@
                     <input type="text" name="pwdChangeChek">
                     <p class="f_10"></p>
                     <h3>이름</h3>
-                    <input type="text" name="memberName" value="김말숙" readonly>
+                    <input type="text" name="memberName" value="${loginSsInfo.memberName}" readonly>
                     <h3>전화번호</h3>
                     <div>
                         <input type="text" name="memberPhone">
