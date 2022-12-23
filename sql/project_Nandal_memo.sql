@@ -36,13 +36,22 @@ desc REVIEW_PHOTO;
 
 -- 저장된 데이터 확인용
 select * from CATEGORY; 
-select * from CLASS;
-select * from CLASS_PHOTO; 
-select * from area; 
+select * from area;  
 select * from CLASS_SCHEDULE;
 select * from CLASS_OPTION;
-select * from MEMBER;
-select * from CLASS_APPLY;
+select * from CLASS_APPLY; 
 select * from APPLY_CANCEL;
 select * from REVIEW;
-select * from REVIEW_PHOTO;
+select * from MEMBER; -- 이미지 경로 수정
+select * from CLASS; -- 이미지 경로 수정
+select * from CLASS_PHOTO; -- 이미지 경로 수정
+select * from REVIEW_PHOTO; -- 이미지 경로 수정
+
+UPDATE CLASS SET CLASS_IMG = TRIM('.' FROM CLASS_IMG);
+UPDATE MEMBER SET MEMBER_IMG = TRIM('.' FROM MEMBER_IMG);
+UPDATE CLASS_PHOTO SET CP_ROUTE = TRIM('.' FROM CP_ROUTE);
+UPDATE REVIEW_PHOTO SET RP_ROUTE = TRIM('.' FROM RP_ROUTE);
+commit;
+--update class set CATEGORY_CODE = 7 where class_code = 27339;
+--commit;
+SELECT TRIM('.' FROM CLASS_IMG) FROM CLASS;
