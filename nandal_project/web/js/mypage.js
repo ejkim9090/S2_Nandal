@@ -1,6 +1,7 @@
 $(function() {
     $(".reCont_text").on("click",reviewContHandler);
     $(".model_a_show").on("click",reviewWriteMadalShowHandler);
+    $("#btn_profile").on("click",memberUpdateMadalShowHandler);
     $(".model_c_show").on("click",reviewUpdateMadalShowHandler);
     $(".madal_close").on("click",reviewWriteMadalHideHandler);
 });
@@ -21,14 +22,17 @@ function reviewContHandler() {
         $p.text("더보기");
     }
 
-    if($img.attr("src") == "./images/review_arrow.png") {
-        $img.attr("src","./images/review_arrow_180.png");
-    } else {
-        $img.attr("src","./images/review_arrow.png");
+    if($img.attr("src") == "/nandal/images/review_arrow.png") {
+        $img.attr("src","/nandal/images/review_arrow_180.png");
+    } else if($img.attr("src") == "/nandal/images/review_arrow_180.png") {
+        $img.attr("src","/nandal/images/review_arrow.png");
     }
 }
 function reviewWriteMadalShowHandler() {
     $(".modal.a").show();
+}
+function memberUpdateMadalShowHandler() {
+    $(".modal.b").show();
 }
 function reviewUpdateMadalShowHandler() {
     $(".modal.c").show();
