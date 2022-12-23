@@ -179,17 +179,115 @@ select *
     from CLASS_SCHEDULE
     where class_code = 124
 ; -- 해당 클래스 코드에 해당 날짜 및 요일을 표함하는 일정 조회
-select CLASS_CODE, CS_STIME, CS_FTIME
+select class_code, CLASS_CODE, CS_STIME, CS_FTIME
     from CLASS_SCHEDULE
-    where CLASS_CODE = 26851 and BITAND(cs_day, 4) = 4 and TO_DATE('2023-3-21', 'YYYY-MM-DD') between cs_sdate and cs_fdate
+    where CLASS_CODE = 26851 and BITAND(cs_day, 4) = 4 and TO_DATE('2022-12-21', 'YYYY-MM-DD') between cs_sdate and cs_fdate
 ;
-select r.*
-    from review r join CLASS_APPLY ca on r.review_code = ca.ca_code
-    where ca.class_code = 124
+-- 해당 클래스의 옵션 가져오기
+select CO_CODE, CO_NAME, CO_PRICE
+    from class_option
+    where class_code = 26851
 ;
+-- 해당 클래스의 리뷰 가져오기
+select r.*, m.MEMBER_NAME
+    from review r join class_apply ca on r.REVIEW_CODE = ca.CA_CODE
+                        join member m on ca.MEMBER_ID = m.member_id
+    where REVIEW_CODE in (select CA_CODE
+                                        from CLASS_APPLY 
+                                        where class_code = 23950)
+;
+select * from review;
+select * 
+    from review 
+    where REVIEW_CODE in (select CA_CODE 
+                                    from CLASS_APPLY  
+                                    where class_code = 23950)
+;
+select r.*, member_name
+    from class_apply ca join REVIEW r on ca.CA_CODE = r.REVIEW_CODE 
+                                join member m using(member_id)
+    where class_code = 23950
+;
+select r.*, (select member_name from member where member_id = ca.member_id) member_name
+    from class_apply ca join REVIEW r on ca.CA_CODE = r.REVIEW_CODE 
+    where class_code = 23950
+;
+-- 리뷰코드에 리뷰이미지 가져오기
 select RP_ROUTE "이미지 경로"
     from REVIEW_PHOTO 
-    where REVIEW_CODE = 1 --해당 review_code
-;  -- 각 리뷰 사진
+    where REVIEW_CODE = 239501 --해당 review_code
+;  
 
---
+-- 리뷰 구매시 클래스신청 넘버 마지막꺼 조회
+select distinct last_value(CA_CODE)  over() a
+    from class_apply
+    where class_code = 23950
+;
+select *
+    from class_apply
+    where class_code = 23950
+;
+
+
+
+--마이페이지 내역 조회
+-- 예시용 데이터 update 및 insert
+update class_apply set CA_CANCEL = 'Y' where ca_code in (194773,200471,287991);
+insert into apply_cancel(AC_CODE) values(194773);
+insert into apply_cancel(AC_CODE) values(200471);
+insert into apply_cancel(AC_CODE) values(287991);
+
+delete from REVIEW where REVIEW_CODE in (194773,200471,287991);
+delete from REVIEW_PHOTO where REVIEW_CODE in (194773,200471,287991);
+commit;
+--신청 내역
+select *  
+    from CLASS_APPLY
+    where MEMBER_ID = 'user2@user.com' and CA_CANCEL = 'N'
+;
+select ca.CA_CODE,class_code,c.CLASS_NAME,c.CLASS_PRICE,ca.CA_TOTAL,ca.CA_DATE,ca.CA_TIME as TIME,ca.CO_CODE,cs.CS_STIME ,cs.CS_FTIME
+    from (select * from CLASS_APPLY where MEMBER_ID = 'user2@user.com' and CA_CANCEL = 'N') ca 
+                 join CLASS c using(class_code)
+                 join CLASS_SCHEDULE cs using(class_code,cs_code)
+--                 join CLASS_OPTION co using(class_code,co_code)
+;
+select ca.CA_CODE,class_code,c.CLASS_NAME,c.CLASS_PRICE,ca.CA_TOTAL,TO_CHAR(ca.CA_DATE,'YYYY-MM-DD') as CA_DATE,TO_CHAR(ca.CA_TIME,'YYYY-MM-DD HH24:MI:SS') as TIME,ca.CO_CODE,cs.CS_STIME ,cs.CS_FTIME
+    from (select * from CLASS_APPLY where MEMBER_ID = 'user2@user.com' and CA_CANCEL = 'N') ca 
+                 join CLASS c using(class_code)
+                 join CLASS_SCHEDULE cs using(class_code,cs_code)
+--                 join CLASS_OPTION co using(class_code,co_code)
+;
+--옵션이 없는 경우를 위해 옵션 번호에 따라 값 가져오기
+select co_name,co_price
+    from CLASS_OPTION
+    where CO_CODE = 3 and CLASS_CODE = 19477
+;
+commit;
+-- 취소 내역
+select aca.CA_CODE,c.CLASS_NAME ,c.CLASS_PRICE,aca.CA_TOTAL,aca.CA_DATE,aca.AC_TIME as TIME,co.CO_NAME,co.CO_PRICE,cs.CS_STIME ,cs.CS_FTIME
+    from (select ca.*,ac.AC_TIME
+                from CLASS_APPLY ca join APPLY_CANCEL ac on ca.CA_CODE = ac.AC_CODE 
+                where MEMBER_ID = 'user2@user.com' and CA_CANCEL = 'Y') aca 
+                    join CLASS c using(class_code)
+                    join CLASS_SCHEDULE cs using(class_code,cs_code)
+                  --  join CLASS_OPTION co using(class_code,co_code)
+;
+select ca.CA_CODE,ca.CLASS_CODE ,ca.CA_TOTAL,ca.CA_DATE,ac.AC_TIME,ca.CO_CODE,ca.CS_CODE
+    from CLASS_APPLY ca join APPLY_CANCEL ac on ca.CA_CODE = ac.AC_CODE
+    where MEMBER_ID = 'user2@user.com' and CA_CANCEL = 'Y'
+;
+--리뷰 관리
+select *
+    from REVIEW
+    where REVIEW_CODE in (select CA_CODE from CLASS_APPLY where MEMBER_ID = 'user2@user.com' and CA_CANCEL = 'N')
+;
+select  c.CLASS_NAME, r.REVIEW_CODE,r.REVIEW_COMPONENT,r.REVIEW_CONT,r.REVIEW_FACILITY,r.REVIEW_GRADE,r.REVIEW_GROUP,r.REVIEW_KIND,r.REVIEW_LEVEL,TO_CHAR(r.REVIEW_TIME,'YYYY-MM-DD HH24:MI:SS') as REVIEW_TIME
+    from (select CA_CODE,CLASS_CODE 
+                from CLASS_APPLY 
+                where MEMBER_ID = 'user2@user.com' and CA_CANCEL = 'N') ca
+                join REVIEW r on ca.CA_CODE = r.review_code
+                join class  c using(class_code)
+;
+select * 
+    from review_photo
+;
