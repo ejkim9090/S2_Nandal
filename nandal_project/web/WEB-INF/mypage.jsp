@@ -31,7 +31,10 @@
 	    $(this).addClass("my_nav_select");
 	    $("#nav_text").text($(this).text());
 	    
-	    var $navId = $(this).attr("id");
+	    myNavSelectList();
+	}
+	function myNavSelectList() {
+		var $navId = $(".my_nav.my_nav_select").attr("id");
 	    console.log($navId);
 	    $.ajax({
       		url : "<%=request.getContextPath()%>/my.lo",
@@ -49,7 +52,6 @@
       							+"error"+error);
       				}
       	});  
-	    
 	}
 	</script>
 

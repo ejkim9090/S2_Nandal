@@ -6,6 +6,7 @@ import java.util.List;
 import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.apply.model.dao.ClassApplyDao;
 import kh.s2.nandal.apply.model.vo.ClassApplyVo;
+import kh.s2.nandal.apply.model.vo.MyApplyVo;
 
 public class ClassApplyService {
 	private ClassApplyDao dao = new ClassApplyDao();
@@ -76,6 +77,15 @@ public class ClassApplyService {
 		volist = dao.selectList(conn);
 		JdbcTemplate.close(conn);
 		System.out.println(">> ClassApplyService selectList return :" + volist);
+		return volist;
+	}
+//	MyApplyList - 마이페이지 신청/취소 내역 
+	public List<MyApplyVo> MyApplyList(String memberId,String check){
+		Connection conn = JdbcTemplate.getConnection();
+		List<MyApplyVo> volist = null;
+		volist = dao.MyApplyList(conn,memberId,check);
+		JdbcTemplate.close(conn);
+		System.out.println(">> ClassApplyService MyApplyList return :" + volist);
 		return volist;
 	}
 //	selectOne

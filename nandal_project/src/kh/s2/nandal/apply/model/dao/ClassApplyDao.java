@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.apply.model.vo.ClassApplyVo;
+import kh.s2.nandal.apply.model.vo.MyApplyVo;
 
 public class ClassApplyDao {
 //	insert
@@ -93,6 +95,60 @@ public class ClassApplyDao {
 			JdbcTemplate.close(pstmt);
 		}
 		System.out.println(">>> ClassApplyService selectList return : " + volist);
+		return volist;
+	}
+//	selectList - 목록조회
+	public List<MyApplyVo> MyApplyList(Connection conn,String memberId,String check){
+		List<MyApplyVo> volist = null;
+		String sql = null;
+		
+		if(check.equals("N")) {
+			sql = "select ca.CA_CODE,c.CLASS_NAME,c.CLASS_PRICE,ca.CA_TOTAL,ca.CA_DATE,ca.CA_TIME as TIME,co.CO_NAME,co.CO_PRICE,cs.CS_STIME ,cs.CS_FTIME "
+					+ "    from (select * from CLASS_APPLY where MEMBER_ID = ? and CA_CANCEL = ?) ca "
+					+ "                 join CLASS c using(class_code) "
+					+ "                 join CLASS_SCHEDULE cs using(class_code,cs_code) "
+					+ "                 join CLASS_OPTION co using(class_code,co_code)";
+		} else {
+			sql = "select aca.CA_CODE,c.CLASS_NAME,c.CLASS_PRICE,aca.CA_TOTAL,aca.CA_DATE,aca.AC_TIME as TIME,co.CO_NAME,co.CO_PRICE,cs.CS_STIME ,cs.CS_FTIME "
+					+ "    from (select ca.*,ac.AC_TIME "
+					+ "                from CLASS_APPLY ca join APPLY_CANCEL ac on ca.CA_CODE = ac.AC_CODE "
+					+ "                where MEMBER_ID = ? and CA_CANCEL = ?) aca "
+					+ "                    join CLASS c using(class_code) "
+					+ "                    join CLASS_SCHEDULE cs using(class_code,cs_code) "
+					+ "                    join CLASS_OPTION co using(class_code,co_code)";
+		}
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, check);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				volist = new ArrayList<MyApplyVo>();
+				do {
+					MyApplyVo vo = new MyApplyVo();
+					vo.setCaCode(rs.getInt("CA_CODE"));
+					vo.setClassName(rs.getString("CLASS_NAME"));
+					vo.setClassPrice(rs.getInt("CLASS_PRICE"));
+					vo.setCaTotal(rs.getInt("CA_TOTAL"));
+					vo.setCaDate(rs.getDate("CA_DATE"));
+					vo.setCaTime(rs.getTimestamp("TIME"));
+					vo.setCoName(rs.getString("CO_NAME"));
+					vo.setCoPrice(rs.getInt("CO_PRICE"));
+					vo.setCsStime(rs.getString("CS_STIME"));
+					vo.setCsFtime(rs.getString("CS_FTIME"));
+					volist.add(vo);
+				} while(rs.next());
+			}
+			//TODO
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println(">>> ClassApplyService MyApplyList return : " + volist);
 		return volist;
 	}
 //	selectOne - 상세조회
