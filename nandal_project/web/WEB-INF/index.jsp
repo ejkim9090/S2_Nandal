@@ -28,7 +28,7 @@
                 <!-- 맨위 상단 섹션-->
                 <div>
                     <div class="main_img_wrap">
-                        <img class="main_img" src=" ">
+                        <img class="main_img" src="<%=request.getContextPath()%>/images/index_top_img.jpg">
                     </div>
                 </div>
                 <!-- 첫번째 섹션 -->
