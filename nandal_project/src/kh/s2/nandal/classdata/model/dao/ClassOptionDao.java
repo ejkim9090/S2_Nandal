@@ -125,4 +125,31 @@ public class ClassOptionDao {
 		System.out.println(">>> ClassOptionDao selectOne return : " + vo);
 		return vo;
 	}
+//	selectOne - 마이 리뷰 각 리스트에서 옵션 정보 조회 시
+	public ClassOptionVo MyoptionOne(Connection conn, int coCode, int classCode){
+		System.out.println(">>> ClassOptionDao MyoptionOne param coCode : " + coCode + classCode);
+		ClassOptionVo vo = null;
+		
+		String sql = "select * from class_option where co_code=? and class_code = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, coCode);
+			pstmt.setInt(2, classCode);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo = new ClassOptionVo();
+				vo.setCoName(rs.getString("co_name"));
+				vo.setCoPrice(rs.getInt("co_price"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println(">>> ClassOptionDao MyoptionOne return : " + vo);
+		return vo;
+	}
 }

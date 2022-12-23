@@ -1,12 +1,16 @@
 package kh.s2.nandal.apply.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.apply.model.dao.ClassApplyDao;
 import kh.s2.nandal.apply.model.vo.ClassApplyVo;
 import kh.s2.nandal.apply.model.vo.MyApplyVo;
+import kh.s2.nandal.classdata.model.dao.ClassOptionDao;
+import kh.s2.nandal.classdata.model.vo.ClassOptionVo;
+import kh.s2.nandal.review.model.vo.ReviewPhotoVo;
 
 public class ClassApplyService {
 	private ClassApplyDao dao = new ClassApplyDao();
@@ -84,6 +88,17 @@ public class ClassApplyService {
 		Connection conn = JdbcTemplate.getConnection();
 		List<MyApplyVo> volist = null;
 		volist = dao.MyApplyList(conn,memberId,check);
+		ClassOptionDao coDao = new ClassOptionDao();
+		for(int i = 0; i < volist.size(); i++) {
+			if(volist.get(i).getCoCode() != 0) {
+				ClassOptionVo coVo = coDao.MyoptionOne(conn, volist.get(i).getCoCode(), volist.get(i).getClasscode()); 
+				volist.get(i).setCoName(coVo.getCoName());
+				volist.get(i).setCoPrice(coVo.getCoPrice());
+			} else {
+				volist.get(i).setCoName("옵션 없음");
+				volist.get(i).setCoPrice(0);
+			}
+		}
 		JdbcTemplate.close(conn);
 		System.out.println(">> ClassApplyService MyApplyList return :" + volist);
 		return volist;

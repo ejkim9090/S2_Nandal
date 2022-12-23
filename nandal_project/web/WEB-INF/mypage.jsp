@@ -36,12 +36,116 @@
 	function myNavSelectList() {
 		var $navId = $(".my_nav.my_nav_select").attr("id");
 	    console.log($navId);
+	    var $listWrap = $("#apply_list_wrap");
 	    $.ajax({
       		url : "<%=request.getContextPath()%>/my.lo",
       		type : "post",
       		data: "navId="+$navId, 
+     	 	dataType : "json", 
       		success: function(data){ 
-      					
+      				 switch($navId) {
+      				case "my_apply" : 
+      					console.log("신청 내역");
+      					if(data != null) {
+     						let addHtml = "";
+     						console.log(data);
+     						console.log(data.length);
+     						for(var i = 0; i < data.length; i++) {
+     							addHtml += "<div class='apply_list'>"+
+					                            "<div class='myList_left'>"+
+					                                "<h3>"+data[i].className+"</h3>"+
+					                                "<div><img class='my_img' src='<%=request.getContextPath()%>/images/calendar.png'><p class='f_16'>"+data[i].caDate+"</p><img class='my_img' src='<%=request.getContextPath()%>/images/clock.png'><p class='f_16'>"+data[i].csStime+"~"+data[i].csFtime+"</p><img class='my_img' src='<%=request.getContextPath()%>/images/option.png'><p class='f_16'>"
+					                                +data[i].coName+"</p></div>"+
+					                                "<div><p>"+data[i].caTotal+"명</p><p>"+((data[i].classPrice+data[i].coPrice)*data[i].caTotal)+"원</p></div>"+
+					                            "</div>"+
+					                            "<div class='myList_right'>"+
+					                                "<p>"+data[i].caTime+"</p>"+
+					                                "<div>"+
+					                                    "<input type='hidden' name='caCode' value='"+data[i].caCode+"'>"+
+					                                    "<button class='c_line c_color myList_btn model_a_show'>리뷰 등록</button>"+
+					                                    "<button class='c_line c_color myList_btn cancle'>취소 신청</button>"+
+					                                "</div></div></div>";
+     						}
+     						$listWrap.html(addHtml);
+     					    $(".model_a_show").on("click",reviewWriteMadalShowHandler);
+     					} else {
+     						$buyTime.html("<div class='apply_list'><h2>클래스 신청 내역이 없습니다.</h2></div>");
+     					}
+      					break;
+      				case "my_cancel" : 
+      					console.log("취소 내역");
+      					if(data != null) {
+     						let addHtml = "";
+     						console.log(data);
+     						console.log(data.length);
+     						for(var i = 0; i < data.length; i++) {
+     							addHtml += "<div class='apply_list'>"+
+					                            "<div class='myList_left'>"+
+					                                "<h3>"+data[i].className+"</h3>"+
+					                                "<div><img class='my_img' src='<%=request.getContextPath()%>/images/calendar.png'><p class='f_16'>"+data[i].caDate+"</p><img class='my_img' src='<%=request.getContextPath()%>/images/clock.png'><p class='f_16'>"+data[i].csStime+"~"+data[i].csFtime+"</p><img class='my_img' src='<%=request.getContextPath()%>/images/option.png'><p class='f_16'>"
+					                                +data[i].coName+"</p></div>"+
+					                                "<div><p>"+data[i].caTotal+"명</p><p>"+((data[i].classPrice+data[i].coPrice)*data[i].caTotal)+"원</p></div>"+
+					                            "</div>"+
+					                            "<div class='myList_right'>"+
+					                                "<p>"+data[i].caTime+"</p>"+
+					                                "<div>"+
+					                                "</div></div></div>";
+     						}
+     						$listWrap.html(addHtml);
+     					} else {
+     						$buyTime.html("<div class='apply_list'><h2>클래스 취소 내역이 없습니다.</h2></div>");
+     					}
+      					break;
+      				case "my_review" : 
+      					console.log("리뷰 관리");
+      					if(data != null) {
+     						let addHtml = "";
+     						console.log(data);
+     						console.log(data.length);
+     						for(var i = 0; i < data.length; i++) {
+     							switch(data[i].reviewGroup) {
+                                case 0: var reGroup = ""; break;
+                                case 1: var reGroup = "혼자"; break;
+                                case 2: var reGroup = "친구"; break;
+                                case 3: var reGroup = "연인"; break;
+                                case 4: var reGroup = "가족"; break;
+                                }
+     							var rpRoute = data[i].rpRoute;
+     							console.log(rpRoute);
+     							
+         						let addPhoto = "";
+     							if (!(rpRoute === undefined)) {
+     								for(var j = 0; j < rpRoute.length; j++) {
+         								addPhoto += "<img class='reCont_img' src='<%=request.getContextPath()%>"+rpRoute[j]+"'>";
+         							}
+     							} 
+     							addHtml += "<div class='apply_list'>"+
+					                            "<div class='myList_left'>"+
+					                                "<h3>"+data[i].className+"</h3>"+
+					                                "<div><img class='my_img' src='<%=request.getContextPath()%>/images/review_star_full.png'><p class='f_16'>"+data[i].reviewGrade+"</p><p class='f_16'>"+
+					                                reGroup
+					                                +"</p></div>"+
+					                                "<div class='reCont'>"+
+					                                    "<p>"+data[i].reviewCont+"</p><div>"+addPhoto+"</div></div>"+
+					                                "<div class='reCont_text'><p>더보기</p><img class='my_img reCont_arrow' src='<%=request.getContextPath()%>/images/review_arrow.png'></div>"+
+					                            "</div>"+
+					                            "<div class='myList_right'>"+
+					                                "<p>"+data[i].reviewTime+"</p>"+
+					                                "<div>"+
+					                                    "<button class='c_line c_color myList_btn model_c_show'>수정</button>"+
+					                                    "<button class='c_line c_color myList_btn'>삭제</button>"+
+					                                "</div>"+
+					                            "</div>"+
+					                        "</div>";
+     						}
+     						$listWrap.html(addHtml);
+     					    $(".reCont_text").on("click",reviewContHandler);
+     					    $(".model_c_show").on("click",reviewUpdateMadalShowHandler);
+     					} else {
+     						$buyTime.html("<div class='apply_list'><h2>작성하신 리뷰 내역이 없습니다.</h2></div>");
+     					}
+      					break;
+      				 }
       				 },
       		error : function(request, status, error){
       					console.log(request);	
@@ -87,19 +191,19 @@
                     <div class="nav_text_wrap">
                         <h3 id="nav_text">신청 내역</h3>
                     </div>
-                    <div class="apply_list_wrap">
-                        <div class="apply_list"> <!--신청 내역 칸-->
-                            <div class="myList_left">
+                    <div id="apply_list_wrap">
+                        <div class='apply_list'> <!--신청 내역 칸-->
+                            <div class='myList_left'>
                                 <h2>클래스명</h2>
-                                <div><img class="my_img" src="<%=request.getContextPath()%>/images/calendar.png"><p class="f_16">2022-11-13</p><img class="my_img" src="<%=request.getContextPath()%>/images/clock.png"><p class="f_16"> 13:00~14:30</p></div>
+                                <div><img class='my_img' src='<%=request.getContextPath()%>/images/calendar.png'><p class='f_16'>2022-11-13</p><img class='my_img' src='<%=request.getContextPath()%>/images/clock.png'><p class='f_16'> 13:00~14:30</p></div>
                                 <div><p>1명</p><p>20,000원</p></div>
                             </div>
-                            <div class="myList_right">
+                            <div class='myList_right'>
                                 <p>2022-12-13 14:12</p>
                                 <div>
-                                    <input type="hidden" name="caCode" value="21242">
-                                    <button class="c_line c_color myList_btn model_a_show">리뷰 등록</button>
-                                    <button class="c_line c_color myList_btn cancle">취소 신청</button>
+                                    <input type='hidden' name='caCode' value='21242'>
+                                    <button class='c_line c_color myList_btn model_a_show'>리뷰 등록</button>
+                                    <button class='c_line c_color myList_btn cancle'>취소 신청</button>
                                 </div>
                             </div>
                         </div>
@@ -135,20 +239,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="apply_list"> <!--리뷰 내용 칸-->
-                            <div class="myList_left">
+                        <div class='apply_list'> <!--리뷰 내용 칸-->
+                            <div class='myList_left'>
                                 <h2>클래스명</h2>
-                                <div><img class="my_img" src="<%=request.getContextPath()%>/images/review_star_full.png"><p class="f_16">5.0</p><p class="f_16">가족</p></div>
-                                <div class="reCont">
+                                <div><img class='my_img' src='<%=request.getContextPath()%>/images/review_star_full.png'><p class='f_16'>5.0</p><p class='f_16'>가족</p></div>
+                                <div class='reCont'>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Proin eget magna id ipsum eleifend cursus sit amet nec lectus. Nunc quis lacus magna. Aliquam blandit, sapien ut viverra fermentum, elit tortor ornare nisi, in luctus sem massa pulvinar turpis. Cras tincidunt dictum urna ut ultricies. Nullam diam nibh, pellentesque non laoreet ut, bibendum nec mauris. Maecenas pulvinar porttitor laoreet. Vivamus bibendum purus nisl, eget aliquam lectus. Maecenas justo libero, euismod sit amet suscipit eu, vulputate eget neque. Aliquam quam est, blandit nec iaculis non, suscipit vel nunc. Proin et odio aliquam erat pharetra accumsan et quis neque.</p>
                                 </div>
-                                <div class="reCont_text"><p>더보기</p><img class="my_img reCont_arrow" src="<%=request.getContextPath()%>/images/review_arrow.png"></div>
+                                <div class='reCont_text'><p>더보기</p><img class='my_img reCont_arrow' src='<%=request.getContextPath()%>/images/review_arrow.png'></div>
                             </div>
-                            <div class="myList_right">
+                            <div class='myList_right'>
                                 <p>2022-12-13 14:12</p>
                                 <div>
-                                    <button class="c_line c_color myList_btn model_c_show">수정</button>
-                                    <button class="c_line c_color myList_btn">삭제</button>
+                                    <button class='c_line c_color myList_btn model_c_show'>수정</button>
+                                    <button class='c_line c_color myList_btn'>삭제</button>
                                 </div>
                             </div>
                         </div>
@@ -165,13 +269,13 @@
     </div>
     <div class="modal a">
             <div class="modal_content a">
-                <form class="model_form a">
+                <form class="model_form a" action="${pageContext.request.contextPath}/review.do" method="post" enctype="multipart/form-data">
                     <div class="form_cont a">
                         <h2>리뷰 등록</h2>
                         <h3>리뷰 작성</h3>
                         <textarea name="reviewCont"></textarea>
                         <h3>사진 첨부</h3>
-                        <input type="file">
+                        <input type="file" name="fileUpload" multiple="multiple">
                         <p class="f_10">*사진은 최대 5개까지 등록가능합니다.</p>
                         <h3>평점 및 추천</h3>
                         <h4>친절도</h4>
@@ -215,7 +319,7 @@
                         </div>
                     </div>
                     <div class="model_btn_wrap">
-                        <button type="button" class="c_line c_color model_btn">등록</button>
+                        <button type="submit" class="c_line c_color model_btn">등록</button>
                         <button type="button" class="c_line c_color model_btn madal_close">취소</button>
                     </div>
                 </form>
@@ -248,7 +352,7 @@
                     </div>
                 </div>
                 <div class="model_btn_wrap">
-                    <button type="button" class="c_line c_color model_btn">등록</button>
+                    <button type="submit" class="c_line c_color model_btn">등록</button>
                     <button type="button" class="c_line c_color model_btn madal_close">취소</button>
                 </div>
             </form>
@@ -306,7 +410,7 @@
                         </div>
                     </div>
                     <div class="model_btn_wrap">
-                        <button type="button" class="c_line c_color model_btn">수정</button>
+                        <button type="submit" class="c_line c_color model_btn">수정</button>
                         <button type="button" class="c_line c_color model_btn madal_close">취소</button>
                     </div>
                 </form>

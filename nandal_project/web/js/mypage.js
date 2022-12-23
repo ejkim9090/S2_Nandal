@@ -1,8 +1,5 @@
 $(function() {
-    $(".reCont_text").on("click",reviewContHandler);
-    $(".model_a_show").on("click",reviewWriteMadalShowHandler);
     $("#btn_profile").on("click",memberUpdateMadalShowHandler);
-    $(".model_c_show").on("click",reviewUpdateMadalShowHandler);
     $(".madal_close").on("click",reviewWriteMadalHideHandler);
 });
 function reviewContHandler() {

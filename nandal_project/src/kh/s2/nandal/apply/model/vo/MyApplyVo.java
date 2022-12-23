@@ -5,26 +5,35 @@ import java.sql.Timestamp;
 
 public class MyApplyVo {
 	private int caCode;
+	private int classcode;
 	private String className;
 	private int classPrice;
 	private int caTotal;
 	private Date caDate;
 	private Timestamp caTime;
+	private int coCode;
 	private String coName;
 	private int coPrice;
 	private String csStime;
 	private String csFtime;
 	@Override
 	public String toString() {
-		return "MyApplyVo [caCode=" + caCode + ", className=" + className + ", classPrice=" + classPrice + ", caTotal="
-				+ caTotal + ", caDate=" + caDate + ", caTime=" + caTime + ", coName=" + coName + ", coPrice=" + coPrice
-				+ ", csStime=" + csStime + ", csFtime=" + csFtime + "]";
+		return "MyApplyVo [caCode=" + caCode + ", classcode=" + classcode + ", className=" + className + ", classPrice="
+				+ classPrice + ", caTotal=" + caTotal + ", caDate=" + caDate + ", caTime=" + caTime + ", coCode="
+				+ coCode + ", coName=" + coName + ", coPrice=" + coPrice + ", csStime=" + csStime + ", csFtime="
+				+ csFtime + "]";
 	}
 	public int getCaCode() {
 		return caCode;
 	}
 	public void setCaCode(int caCode) {
 		this.caCode = caCode;
+	}
+	public int getClasscode() {
+		return classcode;
+	}
+	public void setClasscode(int classcode) {
+		this.classcode = classcode;
 	}
 	public String getClassName() {
 		return className;
@@ -56,6 +65,12 @@ public class MyApplyVo {
 	public void setCaTime(Timestamp caTime) {
 		this.caTime = caTime;
 	}
+	public int getCoCode() {
+		return coCode;
+	}
+	public void setCoCode(int coCode) {
+		this.coCode = coCode;
+	}
 	public String getCoName() {
 		return coName;
 	}
@@ -80,8 +95,4 @@ public class MyApplyVo {
 	public void setCsFtime(String csFtime) {
 		this.csFtime = csFtime;
 	}
-	
-	
-	
-	
 }
