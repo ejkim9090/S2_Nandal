@@ -9,8 +9,8 @@ public class MyApplyVo {
 	private String className;
 	private int classPrice;
 	private int caTotal;
-	private Date caDate;
-	private Timestamp caTime;
+	private String caDate;
+	private String caTime;
 	private int coCode;
 	private String coName;
 	private int coPrice;
@@ -53,16 +53,16 @@ public class MyApplyVo {
 	public void setCaTotal(int caTotal) {
 		this.caTotal = caTotal;
 	}
-	public Date getCaDate() {
+	public String getCaDate() {
 		return caDate;
 	}
-	public void setCaDate(Date caDate) {
+	public void setCaDate(String caDate) {
 		this.caDate = caDate;
 	}
-	public Timestamp getCaTime() {
+	public String getCaTime() {
 		return caTime;
 	}
-	public void setCaTime(Timestamp caTime) {
+	public void setCaTime(String caTime) {
 		this.caTime = caTime;
 	}
 	public int getCoCode() {

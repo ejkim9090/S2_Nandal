@@ -104,12 +104,12 @@ public class ClassApplyDao {
 		String sql = null;
 		
 		if(check.equals("N")) {
-			sql = "select ca.CA_CODE,class_code,c.CLASS_NAME,c.CLASS_PRICE,ca.CA_TOTAL,ca.CA_DATE,ca.CA_TIME as TIME,ca.CO_CODE,cs.CS_STIME ,cs.CS_FTIME "
+			sql = "select ca.CA_CODE,class_code,c.CLASS_NAME,c.CLASS_PRICE,ca.CA_TOTAL,TO_CHAR(ca.CA_DATE,'YYYY-MM-DD') as CA_DATE,TO_CHAR(ca.CA_TIME,'YYYY-MM-DD HH24:MI:SS') as TIME,ca.CO_CODE,cs.CS_STIME ,cs.CS_FTIME "
 					+ "    from (select * from CLASS_APPLY where MEMBER_ID = ? and CA_CANCEL = ?) ca "
 					+ "                 join CLASS c using(class_code) "
 					+ "                 join CLASS_SCHEDULE cs using(class_code,cs_code)";
 		} else {
-			sql = "select aca.CA_CODE,class_code,c.CLASS_NAME ,c.CLASS_PRICE,aca.CA_TOTAL,aca.CA_DATE,aca.AC_TIME as TIME,aca.CO_CODE, cs.CS_STIME ,cs.CS_FTIME "
+			sql = "select aca.CA_CODE,class_code,c.CLASS_NAME ,c.CLASS_PRICE,aca.CA_TOTAL,TO_CHAR(aca.CA_DATE,'YYYY-MM-DD') as CA_DATE,TO_CHAR(aca.AC_TIME,'YYYY-MM-DD HH24:MI:SS') as TIME,aca.CO_CODE, cs.CS_STIME ,cs.CS_FTIME "
 					+ "    from (select ca.*,ac.AC_TIME "
 					+ "                from CLASS_APPLY ca join APPLY_CANCEL ac on ca.CA_CODE = ac.AC_CODE "
 					+ "                where MEMBER_ID = ? and CA_CANCEL = ?) aca "
@@ -132,8 +132,8 @@ public class ClassApplyDao {
 					vo.setClassName(rs.getString("CLASS_NAME"));
 					vo.setClassPrice(rs.getInt("CLASS_PRICE"));
 					vo.setCaTotal(rs.getInt("CA_TOTAL"));
-					vo.setCaDate(rs.getDate("CA_DATE"));
-					vo.setCaTime(rs.getTimestamp("TIME"));
+					vo.setCaDate(rs.getString("CA_DATE"));
+					vo.setCaTime(rs.getString("TIME"));
 					vo.setCoCode(rs.getInt("CO_Code"));
 					vo.setCsStime(rs.getString("CS_STIME"));
 					vo.setCsFtime(rs.getString("CS_FTIME"));
