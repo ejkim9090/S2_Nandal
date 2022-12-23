@@ -142,18 +142,18 @@
                         <div class="info_top_first">         
                             <div class="top_class_img"> <!--상단 이미지 -->
                                 <div class="top_img_wrap">
-                                    <img class="top_img" src=".${classVo.classImg}">
+                                    <img class="top_img" src="${pageContext.request.contextPath}${classVo.classImg}">
                                 </div>
                                 <div class="sub_list">
                                     <div class="sub_list_swiper_wrap">
                                         <div class="sub_list_swiper">     
                                             <div class="sub_img_list">
-                                                <img class="sub_img" src=".${classVo.classImg}" alt="대표 이미지">
+                                                <img class="sub_img" src="${pageContext.request.contextPath}${classVo.classImg}" alt="대표 이미지">
                                             </div>
                                             <c:if test="${not empty cpSubList}">
                                             	<c:forEach items="${cpSubList}" var="vo">
                                             		<div class="sub_img_list">
-		                                                <img class="sub_img" src=".${vo.cpRoute}" alt="서브 이미지">
+		                                                <img class="sub_img" src="${pageContext.request.contextPath}${vo.cpRoute}" alt="서브 이미지">
 		                                            </div>
                                             	</c:forEach>
                                             </c:if>
@@ -165,8 +165,8 @@
                         <div class="top_info_wrap"> <!-- 상단 클래스 요약 정보 -->
                             <div class="f_20_b">${classVo.className}</div>
                             <div>
-                                <div class="top_info_text"><img class="top_info_img" src="../images/clock.png">${classVo.classAlltime}</div>
-                                <div class="top_info_text"><img class="top_info_img" src="../images/level.png">
+                                <div class="top_info_text"><img class="top_info_img" src="${pageContext.request.contextPath}/images/clock.png">${classVo.classAlltime}</div>
+                                <div class="top_info_text"><img class="top_info_img" src="${pageContext.request.contextPath}/images/level.png">
                                 <c:set var="toplevel" value ="난이도 없음"/>
                                 <c:choose>
                                 	<c:when test="${classVo.classLevel eq 1}">
@@ -181,8 +181,8 @@
                                 </c:choose>
                                 ${toplevel}
                                 </div>
-                                <div class="top_info_text"><img class="top_info_img" src="../images/user.png">${classVo.classMin}~${classVo.classMax}</div>
-                                <div class="top_info_text"><img class="top_info_img" src="../images/marker.png">${sumAddress}</div>
+                                <div class="top_info_text"><img class="top_info_img" src="${pageContext.request.contextPath}/images/user.png">${classVo.classMin}~${classVo.classMax}</div>
+                                <div class="top_info_text"><img class="top_info_img" src="${pageContext.request.contextPath}/images/marker.png">${sumAddress}</div>
                             </div>
                         </div>
                         <div id="intro"></div>
@@ -267,7 +267,7 @@
                         <div>
                         <c:if test="${not empty cpIntroList}">
                         	<c:forEach items="${cpIntroList}" var="vo">
-                            	<img class="intro_img" src=".${vo.cpRoute}" alt="소개 이미지">
+                            	<img class="intro_img" src="${pageContext.request.contextPath}${vo.cpRoute}" alt="소개 이미지">
                         	</c:forEach>
                         </c:if>
                         </div>
@@ -471,7 +471,7 @@
 		                            
 		                            <c:if test="${not empty vo.rpRoute}">
 		                            	<c:forEach items="${vo.rpRoute}" var="rpVo">
-		                            		<img src=".${rpVo}" alt="리뷰이미지">
+		                            		<img src="${pageContext.request.contextPath}${rpVo}" alt="리뷰이미지">
 		                            	</c:forEach>
 		                            </c:if>   
 		                        </div>

@@ -54,7 +54,7 @@
 		                   				<c:forEach items="${classlist1}" var="vo">
 			                   				<a href="${pageContext.request.contextPath }/info/${vo.classCode}" class="list_class">
 		                                        <div class="list_class_img_wrap">
-		                                            <img src="${vo.classImg}" alt="클래스 이미지">
+		                                            <img src="${pageContext.request.contextPath}${vo.classImg}" alt="클래스 이미지">
 		                                        </div>
 		                                        <div class="list_class_info_wrap">
 		                                            <h3 class="f_16_b">
@@ -100,7 +100,7 @@
 		                   				<c:forEach items="${classlist2}" var="vo">
 			                   				<a href="${pageContext.request.contextPath }/info/${vo.classCode}" class="list_class">
 		                                        <div class="list_class_img_wrap">
-		                                            <img src="${vo.classImg}" alt="클래스 이미지">
+		                                            <img src="${pageContext.request.contextPath}${vo.classImg}" alt="클래스 이미지">
 		                                        </div>
 		                                        <div class="list_class_info_wrap">
 		                                            <h3 class="f_16_b">
@@ -146,7 +146,7 @@
 		                   				<c:forEach items="${classlist3}" var="vo">
 			                   				<a href="${pageContext.request.contextPath }/info/${vo.classCode}" class="list_class">
 		                                        <div class="list_class_img_wrap">
-		                                            <img src="${vo.classImg}" alt="클래스 이미지">
+		                                            <img src="${pageContext.request.contextPath}${vo.classImg}" alt="클래스 이미지">
 		                                        </div>
 		                                        <div class="list_class_info_wrap">
 		                                            <h3 class="f_16_b">
@@ -192,7 +192,7 @@
 		                                <c:forEach items="${reviewlist}" var="vo">
 		                                	<a href="${pageContext.request.contextPath }/info/${vo.classCode}" class="list_class">
 		                                        <div class="list_class_img_wrap">
-		                                            <img src="${vo.rpRoute}" alt="리뷰 이미지">
+		                                            <img src="${pageContext.request.contextPath}${vo.rpRoute}" alt="리뷰 이미지">
 		                                        </div>
 		                                        <div class="list_review_text">
 		                                            <span class="f_12">
