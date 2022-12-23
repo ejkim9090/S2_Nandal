@@ -27,7 +27,6 @@
     <script src="<%=request.getContextPath()%>/js/info.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=22e814de5ddfa7ab67223da7c1c400b9&libraries=services,clusterer,drawing"></script>
 	
-	<c:set var="memberId" value="${loginSsInfo.memberId}"/>
     <script>
      $( function() {
        $("#datepicker").on("change",datepickerClick);
@@ -42,9 +41,11 @@
      }
      var date = "";
      function classBuyHandler() {
+    	 console.log("${loginSsInfo.memberId}");
     	 var $formQuery = $("#buy_form").serialize() 
-    	 					+ "&classCode=" + ${classVo.classCode} 
-    	 					+ "&caDate=" + date;
+    	 					+ "&classCode=" + "${classVo.classCode}" 
+    	 					+ "&caDate=" + date
+    	 					+ "&memberId=" + "${loginSsInfo.memberId}";
     	 console.log($formQuery);
     	 
     	$.ajax({
@@ -57,6 +58,8 @@
       					} else if(data == 99) {
       						alert("로그인이 필요합니다.")
       						location.href = "<%=request.getContextPath()%>/login";
+      					} else if(data == 88) {
+      						alert("인원을 선택해주세요.")
       					} else {
       						alert("클래스 신청이 실패했습니다.")
       					}

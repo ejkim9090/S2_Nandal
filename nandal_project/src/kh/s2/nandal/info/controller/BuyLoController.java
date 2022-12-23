@@ -45,35 +45,40 @@ public class BuyLoController extends HttpServlet {
 		int coCode = 0;
 		int caTotal = 0;
 		int classCode = 0;
-		MemberVo sessionVo = null;
-		String DateStr = null;
 		Date caDate = null;
+		String memberId = null;
+		memberId = request.getParameter("memberId");
 		
-		try {
-			csCode = Integer.parseInt(request.getParameter("csCode"));
-			coCode = Integer.parseInt(request.getParameter("buyOption"));
-			caTotal = Integer.parseInt(request.getParameter("buyNum"));
-			classCode = Integer.parseInt(request.getParameter("classCode"));
-			caDate = Date.valueOf(request.getParameter("caDate"));
-			
-			sessionVo = (MemberVo)request.getSession().getAttribute("loginSsInfo");
-			if(sessionVo == null) {
-				result = 99;
-			} else {
-				ClassApplyService service = new ClassApplyService();
-				ClassApplyVo vo = new ClassApplyVo();
-				vo.setCaDate(caDate);
-				vo.setCaTotal(caTotal);
-				vo.setClassCode(classCode);
-				vo.setCoCode(coCode);
-				vo.setCsCode(csCode);
-				vo.setMemberId(sessionVo.getMemberId());
-				result = service.insert(vo);
+		if(memberId.equals("")) {
+			result = 99;
+		} else {
+			try {
+				csCode = Integer.parseInt(request.getParameter("csCode"));
+				coCode = Integer.parseInt(request.getParameter("buyOption"));
+				caTotal = Integer.parseInt(request.getParameter("buyNum"));
+				classCode = Integer.parseInt(request.getParameter("classCode"));
+				caDate = Date.valueOf(request.getParameter("caDate"));
+				
+				if(caTotal == 0) {
+					result = 88;
+				} else {
+					ClassApplyService service = new ClassApplyService();
+					ClassApplyVo vo = new ClassApplyVo();
+					vo.setCaDate(caDate);
+					vo.setCaTotal(caTotal);
+					vo.setClassCode(classCode);
+					vo.setCoCode(coCode);
+					vo.setCsCode(csCode);
+					vo.setMemberId(memberId);
+					result = service.insert(vo);
+				}
+			} catch(Exception e) {
+				
 			}
-		} catch(Exception e) {
-			
 		}
 		
+		
+		System.out.println(memberId);
 		System.out.println(result);
 		out.println(result);
 		out.flush(); //3번상태
