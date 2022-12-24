@@ -131,7 +131,7 @@ public class ReviewWriteDoController extends HttpServlet {
 			reVo.setReviewKind(reviewKind);
 			reVo.setReviewLevel(reviewLevel);
 			System.out.println("저장될 re:" +reVo.toString());
-//			reService.insert(reVo);
+			reService.insert(reVo);
 			
 			System.out.println("rp배열 크기 : "+rpRouteArr.size());
 			if(rpRouteArr.size() > 0) { //저장된 파일 경로가 있는지 확인
@@ -140,7 +140,7 @@ public class ReviewWriteDoController extends HttpServlet {
 					rpVo.setReviewCode(reviewCode);
 					rpVo.setRpRoute(rpRoute);
 					System.out.println("저장될 rp:" +rpVo.toString());
-//					rpService.insert(rpVo);
+					rpService.insert(rpVo);
 				}
 			}
 		} catch (Exception e) {

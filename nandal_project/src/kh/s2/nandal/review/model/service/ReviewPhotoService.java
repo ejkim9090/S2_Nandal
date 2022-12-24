@@ -16,6 +16,13 @@ public class ReviewPhotoService {
 		Connection conn = JdbcTemplate.getConnection();
 		int result = 0;
 		result = dao.insert(conn, vo);
+		if(result > 0) {
+			JdbcTemplate.commit(conn); // 커밋
+			System.out.println("커밋성공");
+		} else {
+			JdbcTemplate.rollback(conn); // 롤백
+			System.out.println("커밋실패");
+		}
 		System.out.println(">> ReviewPhotoService insert return :" + result);
 		return result;
 	}
