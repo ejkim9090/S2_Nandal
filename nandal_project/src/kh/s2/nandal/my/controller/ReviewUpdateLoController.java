@@ -55,6 +55,7 @@ public class ReviewUpdateLoController extends HttpServlet {
 		
 		ReviewService service = new ReviewService();
 		ReviewVo vo = service.selectOne(reviewCode);
+		vo.setReviewCont(vo.getReviewCont().replaceAll("%%", "\n"));
 		String result = gson.toJson(vo);
 		
 		out.println(result);//json형태로 넣은 데이터 추가\
