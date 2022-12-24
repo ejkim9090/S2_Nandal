@@ -27,8 +27,9 @@
 	    $(".my_nav").on("click",myNavHandler);
 	    myNavSelectList();
 	    $("form.model_form.a").submit(reviewWriteFormHandler);
+	    $("input[type=file][multiple=multiple]").on("change",FileNumCheck);
 	});
-	function reviewWriteFormHandler() {
+	function reviewWriteFormHandler() { // 리뷰 평점 필수 선택 확인
 		var $kindCheck = $('.form_cont.a > div > input:radio[name=kind]').is(':checked');
 		var $facilityCheck = $('.form_cont.a > div > input:radio[name=facility]').is(':checked');
 		var $componentCheck = $('.form_cont.a > div > input:radio[name=component]').is(':checked');
@@ -37,6 +38,16 @@
 			alert("필수사항을 체크해주세요.");
 			return false;
 		}
+	}
+	function FileNumCheck(){ //리뷰 첨부파일 개수 제한
+	    var maxFileCnt = 5;   // 첨부파일 최대 개수
+	    var curFileCnt = $(this).get(0).files.length;  // 현재 선택된 첨부파일 개수
+		console.log(curFileCnt);
+	    // 첨부파일 개수 확인
+	    if (curFileCnt > maxFileCnt) {
+	        alert("사진은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.");
+	        $(this).get(0).value = ""; //5개 초과시 선택된 파일 다 취소
+	    } 
 	}
 	function applyCancleHandler() {
 	    var $caCode = $(this).siblings("input[type=hidden]").val();
