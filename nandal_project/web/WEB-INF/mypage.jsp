@@ -239,7 +239,7 @@
                         <h3>리뷰 작성</h3>
                         <textarea name="reviewCont"></textarea>
                         <h3>사진 첨부</h3>
-                        <input type="file" name="fileUpload" multiple="multiple">
+                        <input type="file" name="fileUpload" multiple="multiple" accept="image/*">
                         <p class="f_10">*사진은 최대 5개까지 등록가능합니다.</p>
                         <h3>평점 및 추천</h3>
                         <h4>친절도</h4>
