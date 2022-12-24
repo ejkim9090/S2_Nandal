@@ -52,6 +52,8 @@
 	function reviewUpdateMadalShowHandler() {
 	    $(".modal.c").show();
 	    var $reviewCode = $(this).siblings("input[type=hidden]").val(); //수정 클릭한 목록의 리뷰코드
+	    $("#review_code_update").val($reviewCode); //해당 몰당창에 input[type=hidden]에 해당 reviewCode로 수정
+	    $(".form_cont.c > input[type=file][multiple=multiple]").get(0).value = ""; //다른 리뷰 수정 후 다른 리뷰 수정 클릭 시 파일선택이 남아있어서 제거
 	    $.ajax({
       		url : "<%=request.getContextPath()%>/reviewUpdate.lo",
       		type : "post",
@@ -60,11 +62,11 @@
       		success: function(data){ 
       					if(data != null) {
       						$("div.form_cont.c > textarea").get(0).value = data.reviewCont;
-      						$("div.form_cont.c > div > input[name=kind]").get(data.reviewKind-1).checked = true;
-      						$("div.form_cont.c > div > input[name=component]").get(data.reviewComponent-1).checked = true;
-      						$("div.form_cont.c > div > input[name=facility]").get(data.reviewFacility-1).checked = true;
-      						$("div.form_cont.c > div > input[name=level]").get(data.reviewLevel-1).checked = true;
-      						$("div.form_cont.c > div > input[name=group]").get(data.reviewGroup-1).checked = true;
+      						$("div.form_cont.c > div > input[name=kind2]").get(data.reviewKind-1).checked = true;
+      						$("div.form_cont.c > div > input[name=component2]").get(data.reviewComponent-1).checked = true;
+      						$("div.form_cont.c > div > input[name=facility2]").get(data.reviewFacility-1).checked = true;
+      						$("div.form_cont.c > div > input[name=level2]").get(data.reviewLevel-1).checked = true;
+      						$("div.form_cont.c > div > input[name=group2]").get(data.reviewGroup).checked = true;
       						console.log(data.reviewCont);
       						console.log(data.reviewGrade);
       						console.log(data.reviewKind);
@@ -83,6 +85,32 @@
       							+"error"+error);
       				}
       	});
+	}
+	function reviewDeleteHandler() {
+	    var $reviewCode = $(this).siblings("input[type=hidden]").val();
+	    console.log($reviewCode);
+	    
+	    $.ajax({
+      		url : "<%=request.getContextPath()%>/reviewDelete.lo",
+      		type : "post",
+      		data: "reviewCode=" + $reviewCode,
+      		success: function(data){ 
+      					if(data == 1) {
+							alert("해당 리뷰가 삭제되었습니다.")
+						} else {
+							alert("리뷰 삭제가 실패했습니다.")
+						}
+					    myNavSelectList();
+      				 },
+      		error : function(request, status, error){
+      					console.log(request);	
+      					console.log(status);	
+      					console.log(error);	
+      					alert("code:"+request.status+"\n"
+      							+"message"+request.responseText+"\n"
+      							+"error"+error);
+      				}
+      	});  
 	}
 	function applyCancleHandler() {
 	    var $caCode = $(this).siblings("input[type=hidden]").val();
@@ -226,7 +254,7 @@
 					                                "<div>"+
 					                                	"<input type='hidden' name='reviewCode' value='"+data[i].reviewCode+"'>"+
 					                                    "<button class='c_line c_color myList_btn model_c_show'>수정</button>"+
-					                                    "<button class='c_line c_color myList_btn'>삭제</button>"+
+					                                    "<button class='c_line c_color myList_btn delete'>삭제</button>"+
 					                                "</div>"+
 					                            "</div>"+
 					                        "</div>";
@@ -234,6 +262,7 @@
      						$listWrap.html(addHtml);
      					    $(".reCont_text").on("click",reviewContHandler);
      					    $(".model_c_show").on("click",reviewUpdateMadalShowHandler);
+     					    $("button.delete").on("click",reviewDeleteHandler);
      					} else {
      						$buyTime.html("<div class='apply_list'><h2>작성하신 리뷰 내역이 없습니다.</h2></div>");
      					}
@@ -391,54 +420,55 @@
     </div>
     <div class="modal c">
             <div class="modal_content c">
-                <form class="model_form c">
+                <form class="model_form c" action="${pageContext.request.contextPath}/reviewUpdate.do" method="post" enctype="multipart/form-data">
                     <div class="form_cont c">
                         <h2>리뷰 수정</h2>
+                        <input id="review_code_update" type="hidden" name="reviewCode2" value="0">
                         <h3>리뷰 작성</h3>
-                        <textarea name="reviewCont"></textarea>
+                        <textarea name="reviewCont2"></textarea>
                         <h3>사진 첨부</h3>
-                        <input type="file">
+                        <input type="file" name="fileUpload2" multiple="multiple" accept="image/*">
                         <p class="f_10">*사진은 최대 5개까지 등록가능합니다.</p>
                         <h3>평점 및 추천</h3>
                         <h4>친절도</h4>
                         <div>
-                            <input type="radio" name="kind" id="kind1" value="1"><label class="f_14" for="kind1">불만족</label>
-                            <input type="radio" name="kind" id="kind2" value="2"><label class="f_14" for="kind2">약간 불만족</label>
-                            <input type="radio" name="kind" id="kind3" value="3"><label class="f_14" for="kind3">보통</label>
-                            <input type="radio" name="kind" id="kind4" value="4"><label class="f_14" for="kind4">약간 만족</label>
-                            <input type="radio" name="kind" id="kind5" value="5"><label class="f_14" for="kind5">만족</label>
+                            <input type="radio" name="kind2" id="kind21" value="1"><label class="f_14" for="kind21">불만족</label>
+                            <input type="radio" name="kind2" id="kind22" value="2"><label class="f_14" for="kind22">약간 불만족</label>
+                            <input type="radio" name="kind2" id="kind23" value="3"><label class="f_14" for="kind23">보통</label>
+                            <input type="radio" name="kind2" id="kind24" value="4"><label class="f_14" for="kind24">약간 만족</label>
+                            <input type="radio" name="kind2" id="kind25" value="5"><label class="f_14" for="kind25">만족</label>
                         </div>
                         <h4>시설</h4>
                         <div>
-                            <input type="radio" name="facility" id="facility1" value="1"><label class="f_14" for="facility1">불만족</label>
-                            <input type="radio" name="facility" id="facility2" value="2"><label class="f_14" for="facility2">약간 불만족</label>
-                            <input type="radio" name="facility" id="facility3" value="3"><label class="f_14" for="facility3">보통</label>
-                            <input type="radio" name="facility" id="facility4" value="4"><label class="f_14" for="facility4">약간 만족</label>
-                            <input type="radio" name="facility" id="facility5" value="5"><label class="f_14" for="facility5">만족</label>
+                            <input type="radio" name="facility2" id="facility21" value="1"><label class="f_14" for="facility21">불만족</label>
+                            <input type="radio" name="facility2" id="facility22" value="2"><label class="f_14" for="facility22">약간 불만족</label>
+                            <input type="radio" name="facility2" id="facility23" value="3"><label class="f_14" for="facility23">보통</label>
+                            <input type="radio" name="facility2" id="facility24" value="4"><label class="f_14" for="facility24">약간 만족</label>
+                            <input type="radio" name="facility2" id="facility25" value="5"><label class="f_14" for="facility25">만족</label>
                         </div>
                         <h4>수업구성</h4>
                         <div>
-                            <input type="radio" name="component" id="component1" value="1"><label class="f_14" for="component1">불만족</label>
-                            <input type="radio" name="component" id="component2" value="2"><label class="f_14" for="component2">약간 불만족</label>
-                            <input type="radio" name="component" id="component3" value="3"><label class="f_14" for="component3">보통</label>
-                            <input type="radio" name="component" id="component4" value="4"><label class="f_14" for="component4">약간 만족</label>
-                            <input type="radio" name="component" id="component5" value="5"><label class="f_14" for="component5">만족</label>
+                            <input type="radio" name="component2" id="component21" value="1"><label class="f_14" for="component21">불만족</label>
+                            <input type="radio" name="component2" id="component22" value="2"><label class="f_14" for="component22">약간 불만족</label>
+                            <input type="radio" name="component2" id="component23" value="3"><label class="f_14" for="component23">보통</label>
+                            <input type="radio" name="component2" id="component24" value="4"><label class="f_14" for="component24">약간 만족</label>
+                            <input type="radio" name="component2" id="component25" value="5"><label class="f_14" for="component25">만족</label>
                         </div>
                         <h4>난이도 안내</h4>
                         <div>
-                            <input type="radio" name="level" id="level1" value="1"><label class="f_14" for="level1">불만족</label>
-                            <input type="radio" name="level" id="level2" value="2"><label class="f_14" for="level2">약간 불만족</label>
-                            <input type="radio" name="level" id="level3" value="3"><label class="f_14" for="level3">보통</label>
-                            <input type="radio" name="level" id="level4" value="4"><label class="f_14" for="level4">약간 만족</label>
-                            <input type="radio" name="level" id="level5" value="5"><label class="f_14" for="level5">만족</label>
+                            <input type="radio" name="level2" id="level21" value="1"><label class="f_14" for="level21">불만족</label>
+                            <input type="radio" name="level2" id="level22" value="2"><label class="f_14" for="level22">약간 불만족</label>
+                            <input type="radio" name="level2" id="level23" value="3"><label class="f_14" for="level23">보통</label>
+                            <input type="radio" name="level2" id="level24" value="4"><label class="f_14" for="level24">약간 만족</label>
+                            <input type="radio" name="level2" id="level25" value="5"><label class="f_14" for="level25">만족</label>
                         </div>
                         <h4>유형 추천</h4>
                         <div>
-                            <input type="radio" name="group" value="0" style="display:none;" checked="checked">
-                            <input type="radio" name="group" id="group1" value="1"><label class="f_14" for="group1">혼자</label>
-                            <input type="radio" name="group" id="group2" value="2"><label class="f_14" for="group2">친구</label>
-                            <input type="radio" name="group" id="group3" value="3"><label class="f_14" for="group3">연인</label>
-                            <input type="radio" name="group" id="group4" value="4"><label class="f_14" for="group4">가족</label>
+                            <input type="radio" name="group2" value="0" style="display:none;" checked="checked">
+                            <input type="radio" name="group2" id="group21" value="1"><label class="f_14" for="group21">혼자</label>
+                            <input type="radio" name="group2" id="group22" value="2"><label class="f_14" for="group22">친구</label>
+                            <input type="radio" name="group2" id="group23" value="3"><label class="f_14" for="group23">연인</label>
+                            <input type="radio" name="group2" id="group24" value="4"><label class="f_14" for="group24">가족</label>
                         </div>
                     </div>
                     <div class="model_btn_wrap">
