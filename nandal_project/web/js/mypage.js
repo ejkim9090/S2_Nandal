@@ -27,6 +27,8 @@ function reviewContHandler() {
 }
 function reviewWriteMadalShowHandler() {
     $(".modal.a").show();
+    var $reviewCode = $(this).siblings("input[type=hidden]").val();
+    $("#review_code").val($reviewCode);
 }
 function memberUpdateMadalShowHandler() {
     $(".modal.b").show();

@@ -236,13 +236,14 @@
                 <form class="model_form a" action="${pageContext.request.contextPath}/review.do" method="post" enctype="multipart/form-data">
                     <div class="form_cont a">
                         <h2>리뷰 등록</h2>
+                        <input id="review_code" type="hidden" name="reviewCode" value="0">
                         <h3>리뷰 작성</h3>
                         <textarea name="reviewCont"></textarea>
                         <h3>사진 첨부</h3>
                         <input type="file" name="fileUpload" multiple="multiple" accept="image/*">
                         <p class="f_10">*사진은 최대 5개까지 등록가능합니다.</p>
                         <h3>평점 및 추천</h3>
-                        <h4>친절도</h4>
+                        <h4>친절도(필수)</h4>
                         <div>
                             <input type="radio" name="kind" id="kind1" value="1"><label class="f_14" for="kind1">불만족</label>
                             <input type="radio" name="kind" id="kind2" value="2"><label class="f_14" for="kind2">약간 불만족</label>
@@ -250,7 +251,7 @@
                             <input type="radio" name="kind" id="kind4" value="4"><label class="f_14" for="kind4">약간 만족</label>
                             <input type="radio" name="kind" id="kind5" value="5"><label class="f_14" for="kind5">만족</label>
                         </div>
-                        <h4>시설</h4>
+                        <h4>시설(필수)</h4>
                         <div>
                             <input type="radio" name="facility" id="facility1" value="1"><label class="f_14" for="facility1">불만족</label>
                             <input type="radio" name="facility" id="facility2" value="2"><label class="f_14" for="facility2">약간 불만족</label>
@@ -258,7 +259,7 @@
                             <input type="radio" name="facility" id="facility4" value="4"><label class="f_14" for="facility4">약간 만족</label>
                             <input type="radio" name="facility" id="facility5" value="5"><label class="f_14" for="facility5">만족</label>
                         </div>
-                        <h4>수업구성</h4>
+                        <h4>수업구성(필수)</h4>
                         <div>
                             <input type="radio" name="component" id="component1" value="1"><label class="f_14" for="component1">불만족</label>
                             <input type="radio" name="component" id="component2" value="2"><label class="f_14" for="component2">약간 불만족</label>
@@ -266,7 +267,7 @@
                             <input type="radio" name="component" id="component4" value="4"><label class="f_14" for="component4">약간 만족</label>
                             <input type="radio" name="component" id="component5" value="5"><label class="f_14" for="component5">만족</label>
                         </div>
-                        <h4>난이도 안내</h4>
+                        <h4>난이도 안내(필수)</h4>
                         <div>
                             <input type="radio" name="level" id="level1" value="1"><label class="f_14" for="level1">불만족</label>
                             <input type="radio" name="level" id="level2" value="2"><label class="f_14" for="level2">약간 불만족</label>
@@ -274,8 +275,9 @@
                             <input type="radio" name="level" id="level4" value="4"><label class="f_14" for="level4">약간 만족</label>
                             <input type="radio" name="level" id="level5" value="5"><label class="f_14" for="level5">만족</label>
                         </div>
-                        <h4>유형 추천</h4>
+                        <h4>유형 추천(선택)</h4>
                         <div>
+                            <input type="radio" name="group" value="0" style="display:none;" checked="checked">
                             <input type="radio" name="group" id="group1" value="1"><label class="f_14" for="group1">혼자</label>
                             <input type="radio" name="group" id="group2" value="2"><label class="f_14" for="group2">친구</label>
                             <input type="radio" name="group" id="group3" value="3"><label class="f_14" for="group3">연인</label>
