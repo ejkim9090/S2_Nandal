@@ -54,11 +54,11 @@ public class ClassApplyService {
 		return result;
 	}
 //	update
-	public int update(ClassApplyVo vo, int caCode) {
+	public int update(int caCode) {
 		System.out.println(">> ClassApplyService update param caCode :" + caCode);
 		Connection conn = JdbcTemplate.getConnection();
 		int result = 0;
-		result = dao.update(conn, vo, caCode);
+		result = dao.update(conn, caCode);
 		
 		JdbcTemplate.close(conn);
 		System.out.println(">> ClassApplyService update return :" + result);

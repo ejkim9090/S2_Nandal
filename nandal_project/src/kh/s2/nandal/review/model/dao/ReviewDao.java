@@ -72,12 +72,12 @@ public class ReviewDao {
 		System.out.println(">>> ReviewDao delete param reviewCode : " + reviewCode);
 		int result = 0;
 		
-		String sql = "delete from review where review_code=?";
+		String sql = "delete from REVIEW where REVIEW_CODE = ?";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reviewCode);
-			//TODO
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

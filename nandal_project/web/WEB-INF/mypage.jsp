@@ -25,7 +25,34 @@
 	<script>
 	$(function(){
 	    $(".my_nav").on("click",myNavHandler);
+	    myNavSelectList();
 	});
+	function applyCancleHandler() {
+	    var $caCode = $(this).siblings("input[type=hidden]").val();
+	    console.log($caCode);
+	    
+	    $.ajax({
+      		url : "<%=request.getContextPath()%>/applyCancel.lo",
+      		type : "post",
+      		data: "caCode=" + $caCode,
+      		success: function(data){ 
+      					if(data == 1) {
+							alert("신청한 클래스가 취소되었습니다.")
+						} else {
+							alert("취소 신청이 실패했습니다.")
+						}
+					    myNavSelectList();
+      				 },
+      		error : function(request, status, error){
+      					console.log(request);	
+      					console.log(status);	
+      					console.log(error);	
+      					alert("code:"+request.status+"\n"
+      							+"message"+request.responseText+"\n"
+      							+"error"+error);
+      				}
+      	});  
+	}
 	function myNavHandler() {
 	    $(".my_nav").not($(this)).removeClass("my_nav_select");
 	    $(this).addClass("my_nav_select");
@@ -68,6 +95,7 @@
      						}
      						$listWrap.html(addHtml);
      					    $(".model_a_show").on("click",reviewWriteMadalShowHandler);
+     					    $("button.cancle").on("click",applyCancleHandler);
      					} else {
      						$buyTime.html("<div class='apply_list'><h2>클래스 신청 내역이 없습니다.</h2></div>");
      					}
@@ -192,70 +220,6 @@
                         <h3 id="nav_text">신청 내역</h3>
                     </div>
                     <div id="apply_list_wrap">
-                        <div class='apply_list'> <!--신청 내역 칸-->
-                            <div class='myList_left'>
-                                <h2>클래스명</h2>
-                                <div><img class='my_img' src='<%=request.getContextPath()%>/images/calendar.png'><p class='f_16'>2022-11-13</p><img class='my_img' src='<%=request.getContextPath()%>/images/clock.png'><p class='f_16'> 13:00~14:30</p></div>
-                                <div><p>1명</p><p>20,000원</p></div>
-                            </div>
-                            <div class='myList_right'>
-                                <p>2022-12-13 14:12</p>
-                                <div>
-                                    <input type='hidden' name='caCode' value='21242'>
-                                    <button class='c_line c_color myList_btn model_a_show'>리뷰 등록</button>
-                                    <button class='c_line c_color myList_btn cancle'>취소 신청</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="apply_list"> <!--취소 내역 칸-->
-                            <div class="myList_left">
-                                <h2>클래스명</h2>
-                                <div><img class="my_img" src="<%=request.getContextPath()%>/images/calendar.png"><p class="f_16">2022-11-13</p><img class="my_img" src="<%=request.getContextPath()%>/images/clock.png"><p class="f_16"> 13:00~14:30</p></div>
-                                <div><p>1명</p><p>20,000원</p></div>
-                            </div>
-                            <div class="myList_right">
-                                <p>2022-12-13 14:12</p>
-                                <div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="apply_list"> <!--리뷰 내용 칸-->
-                            <div class="myList_left">
-                                <h2>클래스명</h2>
-                                <div><img class="my_img" src="<%=request.getContextPath()%>/images/review_star_full.png"><p class="f_16">5.0</p><p class="f_16">가족</p></div>
-                                <div class="reCont">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Proin eget magna id ipsum eleifend cursus sit amet nec lectus. Nunc quis lacus magna. Aliquam blandit, sapien ut viverra fermentum, elit tortor ornare nisi, in luctus sem massa pulvinar turpis. Cras tincidunt dictum urna ut ultricies. Nullam diam nibh, pellentesque non laoreet ut, bibendum nec mauris. Maecenas pulvinar porttitor laoreet. Vivamus bibendum purus nisl, eget aliquam lectus. Maecenas justo libero, euismod sit amet suscipit eu, vulputate eget neque. Aliquam quam est, blandit nec iaculis non, suscipit vel nunc. Proin et odio aliquam erat pharetra accumsan et quis neque.</p>
-                                    <div>
-                                        <img class="reCont_img" src="<%=request.getContextPath()%>/images/calendar.png">
-                                    </div>
-                                </div>
-                                <div class="reCont_text"><p>더보기</p><img class="my_img reCont_arrow" src="<%=request.getContextPath()%>/images/review_arrow.png"></div>
-                            </div>
-                            <div class="myList_right">
-                                <p>2022-12-13 14:12</p>
-                                <div>
-                                    <button class="c_line c_color myList_btn model_c_show">수정</button>
-                                    <button class="c_line c_color myList_btn">삭제</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='apply_list'> <!--리뷰 내용 칸-->
-                            <div class='myList_left'>
-                                <h2>클래스명</h2>
-                                <div><img class='my_img' src='<%=request.getContextPath()%>/images/review_star_full.png'><p class='f_16'>5.0</p><p class='f_16'>가족</p></div>
-                                <div class='reCont'>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna libero. Sed nec pharetra nunc. Proin eget magna id ipsum eleifend cursus sit amet nec lectus. Nunc quis lacus magna. Aliquam blandit, sapien ut viverra fermentum, elit tortor ornare nisi, in luctus sem massa pulvinar turpis. Cras tincidunt dictum urna ut ultricies. Nullam diam nibh, pellentesque non laoreet ut, bibendum nec mauris. Maecenas pulvinar porttitor laoreet. Vivamus bibendum purus nisl, eget aliquam lectus. Maecenas justo libero, euismod sit amet suscipit eu, vulputate eget neque. Aliquam quam est, blandit nec iaculis non, suscipit vel nunc. Proin et odio aliquam erat pharetra accumsan et quis neque.</p>
-                                </div>
-                                <div class='reCont_text'><p>더보기</p><img class='my_img reCont_arrow' src='<%=request.getContextPath()%>/images/review_arrow.png'></div>
-                            </div>
-                            <div class='myList_right'>
-                                <p>2022-12-13 14:12</p>
-                                <div>
-                                    <button class='c_line c_color myList_btn model_c_show'>수정</button>
-                                    <button class='c_line c_color myList_btn'>삭제</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

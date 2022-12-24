@@ -5,17 +5,37 @@ import java.util.List;
 
 import common.jdbc.JdbcTemplate;
 import kh.s2.nandal.apply.model.dao.ApplyCancelDao;
+import kh.s2.nandal.apply.model.dao.ClassApplyDao;
 import kh.s2.nandal.apply.model.vo.ApplyCancelVo;
+import kh.s2.nandal.review.model.dao.ReviewDao;
+import kh.s2.nandal.review.model.dao.ReviewPhotoDao;
 
 public class ApplyCancelService {
 	private ApplyCancelDao dao = new ApplyCancelDao();
+	private ClassApplyDao caDao = new ClassApplyDao();
+	private ReviewDao reDao = new ReviewDao();
+	private ReviewPhotoDao rpDao = new ReviewPhotoDao();
+	
 	// 최소 5개 CRUD
 //	insert
 	public int insert(int acCode) {
 		System.out.println(">> ApplyCancelService insert param acCode :" + acCode);
 		Connection conn = JdbcTemplate.getConnection();
 		int result = 0;
-		result = dao.insert(conn, acCode);
+		if(caDao.update(conn, acCode) > 0) {
+			if(dao.insert(conn, acCode) > 0) {
+				if(rpDao.delete(conn, acCode) > 0) {
+					result = reDao.delete(conn, acCode);
+				}
+			}
+		}
+		if(result > 0) {
+			JdbcTemplate.commit(conn); // 커밋
+			System.out.println("커밋성공");
+		} else {
+			JdbcTemplate.rollback(conn); // 롤백
+			System.out.println("커밋실패");
+		}
 		System.out.println(">> ApplyCancelService insert return :" + result);
 		return result;
 	}

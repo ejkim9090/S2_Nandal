@@ -57,7 +57,7 @@ public class ReviewPhotoDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reviewCode);
-			//TODO
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

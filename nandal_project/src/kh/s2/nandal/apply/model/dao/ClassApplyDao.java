@@ -40,17 +40,16 @@ public class ClassApplyDao {
 		return result;
 	}
 //	update
-	public int update(Connection conn, ClassApplyVo vo, int caCode) {
-		System.out.println(">>> ClassApplyService update param vo : " + vo);
+	public int update(Connection conn, int caCode) {
 		System.out.println(">>> ClassApplyService update param caCode : " + caCode);
 		int result = 0;
 		
-		String sql = "update class_apply set //TODO where ca_code=?";
+		String sql = "update class_apply set CA_CANCEL = 'Y' where ca_code = ?";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, caCode);
 			result = pstmt.executeUpdate();
-			//TODO
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -59,6 +58,7 @@ public class ClassApplyDao {
 		System.out.println(">>> ClassApplyService update return : " + result);
 		return result;
 	}
+	
 //	delete
 	public int delete(Connection conn, int caCode) {
 		System.out.println(">>> ClassApplyService delete param caCode : " + caCode);
