@@ -26,7 +26,18 @@
 	$(function(){
 	    $(".my_nav").on("click",myNavHandler);
 	    myNavSelectList();
+	    $("form.model_form.a").submit(reviewWriteFormHandler);
 	});
+	function reviewWriteFormHandler() {
+		var $kindCheck = $('.form_cont.a > div > input:radio[name=kind]').is(':checked');
+		var $facilityCheck = $('.form_cont.a > div > input:radio[name=facility]').is(':checked');
+		var $componentCheck = $('.form_cont.a > div > input:radio[name=component]').is(':checked');
+		var $levelCheck = $('.form_cont.a > div > input:radio[name=level]').is(':checked');
+		if(!$kindCheck || !$facilityCheck || !$componentCheck || !$levelCheck) {
+			alert("필수사항을 체크해주세요.");
+			return false;
+		}
+	}
 	function applyCancleHandler() {
 	    var $caCode = $(this).siblings("input[type=hidden]").val();
 	    console.log($caCode);
