@@ -38,7 +38,13 @@ public class ReviewService {
 			Connection conn = JdbcTemplate.getConnection();
 			int result = 0;
 			result = dao.update(conn, vo, reviewCode);
-			
+			if(result > 0) {
+				JdbcTemplate.commit(conn); // 커밋
+				System.out.println("커밋성공");
+			} else {
+				JdbcTemplate.rollback(conn); // 롤백
+				System.out.println("커밋실패");
+			}
 			JdbcTemplate.close(conn);
 			System.out.println(">> ReviewService update return :" + result);
 			return result;

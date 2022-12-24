@@ -46,7 +46,8 @@ public class ReviewDao {
 		System.out.println(">>> ReviewDao update param reviewCode : " + reviewCode);
 		int result = 0;
 		
-		String sql = "update review set REVIEW_TIME=CURRENT_TIMESTAMP, REVIEW_CONT=?, REVIEW_GRADE=?, REVIEW_KIND=?, REVIEW_COMPONENT=?, REVIEW_FACILITY=?, REVIEW_LEVEL=?, REVIEW_GROUP=? where review_code=?";
+		String sql = "update review set REVIEW_TIME=CURRENT_TIMESTAMP, REVIEW_CONT=?, REVIEW_GRADE=?, REVIEW_KIND=?, REVIEW_COMPONENT=?,"
+						+"REVIEW_FACILITY=?, REVIEW_LEVEL=?, REVIEW_GROUP=? where review_code=?";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -57,8 +58,8 @@ public class ReviewDao {
 			pstmt.setInt(5, vo.getReviewFacility());
 			pstmt.setInt(6, vo.getReviewLevel());
 			pstmt.setInt(7, vo.getReviewGroup());
+			pstmt.setInt(8, reviewCode);
 			result = pstmt.executeUpdate();
-			//TODO
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
