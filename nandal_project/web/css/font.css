@@ -1,9 +1,16 @@
+.f_10 {
+    font-size: 10px;
+}
 .f_12 {
     font-size: 12px;
 }
 .f_12_b {
     font-weight: 800;
     font-size: 12px;
+}
+.f_24_b {
+    font-weight: 800;
+    font-size: 24px;
 }
 .f_20_b {
     font-weight: 800;
