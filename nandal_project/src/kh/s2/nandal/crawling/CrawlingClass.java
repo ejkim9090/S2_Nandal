@@ -240,14 +240,14 @@ public class CrawlingClass {
 	        	if(i == 0) {
 	        		//class 테이블에 데이터 insert
 	        		int classLevel = (int)(Math.random()*3) + 1;
-	        		String classImg = "./images/class/"+fileName+".jpg";
+	        		String classImg = "/images/class/"+fileName+".jpg";
 	        		dto = new ClassVo(classCode,  categoryCode, className, classImg, classIntro,
 	        			 classCur, classHost, classAlltime, classPrd, areaCode,
 	        			 classAddress, classPrice, classLevel, classMin, classMax);
 	        		svc.insertClass(dto);
 	        	} else {
 	        		//class_photo 테이블에 데이터 insert
-	        		String cpRoute = "./images/class/"+fileName+".jpg";
+	        		String cpRoute = "/images/class/"+fileName+".jpg";
 	        		ClassPhotoVo cpDto = new ClassPhotoVo(classCode, cpRoute, 0);
 	        		svc.insertClassPhoto(cpDto);
 	        	}
@@ -272,7 +272,7 @@ public class CrawlingClass {
 	        	svc.getImageUrl(classImgUrl2, fileName);
 
 	        	//class_photo 테이블에 데이터 insert
-	        	String cpRoute = "./images/class/"+fileName+".jpg";
+	        	String cpRoute = "/images/class/"+fileName+".jpg";
 	    		ClassPhotoVo cpDto = new ClassPhotoVo(classCode, cpRoute, 1);
 	    		svc.insertClassPhoto(cpDto);
 			} catch (/*IO*/Exception e) {
@@ -468,26 +468,26 @@ public class CrawlingClass {
 					if(i == 1) {
 						System.out.println("--리뷰 2개일때 첫 리뷰한쪽에 사진2개--");
 						rfileName = classCode + String.valueOf(i);
-						rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
+						rpVo.setRpRoute("/images/review/"+rfileName+".jpg");
 						rpSvc.insert(rpVo);
 						System.out.println(rpVo.toString());
 
 						rfileName = classCode + String.valueOf(i+1);
-						rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
+						rpVo.setRpRoute("/images/review/"+rfileName+".jpg");
 						rpSvc.insert(rpVo);
 						System.out.println(rpVo.toString());
 					} 
 					if(i == 2) {
 						System.out.println("--리뷰 2개일때 두번째 리뷰한쪽에 사진1개--");
 						rfileName = classCode + String.valueOf(i+1);
-						rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
+						rpVo.setRpRoute("/images/review/"+rfileName+".jpg");
 						rpSvc.insert(rpVo);
 						System.out.println(rpVo.toString());
 					}
 				} else {
 					System.out.println("--리뷰 3개일때 각 사진 한개씩--");
 					rfileName = classCode + String.valueOf(i);
-					rpVo.setRpRoute("./images/review/"+rfileName+".jpg");
+					rpVo.setRpRoute("/images/review/"+rfileName+".jpg");
 					rpSvc.insert(rpVo);
 					System.out.println(rpVo.toString());
 				}
