@@ -112,7 +112,7 @@
      							
      							addHtml += "<div class='apply_list'>"+
 					                            "<div class='myList_left'>"+
-					                                "<h3>"+data[i].className+"</h3>"+
+					                                "<a href='/nandal/info/"+data[i].classCode+"'><h3>"+data[i].className+"</h3></a>"+
 					                                "<div><img class='my_img' src='<%=request.getContextPath()%>/images/calendar.png'><p class='f_16'>"+data[i].caDate+"</p><img class='my_img' src='<%=request.getContextPath()%>/images/clock.png'><p class='f_16'>"+data[i].csStime+"~"+data[i].csFtime+"</p><img class='my_img' src='<%=request.getContextPath()%>/images/option.png'><p class='f_16'>"
 					                                +data[i].coName+"</p></div>"+
 					                                "<div><p>"+data[i].caTotal+"명</p><p>"+((data[i].classPrice+data[i].coPrice)*data[i].caTotal)+"원</p></div>"+
@@ -138,7 +138,7 @@
      						for(var i = 0; i < data.length; i++) {
      							addHtml += "<div class='apply_list'>"+
 					                            "<div class='myList_left'>"+
-					                                "<h3>"+data[i].className+"</h3>"+
+					                                "<a href='/nandal/info/"+data[i].classCode+"'><h3>"+data[i].className+"</h3></a>"+
 					                                "<div><img class='my_img' src='<%=request.getContextPath()%>/images/calendar.png'><p class='f_16'>"+data[i].caDate+"</p><img class='my_img' src='<%=request.getContextPath()%>/images/clock.png'><p class='f_16'>"+data[i].csStime+"~"+data[i].csFtime+"</p><img class='my_img' src='<%=request.getContextPath()%>/images/option.png'><p class='f_16'>"
 					                                +data[i].coName+"</p></div>"+
 					                                "<div><p>"+data[i].caTotal+"명</p><p>"+((data[i].classPrice+data[i].coPrice)*data[i].caTotal)+"원</p></div>"+

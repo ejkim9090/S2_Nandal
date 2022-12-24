@@ -128,7 +128,7 @@ public class ClassApplyDao {
 				do {
 					MyApplyVo vo = new MyApplyVo();
 					vo.setCaCode(rs.getInt("CA_CODE"));
-					vo.setClasscode(rs.getInt("CLASS_CODE"));
+					vo.setClassCode(rs.getInt("CLASS_CODE"));
 					vo.setClassName(rs.getString("CLASS_NAME"));
 					vo.setClassPrice(rs.getInt("CLASS_PRICE"));
 					vo.setCaTotal(rs.getInt("CA_TOTAL"));

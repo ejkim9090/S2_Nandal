@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 public class MyApplyVo {
 	private int caCode;
-	private int classcode;
+	private int classCode;
 	private String className;
 	private int classPrice;
 	private int caTotal;
@@ -19,7 +19,7 @@ public class MyApplyVo {
 	private int reviewCheck; //해당 apply에 리뷰 있는지 여부 체크
 	@Override
 	public String toString() {
-		return "MyApplyVo [caCode=" + caCode + ", classcode=" + classcode + ", className=" + className + ", classPrice="
+		return "MyApplyVo [caCode=" + caCode + ", classCode=" + classCode + ", className=" + className + ", classPrice="
 				+ classPrice + ", caTotal=" + caTotal + ", caDate=" + caDate + ", caTime=" + caTime + ", coCode="
 				+ coCode + ", coName=" + coName + ", coPrice=" + coPrice + ", csStime=" + csStime + ", csFtime="
 				+ csFtime + ", reviewCheck=" + reviewCheck + "]";
@@ -30,11 +30,11 @@ public class MyApplyVo {
 	public void setCaCode(int caCode) {
 		this.caCode = caCode;
 	}
-	public int getClasscode() {
-		return classcode;
+	public int getClassCode() {
+		return classCode;
 	}
-	public void setClasscode(int classcode) {
-		this.classcode = classcode;
+	public void setClassCode(int classCode) {
+		this.classCode = classCode;
 	}
 	public String getClassName() {
 		return className;

@@ -95,11 +95,11 @@ public class ClassApplyService {
 		for(int i = 0; i < volist.size(); i++) {
 			//옵션 이름,가격 가져오기
 			if(volist.get(i).getCoCode() != 0) {
-				ClassOptionVo coVo = coDao.MyoptionOne(conn, volist.get(i).getCoCode(), volist.get(i).getClasscode()); 
+				ClassOptionVo coVo = coDao.MyoptionOne(conn, volist.get(i).getCoCode(), volist.get(i).getClassCode()); 
 				volist.get(i).setCoName(coVo.getCoName());
 				volist.get(i).setCoPrice(coVo.getCoPrice());
 			} else {
-				volist.get(i).setCoName("옵션 없음");
+				volist.get(i).setCoName("옵션 미선택");
 				volist.get(i).setCoPrice(0);
 			}
 			//해당 신청 내역에 작성된 리뷰가 있는지
