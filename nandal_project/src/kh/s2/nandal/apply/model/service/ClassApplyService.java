@@ -10,6 +10,7 @@ import kh.s2.nandal.apply.model.vo.ClassApplyVo;
 import kh.s2.nandal.apply.model.vo.MyApplyVo;
 import kh.s2.nandal.classdata.model.dao.ClassOptionDao;
 import kh.s2.nandal.classdata.model.vo.ClassOptionVo;
+import kh.s2.nandal.review.model.dao.ReviewDao;
 import kh.s2.nandal.review.model.vo.ReviewPhotoVo;
 
 public class ClassApplyService {
@@ -88,8 +89,11 @@ public class ClassApplyService {
 		Connection conn = JdbcTemplate.getConnection();
 		List<MyApplyVo> volist = null;
 		volist = dao.MyApplyList(conn,memberId,check);
+
 		ClassOptionDao coDao = new ClassOptionDao();
+		ReviewDao reDao = new ReviewDao();
 		for(int i = 0; i < volist.size(); i++) {
+			//옵션 이름,가격 가져오기
 			if(volist.get(i).getCoCode() != 0) {
 				ClassOptionVo coVo = coDao.MyoptionOne(conn, volist.get(i).getCoCode(), volist.get(i).getClasscode()); 
 				volist.get(i).setCoName(coVo.getCoName());
@@ -98,7 +102,10 @@ public class ClassApplyService {
 				volist.get(i).setCoName("옵션 없음");
 				volist.get(i).setCoPrice(0);
 			}
+			//해당 신청 내역에 작성된 리뷰가 있는지
+			volist.get(i).setReviewCheck(reDao.ApplyReviewCheck(conn, volist.get(i).getCaCode()));
 		}
+		
 		JdbcTemplate.close(conn);
 		System.out.println(">> ClassApplyService MyApplyList return :" + volist);
 		return volist;

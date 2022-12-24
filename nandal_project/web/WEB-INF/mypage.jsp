@@ -88,7 +88,17 @@
      						let addHtml = "";
      						console.log(data);
      						console.log(data.length);
+     						
      						for(var i = 0; i < data.length; i++) {
+     							let addPhoto = "";
+     							if (data[i].reviewCheck == 0) {
+       								addPhoto = "<button class='c_line c_color myList_btn model_a_show'>리뷰 등록</button>"+
+                                      			"<button class='c_line c_color myList_btn cancle'>취소 신청</button>";
+     							} else {
+     								addPhoto = "<button class='c_line c_color myList_btn model_a_show' style='visibility: hidden;'>리뷰 등록</button>"+
+                        							"<button class='c_line c_color myList_btn cancle'>취소 신청</button>";
+     							}
+     							
      							addHtml += "<div class='apply_list'>"+
 					                            "<div class='myList_left'>"+
 					                                "<h3>"+data[i].className+"</h3>"+
@@ -99,10 +109,7 @@
 					                            "<div class='myList_right'>"+
 					                                "<p>"+data[i].caTime+"</p>"+
 					                                "<div>"+
-					                                    "<input type='hidden' name='caCode' value='"+data[i].caCode+"'>"+
-					                                    "<button class='c_line c_color myList_btn model_a_show'>리뷰 등록</button>"+
-					                                    "<button class='c_line c_color myList_btn cancle'>취소 신청</button>"+
-					                                "</div></div></div>";
+					                                    "<input type='hidden' name='caCode' value='"+data[i].caCode+"'>"+addPhoto+"</div></div></div>";
      						}
      						$listWrap.html(addHtml);
      					    $(".model_a_show").on("click",reviewWriteMadalShowHandler);

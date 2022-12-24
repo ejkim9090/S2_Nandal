@@ -226,4 +226,30 @@ public class ReviewDao {
 		System.out.println(">>> ReviewDao selectOne return : " + vo);
 		return vo;
 	}
+//	selectOne - 해당 클래스 신청에 작성된 리뷰가 있는지 여부
+	public int ApplyReviewCheck(Connection conn, int reviewCode){
+		System.out.println(">>> ReviewDao ApplyReviewCheck param reviewCode : " + reviewCode);
+		int result = 0;
+		
+		String sql = "select count(review_code) as cnt "
+				+ "    from REVIEW "
+				+ "    where REVIEW_CODE = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewCode);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println(">>> ReviewDao ApplyReviewCheck return : " + result);
+		return result;
+	}
 }

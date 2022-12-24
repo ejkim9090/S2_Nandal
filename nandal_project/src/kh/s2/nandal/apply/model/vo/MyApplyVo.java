@@ -16,12 +16,13 @@ public class MyApplyVo {
 	private int coPrice;
 	private String csStime;
 	private String csFtime;
+	private int reviewCheck; //해당 apply에 리뷰 있는지 여부 체크
 	@Override
 	public String toString() {
 		return "MyApplyVo [caCode=" + caCode + ", classcode=" + classcode + ", className=" + className + ", classPrice="
 				+ classPrice + ", caTotal=" + caTotal + ", caDate=" + caDate + ", caTime=" + caTime + ", coCode="
 				+ coCode + ", coName=" + coName + ", coPrice=" + coPrice + ", csStime=" + csStime + ", csFtime="
-				+ csFtime + "]";
+				+ csFtime + ", reviewCheck=" + reviewCheck + "]";
 	}
 	public int getCaCode() {
 		return caCode;
@@ -95,4 +96,11 @@ public class MyApplyVo {
 	public void setCsFtime(String csFtime) {
 		this.csFtime = csFtime;
 	}
+	public int getReviewCheck() {
+		return reviewCheck;
+	}
+	public void setReviewCheck(int reviewCheck) {
+		this.reviewCheck = reviewCheck;
+	}
+	
 }
