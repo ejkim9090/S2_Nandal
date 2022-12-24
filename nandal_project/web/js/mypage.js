@@ -33,9 +33,6 @@ function reviewWriteMadalShowHandler() {
 function memberUpdateMadalShowHandler() {
     $(".modal.b").show();
 }
-function reviewUpdateMadalShowHandler() {
-    $(".modal.c").show();
-}
 function reviewWriteMadalHideHandler() {
     $(this).parents("div.modal").hide();
 }

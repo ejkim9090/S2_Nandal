@@ -49,6 +49,41 @@
 	        $(this).get(0).value = ""; //5개 초과시 선택된 파일 다 취소
 	    } 
 	}
+	function reviewUpdateMadalShowHandler() {
+	    $(".modal.c").show();
+	    var $reviewCode = $(this).siblings("input[type=hidden]").val(); //수정 클릭한 목록의 리뷰코드
+	    $.ajax({
+      		url : "<%=request.getContextPath()%>/reviewUpdate.lo",
+      		type : "post",
+      		data: "reviewCode=" + $reviewCode,
+     	 	dataType : "json", 
+      		success: function(data){ 
+      					if(data != null) {
+      						$("div.form_cont.c > textarea").get(0).value = data.reviewCont;
+      						$("div.form_cont.c > div > input[name=kind]").get(data.reviewKind-1).checked = true;
+      						$("div.form_cont.c > div > input[name=component]").get(data.reviewComponent-1).checked = true;
+      						$("div.form_cont.c > div > input[name=facility]").get(data.reviewFacility-1).checked = true;
+      						$("div.form_cont.c > div > input[name=level]").get(data.reviewLevel-1).checked = true;
+      						$("div.form_cont.c > div > input[name=group]").get(data.reviewGroup-1).checked = true;
+      						console.log(data.reviewCont);
+      						console.log(data.reviewGrade);
+      						console.log(data.reviewKind);
+      						console.log(data.reviewComponent);
+      						console.log(data.reviewFacility);
+      						console.log(data.reviewLevel);
+      						console.log(data.reviewGroup);
+      					}
+      				 },
+      		error : function(request, status, error){
+      					console.log(request);	
+      					console.log(status);	
+      					console.log(error);	
+      					alert("code:"+request.status+"\n"
+      							+"message"+request.responseText+"\n"
+      							+"error"+error);
+      				}
+      	});
+	}
 	function applyCancleHandler() {
 	    var $caCode = $(this).siblings("input[type=hidden]").val();
 	    console.log($caCode);
@@ -189,6 +224,7 @@
 					                            "<div class='myList_right'>"+
 					                                "<p>"+data[i].reviewTime+"</p>"+
 					                                "<div>"+
+					                                	"<input type='hidden' name='reviewCode' value='"+data[i].reviewCode+"'>"+
 					                                    "<button class='c_line c_color myList_btn model_c_show'>수정</button>"+
 					                                    "<button class='c_line c_color myList_btn'>삭제</button>"+
 					                                "</div>"+
@@ -398,6 +434,7 @@
                         </div>
                         <h4>유형 추천</h4>
                         <div>
+                            <input type="radio" name="group" value="0" style="display:none;" checked="checked">
                             <input type="radio" name="group" id="group1" value="1"><label class="f_14" for="group1">혼자</label>
                             <input type="radio" name="group" id="group2" value="2"><label class="f_14" for="group2">친구</label>
                             <input type="radio" name="group" id="group3" value="3"><label class="f_14" for="group3">연인</label>

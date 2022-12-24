@@ -217,6 +217,16 @@ public class ReviewDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reviewCode);
 			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo = new ReviewVo();
+				vo.setReviewCont(rs.getString("REVIEW_CONT"));
+				vo.setReviewComponent(rs.getInt("REVIEW_COMPONENT"));
+				vo.setReviewFacility(rs.getInt("REVIEW_FACILITY"));
+				vo.setReviewGrade(rs.getInt("REVIEW_GRADE"));
+				vo.setReviewGroup(rs.getInt("REVIEW_GROUP"));
+				vo.setReviewKind(rs.getInt("REVIEW_KIND"));
+				vo.setReviewLevel(rs.getInt("REVIEW_LEVEL"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
