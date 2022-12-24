@@ -108,7 +108,7 @@ public class ReviewDao {
 					ClassReviewVo vo = new ClassReviewVo();
 					vo.setReviewCode(rs.getInt("REVIEW_CODE"));
 					vo.setReviewTime(rs.getString("REVIEW_TIME"));
-					vo.setReviewCont(rs.getString("REVIEW_CONT"));
+					vo.setReviewCont(rs.getString("REVIEW_CONT").replaceAll("%%", "<br>"));
 					vo.setReviewGrade(rs.getDouble("REVIEW_GRADE"));
 					vo.setReviewKind(rs.getInt("REVIEW_KIND"));
 					vo.setReviewComponent(rs.getInt("REVIEW_COMPONENT"));
@@ -148,7 +148,7 @@ public class ReviewDao {
 					ClassReviewVo vo = new ClassReviewVo();
 					vo.setReviewCode(rs.getInt("REVIEW_CODE"));
 					vo.setReviewTime(rs.getString("REVIEW_TIME"));
-					vo.setReviewCont(rs.getString("REVIEW_CONT"));
+					vo.setReviewCont(rs.getString("REVIEW_CONT").replaceAll("%%", "<br>"));
 					vo.setReviewGrade(rs.getDouble("REVIEW_GRADE"));
 					vo.setReviewKind(rs.getInt("REVIEW_KIND"));
 					vo.setReviewComponent(rs.getInt("REVIEW_COMPONENT"));
