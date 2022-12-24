@@ -183,6 +183,7 @@
                                 </div>
                                 <div class="top_info_text"><img class="top_info_img" src="${pageContext.request.contextPath}/images/user.png">${classVo.classMin}~${classVo.classMax}</div>
                                 <div class="top_info_text"><img class="top_info_img" src="${pageContext.request.contextPath}/images/marker.png">${sumAddress}</div>
+                                <div class="top_info_text"><img class="top_info_img" src="${pageContext.request.contextPath}/images/price.png">${classVo.classPrice}원</div>
                             </div>
                         </div>
                         <div id="intro"></div>
