@@ -107,7 +107,7 @@ public class InfoController extends HttpServlet {
 			request.getRequestDispatcher(viewPage).forward(request, response);
 		} else {
 			System.out.println("읽을 수 없는 상세 페이지 번호");
-        	request.setAttribute("msg","없는 클래스 번호 입니다. \n 이전페이지로 돌아갑니다.");
+        	request.setAttribute("msg","없는 클래스 번호 입니다. 이전페이지로 돌아갑니다.");
 			request.getRequestDispatcher("/WEB-INF/alert.jsp").forward(request, response);
 		}
 		

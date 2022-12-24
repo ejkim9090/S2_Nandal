@@ -56,7 +56,7 @@ public class ReviewWriteDoController extends HttpServlet {
 		int reviewGroup = 0;
 		double reviewGrade = 0;
 		List<String> rpRouteArr = new ArrayList<String>();
-		
+		String msg = null; //결과 메시지
 		
 		String saveFolder = "/images/review"; //저장하고 싶은 폴더
 		String path = request.getServletContext().getRealPath(saveFolder); //진짜 파일을 저장하는 java/.metadata안에 경로 
@@ -131,7 +131,13 @@ public class ReviewWriteDoController extends HttpServlet {
 			reVo.setReviewKind(reviewKind);
 			reVo.setReviewLevel(reviewLevel);
 			System.out.println("저장될 re:" +reVo.toString());
-			reService.insert(reVo);
+			int result = reService.insert(reVo);
+		
+			if(result > 0) {
+				msg = "리뷰 등록에 성공했습니다.";
+			} else {
+				msg = "리뷰 등록에 실패했습니다.";
+			}
 			
 			System.out.println("rp배열 크기 : "+rpRouteArr.size());
 			if(rpRouteArr.size() > 0) { //저장된 파일 경로가 있는지 확인
@@ -146,8 +152,10 @@ public class ReviewWriteDoController extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		} finally {
+			request.setAttribute("msg", msg);
+			request.getRequestDispatcher("/WEB-INF/alert.jsp").forward(request, response);
 		}
-	
 		
 		//cos라이브러리 파일 업로드 시 - multiple이 지원안됨
 //		MultipartRequest multi = new MultipartRequest(request

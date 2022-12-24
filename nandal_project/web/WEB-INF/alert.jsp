@@ -10,8 +10,8 @@
 </head>
 <body>
 <script>
-	var msg = "<%=request.getAttribute("msg")%>";
-	alert(msg);
+	var message = "<%=request.getAttribute("msg")%>";
+	alert(message);
 	<%-- location.href = "<%=request.getContextPath()%>/main"; --%>
 	history.back();
 </script>
