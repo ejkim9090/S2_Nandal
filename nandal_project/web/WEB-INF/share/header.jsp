@@ -107,36 +107,36 @@
                             </div>
                             <ul class="category_list">
                                 <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/scrollup_max.png"></div>
-                                    <label>요리</label>
+                                    <div><img src="<%=request.getContextPath()%>/images/cooking.png"></div>
+                                    <label class="f_16_b">요리</label>
                                 </li>
                                 <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/scrollup_max.png"></div>
-                                    <label>수공예</label>
+                                    <div><img src="<%=request.getContextPath()%>/images/craft.png"></div>
+                                    <label class="f_16_b">수공예</label>
                                 </li>
                                 <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/scrollup_max.png"></div>
-                                    <label>플라워</label>
+                                    <div><img src="<%=request.getContextPath()%>/images/flower.png"></div>
+                                    <label class="f_16_b">플라워</label>
                                 </li>
                                 <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/scrollup_max.png"></div>
-                                    <label>미술</label>
+                                    <div><img src="<%=request.getContextPath()%>/images/art.png"></div>
+                                    <label class="f_16_b">미술</label>
                                 </li>
                                 <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/scrollup_max.png"></div>
-                                    <label>음악</label>
+                                    <div><img src="<%=request.getContextPath()%>/images/music.png"></div>
+                                    <label class="f_16_b">음악</label>
                                 </li>
                                 <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/scrollup_max.png"></div>
-                                    <label>액티비티</label>
+                                    <div><img src="<%=request.getContextPath()%>/images/activity.png"></div>
+                                    <label class="f_16_b">액티비티</label>
                                 </li>
                                 <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/scrollup_max.png"></div>
-                                    <label>뷰티</label>
+                                    <div><img src="<%=request.getContextPath()%>/images/beauty.png"></div>
+                                    <label class="f_16_b">뷰티</label>
                                 </li>
                                 <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/scrollup_max.png"></div>
-                                    <label>라이프스타일</label>
+                                    <div><img src="<%=request.getContextPath()%>/images/lifestyle.png"></div>
+                                    <label class="f_16_b">라이프스타일</label>
                                 </li>
                             </ul>
                         </div>
