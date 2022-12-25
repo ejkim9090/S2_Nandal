@@ -21,7 +21,7 @@
     <!-- TODO js 넣기 -->
     <script src="<%=request.getContextPath()%>/js/mypage.js"></script>
     
-    <title>메인페이지</title>
+    <title>마이 페이지</title>
 	<script>
 	$(function(){
 	    $(".my_nav").on("click",myNavHandler);

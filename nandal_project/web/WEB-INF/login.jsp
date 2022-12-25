@@ -15,7 +15,7 @@
     <script src="<%=request.getContextPath()%>/js/jquery-3.6.1.js"></script>
     <script src="<%=request.getContextPath()%>/js/share.js"></script>
 
-    <title>로그인 - 컬리</title>
+    <title>로그인 페이지</title>
 </head>
 <body>
     <div>

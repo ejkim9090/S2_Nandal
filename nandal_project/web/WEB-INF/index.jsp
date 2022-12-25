@@ -17,7 +17,7 @@
     
     
     <script src="<%=request.getContextPath()%>/js/index_section.js"></script>
-    <title>메인페이지</title>
+    <title>메인 페이지</title>
     <!-- 전체공통 -->
 </head>
 <body>

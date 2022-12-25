@@ -130,7 +130,7 @@
      }
      
      </script>
-    <title>상세페이지</title>
+    <title>상세 페이지</title>
 </head>
 <body>
     <div>
