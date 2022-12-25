@@ -1,0 +1,79 @@
+/* header 상단 고정 및 카테고리 부분 제거, 유형 선택 고정 */
+#header_nav {
+    position: static;
+}
+.header_category {
+    display: none;
+}
+.header_check {
+    display: block;
+}
+
+/* 상단 */
+.list_top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list_class_wrap {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0 20px;
+}
+.list_class{
+    display: inline-block;
+    cursor: pointer;
+}
+.list_class_img_wrap{
+    height: 220px;
+    background-color: rgb(245, 245, 245);
+}
+.list_class_img_wrap > img{
+    width: 290px;
+    height: 100%;
+    object-fit: cover;
+}
+.list_class_info_wrap{
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.list_review_text{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: #cbbbf7;
+    width: 290px;
+    padding: 5px;
+}
+
+/* 페이지 이동 nav */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+.page_item {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #696cff2c;
+    border-radius: 5px;
+}
+.page_item:not(li:first-of-type) {
+    margin-left: 5px;
+}
+.page_item.now {
+    border-color: #696cff;
+    background-color: #696cff;
+    color: #fff;
+    box-shadow: 0 0.125rem 0.25rem rgb(105 108 255 / 40%);
+}
+.page_img {
+    width: 15px;
+    height: 15px;
+    object-fit: cover;
+    margin-top: 7.5px;
+}
