@@ -7,46 +7,13 @@ window.onscroll = function() {
         document.getElementById('scrollup').style.opacity = "0";
         document.getElementById('scrollup').style.bottom = "-46px";
     }
-
-    //상단 고정 position 코드
-    // if(document.body.scrollTop > 1 || document.documentElement.scrollTop > 1) {
-    //     $("#header_nav").css("position","fixed");
-    // } else {
-    //     $("#header_nav").css("position","relative");
-    // }
 }
-
-// window.onresize = function() {
-//     var w = window.innerWidth
-//     var minWidth1 = 1140;
-    //상단 고정 header 경계선 화면 크기에 따라 수정
-    // if(w > minWidth1) {
-    //     $("#header_nav").css("width", w);
-    // } else {
-    //     $("#header_nav").css("width", minWidth1);
-    // }
-    // var minWidth2 = 700;
-    // if(w > 1050) {
-    //     $("#headerCon").css("width", w);
-    //     $("#headerCon").css("margin", "0");
-    // } else if(w > minWidth2) {
-    //     $("#headerCon").css("width", w);
-    //     $("#headerCon").css("margin", "0");
-    // } else {
-    //     $("#headerCon").css("width", minWidth2);
-    //     $("#headerCon").css("margin", "0");
-    // }
-
-    //화면 가로해상도에 따라 확대배율 수정할경우
-//     var minWidth = 1140;
-//   var body = document.getElementsByTagName('body')[0];
-//   if (window.innerWidth < minWidth) { body.style.zoom = (window.innerWidth / minWidth); }
-//   else body.style.zoom = 1;
-// }
-
 $(function(){
     $(".category_over, .category_list, .category_li").on("mouseover",categoryShowHandler);
     $(".category_list, .category_li").on("mouseout",categoryHideHandler);
+    
+    //유형 선택 요일/난이도 버튼 클릭 시 색상 변경
+    $("div.check_btn > div > label.c_color").on("click",dayClickHandler);
 
     //키워드 검색창 클릭 시 유형 선택창 보이고 카테고리 숨기기
     var keyword = document.getElementById("keyword");
@@ -63,7 +30,20 @@ $(function(){
         headerCheck.style.display = "none";
         $(".header_category").css("display","flex");
     }
+   
 });
+function dayClickHandler() {
+	console.log("dayClickHandler 진입");
+	console.log($(this).css("background-color"));
+	
+	if($(this).css("background-color") == "rgb(145, 105, 255)") {
+		$(this).css("background-color", "rgb(140, 100, 205)");
+		$(this).css("border", "1px solid rgb(140, 100, 205)");
+	} else {
+		$(this).css("background-color", "rgb(145, 105, 255)");
+		$(this).css("border", "1px solid rgb(145, 105, 255)");
+	}
+}
 function categoryShowHandler() {
     $(".category_list").css("display","flex");
 }

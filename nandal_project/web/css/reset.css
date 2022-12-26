@@ -14,6 +14,7 @@ time, mark, audio, video, input[type="text" i], input[type="password" i] {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	
 }
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -37,6 +38,9 @@ a {
 	color: black;
 }
 select:focus {
+	outline: none;
+}
+input[type="text" i] {
 	outline: none;
 }
 
