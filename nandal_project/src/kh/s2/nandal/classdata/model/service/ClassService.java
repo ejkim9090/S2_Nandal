@@ -82,6 +82,17 @@ public class ClassService {
 		System.out.println(">> ClassService selectList return :" + volist);
 		return volist;
 	}
+//	selectList - overloading
+	public List<ClassVo> selectList(int startRnum, int endRnum, String searchword,int searchArea,int searchCategory, List<Integer> searchDay, List<Integer> searchLevel, int searchMin,int searchMax){
+		List<ClassVo> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+	
+		volist = dao.selectList(conn, startRnum, endRnum, searchword, searchArea, searchCategory, searchDay, searchLevel, searchMin, searchMax);
+		
+		JdbcTemplate.close(conn);
+		System.out.println(">> ClassService selectList return :" + volist);
+		return volist;
+	}
 //	selectTotalCnt
 	public int selectTotalCnt(){
 		int result = 0;
@@ -98,6 +109,16 @@ public class ClassService {
 		Connection conn = JdbcTemplate.getConnection();
 	
 		result = dao.selectTotalCnt(conn, search);
+		
+		JdbcTemplate.close(conn);
+		System.out.println(">> ClassService selectTotalCnt result :" + result);
+		return result;
+	}
+	public int selectTotalCnt(String searchword, int searchArea,int searchCategory, List<Integer> searchDay, List<Integer> searchLevel, int searchMin,int searchMax){
+		int result = 0;
+		Connection conn = JdbcTemplate.getConnection();
+	
+		result = dao.selectTotalCnt(conn, searchword, searchArea, searchCategory, searchDay, searchLevel, searchMin, searchMax);
 		
 		JdbcTemplate.close(conn);
 		System.out.println(">> ClassService selectTotalCnt result :" + result);

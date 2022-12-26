@@ -3,7 +3,7 @@
         <div id="header">
             <div id="header_nav">
                 <div class="wrap_1050" id="headerCon">
-                    <form action="<%=request.getContextPath()%>/list" method="get">
+                    <form id="search_form" action="<%=request.getContextPath()%>/list" method="get">
                         <div class="header_first">
                             <div class="header_title">
                                 <a href="${pageContext.request.contextPath }/main"><img src="<%=request.getContextPath()%>/images/title.png" alt="main_title"></a>
@@ -90,7 +90,7 @@
                             </div>
                             <div class="check_admin">
                                 <button class="c_size c_line c_color" type="reset">초기화</button>
-                                <button class="c_size c_line c_color" type="submit" id="btn_search">검색</button>
+                                <button class="c_size c_line c_color" type="button" id="btn_search">검색</button>
                             </div>
                         </div>
                     </form>

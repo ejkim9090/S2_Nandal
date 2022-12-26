@@ -25,6 +25,33 @@
     
     <title>메인페이지</title>
     <!-- 전체공통 -->
+<script>
+	$(function(){
+		$("#btn_search").on("click",listDataAction);
+	});
+	function listDataAction() {
+		$("#search_form").serialize();
+		console.log($("#search_form").serialize());
+		
+		$.ajax({
+	   		url : "<%=request.getContextPath()%>/list.lo",
+	   		type : "get",
+	   		data: $("#search_form").serialize(),
+	  	 	dataType : "json", 
+	   		success: function(data){ 
+	   					console.log(data);
+	   				 },
+	   		error : function(request, status, error){
+	   					console.log(request);	
+	   					console.log(status);	
+	   					console.log(error);	
+	   					alert("code:"+request.status+"\n"
+	   							+"message"+request.responseText+"\n"
+	   							+"error"+error);
+	   				}
+	   	}); 
+	}
+</script>
 </head>
 <body>
     <div>
@@ -33,7 +60,7 @@
         <!-- TODO 여기에 만든 공간 넣기 -->
            <div class="wrap_1050">
                 <div class="list_top">
-                    <p>${cnt}개의 클래스</p>
+                    <p>000개의 클래스</p>
                     <div>
                         <select>
                             <option value="">선택</option>
@@ -52,7 +79,8 @@
                     </div>
                 </div>
                 <div>
-                <c:choose>
+
+               <%--  <c:choose>
                	<c:when test="${empty classlist}">
 					<div class="list_class">
                      지금 목록 정보가 없음
@@ -86,12 +114,12 @@
     				<c:set var="divCnt" value="${divCnt+1}"/>
     				</c:forEach>
    				</c:otherwise>
-               </c:choose> 
+               </c:choose>  --%>
                 </div>
             </div>
             <div class="wrap_1050">
                 <div class="pagination">
-                <c:if test="${pageCnt ne 1}"> <!-- 총 페이지수가 1뿐이면 페이지목록 안만들기 -->
+                <%-- <c:if test="${pageCnt ne 1}"> <!-- 총 페이지수가 1뿐이면 페이지목록 안만들기 -->
                 	<c:if test="${startPage ne 1}">
 						<a class="page_item pre" href="list?pagenum=${startPage-1 }&search=${searchword}"><img class="page_img" src="<%=request.getContextPath()%>/images/my_arrow_180.png" alt="이전"></a>
 					</c:if>
@@ -108,7 +136,7 @@
 					<c:if test="${endPage < pageCnt}">
 						<a class="page_item next" href="list?pagenum=${endPage+1 }&search=${searchword}"><img class="page_img" src="<%=request.getContextPath()%>/images/my_arrow.png" alt="다음"></a>
 					</c:if>
-                </c:if>
+                </c:if> --%>
                 </div>
             </div>
            <div id="scrollup">
