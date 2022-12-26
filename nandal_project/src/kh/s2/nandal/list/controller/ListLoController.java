@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -100,11 +101,6 @@ public class ListLoController extends HttpServlet {
 		
 		List<ClassVo> classlist = null;
 		try {
-//			if(searchword != null && !searchword.equals("")) {
-//				cnt = service.selectTotalCnt(searchword);
-//			} else {
-//				cnt = service.selectTotalCnt();
-//			}
 			cnt = service.selectTotalCnt(searchword, searchArea, searchCategory, searchDay, searchLevel, searchMin, searchMax);
 			
 			if(cnt <1) {  // 게시글 없음으로 아래 게시글 selectList 할 필요 없음.
@@ -130,31 +126,40 @@ public class ListLoController extends HttpServlet {
 			if(endRnum > cnt ) {
 				endRnum = cnt;
 			}
-			
-//			List<ClassVo> classlist = service.selectList(startRnum, endRnum, searchword);
 			classlist = service.selectList(startRnum, endRnum, searchword, searchArea, searchCategory, searchDay, searchLevel, searchMin, searchMax);
-			request.setAttribute("classlist", classlist);
+
 		} finally {
-			if(searchword != null && !searchword.equals("")) {
-				request.setAttribute("searchword", searchword);
-			}
-			request.setAttribute("cnt", cnt);
-			request.setAttribute("pageCnt", pageCnt);
-			request.setAttribute("startPage", startPage);
-			request.setAttribute("endPage", endPage);
-			request.setAttribute("currentPage", currentPage);	
-//			String viewPage="/WEB-INF/list.jsp";
-//			
-//			request.getRequestDispatcher(viewPage).forward(request, response);
-			
 			JsonObject page = new JsonObject();
+			
+			if(searchword != null && !searchword.equals("")) {
+				page.addProperty("searchword", searchword);
+			}
+			
+			//페이지 이동 nav에 필요한 값 json에추가하기
 			page.addProperty("cnt", cnt);
 			page.addProperty("pageCnt", pageCnt);
 			page.addProperty("startPage", startPage);
 			page.addProperty("endPage", endPage);
 			page.addProperty("currentPage", currentPage);
-			page.addProperty("classlist", gson.toJson(classlist));
 			
+			//받아온 List<ClassVo> classlist 데이터를 json으로 변경 후 기존 json 객체에 추가
+			JsonArray jArray = new JsonArray();
+            for (int j = 0; j < classlist.size(); j++) {
+                JsonObject sObject = new JsonObject();//배열 내에 들어갈 json
+                sObject.addProperty("classCode", classlist.get(j).getClassCode());
+                sObject.addProperty("className", classlist.get(j).getClassName());
+                sObject.addProperty("classImg", classlist.get(j).getClassImg());
+                sObject.addProperty("classAddress", classlist.get(j).getClassAddress());
+                sObject.addProperty("classPrice", classlist.get(j).getClassPrice());
+                jArray.add(sObject);
+                
+                if (j >= classlist.size() - 1) {
+
+                	page.add("classlist", jArray);
+
+                     System.out.println("jArray:"+jArray.toString());
+               }
+            }
 			
 //			String classlist2 = gson.toJson(classlist);
 //			String cnt2 = gson.toJson("cnt:" + cnt);

@@ -27,19 +27,81 @@
     <!-- 전체공통 -->
 <script>
 	$(function(){
+		listDataAction();
 		$("#btn_search").on("click",listDataAction);
 	});
+	var pagenum = 1;
+	function pageItemHandler(num) {
+		pagenum = num;
+		listDataAction();
+	}
 	function listDataAction() {
 		$("#search_form").serialize();
 		console.log($("#search_form").serialize());
 		
+		
 		$.ajax({
 	   		url : "<%=request.getContextPath()%>/list.lo",
 	   		type : "get",
-	   		data: $("#search_form").serialize(),
+	   		data: $("#search_form").serialize()+ "&pagenum=" + pagenum,
 	  	 	dataType : "json", 
 	   		success: function(data){ 
 	   					console.log(data);
+	   					console.log(data.cnt);
+	   					console.log(data.currentPage);
+	   					console.log(data.endPage);
+	   					console.log(data.pageCnt);
+	   					console.log(data.startPage);
+	   					
+	   					//페이지 이동 nav 생성 코드
+	   					var pagehtml = "";
+	   					if(data.pageCnt != 1) {
+	   						if(data.startPage != 1) {
+	   							pagehtml += "<a class='page_item pre' onclick='pageItemHandler("+(data.startPage-1)+");'><img class='page_img' src='<%=request.getContextPath()%>/images/my_arrow_180.png' alt='이전'></a>";
+	   						}
+	   						for(var i = data.startPage;i <= data.endPage;i++) {
+	   							if(i == data.currentPage) {
+	   								pagehtml += "<a class='page_item now' onclick='pageItemHandler("+i+");'>"+i+"</a>";
+	   							} else {
+	   								pagehtml += "<a class='page_item' onclick='pageItemHandler("+i+");'>"+i+"</a>";
+	   							}
+	   						}
+	   						if(data.endPage < data.pageCnt) {
+	   							pagehtml += "<a class='page_item next' onclick='pageItemHandler("+(data.endPage+1)+");'><img class='page_img' src='<%=request.getContextPath()%>/images/my_arrow.png' alt='다음'></a>";
+	   						}
+	   					}
+	   					$("div#pagination").html(pagehtml);
+	   				
+	   					console.log(data.classlist);
+	   					console.log(data.classlist.length);
+	   					var classhtml ="";
+	   					if(data.classlist != null) {
+	   						var divCnt = 0;
+	   						for(var j = 0; j < data.classlist.length; j++) {
+	   							if(divCnt%3 == 0) {
+	   								classhtml += "<div class='list_class_wrap'>";
+	   							}
+	   							classhtml += "<a href='${pageContext.request.contextPath }/info/"+data.classlist[j].classCode+"' class='list_class'>"+
+					   	                         "<div class='list_class_img_wrap'>"+
+					  	                             "<img src='${pageContext.request.contextPath}"+data.classlist[j].classImg+"' alt='클래스 이미지'>"+
+					  	                         "</div>"+
+					  	                         "<div class='list_class_info_wrap'>"+
+					  	                             "<h3 class='f_16_b'>"+data.classlist[j].className+"</h3>"+
+					  	                             "<span class='f_14_b'>"+data.classlist[j].classAddress+"</span>"+
+					  	                             "<span class='f_14_b'>"+data.classlist[j].classPrice+"원</span>"+
+					  	                         "</div>"+
+					  	                     "</a>";
+		  	                   	if(divCnt%3 == 2) {
+	   								classhtml += "</div>";
+	   							} else if(j == data.classlist.length-1) {
+	   								classhtml += "</div>";
+	   							}
+		  	                  	divCnt++;
+	   						}
+	   					} else {
+	   						classhtml += "<div class='list_class'>해당 조건의 클래스가 없습니다.</div>";ㄴ
+	   					}
+	   					$("div#list_content").html(classhtml);
 	   				 },
 	   		error : function(request, status, error){
 	   					console.log(request);	
@@ -78,7 +140,7 @@
                         </select>
                     </div>
                 </div>
-                <div>
+                <div id="list_content">
 
                <%--  <c:choose>
                	<c:when test="${empty classlist}">
@@ -118,7 +180,7 @@
                 </div>
             </div>
             <div class="wrap_1050">
-                <div class="pagination">
+                <div class="pagination" id="pagination">
                 <%-- <c:if test="${pageCnt ne 1}"> <!-- 총 페이지수가 1뿐이면 페이지목록 안만들기 -->
                 	<c:if test="${startPage ne 1}">
 						<a class="page_item pre" href="list?pagenum=${startPage-1 }&search=${searchword}"><img class="page_img" src="<%=request.getContextPath()%>/images/my_arrow_180.png" alt="이전"></a>
