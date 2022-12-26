@@ -44,6 +44,27 @@ public class ListController extends HttpServlet {
 		int endPage = 1;
 		
 		String searchword = request.getParameter("search");
+		int searchArea = Integer.parseInt(request.getParameter("area"));
+		int searchCategory = Integer.parseInt(request.getParameter("category"));
+		String[] searchDayArr = request.getParameterValues("day");
+		String[] searchLevelArr = request.getParameterValues("level");
+		String searchMin = request.getParameter("priceMin");
+		String searchMax = request.getParameter("priceMax");
+		String searchDay = null;
+		String searchLevel = null;
+		if(searchDayArr != null) {
+			for(String day : searchDayArr) {
+				searchDay += day;
+			}
+		}
+		if(searchDayArr != null) {
+			for(String level : searchLevelArr) {
+				searchLevel += level;
+			}
+		}
+		
+		System.out.println("선택지역:"+searchArea+", 카테고리 :" +searchCategory + ",요일:"+searchDay+",난이도:"+searchLevel+",최소금액:"+searchMin+",최고금액:"+searchMax);
+		
 		
 		try {
 			if(searchword != null && !searchword.equals("")) {

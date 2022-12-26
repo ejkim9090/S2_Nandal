@@ -3,20 +3,15 @@
         <div id="header">
             <div id="header_nav">
                 <div class="wrap_1050" id="headerCon">
-                    <form>
+                    <form action="<%=request.getContextPath()%>/list" method="get">
                         <div class="header_first">
                             <div class="header_title">
                                 <a href="${pageContext.request.contextPath }/main"><img src="<%=request.getContextPath()%>/images/title.png" alt="main_title"></a>
                             </div>
                             <div class="search_log_wrap">
                                 <div class="header_search">
-                                    <input id="keyword" class="f_12" type="text" placeholder="검색어를 입력해주세요.">
-                                    <button type="button" id="btn_search"><img src="<%=request.getContextPath()%>/images/search_logo.svg"></button>
-<script>
-	$("#btn_search").click(function(){
-		location.href = "<%=request.getContextPath()%>/list?search="+$("#keyword").val();
-	});
-</script>
+                                    <input id="keyword" name="search" class="f_12" type="text" placeholder="검색어를 입력해주세요.">
+                                    <img src="<%=request.getContextPath()%>/images/search_logo.svg">
                                 </div>
                                 <div class="header_log">
                                 	<c:choose>
@@ -75,9 +70,9 @@
                                 <div class="check_btn">
                                     <div>
                                         <p class="c_size">요일</p>
-                                        <input type="checkbox" name="day" value="평일" id="week"><label class="c_size c_line c_color"for="week">평일</label>
-                                        <input type="checkbox" name="day" value="토요일" id="sat"><label class="c_size c_line c_color" for="sat">토요일</label>
-                                        <input type="checkbox" name="day" value="일요일" id="sun"><label class="c_size c_line c_color" for="sun">일요일</label>
+                                        <input type="checkbox" name="day" value="31" id="week"><label class="c_size c_line c_color"for="week">평일</label>
+                                        <input type="checkbox" name="day" value="32" id="sat"><label class="c_size c_line c_color" for="sat">토요일</label>
+                                        <input type="checkbox" name="day" value="64" id="sun"><label class="c_size c_line c_color" for="sun">일요일</label>
                                     </div>
                                     <div>
                                         <p class="c_size">난이도</p>
@@ -95,10 +90,15 @@
                             </div>
                             <div class="check_admin">
                                 <button class="c_size c_line c_color" type="reset">초기화</button>
-                                <button class="c_size c_line c_color">검색</button>
+                                <button class="c_size c_line c_color" type="submit" id="btn_search">검색</button>
                             </div>
                         </div>
                     </form>
+<%-- <script>
+	$("#btn_search").click(function(){
+		location.href = "<%=request.getContextPath()%>/list?search="+$("#keyword").val();
+	});
+</script> --%>
                     <div class="header_second">
                         <div class="header_category">
                             <div class="category_over">
