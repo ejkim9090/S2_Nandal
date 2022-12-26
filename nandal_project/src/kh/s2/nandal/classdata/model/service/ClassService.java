@@ -41,15 +41,7 @@ public class ClassService {
 		System.out.println(">> ClassService delete return :" + result);
 		return result;
 	}
-//	selectList
-	public List<ClassVo> selectList(){
-		Connection conn = JdbcTemplate.getConnection();
-		List<ClassVo> volist = null;
-		volist = dao.selectList(conn);
-		JdbcTemplate.close(conn);
-		System.out.println(">> ClassService selectList return :" + volist);
-		return volist;
-	}
+
 
 //	selectList - 리뷰 추천유형 해당 목록
 	public List<ClassVo> groupList(int group){
@@ -70,7 +62,47 @@ public class ClassService {
 		System.out.println(">> ClassService keywordList return :" + volist);
 		return volist;
 	}	
+//	selectList
+	public List<ClassVo> selectList(){
+		Connection conn = JdbcTemplate.getConnection();
+		List<ClassVo> volist = null;
+		volist = dao.selectList(conn);
+		JdbcTemplate.close(conn);
+		System.out.println(">> ClassService selectList return :" + volist);
+		return volist;
+	}
+//	selectList - overloading
+	public List<ClassVo> selectList(int startRnum, int endRnum, String searchword){
+		List<ClassVo> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
 	
+		volist = dao.selectList(conn, startRnum, endRnum, searchword);
+		
+		JdbcTemplate.close(conn);
+		System.out.println(">> ClassService selectList return :" + volist);
+		return volist;
+	}
+//	selectTotalCnt
+	public int selectTotalCnt(){
+		int result = 0;
+		Connection conn = JdbcTemplate.getConnection();
+	
+		result = dao.selectTotalCnt(conn);
+		
+		JdbcTemplate.close(conn);
+		System.out.println(">> ClassService selectTotalCnt result :" + result);
+		return result;
+	}
+	public int selectTotalCnt(String search){
+		int result = 0;
+		Connection conn = JdbcTemplate.getConnection();
+	
+		result = dao.selectTotalCnt(conn, search);
+		
+		JdbcTemplate.close(conn);
+		System.out.println(">> ClassService selectTotalCnt result :" + result);
+		return result;
+	}
 //	selectOne
 	public ClassVo selectOne(int classCode){
 		System.out.println(">> ClassService selectOne param classCode :" + classCode);
@@ -80,16 +112,5 @@ public class ClassService {
 		JdbcTemplate.close(conn);
 		System.out.println(">> ClassService selectOne return :" + vo);
 		return vo;
-	}
-//	selectOne - 클래스 수
-	public int selectKeyword(String keyword) {
-		System.out.println(">> ClassService selectKeyword param keyword :" + keyword);
-		Connection conn = JdbcTemplate.getConnection();
-		int result = 0;
-		result = dao.selectKeyword(conn, keyword);
-		
-		JdbcTemplate.close(conn);
-		System.out.println(">> ClassService selectKeyword return :" + keyword);
-		return result;
 	}
 }

@@ -84,28 +84,9 @@ public class ClassDao {
 		System.out.println(">>> ClassDao delete return : " + result);
 		return result;
 	}
-//	selectList - 목록조회
-	public List<ClassVo> selectList(Connection conn){
-		List<ClassVo> volist = null;
-		
-		String sql = "select * from class";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			//TODO
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JdbcTemplate.close(rs);
-			JdbcTemplate.close(pstmt);
-		}
-		System.out.println(">>> ClassDao selectList return : " + volist);
-		return volist;
-	}
 //	selectList - 리뷰 추천유형 해당 목록
 	public List<ClassVo> groupList(Connection conn,int group){
+		System.out.println(">>> ClassDao groupList param group : " + group);
 		List<ClassVo> volist = null;
 		
 		String sql = "select CLASS_CODE, CLASS_IMG, CLASS_NAME, CLASS_ADDRESS, CLASS_PRICE "
@@ -142,8 +123,98 @@ public class ClassDao {
 		System.out.println(">>> ClassDao groupList return : " + volist);
 		return volist;
 	}
+//	selectList  - 목록조회
+	public List<ClassVo> selectList(Connection conn){
+		List<ClassVo> volist = null;
+		
+		String sql = "select * from class";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				volist = new ArrayList<ClassVo>();
+				do {
+					ClassVo vo = new ClassVo();
+					vo.setClassCode(rs.getInt("CLASS_CODE"));
+					vo.setClassImg(rs.getString("CLASS_IMG"));
+					vo.setClassName(rs.getString("CLASS_NAME"));
+					String[] addressArr = rs.getString("CLASS_ADDRESS").split("\\s");
+					String address = addressArr[0] +" "+addressArr[1];
+					vo.setClassAddress(address);
+					vo.setClassPrice(rs.getInt("CLASS_PRICE"));
+					volist.add(vo);
+				} while(rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+
+		System.out.println(">>> ClassDao selectList return : " + volist);
+		return volist;
+	}
+	
+//	selectList  - 목록조회 페이징 - overloading 
+	public List<ClassVo> selectList(Connection conn, int startRnum, int endRnum, String searchword){
+		System.out.println(">>> ClassDao selectList param startRnum : " + startRnum);
+		System.out.println(">>> ClassDao selectList param endRnum : " + endRnum);
+		System.out.println(">>> ClassDao selectList param searchword : " + searchword);
+		List<ClassVo> volist = null;
+		
+		String sql = "select * from (select t1.*, rownum r from "
+				+ " (select * from class) t1 ) t2 "
+				+ " where r between ? and ?";
+		String sqlSearch = "select * from (select t1.*, rownum r from "
+				+ " (select * from class where class_name LIKE ?) t1 ) t2 "
+				+ " where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			if(searchword != null && !searchword.equals("")) {
+				System.out.println("키워드 있는 sql 적용");
+				pstmt = conn.prepareStatement(sqlSearch);
+				pstmt.setInt(2, startRnum);
+				pstmt.setInt(3, endRnum);
+				searchword = "%"+searchword+"%";   // LIKE 형식
+				pstmt.setString(1, searchword);
+			}else {
+				System.out.println("키워드 없는 sql 적용");
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startRnum);
+				pstmt.setInt(2, endRnum);
+			}
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				volist = new ArrayList<ClassVo>();
+				do {
+					ClassVo vo = new ClassVo();
+					vo.setClassCode(rs.getInt("CLASS_CODE"));
+					vo.setClassImg(rs.getString("CLASS_IMG"));
+					vo.setClassName(rs.getString("CLASS_NAME"));
+					String[] addressArr = rs.getString("CLASS_ADDRESS").split("\\s");
+					String address = addressArr[0] +" "+addressArr[1];
+					vo.setClassAddress(address);
+					vo.setClassPrice(rs.getInt("CLASS_PRICE"));
+					volist.add(vo);
+				} while(rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+
+		System.out.println(">>> ClassDao selectList return : " + volist);
+		return volist;
+	}
 //	selectList - 키워드 목록 조회
 	public List<ClassVo> keywordList(Connection conn,String keyword){
+		System.out.println(">>> ClassDao keywordList param keyword : " + keyword);
 		List<ClassVo> volist = null;
 		
 		String sql = "select CLASS_CODE, CLASS_IMG, CLASS_NAME, CLASS_ADDRESS, CLASS_PRICE from CLASS where CLASS_NAME Like '%"+keyword+"%'";
@@ -174,6 +245,51 @@ public class ClassDao {
 		}
 		System.out.println(">>> ClassDao keywordList return : " + volist);
 		return volist;
+	}
+//	selectTotalCnt - 클래스 목록 조회 충 클래스 수 
+	public int selectTotalCnt(Connection conn){
+		int result = 0;
+		String sql = "select count(*) cnt from class";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println(">>> ClassDao selectTotalCnt result : " + result);
+		return result;
+	}
+	public int selectTotalCnt(Connection conn, String searchword){
+		System.out.println(">>> ClassDao selectTotalCnt param searchword : " + searchword);
+		int result = 0;
+
+		String sql = "select count(*) cnt from class where class_name LIKE ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			searchword = "%"+searchword+"%";   // LIKE 형식
+			pstmt.setString(1, searchword);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println(">>> ClassDao selectTotalCnt result : " + result);
+		return result;
 	}
 //	selectOne - 상세조회
 	public ClassVo selectOne(Connection conn, int classCode){
@@ -213,29 +329,5 @@ public class ClassDao {
 		}
 		System.out.println(">>> ClassDao selectOne return : " + vo);
 		return vo;
-	}
-	
-//selectone - keywordcnt
-	public int selectKeyword(Connection conn, String keyword) {
-		System.out.println(">>> ClassDao selectKeyword param keyword : " + keyword);
-		int result = 0;
-		
-		String sql = "select count(*) from class where class_name Like '%?%' ";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, keyword);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				result = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JdbcTemplate.close(pstmt);
-		}
-		System.out.println(">>> ClassDao selectKeyword return : " + result);
-		return result;
 	}
 }

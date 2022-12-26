@@ -32,42 +32,63 @@ public class ListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("/list 컨트롤러");
-		String viewPage="/WEB-INF/list.jsp";
-		request.getRequestDispatcher(viewPage).forward(request, response);
 		
-//		ClassService service = new ClassService();
+		ClassService service = new ClassService();
 //		
-//		final int pageSize = 3;//페이지당 클래스 수 3
-//		final int pageBlock = 3;//페이지링크수 3  예)화면 하단에 1 2 3 >>    << 4 5 6 >>  << 7 8
-//		int cnt = 0;
-//		int pageCnt = 0;
-//		int currentPage = 1;
-//		
-//		try {
-//			cnt = service.selectKeyword("키워드"); //총 클래스 수 16 - 총수는 db에서 읽어오기
-//			if(cnt < 1) {
-//				return; // 클래스 수가 없으면 리턴해서 바로 finally 로
-//			}
-//			pageCnt = (cnt/pageSize) + (cnt%pageSize==0? 0 : 1);
-//			int startRnum = (currentPage-1)*pageSize +1;
-//			int endRnum = startRnum + pageSize -1;
-//			
-//			
-//			
-//			List<ClassVo> classlist = service.selectList();
-//			request.setAttribute("classlsit", classlist);
-//		} finally {
-//			System.out.println("/list 컨트롤러");
-//			String viewPage="/WEB-INF/list.jsp";
-//			request.getRequestDispatcher(viewPage).forward(request, response);
-//		}
-//		 //총페이지수 6 
-//																 //총페이지수에서 클래수 수 만큼 페이지를 만들고 나머지가 있으면 한페이지 추가
-//		
-//		
-//		
-//		
-//		
+		final int pageSize = 9; // 페이지당글수 2
+		final int pageBlock = 3; // 페이지링크수 3 예)게시글하단에  1 2 3 >>  << 4 5 6 >>  << 7 8
+		int cnt = 0;  // 총글수 DB에서 확인하기
+		int pageCnt = 0; // 총페이지수 위 pageSize와 cnt 방정식으로 계산
+		int currentPage = 1; // 현재페이지. 기본1. 페이지 클릭이 되면 바뀌게됨. //TODO
+		int startPage = 1;
+		int endPage = 1;
+		
+		String searchword = request.getParameter("search");
+		
+		try {
+			if(searchword != null && !searchword.equals("")) {
+				cnt = service.selectTotalCnt(searchword);
+			} else {
+				cnt = service.selectTotalCnt();
+			}
+			if(cnt <1) {  // 게시글 없음으로 아래 게시글 selectList 할 필요 없음.
+				return;
+			}
+			try {
+				currentPage = Integer.parseInt(request.getParameter("pagenum"));
+			}catch (Exception e) {
+			}
+			pageCnt = (cnt/pageSize) + (cnt%pageSize==0 ? 0 : 1);		// 총페이지수 위 pageSize와 cnt 방정식으로 계산
+			if(currentPage%pageBlock ==0) {
+				startPage = ((currentPage/pageBlock)-1)*pageBlock+1;
+			}else {
+				startPage = ((currentPage/pageBlock))*pageBlock+1;
+			}
+			endPage = startPage+pageBlock-1;
+			if(endPage > pageCnt ) {
+				endPage = pageCnt;
+			}
+			int startRnum = (currentPage-1)*pageSize + 1;
+			int endRnum = startRnum + pageSize - 1;
+			//endRnum = (endRnum > cnt ? cnt: endRnum);
+			if(endRnum > cnt ) {
+				endRnum = cnt;
+			}
+			
+			List<ClassVo> classlist = service.selectList(startRnum, endRnum, searchword);
+			request.setAttribute("classlist", classlist);
+		} finally {
+			if(searchword != null && !searchword.equals("")) {
+				request.setAttribute("searchword", searchword);
+			}
+			request.setAttribute("cnt", cnt);
+			request.setAttribute("pageCnt", pageCnt);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("currentPage", currentPage);	
+			String viewPage="/WEB-INF/list.jsp";
+			request.getRequestDispatcher(viewPage).forward(request, response);
+		}
 		
 	}
 

@@ -39,6 +39,10 @@
     flex-direction: column;
     align-items: flex-end;
 }
+.list_class_info_wrap > h3 {
+	width: 290px;
+    height: 42px;
+}
 .list_review_text{
     display: flex;
     flex-direction: column;

@@ -33,7 +33,7 @@
         <!-- TODO 여기에 만든 공간 넣기 -->
            <div class="wrap_1050">
                 <div class="list_top">
-                    <p>000개의 클래스</p>
+                    <p>${cnt}개의 클래스</p>
                     <div>
                         <select>
                             <option value="">선택</option>
@@ -52,176 +52,63 @@
                     </div>
                 </div>
                 <div>
-                    <div class="list_class_wrap">
-                        <a class="list_class">
-                            <div class="list_class_img_wrap">
-                                <img src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="클래스 이미지">
-                            </div>
-                            <div class="list_class_info_wrap">
-                                <h3 class="f_16_b">
-                                    [워커힐] 전복 삼계탕
-                                </h3>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                            </div>
-                        </a>
-                        <a class="list_class">
-                            <div class="list_class_img_wrap">
-                                <img src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="클래스 이미지">
-                            </div>
-                            <div class="list_class_info_wrap">
-                                <h3 class="f_16_b">
-                                    [워커힐] 전복 삼계탕
-                                </h3>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                            </div>
-                        </a>
-                        <a class="list_class">
-                            <div class="list_class_img_wrap">
-                                <img src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="클래스 이미지">
-                            </div>
-                            <div class="list_class_info_wrap">
-                                <h3 class="f_16_b">
-                                    [워커힐] 전복 삼계탕
-                                </h3>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                            </div>
-                        </a>
+                <c:choose>
+               	<c:when test="${empty classlist}">
+					<div class="list_class">
+                     지금 목록 정보가 없음
                     </div>
-                    <div class="list_class_wrap">
-                        <a class="list_class">
-                            <div class="list_class_img_wrap">
-                                <img src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="클래스 이미지">
-                            </div>
-                            <div class="list_class_info_wrap">
-                                <h3 class="f_16_b">
-                                    [워커힐] 전복 삼계탕
-                                </h3>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                            </div>
-                        </a>
-                        <a class="list_class">
-                            <div class="list_class_img_wrap">
-                                <img src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="클래스 이미지">
-                            </div>
-                            <div class="list_class_info_wrap">
-                                <h3 class="f_16_b">
-                                    [워커힐] 전복 삼계탕
-                                </h3>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                            </div>
-                        </a>
-                        <a class="list_class">
-                            <div class="list_class_img_wrap">
-                                <img src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="클래스 이미지">
-                            </div>
-                            <div class="list_class_info_wrap">
-                                <h3 class="f_16_b">
-                                    [워커힐] 전복 삼계탕
-                                </h3>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="list_class_wrap">
-                        <a class="list_class">
-                            <div class="list_class_img_wrap">
-                                <img src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="클래스 이미지">
-                            </div>
-                            <div class="list_class_info_wrap">
-                                <h3 class="f_16_b">
-                                    [워커힐] 전복 삼계탕
-                                </h3>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                            </div>
-                        </a>
-                        <a class="list_class">
-                            <div class="list_class_img_wrap">
-                                <img src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="클래스 이미지">
-                            </div>
-                            <div class="list_class_info_wrap">
-                                <h3 class="f_16_b">
-                                    [워커힐] 전복 삼계탕
-                                </h3>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                            </div>
-                        </a>
-                        <a class="list_class">
-                            <div class="list_class_img_wrap">
-                                <img src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="클래스 이미지">
-                            </div>
-                            <div class="list_class_info_wrap">
-                                <h3 class="f_16_b">
-                                    [워커힐] 전복 삼계탕
-                                </h3>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                                <span class="f_14_b">
-                                    34,000 원
-                                </span>
-                            </div>
-                        </a>
-                    </div>
+   				</c:when> 
+   				<c:otherwise>
+   					<c:set var="divCnt" value="0"/>
+    				<c:forEach items="${classlist}" var="vo">
+    				<c:if test="${divCnt mod 3 eq 0}">
+    					<div class="list_class_wrap">
+    				</c:if>
+     				<a href="${pageContext.request.contextPath }/info/${vo.classCode}" class="list_class">
+                         <div class="list_class_img_wrap">
+                             <img src="${pageContext.request.contextPath}${vo.classImg}" alt="클래스 이미지">
+                         </div>
+                         <div class="list_class_info_wrap">
+                             <h3 class="f_16_b">
+                                 ${vo.className}
+                             </h3>
+                             <span class="f_14_b">
+                                 ${vo.classAddress}
+                             </span>
+                             <span class="f_14_b">
+                                 ${vo.classPrice}원
+                             </span>
+                         </div>
+                     </a>
+                     <c:if test="${divCnt mod 3 eq 2}">
+    					</div>
+    				</c:if>
+    				<c:set var="divCnt" value="${divCnt+1}"/>
+    				</c:forEach>
+   				</c:otherwise>
+               </c:choose> 
                 </div>
             </div>
             <div class="wrap_1050">
                 <div class="pagination">
-                    <a class="page_item pre"><img class="page_img" src="./images/my_arrow_180.png" alt="">
-                    </a>
-                    <a class="page_item now">1
-                    </a>
-                    <a class="page_item">2
-                    </a>
-                    <a class="page_item">3
-                    </a>
-                    <a class="page_item">4
-                    </a>
-                    <a class="page_item">5
-                    </a>
-                    <a class="page_item">6
-                    </a>
-                    <a class="page_item next"><img class="page_img" src="./images/my_arrow.png" alt="">
-                    </a>
+                <c:if test="${pageCnt ne 1}"> <!-- 총 페이지수가 1뿐이면 페이지목록 안만들기 -->
+                	<c:if test="${startPage ne 1}">
+						<a class="page_item pre" href="list?pagenum=${startPage-1 }&search=${searchword}"><img class="page_img" src="<%=request.getContextPath()%>/images/my_arrow_180.png" alt="이전"></a>
+					</c:if>
+					<c:forEach begin="${startPage }" end="${endPage }" var="p" step="1">
+						<c:choose>
+							<c:when test="${p eq currentPage}">
+								<a class="page_item now" href="list?pagenum=${p }&search=${searchword}">${p }</a>
+							</c:when>
+							<c:otherwise>
+								<a class="page_item" href="list?pagenum=${p }&search=${searchword}">${p }</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${endPage < pageCnt}">
+						<a class="page_item next" href="list?pagenum=${endPage+1 }&search=${searchword}"><img class="page_img" src="<%=request.getContextPath()%>/images/my_arrow.png" alt="다음"></a>
+					</c:if>
+                </c:if>
                 </div>
             </div>
            <div id="scrollup">

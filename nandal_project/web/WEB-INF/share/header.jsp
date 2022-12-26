@@ -14,7 +14,7 @@
                                     <button type="button" id="btn_search"><img src="<%=request.getContextPath()%>/images/search_logo.svg"></button>
 <script>
 	$("#btn_search").click(function(){
-		location.href = "notice?search="+$("#keyword").val();
+		location.href = "<%=request.getContextPath()%>/list?search="+$("#keyword").val();
 	});
 </script>
                                 </div>
