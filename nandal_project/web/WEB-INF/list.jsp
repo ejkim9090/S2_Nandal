@@ -25,11 +25,101 @@
     
     <title>메인페이지</title>
     <!-- 전체공통 -->
+   
 <script>
 	$(function(){
+		listStartSet();
 		listDataAction();
 		$("#btn_search").on("click",listDataAction);
 	});
+	var day = "";
+	var level = "";
+	function listStartSet() {
+		var search = "${search}";
+		var area = "${area}";
+		var day1 = "${day1}";
+		var day2 = "${day2}";
+		var day3 = "${day3}";
+		var level1 = "${level1}";
+		var level2 = "${level2}";
+		var level3 = "${level3}";
+		var area = "${area}";
+		var category = "${category}";
+		var priceMin = "${priceMin}";
+		var priceMax = "${priceMax}";
+		console.log("search : " + search);
+		console.log("area : " + area);
+		console.log("category : " + category);
+		console.log("priceMin : " + priceMin);
+		console.log("priceMax : " + priceMax); 
+		console.log("day1 : " + day1);
+		console.log("day2 : " + day2);
+		console.log("day3 : " + day3);
+		console.log("level1 : " + level1);
+		console.log("level2 : " + level2);
+		console.log("level3 : " + level3); 
+		
+		
+		//가져온 키워드 적용
+		$("#keyword").val(search);
+		//가져온 지역 선택값 적용
+		var $areaOption = $("select[name=area] > option");
+		for(var i = 0; i < $areaOption.length; i++) {
+			if($areaOption.get(i).value == area) {
+				$areaOption.get(i).setAttribute('selected',true);
+			}
+		}
+		//가져온 카테고리 선택값 적용
+		var $categoryOption = $("select[name=category] > option");
+		for(var i = 0; i < $categoryOption.length; i++) {
+			if($categoryOption.get(i).value == category) {
+				$categoryOption.get(i).setAttribute('selected',true);
+			}
+		}
+		//가져온 요일 적용
+		var $checkboxDay = $("input[type=checkbox][name=day]");
+		if(day1 != "") {
+			for(var i = 0; i < $checkboxDay.length; i++) {
+				if($checkboxDay.get(i).value == day1) {$checkboxDay.get(i).setAttribute('checked',true);}
+			}
+		}
+		if(day2 != "") {
+			for(var i = 0; i < $checkboxDay.length; i++) {
+				if($checkboxDay.get(i).value == day2) {$checkboxDay.get(i).setAttribute('checked',true);}
+			}
+		}
+		if(day3 != "") {
+			for(var i = 0; i < $checkboxDay.length; i++) {
+				if($checkboxDay.get(i).value == day3) {$checkboxDay.get(i).setAttribute('checked',true);}
+			}
+		}
+		//가져온 난이도 적용
+		var $checkboxLevel = $("input[type=checkbox][name=level]");
+		if(level1 != "") {
+			for(var i = 0; i < $checkboxLevel.length; i++) {
+				if($checkboxLevel.get(i).value == level1) {$checkboxLevel.get(i).setAttribute('checked',true);}
+			}
+		}
+		if(level2 != "") {
+			for(var i = 0; i < $checkboxLevel.length; i++) {
+				if($checkboxLevel.get(i).value == level2) {$checkboxLevel.get(i).setAttribute('checked',true);}
+			}
+		}
+		if(level3 != "") {
+			for(var i = 0; i < $checkboxLevel.length; i++) {
+				if($checkboxLevel.get(i).value == level3) {$checkboxLevel.get(i).setAttribute('checked',true);}
+			}
+		}
+		//가져온 금액 정보 적용
+		if(priceMin != "") {
+			$("input[type=text][name=priceMin]").val(priceMin);
+		}
+		if(priceMax != "") {
+			$("input[type=text][name=priceMax]").val(priceMax);
+		}
+		
+	}
+	
 	var pagenum = 1;
 	function pageItemHandler(num) {
 		pagenum = num;
@@ -40,10 +130,16 @@
 		console.log($("#search_form").serialize());
 		
 		
+		var lineUp1 = $("select[name=classLineUp]").val();
+		var lineUp2 = $("select[name=reviewLineUp]").val();
+		console.log("lineUp1 : "+lineUp1);
+		console.log("lineUp2 : "+lineUp2);
+		
+		var searchData = $("#search_form").serialize()+ "&pagenum=" + pagenum + "&classLineUp=" + lineUp1 + "&reviewLineUp=" + lineUp2;
 		$.ajax({
 	   		url : "<%=request.getContextPath()%>/list.lo",
 	   		type : "get",
-	   		data: $("#search_form").serialize()+ "&pagenum=" + pagenum,
+	   		data: searchData,
 	  	 	dataType : "json", 
 	   		success: function(data){ 
 	   					console.log(data);
@@ -51,11 +147,12 @@
 	   					console.log(data.currentPage);
 	   					console.log(data.endPage);
 	   					console.log(data.pageCnt);
-	   					console.log(data.startPage);
+	   					console.log(data.startPage); 
 	   					
+	   					$("p#classCnt").text(data.cnt+"개의 클래스");
 	   					//페이지 이동 nav 생성 코드
 	   					var pagehtml = "";
-	   					if(data.pageCnt != 1) {
+	   					if(data.pageCnt != 1 && data.pageCnt != 0) {
 	   						if(data.startPage != 1) {
 	   							pagehtml += "<a class='page_item pre' onclick='pageItemHandler("+(data.startPage-1)+");'><img class='page_img' src='<%=request.getContextPath()%>/images/my_arrow_180.png' alt='이전'></a>";
 	   						}
@@ -72,10 +169,8 @@
 	   					}
 	   					$("div#pagination").html(pagehtml);
 	   				
-	   					console.log(data.classlist);
-	   					console.log(data.classlist.length);
 	   					var classhtml ="";
-	   					if(data.classlist != null) {
+	   					if(data.classlist != undefined) {
 	   						var divCnt = 0;
 	   						for(var j = 0; j < data.classlist.length; j++) {
 	   							if(divCnt%3 == 0) {
@@ -99,7 +194,7 @@
 		  	                  	divCnt++;
 	   						}
 	   					} else {
-	   						classhtml += "<div class='list_class'>해당 조건의 클래스가 없습니다.</div>";ㄴ
+	   						classhtml += "<div class='list_class_not'><p>해당 조건의 클래스가 없습니다.</p></div>";
 	   					}
 	   					$("div#list_content").html(classhtml);
 	   				 },
@@ -122,83 +217,29 @@
         <!-- TODO 여기에 만든 공간 넣기 -->
            <div class="wrap_1050">
                 <div class="list_top">
-                    <p>000개의 클래스</p>
+                    <p id="classCnt"></p>
                     <div>
-                        <select>
-                            <option value="">선택</option>
-                            <option value="">인기순</option>
-                            <option value="">높은 평점순</option>
-                            <option value="">낮은 가격순</option>
-                            <option value="">높은 가격순</option>
+                        <select name="classLineUp">
+                            <option value="미선택">선택</option>
+                            <option value="인기순">인기순</option>
+                            <option value="높은평점순">높은 평점순</option>
+                            <option value="낮은가격순">낮은 가격순</option>
+                            <option value="높은가격순">높은 가격순</option>
                         </select>
-                        <select>
-                            <option value="">선택</option>
-                            <option value="">혼자</option>
-                            <option value="">친구</option>
-                            <option value="">연인</option>
-                            <option value="">가족</option>
+                        <select name="reviewLineUp">
+                            <option value="0">선택</option>
+                            <option value="1">혼자</option>
+                            <option value="2">친구</option>
+                            <option value="3">연인</option>
+                            <option value="4">가족</option>
                         </select>
                     </div>
                 </div>
                 <div id="list_content">
-
-               <%--  <c:choose>
-               	<c:when test="${empty classlist}">
-					<div class="list_class">
-                     지금 목록 정보가 없음
-                    </div>
-   				</c:when> 
-   				<c:otherwise>
-   					<c:set var="divCnt" value="0"/>
-    				<c:forEach items="${classlist}" var="vo">
-    				<c:if test="${divCnt mod 3 eq 0}">
-    					<div class="list_class_wrap">
-    				</c:if>
-     				<a href="${pageContext.request.contextPath }/info/${vo.classCode}" class="list_class">
-                         <div class="list_class_img_wrap">
-                             <img src="${pageContext.request.contextPath}${vo.classImg}" alt="클래스 이미지">
-                         </div>
-                         <div class="list_class_info_wrap">
-                             <h3 class="f_16_b">
-                                 ${vo.className}
-                             </h3>
-                             <span class="f_14_b">
-                                 ${vo.classAddress}
-                             </span>
-                             <span class="f_14_b">
-                                 ${vo.classPrice}원
-                             </span>
-                         </div>
-                     </a>
-                     <c:if test="${divCnt mod 3 eq 2}">
-    					</div>
-    				</c:if>
-    				<c:set var="divCnt" value="${divCnt+1}"/>
-    				</c:forEach>
-   				</c:otherwise>
-               </c:choose>  --%>
                 </div>
             </div>
             <div class="wrap_1050">
                 <div class="pagination" id="pagination">
-                <%-- <c:if test="${pageCnt ne 1}"> <!-- 총 페이지수가 1뿐이면 페이지목록 안만들기 -->
-                	<c:if test="${startPage ne 1}">
-						<a class="page_item pre" href="list?pagenum=${startPage-1 }&search=${searchword}"><img class="page_img" src="<%=request.getContextPath()%>/images/my_arrow_180.png" alt="이전"></a>
-					</c:if>
-					<c:forEach begin="${startPage }" end="${endPage }" var="p" step="1">
-						<c:choose>
-							<c:when test="${p eq currentPage}">
-								<a class="page_item now" href="list?pagenum=${p }&search=${searchword}">${p }</a>
-							</c:when>
-							<c:otherwise>
-								<a class="page_item" href="list?pagenum=${p }&search=${searchword}">${p }</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<c:if test="${endPage < pageCnt}">
-						<a class="page_item next" href="list?pagenum=${endPage+1 }&search=${searchword}"><img class="page_img" src="<%=request.getContextPath()%>/images/my_arrow.png" alt="다음"></a>
-					</c:if>
-                </c:if> --%>
                 </div>
             </div>
            <div id="scrollup">

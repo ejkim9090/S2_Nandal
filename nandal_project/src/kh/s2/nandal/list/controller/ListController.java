@@ -36,6 +36,36 @@ public class ListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("/list 컨트롤러");
+		
+		request.setAttribute("search", request.getParameter("search"));
+		request.setAttribute("area", request.getParameter("area"));
+		request.setAttribute("category", request.getParameter("category"));
+		request.setAttribute("priceMin", request.getParameter("priceMin"));
+		request.setAttribute("priceMax", request.getParameter("priceMax"));
+		
+		String[] searchDayArr = request.getParameterValues("day");
+		String[] searchLevelArr = request.getParameterValues("level");
+		int daynum= 0;
+		int levelnum =0;
+		if(searchDayArr != null) {
+			for(int i = 1; i < searchDayArr.length+1; i++) {
+				request.setAttribute("day"+i, searchDayArr[i-1]);
+				if(i == searchDayArr.length) {
+					daynum = i;
+				}
+			}
+		}
+		if(searchLevelArr != null) {
+			for(int i = 1; i < searchLevelArr.length+1; i++) {
+				request.setAttribute("level"+i, searchLevelArr[i-1]);
+				if(i == searchLevelArr.length) {
+					levelnum = i;
+				}
+			}
+		}
+		request.setAttribute("daynum", daynum);
+		request.setAttribute("levelnum", levelnum);
+		
 		String viewPage="/WEB-INF/list.jsp";
 		request.getRequestDispatcher(viewPage).forward(request, response);
 //		//gson

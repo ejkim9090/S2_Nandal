@@ -11,9 +11,8 @@ window.onscroll = function() {
 $(function(){
     $(".category_over, .category_list, .category_li").on("mouseover",categoryShowHandler);
     $(".category_list, .category_li").on("mouseout",categoryHideHandler);
+		$("#btn_search").on("click",searchAction);
     
-    //유형 선택 요일/난이도 버튼 클릭 시 색상 변경
-    $("div.check_btn > div > label.c_color").on("click",dayClickHandler);
 
     //키워드 검색창 클릭 시 유형 선택창 보이고 카테고리 숨기기
     var keyword = document.getElementById("keyword");
@@ -32,18 +31,12 @@ $(function(){
     }
    
 });
-function dayClickHandler() {
-	console.log("dayClickHandler 진입");
-	console.log($(this).css("background-color"));
-	
-	if($(this).css("background-color") == "rgb(145, 105, 255)") {
-		$(this).css("background-color", "rgb(140, 100, 205)");
-		$(this).css("border", "1px solid rgb(140, 100, 205)");
-	} else {
-		$(this).css("background-color", "rgb(145, 105, 255)");
-		$(this).css("border", "1px solid rgb(145, 105, 255)");
-	}
-}
+function searchAction() {
+    	$("#search_form").serialize();
+		console.log($("#search_form").serialize());
+		
+		location.href = "/nandal/list?"+$("#search_form").serialize();
+    }
 function categoryShowHandler() {
     $(".category_list").css("display","flex");
 }

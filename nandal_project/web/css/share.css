@@ -125,11 +125,21 @@ html{
 .check_wrap p {
     display: inline-block;
 }
-.check_btn > div > input[type="checkbox"] {
+.check_btn > div {
+    display: flex;
+}
+.check_btn > div > div {
+    margin-right: 5px;
+}
+.check_btn > div > div > input[type="checkbox"] {
     display: none;
 }
-.check_btn > div > label {
+.check_btn > div > div > label {
     cursor: pointer;
+}
+.check_btn > div > div > input[type="checkbox"]:checked ~ label {
+    background-color: rgb(140, 100, 205);
+    border: 1px solid rgb(140, 100, 205);
 }
 .check_admin {
     display: flex;

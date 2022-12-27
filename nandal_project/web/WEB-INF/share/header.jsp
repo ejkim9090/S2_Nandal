@@ -70,21 +70,21 @@
                                 <div class="check_btn">
                                     <div>
                                         <p class="c_size">요일</p>
-                                        <input type="checkbox" name="day" value="31" id="week"><label class="c_size c_line c_color"for="week">평일</label>
-                                        <input type="checkbox" name="day" value="32" id="sat"><label class="c_size c_line c_color" for="sat">토요일</label>
-                                        <input type="checkbox" name="day" value="64" id="sun"><label class="c_size c_line c_color" for="sun">일요일</label>
+                                        <div><input type="checkbox" name="day" value="31" id="week"><label class="c_size c_line c_color"for="week">평일</label></div>
+                                        <div><input type="checkbox" name="day" value="32" id="sat"><label class="c_size c_line c_color" for="sat">토요일</label></div>
+                                        <div><input type="checkbox" name="day" value="64" id="sun"><label class="c_size c_line c_color" for="sun">일요일</label></div>
                                     </div>
                                     <div>
                                         <p class="c_size">난이도</p>
-                                        <input type="checkbox" name="level" value="1" id="1"><label class="c_size c_line c_color" for="1">쉬움</label>
-                                        <input type="checkbox" name="level" value="2" id="2"><label class="c_size c_line c_color" for="2">보통</label>
-                                        <input type="checkbox" name="level" value="3" id="3"><label class="c_size c_line c_color" for="3">어려움</label>
+                                        <div><input type="checkbox" name="level" value="1" id="1"><label class="c_size c_line c_color" for="1">쉬움</label></div>
+                                        <div><input type="checkbox" name="level" value="2" id="2"><label class="c_size c_line c_color" for="2">보통</label></div>
+                                        <div><input type="checkbox" name="level" value="3" id="3"><label class="c_size c_line c_color" for="3">어려움</label></div>
                                     </div>
                                     <div>
                                         <p class="c_size">금액</p>
-                                        <input class="c_size c_line" type="text" name="priceMin" placeholder="최소금액">
-                                        <label class="c_size f_20_b" style="text-align: center;">~</label>
-                                        <input class="c_size c_line" type="text" name="priceMax" placeholder="최고금액">
+                                        <div><input class="c_size c_line" type="text" name="priceMin" placeholder="최소금액"></div>
+                                        <div><label class="c_size f_20_b" style="text-align: center;">~</label></div>
+                                        <div><input class="c_size c_line" type="text" name="priceMax" placeholder="최고금액"></div>
                                     </div>
                                 </div>
                             </div>
