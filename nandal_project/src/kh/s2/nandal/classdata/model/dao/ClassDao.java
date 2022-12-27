@@ -212,6 +212,11 @@ public class ClassDao {
 					+ "        group by c2.class_code) desc,";
 			break;
 		case "높은평점순" : 
+			sqlAllSearch += " (select allavg"
+					+ "      	from class c4 left join (select ca3.CLASS_CODE, avg(r.REVIEW_GRADE) allavg "
+					+ "                                 	from (select * from class_apply where CA_CANCEL = 'N') ca3 join review r  on r.REVIEW_CODE = ca3.CA_CODE "
+					+ "                                     group by ca3.class_code) ca4 on c4.class_code = ca4.class_code "
+					+ "        	where c4.class_code = c.class_code) desc,";
 			break;
 		case "낮은가격순" : 
 			sqlAllSearch += " c.class_price asc,";
@@ -222,7 +227,7 @@ public class ClassDao {
 		}
 		//2번 정렬 조건 추가
 		if(reviewLineUp != 0) {
-			sqlAllSearch += "(select count(ca2.class_code) cnt "
+			sqlAllSearch += " (select count(ca2.class_code) cnt "
 					+ "    		from class c3 left join (select * from class_apply "
 					+ "     						where CA_CANCEL = 'N' and CA_CODE in "
 					+ "            						(select review_code from review "
