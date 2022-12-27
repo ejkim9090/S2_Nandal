@@ -106,37 +106,53 @@
                                 <span class="category_text f_12">카테고리</span>
                             </div>
                             <ul class="category_list">
-                                <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/cooking.png"></div>
-                                    <label class="f_16_b">요리</label>
+                                <li>
+	                                <a class="category_li" href="${pageContext.request.contextPath }/list?category=1">
+	                                    <div><img src="<%=request.getContextPath()%>/images/cooking.png"></div>
+	                                    <label class="f_16_b">요리</label>
+	                                </a>
                                 </li>
-                                <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/craft.png"></div>
-                                    <label class="f_16_b">수공예</label>
+                                <li>
+	                                <a class="category_li" href="${pageContext.request.contextPath }/list?category=2">
+	                                    <div><img src="<%=request.getContextPath()%>/images/craft.png"></div>
+	                                    <label class="f_16_b">수공예</label>
+	                                </a>
                                 </li>
-                                <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/flower.png"></div>
-                                    <label class="f_16_b">플라워</label>
+                                <li>
+	                                <a class="category_li" href="${pageContext.request.contextPath }/list?category=3">
+	                                    <div><img src="<%=request.getContextPath()%>/images/flower.png"></div>
+	                                    <label class="f_16_b">플라워</label>
+	                                </a>
                                 </li>
-                                <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/art.png"></div>
-                                    <label class="f_16_b">미술</label>
+                                <li>
+	                                <a class="category_li" href="${pageContext.request.contextPath }/list?category=4">
+	                                    <div><img src="<%=request.getContextPath()%>/images/art.png"></div>
+	                                    <label class="f_16_b">미술</label>
+	                                </a>
                                 </li>
-                                <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/music.png"></div>
-                                    <label class="f_16_b">음악</label>
+                                <li>
+	                                <a class="category_li" href="${pageContext.request.contextPath }/list?category=5">
+	                                    <div><img src="<%=request.getContextPath()%>/images/music.png"></div>
+	                                    <label class="f_16_b">음악</label>
+	                                </a>
                                 </li>
-                                <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/activity.png"></div>
-                                    <label class="f_16_b">액티비티</label>
+                                <li>
+	                                <a class="category_li" href="${pageContext.request.contextPath }/list?category=6">
+	                                    <div><img src="<%=request.getContextPath()%>/images/activity.png"></div>
+	                                    <label class="f_16_b">액티비티</label>
+	                                </a>
                                 </li>
-                                <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/beauty.png"></div>
-                                    <label class="f_16_b">뷰티</label>
+                                <li>
+	                                <a class="category_li" href="${pageContext.request.contextPath }/list?category=7">
+	                                    <div><img src="<%=request.getContextPath()%>/images/beauty.png"></div>
+	                                    <label class="f_16_b">뷰티</label>
+	                                </a>
                                 </li>
-                                <li class="category_li">
-                                    <div><img src="<%=request.getContextPath()%>/images/lifestyle.png"></div>
-                                    <label class="f_16_b">라이프스타일</label>
+                                <li>
+	                                <a class="category_li" href="${pageContext.request.contextPath }/list?category=8">
+	                                    <div><img src="<%=request.getContextPath()%>/images/lifestyle.png"></div>
+	                                    <label class="f_16_b">라이프스타일</label>
+	                                </a>
                                 </li>
                             </ul>
                         </div>
