@@ -84,6 +84,34 @@ public class ClassDao {
 		System.out.println(">>> ClassDao delete return : " + result);
 		return result;
 	}
+	//keywordListCnt - 키워드 목록 조회된 개수 
+	public int groupListCnt(Connection conn,int group){
+		System.out.println(">>> ClassDao groupListCnt param group : " + group);
+		int result = 0;
+		
+		String sql = "select count(*) cnt"
+				+ "    from class c "
+				+ "    where c.class_code in (select ca.CLASS_CODE "
+				+ "                                from review r join CLASS_APPLY ca on r.REVIEW_CODE = ca.CA_CODE "
+				+ "                                where r.REVIEW_GROUP = ?)";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, group);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println(">>> ClassDao groupListCnt return : " + result);
+		return result;
+	}
 //	selectList - 리뷰 추천유형 해당 목록
 	public List<ClassVo> groupList(Connection conn,int group){
 		System.out.println(">>> ClassDao groupList param group : " + group);
@@ -95,7 +123,8 @@ public class ClassDao {
 				+ "                                         group by ca.class_code) ca on c.class_code = ca.class_code"
 				+ "    where c.class_code in (select ca.CLASS_CODE "
 				+ "                                from review r join CLASS_APPLY ca on r.REVIEW_CODE = ca.CA_CODE "
-				+ "                                where r.REVIEW_GROUP = ?)";
+				+ "                                where r.REVIEW_GROUP = ?)"
+				+ "	   order by allavg desc";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -184,30 +213,30 @@ public class ClassDao {
 //				+ " where r between ? and ?";
 		
 		if(searchword != null && !searchword.equals("")) {
-			sqlAllSearch += " and class_name LIKE '" + "%"+searchword+"%'";
+			sqlAllSearch += " and c.class_name LIKE '" + "%"+searchword+"%'";
 		}
 		if(searchArea != 0) {
-			sqlAllSearch += " and area_code =" + searchArea;
+			sqlAllSearch += " and c.area_code =" + searchArea;
 		}
 		if(searchCategory != 0) {
-			sqlAllSearch += " and category_code =" + searchCategory;
+			sqlAllSearch += " and c.category_code =" + searchCategory;
 		}
 		if(searchLevel.size() > 0) {
-			sqlAllSearch += " and class_level in (";
+			sqlAllSearch += " and c.class_level in (";
 			for(int i = 0; i < searchLevel.size(); i++) {
 				if(i == searchLevel.size()-1) sqlAllSearch += searchLevel.get(i)+")";
 				else sqlAllSearch += searchLevel.get(i)+",";
 			}
 		}
 		if(searchDay.size() > 0) {
-			sqlAllSearch += " and class_code in(select class_code from class_schedule where";
+			sqlAllSearch += " and c.class_code in(select class_code from class_schedule where";
 			for(int i = 0; i < searchDay.size(); i++) {
 				if(i == 0) sqlAllSearch += " bitand(CS_DAY," + searchDay.get(i) +") > 0";
 				else sqlAllSearch += " or bitand(CS_DAY," + searchDay.get(i) +") > 0";
 			}
 			sqlAllSearch  += ")";
 		}
-		sqlAllSearch  += " and class_price between "+searchMin+" and " +searchMax;
+		sqlAllSearch  += " and c.class_price between "+searchMin+" and " +searchMax;
 		sqlAllSearch  += " order by";
 		
 		//1번 정렬 조건 추가
@@ -281,6 +310,29 @@ public class ClassDao {
 		System.out.println(">>> ClassDao selectList return : " + volist);
 		return volist;
 	}
+	//keywordListCnt - 키워드 목록 조회된 개수 
+	public int keywordListCnt(Connection conn,String keyword){
+		System.out.println(">>> ClassDao keywordListCnt param keyword : " + keyword);
+		int result = 0;
+		
+		String sql = "select count(*) cnt from class where class_name like '%"+keyword+"%'";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println(">>> ClassDao keywordList return : " + result);
+		return result;
+	}
 //	selectList - 키워드 목록 조회
 	public List<ClassVo> keywordList(Connection conn,String keyword){
 		System.out.println(">>> ClassDao keywordList param keyword : " + keyword);
@@ -290,7 +342,8 @@ public class ClassDao {
 				+ "    from class c left join (select ca.CLASS_CODE, avg(r.REVIEW_GRADE) allavg , count(r.review_GRADE) allcnt "
 				+ "                                        from (select * from class_apply where CA_CANCEL = 'N') ca join review r  on r.REVIEW_CODE = ca.CA_CODE "
 				+ "                                         group by ca.class_code) ca on c.class_code = ca.class_code "
-				+ "    where c.class_name like '%"+keyword+"%'";
+				+ "    where c.class_name like '%"+keyword+"%'"
+				+ "	   order by allavg desc";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {

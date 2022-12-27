@@ -104,7 +104,16 @@ public class ReviewService {
 			System.out.println(">> ReviewService selectClassList return :" + volist);
 			return volist;
 		}
-		
+//		selectList - 메인화면 리뷰 목록 조회된 개수
+		public int selectListCnt(int reviewGrade){
+			Connection conn = JdbcTemplate.getConnection();
+			int result = 0;
+			result = dao.selectListCnt(conn, reviewGrade);
+			JdbcTemplate.close(conn);
+			System.out.println(">> ReviewService selectList return :" + result);
+			return result;
+		}
+				
 //		selectList - 메인화면 리뷰 목록 조회
 		public List<ReviewMainListVo> selectList(int reviewGrade){
 			Connection conn = JdbcTemplate.getConnection();

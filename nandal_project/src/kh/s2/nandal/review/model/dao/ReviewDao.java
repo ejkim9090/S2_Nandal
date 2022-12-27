@@ -169,7 +169,33 @@ public class ReviewDao {
 		System.out.println(">>> ReviewDao selectClassList return : " + volist);
 		return volist;
 	}
-	
+//	selectList - 메인화면 리뷰 목록 조회된 개수 
+	public int selectListCnt(Connection conn,int reviewGrade){
+		int result = 0;
+		
+		String sql = "select count(*) cnt"
+				+ "	   from (select  distinct first_value(rp.RP_ROUTE)  over(partition by review_code) a, r.REVIEW_CONT, REVIEW_CODE, ca.class_code "
+				+ "    			from review r join review_photo rp using(review_code) "
+				+ "                        		join CLASS_APPLY ca on review_code = ca.ca_code "
+				+ "     		where review_grade > ?)";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewGrade);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println(">>> ReviewDao selectListCnt return : " + result);
+		return result;
+	}	
 //	selectList - 메인화면 리뷰 목록 조회
 	public List<ReviewMainListVo> selectList(Connection conn,int reviewGrade){
 		List<ReviewMainListVo> volist = null;

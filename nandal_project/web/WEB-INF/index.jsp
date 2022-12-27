@@ -15,8 +15,6 @@
     <script src="<%=request.getContextPath()%>/js/jquery-3.6.1.js"></script>
     <script src="<%=request.getContextPath()%>/js/share.js"></script>
     
-    
-    <script src="<%=request.getContextPath()%>/js/index_section.js"></script>
     <title>메인 페이지</title>
     <!-- 전체공통 -->
 </head>
@@ -222,5 +220,112 @@
         </div>
     <%@include file="/WEB-INF/share/footer.jsp" %>
     </div>
+<script>
+        //각 목록 좌우 넘기기
+        //크리스마스 추천 목록
+        var $acnt = ${classlist1Cnt};
+        var acnt = 0;
+        if($acnt != 0 && $acnt%3 == 0) {acnt = Math.floor($acnt/3) - 1;}
+        else {acnt = Math.floor($acnt/3);}
+        var a = 0;
+        document.getElementsByClassName("rmd_right_btn")[0].onclick = function () {
+            a += -1137;
+            var t_value = "translate3d(" + a +"px, 0px, 0px)";
+            document.getElementsByClassName("rmd_list_swiper")[0].style.transform = t_value;
+
+            document.getElementsByClassName("rmd_left_btn")[0].style.display = "inline-block";
+            if(a == -1137*acnt) {
+                document.getElementsByClassName("rmd_right_btn")[0].style.display = "none";
+            }
+        }
+        document.getElementsByClassName("rmd_left_btn")[0].onclick = function () {
+            a += +1137;
+            var t_value = "translate3d(" + a +"px, 0px, 0px)";
+            document.getElementsByClassName("rmd_list_swiper")[0].style.transform = t_value;
+
+            document.getElementsByClassName("rmd_right_btn")[0].style.display = "inline-block";
+            if(a == 0) {
+                document.getElementsByClassName("rmd_left_btn")[0].style.display = "none";
+            }
+        }
+        //연인 추천 유형
+        var $bcnt = ${classlist2Cnt};
+        var bcnt = 0;
+        if($bcnt != 0 && $bcnt%3 == 0) {bcnt = Math.floor($bcnt/3) - 1;}
+        else {bcnt = Math.floor($bcnt/3);}
+        var b = 0;
+        document.getElementsByClassName("rmd_right_btn")[1].onclick = function () {
+            b += -1137;
+            var t_value = "translate3d(" + b +"px, 0px, 0px)";
+            document.getElementsByClassName("rmd_list_swiper")[1].style.transform = t_value;
+
+            document.getElementsByClassName("rmd_left_btn")[1].style.display = "inline-block";
+            if(b == -1137*bcnt) {
+                document.getElementsByClassName("rmd_right_btn")[1].style.display = "none";
+            }
+        }
+        document.getElementsByClassName("rmd_left_btn")[1].onclick = function () {
+            b += +1137;
+            var t_value = "translate3d(" + b +"px, 0px, 0px)";
+            document.getElementsByClassName("rmd_list_swiper")[1].style.transform = t_value;
+
+            document.getElementsByClassName("rmd_right_btn")[1].style.display = "inline-block";
+            if(b == 0) {
+                document.getElementsByClassName("rmd_left_btn")[1].style.display = "none";
+            }
+        }
+        //가족 추천
+        var $ccnt = ${classlist3Cnt};
+        var ccnt = 0;
+        if($ccnt != 0 && $ccnt%3 == 0) {ccnt = Math.floor($ccnt/3) - 1;}
+        else {ccnt = Math.floor($ccnt/3);}
+        var c = 0;
+        document.getElementsByClassName("rmd_right_btn")[2].onclick = function () {
+            c += -1137;
+            var t_value = "translate3d(" + c +"px, 0px, 0px)";
+            document.getElementsByClassName("rmd_list_swiper")[2].style.transform = t_value;
+
+            document.getElementsByClassName("rmd_left_btn")[2].style.display = "inline-block";
+            if(c == -1137*ccnt) {
+                document.getElementsByClassName("rmd_right_btn")[2].style.display = "none";
+            }
+        }
+        document.getElementsByClassName("rmd_left_btn")[2].onclick = function () {
+            c += +1137;
+            var t_value = "translate3d(" + c +"px, 0px, 0px)";
+            document.getElementsByClassName("rmd_list_swiper")[2].style.transform = t_value;
+
+            document.getElementsByClassName("rmd_right_btn")[2].style.display = "inline-block";
+            if(c == 0) {
+                document.getElementsByClassName("rmd_left_btn")[2].style.display = "none";
+            }
+        }
+        //리뷰 총점 4점이상 사진있는 리뷰
+        var $dcnt = ${reviewlistCnt};
+        var dcnt = 0;
+        if($dcnt != 0 && $dcnt%3 == 0) {dcnt = Math.floor($dcnt/3) - 1;}
+        else {dcnt = Math.floor($dcnt/3);}
+        var d = 0;
+        document.getElementsByClassName("rmd_right_btn")[3].onclick = function () {
+            d += -1137;
+            var t_value = "translate3d(" + d +"px, 0px, 0px)";
+            document.getElementsByClassName("rmd_list_swiper")[3].style.transform = t_value;
+
+            document.getElementsByClassName("rmd_left_btn")[3].style.display = "inline-block";
+            if(d == -1137*dcnt) {
+                document.getElementsByClassName("rmd_right_btn")[3].style.display = "none";
+            }
+        }
+        document.getElementsByClassName("rmd_left_btn")[3].onclick = function () {
+            d += +1137;
+            var t_value = "translate3d(" + d +"px, 0px, 0px)";
+            document.getElementsByClassName("rmd_list_swiper")[3].style.transform = t_value;
+
+            document.getElementsByClassName("rmd_right_btn")[3].style.display = "inline-block";
+            if(d == 0) {
+                document.getElementsByClassName("rmd_left_btn")[3].style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>

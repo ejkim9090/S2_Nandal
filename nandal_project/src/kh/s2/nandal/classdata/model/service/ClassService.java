@@ -42,7 +42,15 @@ public class ClassService {
 		return result;
 	}
 
-
+	//keywordListCnt - 키워드 목록 조회된 개수 
+	public int groupListCnt(int group){
+		Connection conn = JdbcTemplate.getConnection();
+		int result = 0;
+		result = dao.groupListCnt(conn,group);
+		JdbcTemplate.close(conn);
+		System.out.println(">> ClassService groupListCnt return :" + result);
+		return result;
+	}	
 //	selectList - 리뷰 추천유형 해당 목록
 	public List<ClassVo> groupList(int group){
 		Connection conn = JdbcTemplate.getConnection();
@@ -52,7 +60,15 @@ public class ClassService {
 		System.out.println(">> ClassService groupList return :" + volist);
 		return volist;
 	}	
-	
+	//keywordListCnt - 키워드 목록 조회된 개수 
+	public int keywordListCnt(String keyword){
+		Connection conn = JdbcTemplate.getConnection();
+		int result = 0;
+		result = dao.keywordListCnt(conn,keyword);
+		JdbcTemplate.close(conn);
+		System.out.println(">> ClassService keywordList return :" + result);
+		return result;
+	}	
 //	selectList - keyword 검색
 	public List<ClassVo> keywordList(String keyword){
 		Connection conn = JdbcTemplate.getConnection();
