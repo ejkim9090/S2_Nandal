@@ -89,9 +89,11 @@ public class ClassDao {
 		System.out.println(">>> ClassDao groupList param group : " + group);
 		List<ClassVo> volist = null;
 		
-		String sql = "select CLASS_CODE, CLASS_IMG, CLASS_NAME, CLASS_ADDRESS, CLASS_PRICE "
-				+ "    from CLASS "
-				+ "    where class_code in (select ca.CLASS_CODE "
+		String sql = "select ROUND(allavg,1) allavg, allcnt, c.class_code, c.CLASS_IMG, c.CLASS_NAME, c.CLASS_ADDRESS, c.CLASS_PRICE "
+				+ "    from class c left join (select ca.CLASS_CODE, avg(r.REVIEW_GRADE) allavg , count(r.review_GRADE) allcnt "
+				+ "                                        from (select * from class_apply where CA_CANCEL = 'N') ca join review r  on r.REVIEW_CODE = ca.CA_CODE "
+				+ "                                         group by ca.class_code) ca on c.class_code = ca.class_code"
+				+ "    where c.class_code in (select ca.CLASS_CODE "
 				+ "                                from review r join CLASS_APPLY ca on r.REVIEW_CODE = ca.CA_CODE "
 				+ "                                where r.REVIEW_GROUP = ?)";
 		PreparedStatement pstmt = null;
@@ -111,6 +113,8 @@ public class ClassDao {
 					String address = addressArr[0] +" "+addressArr[1];
 					vo.setClassAddress(address);
 					vo.setClassPrice(rs.getInt("CLASS_PRICE"));
+					vo.setAllAvg(rs.getDouble("allavg"));
+					vo.setAllCnt(rs.getInt("allcnt"));
 					volist.add(vo);
 				} while(rs.next());
 			}
@@ -164,7 +168,10 @@ public class ClassDao {
 		List<ClassVo> volist = null;
 		
 		String sqlAllSearch = "select * from (select t1.*, rownum r from "
-				+ " (select * from class c where 1=1";
+				+ " (select ROUND(allavg,1) allavg, allcnt, c.class_code ,c.CLASS_IMG, c.CLASS_NAME, c.CLASS_ADDRESS, c.CLASS_PRICE "
+				+ "                                    from class c left join (select ca.CLASS_CODE, avg(r.REVIEW_GRADE) allavg , count(r.review_GRADE) allcnt "
+				+ "                                        from (select * from class_apply where CA_CANCEL = 'N') ca join review r  on r.REVIEW_CODE = ca.CA_CODE "
+				+ "                                         group by ca.class_code) ca on c.class_code = ca.class_code where 1=1";
 //				+ "  and class_name LIKE ? " //키워드 검색 값 
 //				+ "and area_code = 11 " //지역 검색
 //				+ "and category_code = 3 " //카테고리 검색
@@ -259,6 +266,8 @@ public class ClassDao {
 					String address = addressArr[0] +" "+addressArr[1];
 					vo.setClassAddress(address);
 					vo.setClassPrice(rs.getInt("CLASS_PRICE"));
+					vo.setAllAvg(rs.getDouble("allavg"));
+					vo.setAllCnt(rs.getInt("allcnt"));
 					volist.add(vo);
 				} while(rs.next());
 			}
@@ -277,7 +286,11 @@ public class ClassDao {
 		System.out.println(">>> ClassDao keywordList param keyword : " + keyword);
 		List<ClassVo> volist = null;
 		
-		String sql = "select CLASS_CODE, CLASS_IMG, CLASS_NAME, CLASS_ADDRESS, CLASS_PRICE from CLASS where CLASS_NAME Like '%"+keyword+"%'";
+		String sql = "select ROUND(allavg,1) allavg, allcnt, c.class_code, c.CLASS_IMG, c.CLASS_NAME, c.CLASS_ADDRESS, c.CLASS_PRICE "
+				+ "    from class c left join (select ca.CLASS_CODE, avg(r.REVIEW_GRADE) allavg , count(r.review_GRADE) allcnt "
+				+ "                                        from (select * from class_apply where CA_CANCEL = 'N') ca join review r  on r.REVIEW_CODE = ca.CA_CODE "
+				+ "                                         group by ca.class_code) ca on c.class_code = ca.class_code "
+				+ "    where c.class_name like '%"+keyword+"%'";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -294,6 +307,8 @@ public class ClassDao {
 					String address = addressArr[0] +" "+addressArr[1];
 					vo.setClassAddress(address);
 					vo.setClassPrice(rs.getInt("CLASS_PRICE"));
+					vo.setAllAvg(rs.getDouble("allavg"));
+					vo.setAllCnt(rs.getInt("allcnt"));
 					volist.add(vo);
 				} while(rs.next());
 			}

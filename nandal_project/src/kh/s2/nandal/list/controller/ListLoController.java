@@ -157,6 +157,8 @@ public class ListLoController extends HttpServlet {
 	                sObject.addProperty("classImg", classlist.get(j).getClassImg());
 	                sObject.addProperty("classAddress", classlist.get(j).getClassAddress());
 	                sObject.addProperty("classPrice", classlist.get(j).getClassPrice());
+	                sObject.addProperty("allAvg", classlist.get(j).getAllAvg());
+	                sObject.addProperty("allCnt", classlist.get(j).getAllCnt());
 	                jArray.add(sObject);
 	                
 	                if (j >= classlist.size() - 1) {

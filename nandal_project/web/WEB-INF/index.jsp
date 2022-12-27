@@ -57,6 +57,7 @@
 		                                            <img src="${pageContext.request.contextPath}${vo.classImg}" alt="클래스 이미지">
 		                                        </div>
 		                                        <div class="list_class_info_wrap">
+		                                        	<div class="allavg"><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"><span class="f_14_b">${vo.allAvg}(${vo.allCnt})</span></div>
 		                                            <h3 class="f_16_b">
 		                                                ${vo.className}
 		                                            </h3>
@@ -103,6 +104,7 @@
 		                                            <img src="${pageContext.request.contextPath}${vo.classImg}" alt="클래스 이미지">
 		                                        </div>
 		                                        <div class="list_class_info_wrap">
+		                                        <div class="allavg"><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"><span class="f_14_b">${vo.allAvg}(${vo.allCnt})</span></div>
 		                                            <h3 class="f_16_b">
 		                                                ${vo.className}
 		                                            </h3>
@@ -149,6 +151,7 @@
 		                                            <img src="${pageContext.request.contextPath}${vo.classImg}" alt="클래스 이미지">
 		                                        </div>
 		                                        <div class="list_class_info_wrap">
+		                                        <div class="allavg"><img class="review_star"src="<%=request.getContextPath()%>/images/review_star_full.png"><span class="f_14_b">${vo.allAvg}(${vo.allCnt})</span></div>
 		                                            <h3 class="f_16_b">
 		                                                ${vo.className}
 		                                            </h3>

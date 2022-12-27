@@ -82,3 +82,12 @@
     object-fit: cover;
     margin-top: 7.5px;
 }
+.allavg {
+	display : flex;
+	align-items : center;
+}
+.review_star {
+    width: 15px;
+    height: 15px;
+    margin-right: 3px;
+}
