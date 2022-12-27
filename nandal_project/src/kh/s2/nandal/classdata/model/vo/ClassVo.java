@@ -38,6 +38,28 @@ public class ClassVo {
 		super();
 	}
 
+	public ClassVo(int classCode, int categoryCode, String className, String classImg, String classIntro,
+			String classCur, String classHost, String classAlltime, String classPrd, int areaCode, String classAddress,
+			int classPrice, int classLevel, int classMin, int classMax) {
+		super();
+		this.classCode = classCode;
+		this.categoryCode = categoryCode;
+		this.className = className;
+		this.classImg = classImg;
+		this.classIntro = classIntro;
+		this.classCur = classCur;
+		this.classHost = classHost;
+		this.classAlltime = classAlltime;
+		this.classPrd = classPrd;
+		this.areaCode = areaCode;
+		this.classAddress = classAddress;
+		this.classPrice = classPrice;
+		this.classLevel = classLevel;
+		this.classMin = classMin;
+		this.classMax = classMax;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ClassVo [classCode=" + classCode + ", categoryCode=" + categoryCode + ", className=" + className
