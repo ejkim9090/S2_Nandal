@@ -131,7 +131,7 @@ public class ListLoController extends HttpServlet {
 			if(endRnum > cnt ) {
 				endRnum = cnt;
 			}
-			classlist = service.selectList(startRnum, endRnum, searchword, searchArea, searchCategory, searchDay, searchLevel, searchMin, searchMax);
+			classlist = service.selectList(startRnum, endRnum, searchword, searchArea, searchCategory, searchDay, searchLevel, searchMin, searchMax, classLineUp, reviewLineUp);
 
 		} finally {
 			JsonObject page = new JsonObject();

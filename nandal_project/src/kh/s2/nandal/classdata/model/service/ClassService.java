@@ -72,11 +72,11 @@ public class ClassService {
 		return volist;
 	}
 //	selectList - overloading
-	public List<ClassVo> selectList(int startRnum, int endRnum, String searchword,int searchArea,int searchCategory, List<Integer> searchDay, List<Integer> searchLevel, int searchMin,int searchMax){
+	public List<ClassVo> selectList(int startRnum, int endRnum, String searchword,int searchArea,int searchCategory, List<Integer> searchDay, List<Integer> searchLevel, int searchMin,int searchMax,String classLineUp,int reviewLineUp){
 		List<ClassVo> volist = null;
 		Connection conn = JdbcTemplate.getConnection();
 	
-		volist = dao.selectList(conn, startRnum, endRnum, searchword, searchArea, searchCategory, searchDay, searchLevel, searchMin, searchMax);
+		volist = dao.selectList(conn, startRnum, endRnum, searchword, searchArea, searchCategory, searchDay, searchLevel, searchMin, searchMax, classLineUp, reviewLineUp);
 		
 		JdbcTemplate.close(conn);
 		System.out.println(">> ClassService selectList return :" + volist);

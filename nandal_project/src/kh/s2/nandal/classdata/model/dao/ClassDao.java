@@ -158,8 +158,8 @@ public class ClassDao {
 		return volist;
 	}
 //	selectList  - 목록조회 페이징 - overloading 
-	public List<ClassVo> selectList(Connection conn, int startRnum, int endRnum, String searchword,int searchArea,int searchCategory, List<Integer> searchDay, List<Integer> searchLevel, int searchMin,int searchMax){
-		System.out.println("키워드:"+searchword+",선택지역:"+searchArea+", 카테고리 :" +searchCategory + ",요일:"+searchDay+",난이도:"+searchLevel+",최소금액:"+searchMin+",최고금액:"+searchMax);
+	public List<ClassVo> selectList(Connection conn, int startRnum, int endRnum, String searchword,int searchArea,int searchCategory, List<Integer> searchDay, List<Integer> searchLevel, int searchMin,int searchMax,String classLineUp,int reviewLineUp){
+		System.out.println("키워드:"+searchword+",선택지역:"+searchArea+", 카테고리 :" +searchCategory + ",요일:"+searchDay+",난이도:"+searchLevel+",최소금액:"+searchMin+",최고금액:"+searchMax+",classLineUp :" + classLineUp + ", reviewLineUp : " + reviewLineUp);
 		
 		List<ClassVo> volist = null;
 		
@@ -200,8 +200,38 @@ public class ClassDao {
 			}
 			sqlAllSearch  += ")";
 		}
-		sqlAllSearch  += "and class_price between "+searchMin+" and " +searchMax;
-		sqlAllSearch  += "order by c.class_name asc) t1 ) t2 where r between ? and ?";
+		sqlAllSearch  += " and class_price between "+searchMin+" and " +searchMax;
+		sqlAllSearch  += " order by";
+		
+		//1번 정렬 조건 추가
+		switch(classLineUp) {
+		case "인기순" : 
+			sqlAllSearch += " (select count(ca.class_code) cnt "
+					+ "        from class c2 left join (select * from CLASS_apply where ca_cancel = 'N') ca on c2.CLASS_CODE = ca.class_code"
+					+ "        where  c2.class_code = c.class_code"
+					+ "        group by c2.class_code) desc,";
+			break;
+		case "높은평점순" : 
+			break;
+		case "낮은가격순" : 
+			sqlAllSearch += " c.class_price asc,";
+			break;
+		case "높은가격순" : 
+			sqlAllSearch += " c.class_price desc,";
+			break;
+		}
+		//2번 정렬 조건 추가
+		if(reviewLineUp != 0) {
+			sqlAllSearch += "(select count(ca2.class_code) cnt "
+					+ "    		from class c3 left join (select * from class_apply "
+					+ "     						where CA_CANCEL = 'N' and CA_CODE in "
+					+ "            						(select review_code from review "
+					+ "                					where REVIEW_GROUP = "+reviewLineUp+")) ca2 on c3.class_code = ca2.class_code "
+					+ "      	where c3.class_code = c.class_code "
+					+ "         group by c3.class_code) desc,";
+		}
+		
+		sqlAllSearch  += " c.class_name asc) t1 ) t2 where r between ? and ?";
 		
 		System.out.println(sqlAllSearch);
 		PreparedStatement pstmt = null;
