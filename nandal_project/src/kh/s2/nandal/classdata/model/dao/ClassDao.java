@@ -157,72 +157,6 @@ public class ClassDao {
 		System.out.println(">>> ClassDao selectList return : " + volist);
 		return volist;
 	}
-	
-//	selectList  - 목록조회 페이징 - overloading 
-	public List<ClassVo> selectList(Connection conn, int startRnum, int endRnum, String searchword){
-		System.out.println(">>> ClassDao selectList param startRnum : " + startRnum);
-		System.out.println(">>> ClassDao selectList param endRnum : " + endRnum);
-		System.out.println(">>> ClassDao selectList param searchword : " + searchword);
-		List<ClassVo> volist = null;
-		
-		String sql = "select * from (select t1.*, rownum r from "
-				+ " (select * from class) t1 ) t2 "
-				+ " where r between ? and ?";
-		String sqlSearch = "select * from (select t1.*, rownum r from "
-				+ " (select * from class where class_name LIKE ?) t1 ) t2 "
-				+ " where r between ? and ?";
-		
-		String sqlAllSearch = "select * from (select t1.*, rownum r from "
-				+ " (select * from class where class_name LIKE ? " //키워드 검색 값 
-				+ "and area_code = 11 " //지역 검색
-				+ "and category_code = 3 " //카테고리 검색
-				+ "and class_level in (1,2,3) " //난이도 검색
-				+ "and class_code in(select class_code from class_schedule where bitand(CS_DAY,31) > 0 " // 요일 - 평일 확인
-				+ "																or bitand(CS_DAY,32) > 0 " // 요일 - 토요일 확인
-				+ "																or bitand(CS_DAY,64) > 0)" // 요일 - 일요일 확인
-				+ ") t1 ) t2 "
-				+ " where r between ? and ?";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			if(searchword != null && !searchword.equals("")) {
-				System.out.println("키워드 있는 sql 적용");
-				pstmt = conn.prepareStatement(sqlSearch);
-				pstmt.setInt(2, startRnum);
-				pstmt.setInt(3, endRnum);
-				searchword = "%"+searchword+"%";   // LIKE 형식
-				pstmt.setString(1, searchword);
-			}else {
-				System.out.println("키워드 없는 sql 적용");
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, startRnum);
-				pstmt.setInt(2, endRnum);
-			}
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				volist = new ArrayList<ClassVo>();
-				do {
-					ClassVo vo = new ClassVo();
-					vo.setClassCode(rs.getInt("CLASS_CODE"));
-					vo.setClassImg(rs.getString("CLASS_IMG"));
-					vo.setClassName(rs.getString("CLASS_NAME"));
-					String[] addressArr = rs.getString("CLASS_ADDRESS").split("\\s");
-					String address = addressArr[0] +" "+addressArr[1];
-					vo.setClassAddress(address);
-					vo.setClassPrice(rs.getInt("CLASS_PRICE"));
-					volist.add(vo);
-				} while(rs.next());
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JdbcTemplate.close(rs);
-			JdbcTemplate.close(pstmt);
-		}
-
-		System.out.println(">>> ClassDao selectList return : " + volist);
-		return volist;
-	}
 //	selectList  - 목록조회 페이징 - overloading 
 	public List<ClassVo> selectList(Connection conn, int startRnum, int endRnum, String searchword,int searchArea,int searchCategory, List<Integer> searchDay, List<Integer> searchLevel, int searchMin,int searchMax){
 		System.out.println("키워드:"+searchword+",선택지역:"+searchArea+", 카테고리 :" +searchCategory + ",요일:"+searchDay+",난이도:"+searchLevel+",최소금액:"+searchMin+",최고금액:"+searchMax);
@@ -239,11 +173,11 @@ public class ClassDao {
 //				+ "																or bitand(CS_DAY,32) > 0 " // 요일 - 토요일 확인
 //				+ "																or bitand(CS_DAY,64) > 0)" // 요일 - 일요일 확인
 //				+ "and class_price between 0 and 9999"
-//				+ ") t1 ) t2 "
+//				+ "order by c.class_name asc) t1 ) t2 "
 //				+ " where r between ? and ?";
 		
 		if(searchword != null && !searchword.equals("")) {
-			sqlAllSearch += " and class_name LIKE " + "%"+searchword+"%";
+			sqlAllSearch += " and class_name LIKE '" + "%"+searchword+"%'";
 		}
 		if(searchArea != 0) {
 			sqlAllSearch += " and area_code =" + searchArea;
@@ -262,13 +196,14 @@ public class ClassDao {
 			sqlAllSearch += " and class_code in(select class_code from class_schedule where";
 			for(int i = 0; i < searchDay.size(); i++) {
 				if(i == 0) sqlAllSearch += " bitand(CS_DAY," + searchDay.get(i) +") > 0";
-				else sqlAllSearch += "or bitand(CS_DAY," + searchDay.get(i) +") > 0";
+				else sqlAllSearch += " or bitand(CS_DAY," + searchDay.get(i) +") > 0";
 			}
 			sqlAllSearch  += ")";
 		}
 		sqlAllSearch  += "and class_price between "+searchMin+" and " +searchMax;
-		sqlAllSearch  += ") t1 ) t2 where r between ? and ?";
+		sqlAllSearch  += "order by c.class_name asc) t1 ) t2 where r between ? and ?";
 		
+		System.out.println(sqlAllSearch);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -337,51 +272,6 @@ public class ClassDao {
 		return volist;
 	}
 //	selectTotalCnt - 클래스 목록 조회 충 클래스 수 
-	public int selectTotalCnt(Connection conn){
-		int result = 0;
-		String sql = "select count(*) cnt from class";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				result = rs.getInt("cnt");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			JdbcTemplate.close(rs);
-			JdbcTemplate.close(pstmt);
-		}
-		System.out.println(">>> ClassDao selectTotalCnt result : " + result);
-		return result;
-	}
-	public int selectTotalCnt(Connection conn, String searchword){
-		System.out.println(">>> ClassDao selectTotalCnt param searchword : " + searchword);
-		int result = 0;
-
-		String sql = "select count(*) cnt from class where class_name LIKE ?";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			searchword = "%"+searchword+"%";   // LIKE 형식
-			pstmt.setString(1, searchword);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				result = rs.getInt("cnt");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			JdbcTemplate.close(rs);
-			JdbcTemplate.close(pstmt);
-		}
-		System.out.println(">>> ClassDao selectTotalCnt result : " + result);
-		return result;
-	}
-	
 	public int selectTotalCnt(Connection conn, String searchword, int searchArea,int searchCategory, List<Integer> searchDay, List<Integer> searchLevel, int searchMin,int searchMax){
 		
 		int result = 0;
@@ -389,7 +279,7 @@ public class ClassDao {
 		String sql = "select count(*) cnt from class where 1=1";
 		
 		if(searchword != null && !searchword.equals("")) {
-			sql += " and class_name LIKE " + "%"+searchword+"%";
+			sql += " and class_name LIKE '" + "%"+searchword+"%'";
 		}
 		if(searchArea != 0) {
 			sql += " and area_code =" + searchArea;
@@ -412,7 +302,7 @@ public class ClassDao {
 			}
 			sql  += ")";
 		}
-		sql  += "and class_price between "+searchMin+" and " +searchMax;
+		sql  += " and class_price between "+searchMin+" and " +searchMax;
 		
 		System.out.println(sql);
 		PreparedStatement pstmt = null;

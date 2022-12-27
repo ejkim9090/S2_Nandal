@@ -57,7 +57,7 @@ public class ListLoController extends HttpServlet {
 		
 		
 		
-		
+		//키워드, 유형선택 검색 값 가져오기
 		String searchword = request.getParameter("search");
 		String[] searchDayArr = request.getParameterValues("day");
 		String[] searchLevelArr = request.getParameterValues("level");
@@ -67,7 +67,6 @@ public class ListLoController extends HttpServlet {
 		int searchMax = 999999999;
 		List<Integer> searchDay = new ArrayList<Integer>();
 		List<Integer> searchLevel = new ArrayList<Integer>();
-		
 		try {
 			searchArea = Integer.parseInt(request.getParameter("area"));
 			searchCategory = Integer.parseInt(request.getParameter("category"));
@@ -75,29 +74,35 @@ public class ListLoController extends HttpServlet {
 			if(!MinStr.equals("")) {
 				searchMin = Integer.parseInt(MinStr);
 			}
-			
 			String MaxStr = request.getParameter("priceMax");
 			if(!MaxStr.equals("")) {
 				searchMax = Integer.parseInt(MaxStr);
 			}
-			
 			if(searchDayArr != null) {
 				for(String day : searchDayArr) {
 					searchDay.add(Integer.parseInt(day));
 				}
 			}
-			if(searchDayArr != null) {
+			if(searchLevelArr != null) {
 				for(String level : searchLevelArr) {
 					searchLevel.add(Integer.parseInt(level));
 				}
 			}
-			
 		} catch(NumberFormatException e) {
 			System.out.println("String --> int 변환 실패");
 			e.printStackTrace();
 		}
-
 		System.out.println("키워드:"+searchword+",선택지역:"+searchArea+", 카테고리 :" +searchCategory + ",요일:"+searchDay+",난이도:"+searchLevel+",최소금액:"+searchMin+",최고금액:"+searchMax);
+		
+		//정렬 기준 가져오기
+		String classLineUp = request.getParameter("classLineUp");
+		int reviewLineUp = 0;
+		try {
+			reviewLineUp = Integer.parseInt(request.getParameter("reviewLineUp"));
+		} catch(NumberFormatException e) {
+			
+		}
+		System.out.println("classLineUp :" + classLineUp + ", reviewLineUp : " + reviewLineUp);
 		
 		List<ClassVo> classlist = null;
 		try {
@@ -144,22 +149,25 @@ public class ListLoController extends HttpServlet {
 			
 			//받아온 List<ClassVo> classlist 데이터를 json으로 변경 후 기존 json 객체에 추가
 			JsonArray jArray = new JsonArray();
-            for (int j = 0; j < classlist.size(); j++) {
-                JsonObject sObject = new JsonObject();//배열 내에 들어갈 json
-                sObject.addProperty("classCode", classlist.get(j).getClassCode());
-                sObject.addProperty("className", classlist.get(j).getClassName());
-                sObject.addProperty("classImg", classlist.get(j).getClassImg());
-                sObject.addProperty("classAddress", classlist.get(j).getClassAddress());
-                sObject.addProperty("classPrice", classlist.get(j).getClassPrice());
-                jArray.add(sObject);
-                
-                if (j >= classlist.size() - 1) {
+			if(classlist != null) {
+				for (int j = 0; j < classlist.size(); j++) {
+	                JsonObject sObject = new JsonObject();//배열 내에 들어갈 json
+	                sObject.addProperty("classCode", classlist.get(j).getClassCode());
+	                sObject.addProperty("className", classlist.get(j).getClassName());
+	                sObject.addProperty("classImg", classlist.get(j).getClassImg());
+	                sObject.addProperty("classAddress", classlist.get(j).getClassAddress());
+	                sObject.addProperty("classPrice", classlist.get(j).getClassPrice());
+	                jArray.add(sObject);
+	                
+	                if (j >= classlist.size() - 1) {
 
-                	page.add("classlist", jArray);
+	                	page.add("classlist", jArray);
 
-                     System.out.println("jArray:"+jArray.toString());
-               }
-            }
+	                     System.out.println("jArray:"+jArray.toString());
+	               }
+	            }
+			}
+            
 			
 //			String classlist2 = gson.toJson(classlist);
 //			String cnt2 = gson.toJson("cnt:" + cnt);
