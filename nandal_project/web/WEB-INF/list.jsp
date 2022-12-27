@@ -31,9 +31,10 @@
 		listStartSet();
 		listDataAction();
 		$("#btn_search").on("click",listDataAction);
+		$("select[name=classLineUp]").on("change",listDataAction);
+		$("select[name=reviewLineUp]").on("change",listDataAction);
 	});
-	var day = "";
-	var level = "";
+	
 	function listStartSet() {
 		var search = "${search}";
 		var area = "${area}";
