@@ -13,6 +13,9 @@ html{
     z-index: 100;
     top: 0px;
 }
+#header_nav > div {
+    box-shadow: rgba(125, 58, 248, 0.17) 0 7px 4px -4px;
+}
 .wrap_1050 {
     width: 1050px;
     margin: 0 auto;
@@ -71,17 +74,17 @@ html{
     display: flex;
     align-items: center;
     margin-left: 40px;
-    width: 80px;
+    width: 100px;
     cursor: pointer;
 }
 .category_img {
-    width: 12px;
-    height: 11px;
+    width: 16px;
+    height: 14.5px;
     margin-right: 5px;
-    background: url(../images/category_logo.svg) 0px 0px / 12px 11px no-repeat;
+    background: url(../images/category_logo.svg) 0px 0px / 16px 14.5px no-repeat;
 }
 .category_over:hover > .category_img {
-    background: url(../images/category_logo_hover.svg) 0px 0px / 12px 11px no-repeat;
+    background: url(../images/category_logo_hover.svg) 0px 0px / 16px 14.5px no-repeat;
 }
 .category_over:hover > .category_text {
     color: rgb(183, 128, 201);
@@ -107,8 +110,8 @@ html{
     margin-top : 10px;
 }
 .category_li > div > img {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
 }
 
 /* 유형선택 부분 */
@@ -125,8 +128,12 @@ html{
 .check_wrap p {
     display: inline-block;
 }
+.check_list > div {
+    margin-bottom: 10px;
+}
 .check_btn > div {
     display: flex;
+    margin-bottom: 10px;
 }
 .check_btn > div > div {
     margin-right: 5px;
@@ -147,6 +154,9 @@ html{
     margin-top: 40px;
     padding-bottom: 20px;
 }
+.check_admin > button {
+	margin : 0 5px;
+} 
 /* 유형 선택 칸 */
 
 .c_line {
@@ -163,9 +173,9 @@ html{
 }
 .c_size_select {
     display: inline-block;
-    width: 88px;
+    width: 110px;
     height: 33px;
-    line-height: 30px;
+    line-height: 33px;
 }
 .c_color {
     color: #fff;

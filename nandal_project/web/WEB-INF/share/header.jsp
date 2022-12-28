@@ -94,16 +94,11 @@
                             </div>
                         </div>
                     </form>
-<%-- <script>
-	$("#btn_search").click(function(){
-		location.href = "<%=request.getContextPath()%>/list?search="+$("#keyword").val();
-	});
-</script> --%>
                     <div class="header_second">
                         <div class="header_category">
                             <div class="category_over">
                                 <span class="category_img"></span>
-                                <span class="category_text f_12">카테고리</span>
+                                <span class="category_text f_14">카테고리</span>
                             </div>
                             <ul class="category_list">
                                 <li>
