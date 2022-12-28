@@ -16,6 +16,7 @@
                                 <div class="header_log">
                                 	<c:choose>
                                 		<c:when test="${empty loginSsInfo}">
+                                    	<a href="${pageContext.request.contextPath }/join">Join</a>
                                     	<a href="${pageContext.request.contextPath }/login">Login</a>
                                 		</c:when>
                                 		<c:otherwise>

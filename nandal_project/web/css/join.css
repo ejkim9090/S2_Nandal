@@ -1,0 +1,72 @@
+#section_child_1 {
+    margin: 247px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.border_div {
+	width: 500px;
+	border-bottom: 1px solid black;
+	margin: 15px 0;
+}
+.border_div > p {
+	text-align: right;
+}
+/*로그인 - 텍스트 영역*/
+.login_txt {
+    margin-bottom: 15px;
+    line-height: 20px;
+    text-align: center;
+}
+/*로그인 - 사용자 입력 구간*/
+.login_user_area {
+    width: 500px;
+}
+
+.input_area {
+    display: flex; 
+    flex-direction: column;
+}
+.input_area > div {
+	display : flex;
+	justify-content: space-between;
+}
+.input_area > div:nth-of-type(1), .input_area > div:nth-of-type(4) {
+	margin-bottom: 30px;
+}
+.input_area > div > label {
+	height: 50px;
+	line-height: 50px;
+}
+.input_area > div > input {
+    width: 340px;
+    height: 50px;
+    padding: 0px 11px 1px 15px;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 4px;
+
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+}
+.input_area > p {
+	margin-left: 160px;
+	height: 30px;
+	line-height: 30px;
+} 
+/*로그인 - 페이지 이동 버튼 영역*/
+.submit_area {
+    margin-top: 28px;
+    display : flex;
+    justify-content: center;
+}
+#login_btn {
+    cursor: pointer;
+    width: 300px;
+    height: 54px;
+    border-radius: 3px;
+    background-color: rgb(175, 129, 252);
+    border: none;
+    color: rgb(255, 255, 255);
+}
+

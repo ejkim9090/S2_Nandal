@@ -15,6 +15,8 @@
 	alert(message);
 	if(messageName == "memberUpdate") {
 		location.href = "<%=request.getContextPath()%>/my";
+	} else if(messageName == "memberInsert") {
+		location.href = "<%=request.getContextPath()%>/login";
 	} else {
 		history.back();
 	}

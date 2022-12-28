@@ -43,10 +43,7 @@ a {
 select:focus {
 	outline: none;
 }
-input[type="text" i] {
-	outline: none;
-}
-input[type="number" i] {
+input[type="text" i], input[type="number" i], input[type="password" i]  {
 	outline: none;
 }
 

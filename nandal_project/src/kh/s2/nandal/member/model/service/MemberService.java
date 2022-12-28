@@ -26,6 +26,13 @@ public class MemberService {
 		Connection conn = JdbcTemplate.getConnection();
 		int result = 0;
 		result = dao.insert(conn, vo);
+		if(result > 0) {
+			JdbcTemplate.commit(conn);
+			System.out.println("커밋 완료");
+		} else {
+			JdbcTemplate.rollback(conn);
+			System.out.println("커밋 실패");
+		}
 		System.out.println(">> MemberService insert return :" + result);
 		return result;
 	}

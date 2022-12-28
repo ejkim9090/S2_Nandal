@@ -45,7 +45,7 @@ public class MemberDao {
 	public int insert(Connection conn, MemberVo vo) {
 		System.out.println(">>> MemberDao insert param : " + vo);
 		int result = 0;
-		String sql = "insert into member values(?,?,?,?,?)"; // ""안에 ; 는 없어야함
+		String sql = "insert into member(MEMBER_ID,MEMBER_PWD,MEMBER_NAME,MEMBER_PHONE) values(?,?,?,?)"; // ""안에 ; 는 없어야함
 		PreparedStatement pstmt = null;
 		
 		try {
@@ -54,7 +54,6 @@ public class MemberDao {
 			pstmt.setString(2, vo.getMemberPwd());
 			pstmt.setString(3, vo.getMemberName());
 			pstmt.setString(4, vo.getMemberPhone());
-			pstmt.setString(5, vo.getMemberImg());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
