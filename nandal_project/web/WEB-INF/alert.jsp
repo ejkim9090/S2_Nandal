@@ -11,9 +11,13 @@
 <body>
 <script>
 	var message = "<%=request.getAttribute("msg")%>";
+	var messageName = "<%=request.getAttribute("msgName")%>";
 	alert(message);
-	<%-- location.href = "<%=request.getContextPath()%>/main"; --%>
-	history.back();
+	if(messageName == "memberUpdate") {
+		location.href = "<%=request.getContextPath()%>/my";
+	} else {
+		history.back();
+	}
 </script>
 </body>
 </html>

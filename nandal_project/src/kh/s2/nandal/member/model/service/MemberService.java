@@ -35,6 +35,13 @@ public class MemberService {
 		Connection conn = JdbcTemplate.getConnection();
 		int result = 0;
 		result = dao.update(conn, vo, memberId);
+		if(result > 0) {
+			JdbcTemplate.commit(conn);
+			System.out.println("커밋 완료");
+		} else {
+			JdbcTemplate.rollback(conn);
+			System.out.println("커밋 실패");
+		}
 		
 		JdbcTemplate.close(conn);
 		System.out.println(">> MemberService update return :" + result);

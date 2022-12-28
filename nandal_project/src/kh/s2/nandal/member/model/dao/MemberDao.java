@@ -71,8 +71,20 @@ public class MemberDao {
 		System.out.println(">>> MemberDao update param memberId : " + memberId);
 		int result = 0;
 		
-		String sql = "update member set //TODO where member_id=?";
+		String sql = "update member set member_pwd = '"+vo.getMemberPwd()+"'"; 
+		
+		if(vo.getMemberImg() != null) {
+			sql += ", member_img = '" + vo.getMemberImg()+"'";
+		}
+		if(!vo.getMemberPhone().equals("") && vo.getMemberPhone() != null) {
+			sql += ", member_phone = '" + vo.getMemberPhone()+"'";
+		}
+		
+		sql += " where member_id= '"+memberId+"'";
+				
+		
 		PreparedStatement pstmt = null;
+		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			result = pstmt.executeUpdate();
