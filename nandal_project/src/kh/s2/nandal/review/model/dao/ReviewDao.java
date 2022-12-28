@@ -91,7 +91,7 @@ public class ReviewDao {
 	public List<ClassReviewVo> MyReviewList(Connection conn,String memberId){
 		List<ClassReviewVo> volist = null;
 		
-		String sql = "select c.CLASS_NAME, r.REVIEW_CODE,r.REVIEW_COMPONENT,r.REVIEW_CONT,r.REVIEW_FACILITY,r.REVIEW_GRADE,r.REVIEW_GROUP,r.REVIEW_KIND,r.REVIEW_LEVEL,TO_CHAR(r.REVIEW_TIME,'YYYY-MM-DD HH24:MI:SS') as REVIEW_TIME"
+		String sql = "select class_code, c.CLASS_NAME, r.REVIEW_CODE,r.REVIEW_COMPONENT,r.REVIEW_CONT,r.REVIEW_FACILITY,r.REVIEW_GRADE,r.REVIEW_GROUP,r.REVIEW_KIND,r.REVIEW_LEVEL,TO_CHAR(r.REVIEW_TIME,'YYYY-MM-DD HH24:MI:SS') as REVIEW_TIME"
 				+ "    from (select CA_CODE,CLASS_CODE "
 				+ "                from CLASS_APPLY "
 				+ "                where MEMBER_ID = ? and CA_CANCEL = 'N') ca "
@@ -117,6 +117,7 @@ public class ReviewDao {
 					vo.setReviewLevel(rs.getInt("REVIEW_LEVEL"));
 					vo.setReviewGroup(rs.getInt("REVIEW_GROUP"));
 					vo.setClassName(rs.getString("CLASS_NAME"));
+					vo.setClassCode(rs.getInt("class_code"));
 					volist.add(vo);
 				} while(rs.next());
 			}

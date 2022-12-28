@@ -241,7 +241,7 @@
      							} 
      							addHtml += "<div class='apply_list'>"+
 					                            "<div class='myList_left'>"+
-					                                "<h3>"+data[i].className+"</h3>"+
+					                            	"<a href='/nandal/info/"+data[i].classCode+"'><h3>"+data[i].className+"</h3></a>"+
 					                                "<div><img class='my_img' src='<%=request.getContextPath()%>/images/review_star_full.png'><p class='f_16'>"+data[i].reviewGrade+"</p><p class='f_16'>"+
 					                                reGroup
 					                                +"</p></div>"+
