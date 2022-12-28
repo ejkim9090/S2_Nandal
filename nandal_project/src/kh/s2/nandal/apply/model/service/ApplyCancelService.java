@@ -24,9 +24,8 @@ public class ApplyCancelService {
 		int result = 0;
 		if(caDao.update(conn, acCode) > 0) {
 			if(dao.insert(conn, acCode) > 0) {
-				if(rpDao.delete(conn, acCode) > 0) {
+					rpDao.delete(conn, acCode);
 					result = reDao.delete(conn, acCode);
-				}
 			}
 		}
 		if(result > 0) {
