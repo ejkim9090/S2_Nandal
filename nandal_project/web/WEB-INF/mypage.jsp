@@ -475,7 +475,7 @@
 		
 	}
 	//비밀번호 확인 문구안내
-	$("input[type=password][name=pwdCheck]").blur(pwdCheckBluredHandler);
+	$("input[type=password][name=pwdCheck]").on("propertychange change paste input",pwdCheckBluredHandler);
 	function pwdCheckBluredHandler() {
 		var $pwdCheck = $("input[type=password][name=pwdCheck]").val();
 		var pwd = "${loginSsInfo.memberPwd}";
@@ -492,7 +492,7 @@
 		}
 	}
 	//변경할 비밀번호 문구안내
-	$("input[type=password][name=pwdChange]").blur(pwdChangeBluredHandler);
+	$("input[type=password][name=pwdChange]").on("propertychange change paste input",pwdChangeBluredHandler);
 	function pwdChangeBluredHandler() {
 		var $pwdChange = $("input[type=password][name=pwdChange]").val();
 		var pwd = "${loginSsInfo.memberPwd}";
@@ -501,7 +501,7 @@
 		if($pwdChange == pwd) {
 			$("#pwdChange_text").text("*현재 비밀번호와 같습니다.");
 			$("#pwdChange_text").css("color","red");
-		} else if(reg.test($pwdChange)) {
+		} else if(reg.test($pwdChange) || $pwdChange == "") {
 			$("#pwdChange_text").text("*최소 8자이상, 영문,숫자,특수문자(_!@#$% 가능) 최소 1개 이상");
 			$("#pwdChange_text").css("color","black");
 		} else {
@@ -510,7 +510,7 @@
 		}
 	} 
 	//변경할 비밀번호 문구안내
-	$("input[type=password][name=pwdChangeCheck]").blur(pwdChangeCheckBluredHandler);
+	$("input[type=password][name=pwdChangeCheck]").on("propertychange change paste input",pwdChangeCheckBluredHandler);
 	function pwdChangeCheckBluredHandler() {
 		var $pwdChangeCheck = $("input[type=password][name=pwdChangeCheck]").val();
 		var $pwdChange = $("input[type=password][name=pwdChange]").val();
@@ -522,17 +522,18 @@
 		}
 	}
 	//휴대폰 번호 형식 문구안내
-	$("input[type=text][name=memberPhone]").blur(memberPhoneCheckBluredHandler);
+	$("input[type=text][name=memberPhone]").on("propertychange change paste input",memberPhoneCheckBluredHandler);
 	function memberPhoneCheckBluredHandler() {
 		var $memberPhone = $("input[type=text][name=memberPhone]").val();
 		
 		var reg = /^[0][1][016789]-[0-9]{4}-[0-9]{4}$/;
-		if(reg.test($memberPhone)) {
+		if(reg.test($memberPhone) || $memberPhone == "") {
 			$("#memberPhone_text").text("");
 		} else {
 			$("#memberPhone_text").text("*휴대폰 번호가 형식에 맞지 않습니다.");
 			$("#memberPhone_text").css("color","red");
 		}
+		
 	}
 </script>
         </div>
