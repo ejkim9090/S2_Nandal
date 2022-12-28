@@ -260,6 +260,7 @@
 .review_arrow {
     width: 9px;
     height: 6px;
+    cursor: pointer;
 }
 
 .review_total_rmd {

@@ -242,10 +242,13 @@
      							addHtml += "<div class='apply_list'>"+
 					                            "<div class='myList_left'>"+
 					                            	"<a href='/nandal/info/"+data[i].classCode+"'><h3>"+data[i].className+"</h3></a>"+
-					                                "<div><img class='my_img' src='<%=request.getContextPath()%>/images/review_star_full.png'><p class='f_16'>"+data[i].reviewGrade+"</p><p class='f_16'>"+
-					                                reGroup
-					                                +"</p></div>"+
+					                                "<div><img class='my_img' src='<%=request.getContextPath()%>/images/review_star_full.png'><p class='f_16'>"+data[i].reviewGrade+"</p>"+
+					                                "<p class='f_16'>"+reGroup+"</p></div>"+
 					                                "<div class='reCont'>"+
+					                                	"<div class='reCont_score'><label class='f_14'>친절도("+data[i].reviewKind+")</label>"+
+					                                	"<label class='f_14'>시설("+data[i].reviewComponent+")</label>"+
+					                                	"<label class='f_14'>수업구성("+data[i].reviewFacility+")</label>"+
+					                                	"<label class='f_14'>난이도 안내("+data[i].reviewLevel+")</label></div>"+
 					                                    "<p>"+data[i].reviewCont+"</p><div>"+addPhoto+"</div></div>"+
 					                                "<div class='reCont_text'><p>더보기</p><img class='my_img reCont_arrow' src='<%=request.getContextPath()%>/images/review_arrow.png'></div>"+
 					                            "</div>"+

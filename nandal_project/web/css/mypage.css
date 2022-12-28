@@ -89,18 +89,25 @@
     margin-top: 10px;
 }
 .myList_left > div > p {
-    margin-right: 10px;
-}
-.my_img {
-    width: 20px;
-    height: 20px;
     margin-right: 5px;
 }
+.my_img {
+    width: 18px;
+    height: 18px;
+    margin-right:5px;
+}
+
 
 /* 리뷰 내용 */
 .reCont {
     flex-direction: column;
     display: none;
+}
+.reCont_score {
+	display : flex;
+}
+.reCont_score > label {
+	margin-right: 7px;
 }
 .reCont_text {
     cursor: pointer;
