@@ -127,6 +127,10 @@ public class memberUpdateDoController extends HttpServlet {
 			int result = service.update(vo, memberId);
 			if(result > 0) {
 				msg = "회원정보가 수정되었습니다.";
+				
+				//수정이 완료 되면 세션에 저장된 로그인 정보 수정
+				MemberVo loginInfo = service.selectOne(memberId);
+				request.getSession().setAttribute("loginSsInfo", loginInfo);
 			} else {
 				msg = "회원정보 수정에 실패했습니다.";
 			}

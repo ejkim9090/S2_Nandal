@@ -148,6 +148,14 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo = new MemberVo();
+				vo.setMemberId(rs.getString("member_id"));
+				vo.setMemberPwd(rs.getString("member_pwd"));
+				vo.setMemberName(rs.getString("member_name"));
+				vo.setMemberPhone(rs.getString("member_phone"));
+				vo.setMemberImg(rs.getString("member_img"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
