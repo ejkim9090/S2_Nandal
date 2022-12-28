@@ -44,6 +44,8 @@ public class LoginDoController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/main");
 		} else {
 			System.out.println("로그인 실패");
+			request.setAttribute("msg", "로그인에 실패하였습니다.아이디 및 비밀번호를 확인해주세요. ");
+			request.getRequestDispatcher("/WEB-INF/alert.jsp").forward(request, response);
 		} 
 	}
 
