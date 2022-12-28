@@ -292,7 +292,7 @@
                 <div class="wrap_1050">
                     <div><h2>프로필</h2></div>
                     <div class="profile_data">
-                        <div><img class="profile_img" src="https://img-cf.kurly.com/cdn-cgi/image/width=400,format=auto/shop/data/goods/1654826608504l0.jpg" alt="프로필 이미지"></div>
+                        <div><img class="profile_img" src="<%=request.getContextPath()%>${loginSsInfo.memberImg}" alt="프로필 이미지"></div>
                         <div class="profile_text">
                             <p class="f_20_b">${loginSsInfo.memberName}님</p>
                             <p class="f_20_b">이메일(ID) : ${loginSsInfo.memberId}</p>
@@ -387,35 +387,151 @@
         </div>
     <div class="modal b">
         <div class="modal_content b">
-            <form class="model_form b">
+            <form class="model_form b" action="${pageContext.request.contextPath}/memberUpdate.do" method="post" enctype="multipart/form-data">
                 <div class="form_cont b">
                     <h2>회원 정보 수정</h2>
                     <h3>프로필 사진 변경</h3>
-                    <input type="file">
+                    <input id="memberFile" type="file" name="fileUpload" accept="image/*">
                     <h3>아이디(이메일)</h3>
                     <input type="text" name="memberId" value="${loginSsInfo.memberId}" readonly>
                     <h3>비밀번호 확인</h3>
-                    <input type="text" name="pwdChek">
-                    <p class="f_10">*필수</p>
-                    <h3>비밀번호 변경</h3>
-                    <input type="text" name="pwdChange">
-                    <p class="f_10">*최소 8자이상 및 영문,숫자,특수문자(_!@#$% 가능) 최소 1개 이상 입력</p>
-                    <h3>비밀번호 변경 확인</h3>
-                    <input type="text" name="pwdChangeChek">
-                    <p class="f_10"></p>
+                    <input type="password" name="pwdCheck">
+                    <p class="f_10" id="pwdCheck_text">*필수</p>
+                    <h3>새 비밀번호</h3>
+                    <input type="password" name="pwdChange">
+                    <p class="f_10" id="pwdChange_text">*최소 8자이상, 영문,숫자,특수문자(_!@#$% 가능) 최소 1개 이상</p>
+                    <h3>새 비밀번호 확인</h3>
+                    <input type="password" name="pwdChangeCheck">
+                    <p class="f_10" id="pwdChangeCheck_text"></p>
                     <h3>이름</h3>
                     <input type="text" name="memberName" value="${loginSsInfo.memberName}" readonly>
-                    <h3>전화번호</h3>
-                    <div>
-                        <input type="text" name="memberPhone">
-                        <button type="button" class="c_line c_color model_btn">중복확인</button>
-                    </div>
+                    <h3>휴대폰 번호 변경</h3>
+                    <input type="text" name="memberPhone">
+                 	<p class="f_10" id="memberPhone_text"></p>
                 </div>
                 <div class="model_btn_wrap">
-                    <button type="submit" class="c_line c_color model_btn">등록</button>
-                    <button type="button" class="c_line c_color model_btn madal_close">취소</button>
+                    <button type="submit" class="c_line c_color model_btn">수정</button>
+                    <button id="member_reset" type="button" class="c_line c_color model_btn madal_close">취소</button>
                 </div>
             </form>
+<script>
+	//취소 클릭 시 모달창 내용 기존으로 되돌리기
+	$("#member_reset").click(memberFromResetHandler);
+	function memberFromResetHandler() {
+		$("#memberFile").val("");
+		$("input[type=password][name=pwdCheck]").val("");
+		$("#pwdCheck_text").text("*필수");
+		$("#pwdCheck_text").css("color","black");
+		$("input[type=password][name=pwdChange]").val("");
+		$("#pwdChange_text").text("*최소 8자이상, 영문,숫자,특수문자(_!@#$% 가능) 최소 1개 이상");
+		$("#pwdChange_text").css("color","black");
+		$("input[type=password][name=pwdChangeCheck]").val("");
+		$("#pwdChangeCheck_text").text("");
+		$("input[type=text][name=memberPhone]").val("");
+		$("#memberPhone_text").text("");
+	}
+	//회원 정보 수정 submit 시 필수 체크
+	$("form.model_form.b").submit(memberUpdateFromHandler);
+	function memberUpdateFromHandler() { 
+		//초기 비번 체크
+		var $pwdCheck = $("input[type=password][name=pwdCheck]").val();
+		var pwd = "${loginSsInfo.memberPwd}";
+		if($pwdCheck != pwd) {
+			alert("현재 비밀번호를 확인 해주세요.");
+			return false;
+		}
+		
+		//비밀번호 변경할 경우 체크
+		var $pwdChange = $("input[type=password][name=pwdChange]").val();
+		var $pwdChangeCheck = $("input[type=password][name=pwdChangeCheck]").val();
+		var reg = /^(?=.*[a-z])(?=.*[0-9])(?=.*[_!@#$%])[A-Za-z0-9_!@#$%]{8,}$/;
+		
+		if($pwdChange != "" && $pwdChange != null) {
+			if($pwdChange == pwd) {
+				alert("새 비밀번호가 기존과 같습니다.");
+				return false;
+			} else if(!reg.test($pwdChange)) {
+				alert("새 비밀번호가 조건에 맞지 않습니다.");
+				return false;
+			} else if($pwdChange != $pwdChangeCheck) {
+				alert("새 비밀번호 확인이 새 비밀번호와 맞지 않습니다.");
+				return false;
+			}
+		}
+		
+		//휴대폰 번호 변경할 경우 체크
+		var $memberPhone = $("input[type=text][name=memberPhone]").val();
+		
+		var reg = /^[0][1][016789]-[0-9]{4}-[0-9]{4}$/;
+		if($memberPhone != "" && $memberPhone != null) {
+			if(!reg.test($memberPhone)) {
+				alert("휴대폰 번호가 형식에 맞지 않습니다.");
+				return false;
+			} 
+		}
+		
+	}
+	//비밀번호 확인 문구안내
+	$("input[type=password][name=pwdCheck]").blur(pwdCheckBluredHandler);
+	function pwdCheckBluredHandler() {
+		var $pwdCheck = $("input[type=password][name=pwdCheck]").val();
+		var pwd = "${loginSsInfo.memberPwd}";
+		
+		if($pwdCheck == "" || $pwdCheck == null) {
+			$("#pwdCheck_text").text("*필수");
+			$("#pwdCheck_text").css("color","black");
+		} else if($pwdCheck == pwd) {
+			$("#pwdCheck_text").text("");
+			$("#pwdCheck_text").css("color","black");
+		} else {
+			$("#pwdCheck_text").text("*현재 비밀번호를 입력 해주세요.");
+			$("#pwdCheck_text").css("color","red");
+		}
+	}
+	//변경할 비밀번호 문구안내
+	$("input[type=password][name=pwdChange]").blur(pwdChangeBluredHandler);
+	function pwdChangeBluredHandler() {
+		var $pwdChange = $("input[type=password][name=pwdChange]").val();
+		var pwd = "${loginSsInfo.memberPwd}";
+		
+		var reg = /^(?=.*[a-z])(?=.*[0-9])(?=.*[_!@#$%])[A-Za-z0-9_!@#$%]{8,}$/;
+		if($pwdChange == pwd) {
+			$("#pwdChange_text").text("*현재 비밀번호와 같습니다.");
+			$("#pwdChange_text").css("color","red");
+		} else if(reg.test($pwdChange)) {
+			$("#pwdChange_text").text("*최소 8자이상, 영문,숫자,특수문자(_!@#$% 가능) 최소 1개 이상");
+			$("#pwdChange_text").css("color","black");
+		} else {
+			$("#pwdChange_text").text("*최소 8자이상 및 영문,숫자,특수문자(_!@#$% 가능)를 최소 1개씩 입력 해주세요.");
+			$("#pwdChange_text").css("color","red");
+		}
+	} 
+	//변경할 비밀번호 문구안내
+	$("input[type=password][name=pwdChangeCheck]").blur(pwdChangeCheckBluredHandler);
+	function pwdChangeCheckBluredHandler() {
+		var $pwdChangeCheck = $("input[type=password][name=pwdChangeCheck]").val();
+		var $pwdChange = $("input[type=password][name=pwdChange]").val();
+		if($pwdChangeCheck == $pwdChange) {
+			$("#pwdChangeCheck_text").text("");
+		} else {
+			$("#pwdChangeCheck_text").text("*새 비밀번호와 동일하게 입력 해주세요.");
+			$("#pwdChangeCheck_text").css("color","red");
+		}
+	}
+	//휴대폰 번호 형식 문구안내
+	$("input[type=text][name=memberPhone]").blur(memberPhoneCheckBluredHandler);
+	function memberPhoneCheckBluredHandler() {
+		var $memberPhone = $("input[type=text][name=memberPhone]").val();
+		
+		var reg = /^[0][1][016789]-[0-9]{4}-[0-9]{4}$/;
+		if(reg.test($memberPhone)) {
+			$("#memberPhone_text").text("");
+		} else {
+			$("#memberPhone_text").text("*휴대폰 번호가 형식에 맞지 않습니다.");
+			$("#memberPhone_text").css("color","red");
+		}
+	}
+</script>
         </div>
     </div>
     <div class="modal c">
