@@ -44,6 +44,7 @@ public class ListLoController extends HttpServlet {
 		//gson
 		PrintWriter out = response.getWriter();
 		Gson gson = new Gson();
+		JsonObject page = null;
 		
 		ClassService service = new ClassService();
 //		
@@ -90,6 +91,9 @@ public class ListLoController extends HttpServlet {
 			}
 		} catch(NumberFormatException e) {
 			System.out.println("String --> int 변환 실패");
+			out.println(page);//json형태로 넣은 데이터 추가
+			out.flush(); //3번상태
+			out.close(); //4번 - 데이터 전달
 			e.printStackTrace();
 		}
 		System.out.println("키워드:"+searchword+",선택지역:"+searchArea+", 카테고리 :" +searchCategory + ",요일:"+searchDay+",난이도:"+searchLevel+",최소금액:"+searchMin+",최고금액:"+searchMax);
@@ -134,7 +138,7 @@ public class ListLoController extends HttpServlet {
 			classlist = service.selectList(startRnum, endRnum, searchword, searchArea, searchCategory, searchDay, searchLevel, searchMin, searchMax, classLineUp, reviewLineUp);
 
 		} finally {
-			JsonObject page = new JsonObject();
+			page = new JsonObject();
 			
 			if(searchword != null && !searchword.equals("")) {
 				page.addProperty("searchword", searchword);

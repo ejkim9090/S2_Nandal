@@ -82,9 +82,9 @@
                                     </div>
                                     <div>
                                         <p class="c_size">금액</p>
-                                        <div><input class="c_size c_line" type="text" name="priceMin" placeholder="최소금액"></div>
+                                        <div><input class="c_size c_line" type="number" name="priceMin" placeholder="최소금액"></div>
                                         <div><label class="c_size f_20_b" style="text-align: center;">~</label></div>
-                                        <div><input class="c_size c_line" type="text" name="priceMax" placeholder="최고금액"></div>
+                                        <div><input class="c_size c_line" type="number" name="priceMax" placeholder="최고금액"></div>
                                     </div>
                                 </div>
                             </div>

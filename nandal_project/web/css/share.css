@@ -157,6 +157,12 @@ html{
 .check_admin > button {
 	margin : 0 5px;
 } 
+/* 금액 입력 칸 증감버튼 제거 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 /* 유형 선택 칸 */
 
 .c_line {

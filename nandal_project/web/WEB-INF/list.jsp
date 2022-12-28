@@ -143,62 +143,67 @@
 	   		data: searchData,
 	  	 	dataType : "json", 
 	   		success: function(data){ 
-	   					console.log(data);
-	   					console.log(data.cnt);
-	   					console.log(data.currentPage);
-	   					console.log(data.endPage);
-	   					console.log(data.pageCnt);
-	   					console.log(data.startPage); 
-	   					
-	   					$("p#classCnt").text(data.cnt+"개의 클래스");
-	   					//페이지 이동 nav 생성 코드
-	   					var pagehtml = "";
-	   					if(data.pageCnt != 1 && data.pageCnt != 0) {
-	   						if(data.startPage != 1) {
-	   							pagehtml += "<a class='page_item pre' onclick='pageItemHandler("+(data.startPage-1)+");'><img class='page_img' src='<%=request.getContextPath()%>/images/my_arrow_180.png' alt='이전'></a>";
-	   						}
-	   						for(var i = data.startPage;i <= data.endPage;i++) {
-	   							if(i == data.currentPage) {
-	   								pagehtml += "<a class='page_item now' onclick='pageItemHandler("+i+");'>"+i+"</a>";
-	   							} else {
-	   								pagehtml += "<a class='page_item' onclick='pageItemHandler("+i+");'>"+i+"</a>";
-	   							}
-	   						}
-	   						if(data.endPage < data.pageCnt) {
-	   							pagehtml += "<a class='page_item next' onclick='pageItemHandler("+(data.endPage+1)+");'><img class='page_img' src='<%=request.getContextPath()%>/images/my_arrow.png' alt='다음'></a>";
-	   						}
-	   					}
-	   					$("div#pagination").html(pagehtml);
-	   				
-	   					var classhtml ="";
-	   					if(data.classlist != undefined) {
-	   						var divCnt = 0;
-	   						for(var j = 0; j < data.classlist.length; j++) {
-	   							if(divCnt%3 == 0) {
-	   								classhtml += "<div class='list_class_wrap'>";
-	   							}
-	   							classhtml += "<a href='${pageContext.request.contextPath }/info/"+data.classlist[j].classCode+"' class='list_class'>"+
-					   	                         "<div class='list_class_img_wrap'>"+
-					  	                             "<img src='${pageContext.request.contextPath}"+data.classlist[j].classImg+"' alt='클래스 이미지'>"+
-					  	                         "</div>"+
-					  	                         "<div class='list_class_info_wrap'>"+
-					  	                         	 "<div class='allavg'><img class='review_star' src='<%=request.getContextPath()%>/images/review_star_full.png'><span class='f_14_b'>"+data.classlist[j].allAvg+"("+data.classlist[j].allCnt+")</span></div>"+
-					  	                             "<h3 class='f_16_b'>"+data.classlist[j].className+"</h3>"+
-					  	                             "<span class='f_14_b'>"+data.classlist[j].classAddress+"</span>"+
-					  	                             "<span class='f_14_b'>"+data.classlist[j].classPrice+"원</span>"+
-					  	                         "</div>"+
-					  	                     "</a>";
-		  	                   	if(divCnt%3 == 2) {
-	   								classhtml += "</div>";
-	   							} else if(j == data.classlist.length-1) {
-	   								classhtml += "</div>";
-	   							}
-		  	                  	divCnt++;
-	   						}
+	   					if(data == null) {
+	   						alert("금액에는 정수만 입력 가능합니다.");
 	   					} else {
-	   						classhtml += "<div class='list_class_not'><p>해당 조건의 클래스가 없습니다.</p></div>";
+		   					console.log(data);
+		   					console.log(data.cnt);
+		   					console.log(data.currentPage);
+		   					console.log(data.endPage);
+		   					console.log(data.pageCnt);
+		   					console.log(data.startPage); 
+		   					
+		   					$("p#classCnt").text(data.cnt+"개의 클래스");
+		   					//페이지 이동 nav 생성 코드
+		   					var pagehtml = "";
+		   					if(data.pageCnt != 1 && data.pageCnt != 0) {
+		   						if(data.startPage != 1) {
+		   							pagehtml += "<a class='page_item pre' onclick='pageItemHandler("+(data.startPage-1)+");'><img class='page_img' src='<%=request.getContextPath()%>/images/my_arrow_180.png' alt='이전'></a>";
+		   						}
+		   						for(var i = data.startPage;i <= data.endPage;i++) {
+		   							if(i == data.currentPage) {
+		   								pagehtml += "<a class='page_item now' onclick='pageItemHandler("+i+");'>"+i+"</a>";
+		   							} else {
+		   								pagehtml += "<a class='page_item' onclick='pageItemHandler("+i+");'>"+i+"</a>";
+		   							}
+		   						}
+		   						if(data.endPage < data.pageCnt) {
+		   							pagehtml += "<a class='page_item next' onclick='pageItemHandler("+(data.endPage+1)+");'><img class='page_img' src='<%=request.getContextPath()%>/images/my_arrow.png' alt='다음'></a>";
+		   						}
+		   					}
+		   					$("div#pagination").html(pagehtml);
+		   				
+		   					var classhtml ="";
+		   					if(data.classlist != undefined) {
+		   						var divCnt = 0;
+		   						for(var j = 0; j < data.classlist.length; j++) {
+		   							if(divCnt%3 == 0) {
+		   								classhtml += "<div class='list_class_wrap'>";
+		   							}
+		   							classhtml += "<a href='${pageContext.request.contextPath }/info/"+data.classlist[j].classCode+"' class='list_class'>"+
+						   	                         "<div class='list_class_img_wrap'>"+
+						  	                             "<img src='${pageContext.request.contextPath}"+data.classlist[j].classImg+"' alt='클래스 이미지'>"+
+						  	                         "</div>"+
+						  	                         "<div class='list_class_info_wrap'>"+
+						  	                         	 "<div class='allavg'><img class='review_star' src='<%=request.getContextPath()%>/images/review_star_full.png'><span class='f_14_b'>"+data.classlist[j].allAvg+"("+data.classlist[j].allCnt+")</span></div>"+
+						  	                             "<h3 class='f_16_b'>"+data.classlist[j].className+"</h3>"+
+						  	                             "<span class='f_14_b'>"+data.classlist[j].classAddress+"</span>"+
+						  	                             "<span class='f_14_b'>"+data.classlist[j].classPrice+"원</span>"+
+						  	                         "</div>"+
+						  	                     "</a>";
+			  	                   	if(divCnt%3 == 2) {
+		   								classhtml += "</div>";
+		   							} else if(j == data.classlist.length-1) {
+		   								classhtml += "</div>";
+		   							}
+			  	                  	divCnt++;
+		   						}
+		   					} else {
+		   						classhtml += "<div class='list_class_not'><p>해당 조건의 클래스가 없습니다.</p></div>";
+		   					}
+		   					$("div#list_content").html(classhtml);
+	   					
 	   					}
-	   					$("div#list_content").html(classhtml);
 	   				 },
 	   		error : function(request, status, error){
 	   					console.log(request);	
