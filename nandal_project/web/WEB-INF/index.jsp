@@ -191,12 +191,12 @@
 	                                </c:when>
 	                                <c:otherwise>
 		                                <c:forEach items="${reviewlist}" var="vo">
-		                                	<a href="${pageContext.request.contextPath }/info/${vo.classCode}" class="list_class">
-		                                        <div class="list_class_img_wrap">
+		                                	<a href="${pageContext.request.contextPath }/info/${vo.classCode}" class="list_class relist">
+		                                        <div class="list_class_img_wrap relist">
 		                                            <img src="${pageContext.request.contextPath}${vo.rpRoute}" alt="리뷰 이미지">
 		                                        </div>
 		                                        <div class="list_review_text">
-		                                            <span class="f_12">
+		                                            <span class="f_16_b f_k_hiMelody">
 		                                                ${vo.reviewCont}
 		                                            </span>
 		                                        </div>
@@ -307,17 +307,17 @@
         else {dcnt = Math.floor($dcnt/3);}
         var d = 0;
         document.getElementsByClassName("rmd_right_btn")[3].onclick = function () {
-            d += -1137;
+            d += -1128;
             var t_value = "translate3d(" + d +"px, 0px, 0px)";
             document.getElementsByClassName("rmd_list_swiper")[3].style.transform = t_value;
 
             document.getElementsByClassName("rmd_left_btn")[3].style.display = "inline-block";
-            if(d == -1137*dcnt) {
+            if(d == -1128*dcnt) {
                 document.getElementsByClassName("rmd_right_btn")[3].style.display = "none";
             }
         }
         document.getElementsByClassName("rmd_left_btn")[3].onclick = function () {
-            d += +1137;
+            d += +1128;
             var t_value = "translate3d(" + d +"px, 0px, 0px)";
             document.getElementsByClassName("rmd_list_swiper")[3].style.transform = t_value;
 

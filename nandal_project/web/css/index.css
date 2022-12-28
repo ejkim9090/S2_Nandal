@@ -31,6 +31,7 @@
 /* 메신 섹션 상품 리스트 */
 .rmd {
     margin-top: 200px;
+    margin-bottom: 100px;
 }
 .rmd_list {
     position: relative;
@@ -81,9 +82,17 @@
     cursor: pointer;
     margin-right: 89px;
 }
+.list_class.relist {
+    box-shadow : 5px 5px 5px 0 rgb(158 105 255 / 40%);
+    margin-bottom: 10px;
+    margin-right: 86px;
+}
 .list_class_img_wrap{
     height: 220px;
     background-color: rgb(245, 245, 245);
+}
+.list_class_img_wrap.relist {
+    height: 260px;
 }
 .list_class_img_wrap > img{
     width: 290px;
@@ -97,13 +106,12 @@
     align-items: flex-end;
 }
 .list_review_text{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    background-color: #cbbbf7;
+    background-color: white;
     width: 290px;
+    height : 130px;
     padding: 5px;
 }
+
 .allavg {
 	display : flex;
 	align-items : center;

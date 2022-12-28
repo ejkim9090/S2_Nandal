@@ -201,7 +201,7 @@
                             <a href="#host"><span class="f_16_b">호스트 소개</span></a>
                         </div>
                         <div class="prod_tab">
-                            <a href="#prd"><span class="f_16_b">제공 및 유의사항</span></a>
+                            <a href="#prd"><span class="f_16_b">기타 제공사항</span></a>
                         </div>
                         <div class="prod_tab">
                             <a href="#address" class="active"><span class="f_16_b">위치</span></a>

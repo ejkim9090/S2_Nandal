@@ -216,7 +216,7 @@ public class ReviewDao {
 				do {
 					ReviewMainListVo vo = new ReviewMainListVo();
 					vo.setRpRoute(rs.getString(1));
-					vo.setReviewCont(rs.getString(2));
+					vo.setReviewCont(rs.getString(2).replaceAll("%%", "<br>"));
 					vo.setReviewCode(rs.getInt(3));
 					vo.setClassCode(rs.getInt(4));
 					volist.add(vo);

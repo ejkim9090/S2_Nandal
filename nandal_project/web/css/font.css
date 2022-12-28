@@ -1,3 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Gamja+Flower&family=Hi+Melody&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+
+.f_k_hiMelody {
+	font-family: 'Hi Melody', cursive;
+}
+.f_k_dongle {
+	font-family: 'Dongle', sans-serif;
+}
+.f_k_gamja {
+	font-family: 'Gamja Flower', cursive;
+}
+.f_k_nanumPen {
+	font-family: 'Nanum Pen Script', cursive;
+}
+.f_k_notoSans {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
 .f_10 {
     font-size: 10px;
 }
