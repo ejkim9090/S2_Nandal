@@ -14,7 +14,7 @@ import kh.s2.nandal.member.model.vo.MemberVo;
 /**
  * Servlet implementation class LoginDoController
  */
-@WebServlet("/Join.do")
+@WebServlet("/join.do")
 public class JoinDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

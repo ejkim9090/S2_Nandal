@@ -28,19 +28,55 @@
                 <div class="login_area login_user_area">
                     <form id="join_form" action="<%=request.getContextPath()%>/join.do" method="post">
                         <div class="input_area">
-                            <div><label>아이디(이메일)</label><input type="text" name="memberId" placeholder="아이디(이메일)를 입력해주세요"></div>
-                            <div><label>비밀번호</label><input type="password" name="memberPwd" placeholder="비밀번호를 입력해주세요"></div>
+                            <div><label>아이디(이메일)</label><input type="text" name="memberId" placeholder="아이디(이메일)를 입력해주세요" required><button id="IdCheck" class="IdCheck_btn" type="button">인증번호 받기</button></div>
+                            <div><label></label><input type="text" name="memberIdCheck" placeholder="인증번호 입력" required><input type="hidden" name="memberIdCheckCode"><button id="IdCheckCode" class="IdCheck_btn" type="button">인증 확인</button></div>
+                            <div><label>비밀번호</label><input type="password" name="memberPwd" placeholder="비밀번호를 입력해주세요" required></div>
                             <p id="memberPwd_text" class="f_12">*최소 8자이상, 영문,숫자,특수문자(_!@#$% 가능) 최소 1개 이상</p>
-                            <div><label>비밀번호 확인</label><input type="password" name="memberPwdCheck" placeholder="비밀번호 확인을 입력해주세요"></div>
+                            <div><label>비밀번호 확인</label><input type="password" name="memberPwdCheck" placeholder="비밀번호 확인을 입력해주세요" required></div>
                             <p id="memberPwdCheck_text" class="f_12"></p>
-                            <div><label>이름</label><input type="text" name="memberName" placeholder="이름을 입력해주세요"></div>
-                            <div><label>휴대폰</label><input type="text" name="memberPhone" placeholder="000-0000-0000"></div>
+                            <div><label>이름</label><input type="text" name="memberName" placeholder="이름을 입력해주세요" required></div>
+                            <div><label>휴대폰</label><input type="text" name="memberPhone" placeholder="000-0000-0000" required></div>
                             <p id="memberPhone_text" class="f_12"></p>
                         </div>
 <script>
+	$("button#IdCheck").click(IdCheckAction);
+	function IdCheckAction() {
+		console.log("인증메일 보내기 함수 진입");
+		var $memberId = $("input[type=text][name=memberId]").val();
+		
+		$.ajax({
+      		url : "<%=request.getContextPath()%>/join.lo",
+      		type : "post",
+      		data: "memberId=" + $memberId,
+      		success: function(data){ 
+      					alert(data);
+      					$("input[type=hidden][name=memberIdCheckCode]").val(data.replace("\n",""));
+      				 },
+      		error : function(request, status, error){
+      					console.log(request);	
+      					console.log(status);	
+      					console.log(error);	
+      					alert("code:"+request.status+"\n"
+      							+"message"+request.responseText+"\n"
+      							+"error"+error);
+      				}
+      	});
+	}
+	$("button#IdCheckCode").click(IdCheckCodeAction);
+	function IdCheckCodeAction() {
+		console.log("인증 함수 진입");
+		var $memberIdCheck = $("input[type=text][name=memberIdCheck]").val();
+		var $memberIdCheckCode = $("input[type=hidden][name=memberIdCheckCode]").val();
+		console.log($memberIdCheck);
+		console.log($memberIdCheckCode);
+		if($memberIdCheck == $memberIdCheckCode) {
+			console.log("인증 성공");
+			alert("인증에 성공하셨습니다.");
+		}
+	}
+	
 	$("#join_form").submit(memberInsertFromHandler);
 	function memberInsertFromHandler() { 
-		
 		//비밀번호 체크
 		var $memberPwd = $("input[type=password][name=memberPwd]").val();
 		var $memberPwdCheck = $("input[type=password][name=memberPwdCheck]").val();
