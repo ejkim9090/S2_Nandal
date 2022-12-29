@@ -68,7 +68,17 @@ public class InfoController extends HttpServlet {
 			//출력시 줄바꿈을 위해 클래스 소개,커리큘럼,호스트소개,기타제공사항에 replace 처리 
 			String classIntro = vo.getClassIntro().replaceAll("%%", "<br>");
 			vo.setClassIntro(classIntro); 
-			String classCur = vo.getClassCur().replaceAll("%%", "<br>");
+			String classCurStr = vo.getClassCur().replaceAll("%%", "<br><br>");
+			classCurStr = classCurStr.replace("1단계 :", "<h4 style='display:inline'>1단계:</h4>");
+			classCurStr = classCurStr.replace("2단계 :", "<h4 style='display:inline'>2단계:</h4>");
+			classCurStr = classCurStr.replace("3단계 :", "<h4 style='display:inline'>3단계:</h4>");
+			classCurStr = classCurStr.replace("4단계 :", "<h4 style='display:inline'>4단계:</h4>");
+			classCurStr = classCurStr.replace("5단계 :", "<h4 style='display:inline'>5단계:</h4>");
+			classCurStr = classCurStr.replace("6단계 :", "<h4 style='display:inline'>6단계:</h4>");
+			classCurStr = classCurStr.replace("7단계 :", "<h4 style='display:inline'>7단계:</h4>");
+			classCurStr = classCurStr.replace("8단계 :", "<h4 style='display:inline'>8단계:</h4>");
+			classCurStr = classCurStr.replace("9단계 :", "<h4 style='display:inline'>9단계:</h4>");
+			String classCur = classCurStr;
 			vo.setClassCur(classCur);
 			String classHost = vo.getClassHost().replaceAll("%%", "<br>");
 			vo.setClassHost(classHost);

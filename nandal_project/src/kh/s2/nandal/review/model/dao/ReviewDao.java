@@ -157,7 +157,9 @@ public class ReviewDao {
 					vo.setReviewFacility(rs.getInt("REVIEW_FACILITY"));
 					vo.setReviewLevel(rs.getInt("REVIEW_LEVEL"));
 					vo.setReviewGroup(rs.getInt("REVIEW_GROUP"));
-					vo.setMemberName(rs.getString("member_name"));
+					StringBuilder sb = new StringBuilder(rs.getString("member_name"));
+					sb.setCharAt(1, '*');
+					vo.setMemberName(sb.toString());
 					volist.add(vo);
 				} while(rs.next());
 			}

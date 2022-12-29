@@ -8,6 +8,9 @@
 .header_check {
     display: block;
 }
+#header_nav > div {
+    box-shadow: none;
+}
 
 /* 상단 */
 .list_top {

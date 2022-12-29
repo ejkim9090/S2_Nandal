@@ -57,7 +57,7 @@ public class BuyLoController extends HttpServlet {
 				caTotal = Integer.parseInt(request.getParameter("buyNum"));
 				classCode = Integer.parseInt(request.getParameter("classCode"));
 				caDate = Date.valueOf(request.getParameter("caDate"));
-				
+					System.out.println("csCode" + csCode);
 				if(caTotal == 0) {
 					result = 88;
 				} else {
@@ -71,6 +71,8 @@ public class BuyLoController extends HttpServlet {
 					vo.setMemberId(memberId);
 					result = service.insert(vo);
 				}
+			} catch(NumberFormatException e) {
+				result = 77;
 			} catch(Exception e) {
 				
 			}

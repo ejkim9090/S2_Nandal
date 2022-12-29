@@ -54,14 +54,17 @@
       		data: $formQuery, 
       		success: function(data){ 
       					if(data == 1) {
-      						alert("클래스가 신청되었습니다.")
+      						alert("클래스가 신청되었습니다.");
+      						location.reload();
       					} else if(data == 99) {
-      						alert("로그인이 필요합니다.")
+      						alert("로그인이 필요합니다.");
       						location.href = "<%=request.getContextPath()%>/login";
+      					} else if(data == 77) {
+      						alert("시간을 선택해주세요.");
       					} else if(data == 88) {
-      						alert("인원을 선택해주세요.")
+      						alert("인원을 선택해주세요.");
       					} else {
-      						alert("클래스 신청이 실패했습니다.")
+      						alert("클래스 신청이 실패했습니다.");
       					}
       				 },
       		error : function(request, status, error){
@@ -165,8 +168,8 @@
                         <div class="top_info_wrap"> <!-- 상단 클래스 요약 정보 -->
                             <div class="f_20_b">${classVo.className}</div>
                             <div>
-                                <div class="top_info_text"><img class="top_info_img" src="<%=request.getContextPath()%>/images/clock.png">${classVo.classAlltime}</div>
-                                <div class="top_info_text"><img class="top_info_img" src="<%=request.getContextPath()%>/images/level.png">
+                                <div class="top_info_text f_k_dongle f_24"><img class="top_info_img" src="<%=request.getContextPath()%>/images/clock.png">${classVo.classAlltime}</div>
+                                <div class="top_info_text f_k_dongle f_24"><img class="top_info_img" src="<%=request.getContextPath()%>/images/level.png">
                                 <c:set var="toplevel" value ="난이도 없음"/>
                                 <c:choose>
                                 	<c:when test="${classVo.classLevel eq 1}">
@@ -181,9 +184,9 @@
                                 </c:choose>
                                 ${toplevel}
                                 </div>
-                                <div class="top_info_text"><img class="top_info_img" src="<%=request.getContextPath()%>/images/user.png">${classVo.classMin}~${classVo.classMax}</div>
-                                <div class="top_info_text"><img class="top_info_img" src="<%=request.getContextPath()%>/images/marker.png">${sumAddress}</div>
-                                <div class="top_info_text"><img class="top_info_img" src="<%=request.getContextPath()%>/images/price.png">${classVo.classPrice}원</div>
+                                <div class="top_info_text f_k_dongle f_24"><img class="top_info_img" src="<%=request.getContextPath()%>/images/user.png">${classVo.classMin}~${classVo.classMax}</div>
+                                <div class="top_info_text f_k_dongle f_24"><img class="top_info_img" src="<%=request.getContextPath()%>/images/marker.png">${sumAddress}</div>
+                                <div class="top_info_text f_k_dongle f_24"><img class="top_info_img" src="<%=request.getContextPath()%>/images/price.png">${classVo.classPrice}원</div>
                             </div>
                         </div>
                         <div id="intro"></div>
@@ -261,7 +264,7 @@
                 </div>
                 <div class="wrap_1050 info_wrap">
                     <div> <!-- 클래스 소개-->
-                        <h2 class="info_h2">클래스 소개</h2>
+                        <h1 class="info_h1">클래스 소개</h1>
                         <div>
                         ${classVo.classIntro}
                         </div>
@@ -275,34 +278,34 @@
                         <div id="cur"></div>
                     </div>
                     <div> <!-- 커리큘럼-->
-                        <h2 class="info_h2">커리큘럼</h2>
+                        <h1 class="info_h1">커리큘럼</h1>
                         <div>
                         ${classVo.classCur}
                         </div>
                         <div id="host"></div>
                     </div>
                     <div> <!-- 호스트 소개-->
-                        <h2 class="info_h2">호스트 소개</h2>
+                        <h1 class="info_h1">호스트 소개</h1>
                         <div>
                         ${classVo.classHost}
                         </div>
                         <div id="prd"></div>
                     </div>
                     <div> <!-- 제공 및 유의사항-->
-                        <h2 class="info_h2">기타 제공사항</h2>
+                        <h1 class="info_h1">기타 제공사항</h1>
                         <div>
                         ${classVo.classPrd}
                         </div>
                         <div id="address"></div>
                     </div>
                     <div> <!-- 위치-->
-                        <h2 class="info_h2">위치</h2>
+                        <h1 class="info_h1">위치</h1>
                             <p id = "address_text">${classVo.classAddress}</p>
                         <div id="map"></div>
                         <div id="review"></div>
                     </div>
                     <div> <!-- 후기-->
-                        <h2 class="info_h2">후기</h2>
+                        <h1 class="info_h1">후기</h1>
                         <c:choose>
                         <c:when test="${empty reList}">
 	                        <div class="review_total">
@@ -468,7 +471,7 @@
 		                                    </div>
 		                                </div>
 		                            </div>
-		                            <p>${vo.reviewCont}</p>
+		                            <p class="f_20_b f_k_hiMelody">${vo.reviewCont}</p>
 		                            
 		                            <c:if test="${not empty vo.rpRoute}">
 		                            	<c:forEach items="${vo.rpRoute}" var="rpVo">
