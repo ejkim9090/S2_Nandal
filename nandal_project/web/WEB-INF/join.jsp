@@ -26,7 +26,7 @@
                 <div class="login_area f_20_b login_txt">회원가입</div>
                 <div class="border_div"><p class="f_12">*전체입력 필수</p></div>
                 <div class="login_area login_user_area">
-                    <form id="join_form" action="<%=request.getContextPath()%>/join.do" method="post">
+                    <form id="join_form" action="<%=request.getContextPath()%>/join.do" method="post"  accept-charset="utf-8">
                         <div class="input_area">
                             <div><label>아이디(이메일)</label><input type="text" name="memberId" placeholder="아이디(이메일)를 입력해주세요" required><button id="IdCheck" class="IdCheck_btn" type="button">인증번호 받기</button></div>
                             <p id="memberId_text" class="f_12"></p>
