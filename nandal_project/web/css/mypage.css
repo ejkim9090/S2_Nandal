@@ -71,6 +71,9 @@
 }
 
 /* 신청 내역 목록 */
+#apply_list_wrap {
+	margin-bottom: 100px;
+}
 .apply_list {
     display: flex;
     justify-content: space-between;
@@ -87,6 +90,7 @@
 .myList_left > div:not(div.reCont) {
     display: flex;
     margin-top: 10px;
+    align-items: center;
 }
 .myList_left > div > p {
     margin-right: 5px;
@@ -103,6 +107,9 @@
     flex-direction: column;
     display: none;
 }
+.reCont > p {
+	margin: 10px 0;
+}
 .reCont_score {
 	display : flex;
 }
@@ -118,6 +125,7 @@
 .reCont_img {
     width: 130px;
     height: 130px;
+    border : 1px solid rgba(121, 44, 197,.8);
 }
 
 /* 오른쪽 div */
@@ -164,10 +172,12 @@ div.modal.c {
     top: 10%;
     margin: auto;
     width: 480px;
-    height: 760px;
+    height: 800px;
     background-color: white;
     border-radius: 10px;
-    
+}
+.modal_content.b {
+    height: 750px;
 }
 .model_form {
     display: flex;
@@ -206,5 +216,10 @@ div.modal.c {
 .model_btn {
     padding: 5px 15px;
     margin: 0 3px;
+}
+
+.form_cont.b > input[type="text"][name="memberId"],.form_cont.b > input[type="text"][name="memberName"] {
+	border: none;
+	background-color: rgba(177,177,177,.6);
 }
 

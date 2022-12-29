@@ -16,12 +16,12 @@
                                 <div class="header_log">
                                 	<c:choose>
                                 		<c:when test="${empty loginSsInfo}">
-                                    	<a href="${pageContext.request.contextPath }/join">Join</a>
-                                    	<a href="${pageContext.request.contextPath }/login">Login</a>
+                                    	<a class="f_16_b" href="${pageContext.request.contextPath }/join" >Join</a>
+                                    	<a class="f_16_b" href="${pageContext.request.contextPath }/login">Login</a>
                                 		</c:when>
                                 		<c:otherwise>
-                                    	<a href="${pageContext.request.contextPath }/my">My</a>
-                                    	<a href="${pageContext.request.contextPath }/logout">Logout</a>
+                                    	<a class="f_16_b" href="${pageContext.request.contextPath }/my">My</a>
+                                    	<a class="f_16_b" href="${pageContext.request.contextPath }/logout">Logout</a>
                                 		</c:otherwise>
                                 	</c:choose>
                                 </div>
@@ -99,7 +99,7 @@
                         <div class="header_category">
                             <div class="category_over">
                                 <span class="category_img"></span>
-                                <span class="category_text f_14">카테고리</span>
+                                <span class="category_text f_16">카테고리</span>
                             </div>
                             <ul class="category_list">
                                 <li>

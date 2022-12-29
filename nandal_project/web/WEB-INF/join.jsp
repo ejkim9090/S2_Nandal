@@ -57,7 +57,6 @@
 	      		type : "post",
 	      		data: "memberId=" + $memberId,
 	      		success: function(data){ 
-	      					alert(data);
 	      					$("input[type=hidden][name=memberIdCheckCode]").val(data.replace("\n",""));
 	      					$("input[type=text][name=memberId]").attr("readonly", "true");
 	      					$("button#IdCheck").css("background-color","rgba(0,0,0,0.2)");

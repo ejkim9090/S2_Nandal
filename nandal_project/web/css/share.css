@@ -42,7 +42,7 @@ html{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 350px;
+    width: 400px;
     margin-right: 20px;
 }
 
@@ -63,6 +63,12 @@ html{
 }
 .header_search > button > img {
     height: 100%;
+}
+/* 로그 */
+.header_log {
+	display : flex;
+	justify-content: space-between;
+	width: 100px;
 }
 
 /* heaer 카테고리 부분*/

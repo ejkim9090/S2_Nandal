@@ -187,7 +187,7 @@
 						  	                         "<div class='list_class_info_wrap'>"+
 						  	                         	 "<div class='allavg'><img class='review_star' src='<%=request.getContextPath()%>/images/review_star_full.png'><span class='f_14_b'>"+data.classlist[j].allAvg+"("+data.classlist[j].allCnt+")</span></div>"+
 						  	                             "<h3 class='f_16_b'>"+data.classlist[j].className+"</h3>"+
-						  	                             "<span class='f_14_b'>"+data.classlist[j].classAddress+"</span>"+
+						  	                             "<span class='f_14_b f_purple'>"+data.classlist[j].classAddress+"</span>"+
 						  	                             "<span class='f_14_b'>"+data.classlist[j].classPrice+"원</span>"+
 						  	                         "</div>"+
 						  	                     "</a>";

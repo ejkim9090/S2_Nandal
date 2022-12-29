@@ -245,10 +245,10 @@
 					                                "<div><img class='my_img' src='<%=request.getContextPath()%>/images/review_star_full.png'><p class='f_16'>"+data[i].reviewGrade+"</p>"+
 					                                "<p class='f_16'>"+reGroup+"</p></div>"+
 					                                "<div class='reCont'>"+
-					                                	"<div class='reCont_score'><label class='f_14'>친절도("+data[i].reviewKind+")</label>"+
-					                                	"<label class='f_14'>시설("+data[i].reviewComponent+")</label>"+
-					                                	"<label class='f_14'>수업구성("+data[i].reviewFacility+")</label>"+
-					                                	"<label class='f_14'>난이도 안내("+data[i].reviewLevel+")</label></div>"+
+					                                	"<div class='reCont_score'><label class='f_12_b'>친절도("+data[i].reviewKind+")</label>"+
+					                                	"<label class='f_12_b'>시설("+data[i].reviewComponent+")</label>"+
+					                                	"<label class='f_12_b'>수업구성("+data[i].reviewFacility+")</label>"+
+					                                	"<label class='f_12_b'>난이도 안내("+data[i].reviewLevel+")</label></div>"+
 					                                    "<p>"+data[i].reviewCont+"</p><div>"+addPhoto+"</div></div>"+
 					                                "<div class='reCont_text'><p>더보기</p><img class='my_img reCont_arrow' src='<%=request.getContextPath()%>/images/review_arrow.png'></div>"+
 					                            "</div>"+
@@ -509,7 +509,7 @@
 			$("#pwdChange_text").css("color","red");
 		}
 	} 
-	//변경할 비밀번호 문구안내
+	//변경할 비밀번호 확인 문구안내
 	$("input[type=password][name=pwdChangeCheck]").on("propertychange change paste input",pwdChangeCheckBluredHandler);
 	function pwdChangeCheckBluredHandler() {
 		var $pwdChangeCheck = $("input[type=password][name=pwdChangeCheck]").val();
@@ -533,7 +533,6 @@
 			$("#memberPhone_text").text("*휴대폰 번호가 형식에 맞지 않습니다.");
 			$("#memberPhone_text").css("color","red");
 		}
-		
 	}
 </script>
         </div>
