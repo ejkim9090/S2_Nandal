@@ -30,7 +30,7 @@
 .input_area > div {
 	display : flex;
 }
-.input_area > div:nth-of-type(1), .input_area > div:nth-of-type(4) {
+.input_area > div:nth-of-type(5) {
 	margin-bottom: 30px;
 }
 .input_area > div > label {
@@ -64,6 +64,19 @@
     color: rgb(255, 255, 255);
     margin-left: 20px;
 }
+#memberIdCheck_div {
+	margin-bottom: 30px;
+	display:none;
+	position: relative;
+	align-items: center;
+}
+#CheckTime {
+	position: absolute;
+	left: 460px;
+	color : red;
+	
+}
+
 /*로그인 - 페이지 이동 버튼 영역*/
 .submit_area {
     margin-top: 28px;

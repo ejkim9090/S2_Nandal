@@ -29,7 +29,8 @@
                     <form id="join_form" action="<%=request.getContextPath()%>/join.do" method="post">
                         <div class="input_area">
                             <div><label>아이디(이메일)</label><input type="text" name="memberId" placeholder="아이디(이메일)를 입력해주세요" required><button id="IdCheck" class="IdCheck_btn" type="button">인증번호 받기</button></div>
-                            <div><label></label><input type="text" name="memberIdCheck" placeholder="인증번호 입력" required><input type="hidden" name="memberIdCheckCode"><button id="IdCheckCode" class="IdCheck_btn" type="button">인증 확인</button></div>
+                            <p id="memberId_text" class="f_12"></p>
+                            <div id="memberIdCheck_div"><label></label><input type="text" name="memberIdCheck" placeholder="인증번호 입력"><div id="CheckTime"></div><input type="hidden" name="memberIdCheckCode"><button id="IdCheckCode" class="IdCheck_btn" type="button">인증 확인</button></div>
                             <div><label>비밀번호</label><input type="password" name="memberPwd" placeholder="비밀번호를 입력해주세요" required></div>
                             <p id="memberPwd_text" class="f_12">*최소 8자이상, 영문,숫자,특수문자(_!@#$% 가능) 최소 1개 이상</p>
                             <div><label>비밀번호 확인</label><input type="password" name="memberPwdCheck" placeholder="비밀번호 확인을 입력해주세요" required></div>
@@ -44,23 +45,62 @@
 		console.log("인증메일 보내기 함수 진입");
 		var $memberId = $("input[type=text][name=memberId]").val();
 		
-		$.ajax({
-      		url : "<%=request.getContextPath()%>/join.lo",
-      		type : "post",
-      		data: "memberId=" + $memberId,
-      		success: function(data){ 
-      					alert(data);
-      					$("input[type=hidden][name=memberIdCheckCode]").val(data.replace("\n",""));
-      				 },
-      		error : function(request, status, error){
-      					console.log(request);	
-      					console.log(status);	
-      					console.log(error);	
-      					alert("code:"+request.status+"\n"
-      							+"message"+request.responseText+"\n"
-      							+"error"+error);
-      				}
-      	});
+		var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+		if(!regExp.test($memberId)) {
+			$("#memberId_text").text("*이메일 형식에 맞지 않습니다.");
+			$("#memberId_text").css("color","red");
+		} else if($("#IdCheck").css("cursor") != "default") {
+			$("#memberId_text").text("");
+			$("#memberId_text").css("color","black");
+			$.ajax({
+	      		url : "<%=request.getContextPath()%>/join.lo",
+	      		type : "post",
+	      		data: "memberId=" + $memberId,
+	      		success: function(data){ 
+	      					alert(data);
+	      					$("input[type=hidden][name=memberIdCheckCode]").val(data.replace("\n",""));
+	      					$("input[type=text][name=memberId]").attr("readonly", "true");
+	      					$("button#IdCheck").css("background-color","rgba(0,0,0,0.2)");
+	      					$("button#IdCheck").css("cursor","default");
+	      					$("#memberIdCheck_div").css("display", "flex");
+	      					CheckTimer();
+	      				 },
+	      		error : function(request, status, error){
+	      					console.log(request);	
+	      					console.log(status);	
+	      					console.log(error);	
+	      					alert("code:"+request.status+"\n"
+	      							+"message"+request.responseText+"\n"
+	      							+"error"+error);
+	      				}
+	      	});
+		}
+	}
+	function CheckTimer() {
+		var time = 180;
+		var min = "";
+		var sec = "";
+		
+		var x = setInterval(function(){
+				min = parseInt(time/60);
+				if(time%60 < 10) {
+					sec = "0" + time%60;
+				} else {
+					sec = time%60;
+				}
+				
+				$("#CheckTime").text(min+":"+sec);
+				time--;
+				
+				if(time < 0) {
+					clearInterval(x);
+					alert("인증시간이 초과하였습니다.");
+					location.reload();
+				} else if($("button#IdCheckCode").css("cursor") == "default") {
+					$("#CheckTime").text("");
+					clearInterval(x);
+				}
+		}, 1000);
 	}
 	$("button#IdCheckCode").click(IdCheckCodeAction);
 	function IdCheckCodeAction() {
@@ -72,11 +112,23 @@
 		if($memberIdCheck == $memberIdCheckCode) {
 			console.log("인증 성공");
 			alert("인증에 성공하셨습니다.");
+			$("button#IdCheckCode").css("background-color","rgba(0,0,0,0.2)");
+			$("button#IdCheckCode").css("cursor","default");
+			$("button#IdCheckCode").text("인증 완료");
+		} else {
+			console.log("인증 실패");
+			alert("인증에 실패하셨습니다. 인증번호를 확인바랍니다.");
 		}
 	}
 	
 	$("#join_form").submit(memberInsertFromHandler);
 	function memberInsertFromHandler() { 
+		//아이디 인증 체크
+		if($("button#IdCheckCode").css("cursor") != "default") {
+			alert("아이디(이메일)를 인증해주세요.");
+			return false;
+		}
+		
 		//비밀번호 체크
 		var $memberPwd = $("input[type=password][name=memberPwd]").val();
 		var $memberPwdCheck = $("input[type=password][name=memberPwdCheck]").val();
