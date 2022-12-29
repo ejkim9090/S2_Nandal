@@ -197,7 +197,7 @@ public class ClassDao {
 		List<ClassVo> volist = null;
 		
 		String sqlAllSearch = "select * from (select t1.*, rownum r from "
-				+ " (select ROUND(allavg,1) allavg, allcnt, c.class_code ,c.CLASS_IMG, c.CLASS_NAME, c.CLASS_ADDRESS, c.CLASS_PRICE "
+				+ " (select (select count(ca.ca_code)  from CLASS_apply ca where ca.ca_cancel = 'N' and ca.class_code = c.class_code) cacnt, ROUND(allavg,1) allavg, allcnt, c.class_code ,c.CLASS_IMG, c.CLASS_NAME, c.CLASS_ADDRESS, c.CLASS_PRICE "
 				+ "                                    from class c left join (select ca.CLASS_CODE, avg(r.REVIEW_GRADE) allavg , count(r.review_GRADE) allcnt "
 				+ "                                        from (select * from class_apply where CA_CANCEL = 'N') ca join review r  on r.REVIEW_CODE = ca.CA_CODE "
 				+ "                                         group by ca.class_code) ca on c.class_code = ca.class_code where 1=1";
@@ -242,17 +242,10 @@ public class ClassDao {
 		//1번 정렬 조건 추가
 		switch(classLineUp) {
 		case "인기순" : 
-			sqlAllSearch += " (select count(ca.class_code) cnt "
-					+ "        from class c2 left join (select * from CLASS_apply where ca_cancel = 'N') ca on c2.CLASS_CODE = ca.class_code"
-					+ "        where  c2.class_code = c.class_code"
-					+ "        group by c2.class_code) desc,";
+			sqlAllSearch += " cacnt desc,";
 			break;
 		case "높은평점순" : 
-			sqlAllSearch += " (select allavg"
-					+ "      	from class c4 left join (select ca3.CLASS_CODE, avg(r.REVIEW_GRADE) allavg "
-					+ "                                 	from (select * from class_apply where CA_CANCEL = 'N') ca3 join review r  on r.REVIEW_CODE = ca3.CA_CODE "
-					+ "                                     group by ca3.class_code) ca4 on c4.class_code = ca4.class_code "
-					+ "        	where c4.class_code = c.class_code) desc,";
+			sqlAllSearch += " allavg desc,";
 			break;
 		case "낮은가격순" : 
 			sqlAllSearch += " c.class_price asc,";
