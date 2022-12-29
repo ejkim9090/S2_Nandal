@@ -197,7 +197,9 @@ public class ClassDao {
 		List<ClassVo> volist = null;
 		
 		String sqlAllSearch = "select * from (select t1.*, rownum r from "
-				+ " (select (select count(ca.ca_code)  from CLASS_apply ca where ca.ca_cancel = 'N' and ca.class_code = c.class_code) cacnt, ROUND(allavg,1) allavg, allcnt, c.class_code ,c.CLASS_IMG, c.CLASS_NAME, c.CLASS_ADDRESS, c.CLASS_PRICE "
+				+ " (select (select count(ca2.ca_code) from class_apply ca2 where ca2.CA_CANCEL = 'N' and ca2.CA_CODE in (select review_code from review where REVIEW_GROUP = "+reviewLineUp+") and ca2.class_code = c.class_code) groupcnt,"
+				+ "			(select count(ca.ca_code)  from CLASS_apply ca where ca.ca_cancel = 'N' and ca.class_code = c.class_code) cacnt, "
+				+ "			ROUND(allavg,1) allavg, allcnt, c.class_code ,c.CLASS_IMG, c.CLASS_NAME, c.CLASS_ADDRESS, c.CLASS_PRICE "
 				+ "                                    from class c left join (select ca.CLASS_CODE, avg(r.REVIEW_GRADE) allavg , count(r.review_GRADE) allcnt "
 				+ "                                        from (select * from class_apply where CA_CANCEL = 'N') ca join review r  on r.REVIEW_CODE = ca.CA_CODE "
 				+ "                                         group by ca.class_code) ca on c.class_code = ca.class_code where 1=1";
@@ -256,13 +258,7 @@ public class ClassDao {
 		}
 		//2번 정렬 조건 추가
 		if(reviewLineUp != 0) {
-			sqlAllSearch += " (select count(ca2.class_code) cnt "
-					+ "    		from class c3 left join (select * from class_apply "
-					+ "     						where CA_CANCEL = 'N' and CA_CODE in "
-					+ "            						(select review_code from review "
-					+ "                					where REVIEW_GROUP = "+reviewLineUp+")) ca2 on c3.class_code = ca2.class_code "
-					+ "      	where c3.class_code = c.class_code "
-					+ "         group by c3.class_code) desc,";
+			sqlAllSearch += " groupcnt desc,";
 		}
 		
 		sqlAllSearch  += " c.class_name asc) t1 ) t2 where r between ? and ?";
