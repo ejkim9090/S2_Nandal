@@ -85,17 +85,17 @@ public class ClassApplyService {
 		return volist;
 	}
 //	MyApplyList - 마이페이지 신청/취소 내역 
-	public List<MyApplyVo> MyApplyList(String memberId,String check){
+	public List<MyApplyVo> myApplyList(String memberId,String check){
 		Connection conn = JdbcTemplate.getConnection();
 		List<MyApplyVo> volist = null;
-		volist = dao.MyApplyList(conn,memberId,check);
+		volist = dao.myApplyList(conn,memberId,check);
 
 		ClassOptionDao coDao = new ClassOptionDao();
 		ReviewDao reDao = new ReviewDao();
 		for(int i = 0; i < volist.size(); i++) {
 			//옵션 이름,가격 가져오기
 			if(volist.get(i).getCoCode() != 0) {
-				ClassOptionVo coVo = coDao.MyoptionOne(conn, volist.get(i).getCoCode(), volist.get(i).getClassCode()); 
+				ClassOptionVo coVo = coDao.myOptionOne(conn, volist.get(i).getCoCode(), volist.get(i).getClassCode()); 
 				volist.get(i).setCoName(coVo.getCoName());
 				volist.get(i).setCoPrice(coVo.getCoPrice());
 			} else {

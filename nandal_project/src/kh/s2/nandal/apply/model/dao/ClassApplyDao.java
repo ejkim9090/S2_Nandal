@@ -99,7 +99,7 @@ public class ClassApplyDao {
 		return volist;
 	}
 //	selectList - 목록조회
-	public List<MyApplyVo> MyApplyList(Connection conn,String memberId,String check){
+	public List<MyApplyVo> myApplyList(Connection conn,String memberId,String check){
 		List<MyApplyVo> volist = null;
 		String sql = null;
 		

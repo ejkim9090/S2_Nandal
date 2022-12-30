@@ -126,7 +126,7 @@ public class ClassOptionDao {
 		return vo;
 	}
 //	selectOne - 마이 리뷰 각 리스트에서 옵션 정보 조회 시
-	public ClassOptionVo MyoptionOne(Connection conn, int coCode, int classCode){
+	public ClassOptionVo myOptionOne(Connection conn, int coCode, int classCode){
 		System.out.println(">>> ClassOptionDao MyoptionOne param coCode : " + coCode + classCode);
 		ClassOptionVo vo = null;
 		

@@ -60,7 +60,7 @@ public class MyLoController extends HttpServlet {
 		switch(navId) {
 		case "my_apply" : 
 			System.out.println("신청 내역");
-			List<MyApplyVo> calist = caService.MyApplyList(memberId, "N");
+			List<MyApplyVo> calist = caService.myApplyList(memberId, "N");
 			System.out.println(calist.toString());
 			
 			//json으로 데이터 변경
@@ -69,7 +69,7 @@ public class MyLoController extends HttpServlet {
 			break;
 		case "my_cancel" : 
 			System.out.println("취소 내역");
-			List<MyApplyVo> aclist = caService.MyApplyList(memberId, "Y");
+			List<MyApplyVo> aclist = caService.myApplyList(memberId, "Y");
 			System.out.println(aclist.toString());
 			
 			//json으로 데이터 변경
@@ -79,7 +79,7 @@ public class MyLoController extends HttpServlet {
 		case "my_review" : 
 			System.out.println("리뷰 관리");
 			ReviewService reService = new ReviewService();
-			List<ClassReviewVo> relist = reService.MyReviewList(memberId);
+			List<ClassReviewVo> relist = reService.myReviewList(memberId);
 			System.out.println(relist.toString());
 			
 			result = gson.toJson(relist);
