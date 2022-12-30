@@ -88,7 +88,7 @@ public class ReviewDao {
 		return result;
 	}
 //	selectList - 마이페이지 리뷰 목록 가져오기
-	public List<ClassReviewVo> MyReviewList(Connection conn,String memberId){
+	public List<ClassReviewVo> myReviewList(Connection conn,String memberId){
 		List<ClassReviewVo> volist = null;
 		
 		String sql = "select class_code, c.CLASS_NAME, r.REVIEW_CODE,r.REVIEW_COMPONENT,r.REVIEW_CONT,r.REVIEW_FACILITY,r.REVIEW_GRADE,r.REVIEW_GROUP,r.REVIEW_KIND,r.REVIEW_LEVEL,TO_CHAR(r.REVIEW_TIME,'YYYY-MM-DD HH24:MI:SS') as REVIEW_TIME"
