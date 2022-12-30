@@ -27,13 +27,13 @@ import kh.s2.nandal.review.model.vo.ReviewVo;
  * Servlet implementation class rmemberUpdateDoController
  */
 @WebServlet("/memberUpdate.do")
-public class memberUpdateDoController extends HttpServlet {
+public class MemberUpdateDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public memberUpdateDoController() {
+    public MemberUpdateDoController() {
         super();
         // TODO Auto-generated constructor stub
     }
