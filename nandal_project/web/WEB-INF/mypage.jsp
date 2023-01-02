@@ -31,12 +31,13 @@
 	    $("input[type=file][multiple=multiple]").on("change",FileNumCheck);
 	});
 	function reviewWriteFormHandler() { // 리뷰 평점 필수 선택 확인
+		console.log($("textarea[name=reviewCont]").val().length);
 		var $kindCheck = $('.form_cont.a > div > input:radio[name=kind]').is(':checked');
 		var $facilityCheck = $('.form_cont.a > div > input:radio[name=facility]').is(':checked');
 		var $componentCheck = $('.form_cont.a > div > input:radio[name=component]').is(':checked');
 		var $levelCheck = $('.form_cont.a > div > input:radio[name=level]').is(':checked');
-		if($("textarea[name=reviewCont]").val().length < 10) {
-			alert("최소 10자 이상 입력해주세요.");
+		if($("textarea[name=reviewCont]").val().length > 1000) {
+			alert("최대 1000자까지 입력가능합니다.");
 			return false;
 		} else if(!$kindCheck || !$facilityCheck || !$componentCheck || !$levelCheck) {
 			alert("필수사항을 체크해주세요.");
@@ -340,6 +341,7 @@
                         <input id="review_code" type="hidden" name="reviewCode" value="0">
                         <h3>리뷰 작성</h3>
                         <textarea name="reviewCont"></textarea>
+                        <p class="f_10">*최대 1000자까지 입력가능</p>
                         <h3>사진 첨부</h3>
                         <input type="file" name="fileUpload" multiple="multiple" accept="image/*">
                         <p class="f_10">*사진은 최대 5개까지 등록가능합니다.</p>
@@ -549,6 +551,7 @@
                         <input id="review_code_update" type="hidden" name="reviewCode2" value="0">
                         <h3>리뷰 작성</h3>
                         <textarea name="reviewCont2"></textarea>
+                        <p class="f_10">*최대 1000자까지 입력가능</p>
                         <h3>사진 첨부</h3>
                         <input type="file" name="fileUpload2" multiple="multiple" accept="image/*">
                         <p class="f_10">*사진은 최대 5개까지 등록가능합니다.</p>
