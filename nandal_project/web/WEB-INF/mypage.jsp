@@ -27,6 +27,7 @@
 	    $(".my_nav").on("click",myNavHandler);
 	    myNavSelectList();
 	    $("form.model_form.a").submit(reviewWriteFormHandler);
+	    $("form.model_form.c").submit(reviewWriteFormHandler);
 	    $("input[type=file][multiple=multiple]").on("change",FileNumCheck);
 	});
 	function reviewWriteFormHandler() { // 리뷰 평점 필수 선택 확인
@@ -34,7 +35,10 @@
 		var $facilityCheck = $('.form_cont.a > div > input:radio[name=facility]').is(':checked');
 		var $componentCheck = $('.form_cont.a > div > input:radio[name=component]').is(':checked');
 		var $levelCheck = $('.form_cont.a > div > input:radio[name=level]').is(':checked');
-		if(!$kindCheck || !$facilityCheck || !$componentCheck || !$levelCheck) {
+		if($("textarea[name=reviewCont]").val().length < 10) {
+			alert("최소 10자 이상 입력해주세요.");
+			return false;
+		} else if(!$kindCheck || !$facilityCheck || !$componentCheck || !$levelCheck) {
 			alert("필수사항을 체크해주세요.");
 			return false;
 		}
