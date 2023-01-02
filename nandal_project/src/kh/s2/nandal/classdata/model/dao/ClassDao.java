@@ -193,6 +193,7 @@ public class ClassDao {
 //	selectList  - 목록조회 페이징 - overloading 
 	public List<ClassVo> selectList(Connection conn, int startRnum, int endRnum, String searchword,int searchArea,int searchCategory, List<Integer> searchDay, List<Integer> searchLevel, int searchMin,int searchMax,String classLineUp,int reviewLineUp){
 		System.out.println("키워드:"+searchword+",선택지역:"+searchArea+", 카테고리 :" +searchCategory + ",요일:"+searchDay+",난이도:"+searchLevel+",최소금액:"+searchMin+",최고금액:"+searchMax+",classLineUp :" + classLineUp + ", reviewLineUp : " + reviewLineUp);
+		System.out.println("startRnum:"+startRnum+",endRnum:"+endRnum);
 		
 		List<ClassVo> volist = null;
 		
