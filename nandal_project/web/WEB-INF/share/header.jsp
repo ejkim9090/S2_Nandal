@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="check_admin">
-                                <button class="c_size c_line c_color" type="reset">초기화</button>
+                                <button class="c_size c_line c_color" type="reset" id="btn_reset">초기화</button>
                                 <button class="c_size c_line c_color" type="button" id="btn_search">검색</button>
                             </div>
                         </div>

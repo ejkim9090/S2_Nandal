@@ -31,10 +31,38 @@
 		listStartSet();
 		listDataAction();
 		$("#btn_search").on("click",listDataAction);
+		$("#btn_reset").on("click",DataResetAction);		
 		$("select[name=classLineUp]").on("change",listDataAction);
 		$("select[name=reviewLineUp]").on("change",listDataAction);
 	});
-	
+	function DataResetAction() {
+		//가져온 지역 선택값 적용
+		var $areaOption = $("select[name=area] > option");
+		for(var i = 0; i < $areaOption.length; i++) {
+			if(i == 0) {$areaOption.get(i).setAttribute('selected',true);}
+			else {$areaOption.get(i).removeAttribute('selected');}
+			
+		}
+		//가져온 카테고리 선택값 적용
+		var $categoryOption = $("select[name=category] > option");
+		for(var i = 0; i < $categoryOption.length; i++) {
+			if(i == 0) {$categoryOption.get(i).setAttribute('selected',true);}
+			else {$categoryOption.get(i).removeAttribute('selected');}
+		}
+		//가져온 요일 적용
+		var $checkboxDay = $("input[type=checkbox][name=day]");
+		for(var i = 0; i < $checkboxDay.length; i++) {
+			$checkboxDay.get(i).removeAttribute('checked');
+		}
+		//가져온 난이도 적용
+		var $checkboxLevel = $("input[type=checkbox][name=level]");
+		for(var i = 0; i < $checkboxLevel.length; i++) {
+			$checkboxLevel.get(i).removeAttribute('checked');
+		}
+		//가져온 금액 정보 적용
+		$("input[type=text][name=priceMin]").val("");
+		$("input[type=text][name=priceMax]").val("");
+	}
 	function listStartSet() {
 		var search = "${search}";
 		var area = "${area}";
