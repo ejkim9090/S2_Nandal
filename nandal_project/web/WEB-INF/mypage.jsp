@@ -404,7 +404,7 @@
                     <h3>아이디(이메일)</h3>
                     <input type="text" name="memberId" value="${loginSsInfo.memberId}" readonly>
                     <h3>비밀번호 확인</h3>
-                    <input type="password" name="pwdCheck">
+                    <input type="password" name="pwdCheck" required>
                     <p class="f_10" id="pwdCheck_text">*필수</p>
                     <h3>새 비밀번호</h3>
                     <input type="password" name="pwdChange">
@@ -449,12 +449,10 @@
 			alert("현재 비밀번호를 확인 해주세요.");
 			return false;
 		}
-		
 		//비밀번호 변경할 경우 체크
 		var $pwdChange = $("input[type=password][name=pwdChange]").val();
 		var $pwdChangeCheck = $("input[type=password][name=pwdChangeCheck]").val();
 		var reg = /^(?=.*[a-z])(?=.*[0-9])(?=.*[_!@#$%])[A-Za-z0-9_!@#$%]{8,}$/;
-		
 		if($pwdChange != "" && $pwdChange != null) {
 			if($pwdChange == pwd) {
 				alert("새 비밀번호가 기존과 같습니다.");
@@ -467,10 +465,8 @@
 				return false;
 			}
 		}
-		
 		//휴대폰 번호 변경할 경우 체크
 		var $memberPhone = $("input[type=text][name=memberPhone]").val();
-		
 		var reg = /^[0][1][016789]-[0-9]{4}-[0-9]{4}$/;
 		if($memberPhone != "" && $memberPhone != null) {
 			if(!reg.test($memberPhone)) {

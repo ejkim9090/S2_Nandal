@@ -117,7 +117,7 @@ public class ClassDao {
 		System.out.println(">>> ClassDao groupList param group : " + group);
 		List<ClassVo> volist = null;
 		
-		String sql = "select ROUND(allavg,1) allavg, allcnt, c.class_code, c.CLASS_IMG, c.CLASS_NAME, c.CLASS_ADDRESS, c.CLASS_PRICE "
+		String sql = "select NVL(ROUND(allavg,1), 0) allavg, NVL(allcnt, 0) allcnt, c.class_code, c.CLASS_IMG, c.CLASS_NAME, c.CLASS_ADDRESS, c.CLASS_PRICE "
 				+ "    from class c left join (select ca.CLASS_CODE, avg(r.REVIEW_GRADE) allavg , count(r.review_GRADE) allcnt "
 				+ "                                        from (select * from class_apply where CA_CANCEL = 'N') ca join review r  on r.REVIEW_CODE = ca.CA_CODE "
 				+ "                                         group by ca.class_code) ca on c.class_code = ca.class_code"
@@ -200,20 +200,10 @@ public class ClassDao {
 		String sqlAllSearch = "select * from (select t1.*, rownum r from "
 				+ " (select (select count(ca2.ca_code) from class_apply ca2 where ca2.CA_CANCEL = 'N' and ca2.CA_CODE in (select review_code from review where REVIEW_GROUP = "+reviewLineUp+") and ca2.class_code = c.class_code) groupcnt,"
 				+ "			(select count(ca.ca_code)  from CLASS_apply ca where ca.ca_cancel = 'N' and ca.class_code = c.class_code) cacnt, "
-				+ "			ROUND(allavg,1) allavg, allcnt, c.class_code ,c.CLASS_IMG, c.CLASS_NAME, c.CLASS_ADDRESS, c.CLASS_PRICE "
+				+ "			NVL(ROUND(allavg,1), 0) allavg, NVL(allcnt, 0) allcnt, c.class_code ,c.CLASS_IMG, c.CLASS_NAME, c.CLASS_ADDRESS, c.CLASS_PRICE "
 				+ "                                    from class c left join (select ca.CLASS_CODE, avg(r.REVIEW_GRADE) allavg , count(r.review_GRADE) allcnt "
 				+ "                                        from (select * from class_apply where CA_CANCEL = 'N') ca join review r  on r.REVIEW_CODE = ca.CA_CODE "
 				+ "                                         group by ca.class_code) ca on c.class_code = ca.class_code where 1=1";
-//				+ "  and class_name LIKE ? " //키워드 검색 값 
-//				+ "and area_code = 11 " //지역 검색
-//				+ "and category_code = 3 " //카테고리 검색
-//				+ "and class_level in (1,2,3) " //난이도 검색
-//				+ "and class_code in(select class_code from class_schedule where bitand(CS_DAY,31) > 0 " // 요일 - 평일 확인
-//				+ "																or bitand(CS_DAY,32) > 0 " // 요일 - 토요일 확인
-//				+ "																or bitand(CS_DAY,64) > 0)" // 요일 - 일요일 확인
-//				+ "and class_price between 0 and 9999"
-//				+ "order by c.class_name asc) t1 ) t2 "
-//				+ " where r between ? and ?";
 		
 		if(searchword != null && !searchword.equals("")) {
 			sqlAllSearch += " and c.class_name LIKE '" + "%"+searchword+"%'";
@@ -238,7 +228,7 @@ public class ClassDao {
 				else sqlAllSearch += " or bitand(CS_DAY," + searchDay.get(i) +") > 0";
 			}
 			sqlAllSearch  += ")";
-		}
+		}	
 		sqlAllSearch  += " and c.class_price between "+searchMin+" and " +searchMax;
 		sqlAllSearch  += " order by";
 		
