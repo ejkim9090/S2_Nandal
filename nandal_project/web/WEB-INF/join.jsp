@@ -30,7 +30,7 @@
                         <div class="input_area">
                             <div><label>아이디(이메일)</label><input type="text" name="memberId" placeholder="아이디(이메일)를 입력해주세요" required><button id="IdCheck" class="IdCheck_btn" type="button">인증번호 받기</button></div>
                             <p id="memberId_text" class="f_12"></p>
-                            <div id="memberIdCheck_div"><label></label><input type="text" name="memberIdCheck" placeholder="인증번호 입력"><div id="CheckTime"></div><input type="hidden" name="memberIdCheckCode"><button id="IdCheckCode" class="IdCheck_btn" type="button">인증 확인</button></div>
+                            <div id="memberIdCheck_div"><label></label><input type="text" name="memberIdCheck" placeholder="인증번호 입력"><div id="CheckTime"></div><input type="hidden" name="memberIdCheckCode"><button id="IdCheckCode" class="IdCheck_btn" type="button">인증번호 확인</button></div>
                             <div><label>비밀번호</label><input type="password" name="memberPwd" placeholder="비밀번호를 입력해주세요" required></div>
                             <p id="memberPwd_text" class="f_12">*최소 8자이상, 영문,숫자,특수문자(_!@#$% 가능) 최소 1개 이상</p>
                             <div><label>비밀번호 확인</label><input type="password" name="memberPwdCheck" placeholder="비밀번호 확인을 입력해주세요" required></div>
@@ -53,16 +53,37 @@
 			$("#memberId_text").text("");
 			$("#memberId_text").css("color","black");
 			$.ajax({
-	      		url : "<%=request.getContextPath()%>/join.lo",
+	      		url : "<%=request.getContextPath()%>/joinIdCheck.lo",
 	      		type : "post",
 	      		data: "memberId=" + $memberId,
 	      		success: function(data){ 
-	      					$("input[type=hidden][name=memberIdCheckCode]").val(data.replace("\n",""));
-	      					$("input[type=text][name=memberId]").attr("readonly", "true");
-	      					$("button#IdCheck").css("background-color","rgba(0,0,0,0.2)");
-	      					$("button#IdCheck").css("cursor","default");
-	      					$("#memberIdCheck_div").css("display", "flex");
-	      					CheckTimer();
+	      					if(data == 1) {
+	      						$("#memberId_text").text("*이미 가입된 아이디(이메일)입니다.");
+	      						$("#memberId_text").css("color","red");
+	      						return;
+	      					} else {
+	      						$.ajax({
+	      				      		url : "<%=request.getContextPath()%>/join.lo",
+	      				      		type : "post",
+	      				      		data: "memberId=" + $memberId,
+	      				      		success: function(data){ 
+	      				      					$("input[type=hidden][name=memberIdCheckCode]").val(data.replace("\n",""));
+	      				      					$("input[type=text][name=memberId]").attr("readonly", "true");
+	      				      					$("button#IdCheck").css("background-color","rgba(0,0,0,0.2)");
+	      				      					$("button#IdCheck").css("cursor","default");
+	      				      					$("#memberIdCheck_div").css("display", "flex");
+	      				      					CheckTimer();
+	      				      				 },
+	      				      		error : function(request, status, error){
+	      				      					console.log(request);	
+	      				      					console.log(status);	
+	      				      					console.log(error);	
+	      				      					alert("code:"+request.status+"\n"
+	      				      							+"message"+request.responseText+"\n"
+	      				      							+"error"+error);
+	      				      				}
+	      				      	});
+	      					}
 	      				 },
 	      		error : function(request, status, error){
 	      					console.log(request);	
@@ -73,6 +94,7 @@
 	      							+"error"+error);
 	      				}
 	      	});
+			
 		}
 	}
 	function CheckTimer() {
