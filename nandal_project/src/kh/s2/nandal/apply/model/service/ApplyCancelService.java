@@ -23,9 +23,10 @@ public class ApplyCancelService {
 		Connection conn = JdbcTemplate.getConnection();
 		int result = 0;
 		if(caDao.update(conn, acCode) > 0) {
-			if(dao.insert(conn, acCode) > 0) {
+			result = dao.insert(conn, acCode);
+			if(result > 0) {
 					rpDao.delete(conn, acCode);
-					result = reDao.delete(conn, acCode);
+					reDao.delete(conn, acCode);
 			}
 		}
 		if(result > 0) {
