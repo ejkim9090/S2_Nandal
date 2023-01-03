@@ -25,7 +25,7 @@
     <script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
     <script src="<%=request.getContextPath()%>/js/info_api.js"></script>
     <script src="<%=request.getContextPath()%>/js/info.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=22e814de5ddfa7ab67223da7c1c400b9&libraries=services,clusterer,drawing"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey="kakaoMap api key 입력&libraries=services,clusterer,drawing"></script>
 	
     <script>
      $( function() {
