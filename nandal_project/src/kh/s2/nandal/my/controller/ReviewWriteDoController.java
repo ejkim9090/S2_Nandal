@@ -98,7 +98,6 @@ public class ReviewWriteDoController extends HttpServlet {
 					if(origin.equals("")) {
 						System.out.println("첨부된 파일이 없음");
 					} else {
-						
 						String ext = origin.substring(origin.lastIndexOf("."));
 						
 						//이름 중복을 방지하기 위한 처리
@@ -111,7 +110,6 @@ public class ReviewWriteDoController extends HttpServlet {
 						if(!currentDir.exists()) { //저장할 경로 폴더가 있는건지 확인
 							currentDir.mkdirs(); //없으면 해당 경로 폴더들 다 생성
 						}
-						
 						File uploadFile = new File(currentDir+separator+name); //저장할 파일 생성
 						item.write(uploadFile); //첨부파일을 해당 경로로 저장
 					}
@@ -135,19 +133,18 @@ public class ReviewWriteDoController extends HttpServlet {
 		
 			if(result > 0) {
 				msg = "리뷰 등록에 성공했습니다.";
+				System.out.println("rp배열 크기 : "+rpRouteArr.size());
+				if(rpRouteArr.size() > 0) { //저장된 파일 경로가 있는지 확인
+					for(String rpRoute: rpRouteArr) { 
+						ReviewPhotoVo rpVo = new ReviewPhotoVo();
+						rpVo.setReviewCode(reviewCode);
+						rpVo.setRpRoute(rpRoute);
+						System.out.println("저장될 rp:" +rpVo.toString());
+						rpService.insert(rpVo);
+					}
+				}
 			} else {
 				msg = "리뷰 등록에 실패했습니다.";
-			}
-			
-			System.out.println("rp배열 크기 : "+rpRouteArr.size());
-			if(rpRouteArr.size() > 0) { //저장된 파일 경로가 있는지 확인
-				for(String rpRoute: rpRouteArr) { 
-					ReviewPhotoVo rpVo = new ReviewPhotoVo();
-					rpVo.setReviewCode(reviewCode);
-					rpVo.setRpRoute(rpRoute);
-					System.out.println("저장될 rp:" +rpVo.toString());
-					rpService.insert(rpVo);
-				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
