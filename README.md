@@ -25,7 +25,7 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/116356234/227253152-a512e104-b310-4f1f-a2eb-65d74890e08a.png"></p>
 
 ## 3️⃣ 주요 기능
-
+![주요 기능](https://user-images.githubusercontent.com/116356234/228161783-fbb89207-98e5-47b5-a260-7ecb3332f3be.png)
 
 ## 4️⃣ 산출물
 ## 1.개발일정
@@ -33,12 +33,23 @@
 [데일리 일정 보기(Google Drive)](https://docs.google.com/spreadsheets/d/1CawW7X56g70JCO-MmkeiacJanTxpTwznG2hZXZjfstY/edit?usp=sharing)
 
 ## 2.요구사항 정의서
+
+<h3 align="center">마이페이지</h3>
+
+![요구사항정의서(마이 페이지)](https://user-images.githubusercontent.com/116356234/228162759-a9741668-59dd-42b8-80c5-34508abe8c67.png)
 [요구사항 정의서 전체보기(Google Drive)](https://docs.google.com/spreadsheets/d/1WZ8FKLGcB3sAmk1_qZcC9mDx_BMDflsnClbkX-mwUqw/edit?usp=sharing)
 
-## 3. 유스케이스 다이어그램
+## 3. UI 설계서
+
+<h3 align="center">상세 페이지(일부)</h3>
+
+![project_Nandal  상세페이지](https://user-images.githubusercontent.com/116356234/228165166-86fb1eb1-795f-42bf-bceb-38424b011d97.png)
+[UI 설계서 전체보기(Google Drive)](https://drive.google.com/file/d/1-nIWiOTHrDdHr_S33RS3rCn7dQmzimEM/view?usp=sharing)
+
+## 4. 유스케이스 다이어그램
 ![이미지](https://user-images.githubusercontent.com/116356234/228153613-7a696ca3-6766-4445-b1c7-d83a39c59fc6.png)
 
-## 4.시퀀스 다이어그램
+## 5.시퀀스 다이어그램
 
 <h3 align="center">회원가입</h3>
 
@@ -59,22 +70,27 @@
 
 ![리뷰 수정(시퀀스)](https://user-images.githubusercontent.com/116356234/228153997-9caf0c0a-5645-48c8-8ef3-24c2b7e911b1.png)
 
-## 4.ERD 다이어그램
+## 6.ERD 다이어그램
 ![ERD확대](https://user-images.githubusercontent.com/116356234/228155278-e4e019b3-54fd-4525-8756-3f4032c98902.png)
 
-## 5.클래스 URL 맵핑
+## 7.클래스 URL 맵핑
 ![url mapping](https://user-images.githubusercontent.com/116356234/228155963-c840fb30-9642-44d9-bfbd-395d42d704c0.png)
 
-## 6.클래스 다이어그램
+## 8.클래스 다이어그램
 
 <h3 align="center">목록 조회</h3>
 
 ![class](https://user-images.githubusercontent.com/116356234/228155785-cd863372-4c76-4d13-8124-7d88f96b7d2e.png)
 
-## 7.history
+## 9.history
+![히스토리 일부](https://user-images.githubusercontent.com/116356234/228162768-44f63460-d3c0-4712-9e2e-95bffab03af3.png)
 [history 전체 보기(Google Drive)](https://docs.google.com/spreadsheets/d/17JAPmGYTPVRHDcrvCwwMwiZ-16RYISPayvNI8cIO3gg/edit?usp=sharing)
 
 
-## 8.테스트 케이스
+## 10.테스트 케이스
+
+<h3 align="center">마이페이지</h3>
+
+![테스트 케이스(마이 페이지)](https://user-images.githubusercontent.com/116356234/228162764-1d7083af-cd17-468f-8dc9-901ce7865f4b.png)
 [테스트 케이스 전체 보기(Google Drive)](https://docs.google.com/spreadsheets/d/1vm2aPEtXIhMBIqChLwXK-q4RTqgk3pphlwWo8_pCQuY/edit?usp=sharing)
 
