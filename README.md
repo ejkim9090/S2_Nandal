@@ -29,7 +29,8 @@
 
 ## 4️⃣ 산출물
 ## 1.개발일정
-
+![일정](https://user-images.githubusercontent.com/116356234/228160064-d3644862-3945-4d58-93d0-4baba962796b.png)
+[데일리 일정 보기(Google Drive)](https://docs.google.com/spreadsheets/d/1CawW7X56g70JCO-MmkeiacJanTxpTwznG2hZXZjfstY/edit?usp=sharing)
 
 ## 2.요구사항 정의서
 [요구사항 정의서 전체보기(Google Drive)](https://docs.google.com/spreadsheets/d/1WZ8FKLGcB3sAmk1_qZcC9mDx_BMDflsnClbkX-mwUqw/edit?usp=sharing)
@@ -65,6 +66,9 @@
 ![url mapping](https://user-images.githubusercontent.com/116356234/228155963-c840fb30-9642-44d9-bfbd-395d42d704c0.png)
 
 ## 6.클래스 다이어그램
+
+<h3 align="center">목록 조회</h3>
+
 ![class](https://user-images.githubusercontent.com/116356234/228155785-cd863372-4c76-4d13-8124-7d88f96b7d2e.png)
 
 ## 7.history
