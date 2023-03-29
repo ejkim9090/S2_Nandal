@@ -25,7 +25,6 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/116356234/227253152-a512e104-b310-4f1f-a2eb-65d74890e08a.png"></p>
 
 ## 3️⃣ 주요 기능
-![주요 기능](https://user-images.githubusercontent.com/116356234/228161783-fbb89207-98e5-47b5-a260-7ecb3332f3be.png)
 
 <details>
 <summary><h3>✅ 회원가입/로그인 </h3></summary>
@@ -40,7 +39,7 @@
 </div><br>
 <div align="center">
   
-![스터디 관리 800](https://user-images.githubusercontent.com/116356234/226551126-1e3d45e1-6367-48af-9d0c-31e10ae5b216.gif)   
+![회원가입 800](https://user-images.githubusercontent.com/116356234/228622134-e5a7db10-c7fb-4037-8dd8-09f95b2561e1.gif) 
   
 </div>
 
@@ -58,13 +57,11 @@
 </div><br>
 <div align="center">
   
-![스터디 카페 등록 800](https://user-images.githubusercontent.com/116356234/226551119-460ba9ae-6bf4-433f-a3e5-bfb696cc4441.gif)   
+![로그인 800](https://user-images.githubusercontent.com/116356234/228622051-92735add-ef39-46b5-a0e2-7825009342a2.gif)   
   
 </div>
 
 - 내용
-
-<div align="center"><img src="https://res.cloudinary.com/dnik5jlzd/image/upload/v1679389765/readme/storyboard/%EC%8A%A4%ED%86%A0%EB%A6%AC%EB%B3%B4%EB%93%9C_-_%EC%8A%A4%ED%84%B0%EB%94%94_%EC%B9%B4%ED%8E%98_%EB%93%B1%EB%A1%9D_kc6ggo.png" width="810"></div>
 
 </div>
 </details>
@@ -77,37 +74,17 @@
   
 <div align="center">
 <img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-회원가입
+클래스/리뷰 추천 
 <img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
 </div><br>
 <div align="center">
   
-![스터디 관리 800](https://user-images.githubusercontent.com/116356234/226551126-1e3d45e1-6367-48af-9d0c-31e10ae5b216.gif)   
+![메인 페이지 800](https://user-images.githubusercontent.com/116356234/228622068-f6d55f2d-945c-40ba-a28e-fdd0e412b466.gif)
   
 </div>
 
 - 내용
  
-</div>
-
----
-<br> 
-  
-<div align="center">
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-로그인
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-</div><br>
-<div align="center">
-  
-![스터디 카페 등록 800](https://user-images.githubusercontent.com/116356234/226551119-460ba9ae-6bf4-433f-a3e5-bfb696cc4441.gif)   
-  
-</div>
-
-- 내용
-
-<div align="center"><img src="https://res.cloudinary.com/dnik5jlzd/image/upload/v1679389765/readme/storyboard/%EC%8A%A4%ED%86%A0%EB%A6%AC%EB%B3%B4%EB%93%9C_-_%EC%8A%A4%ED%84%B0%EB%94%94_%EC%B9%B4%ED%8E%98_%EB%93%B1%EB%A1%9D_kc6ggo.png" width="810"></div>
-
 </div>
 </details>
 
@@ -119,37 +96,17 @@
   
 <div align="center">
 <img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-회원가입
+클래스 목록 조회/정렬
 <img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
 </div><br>
 <div align="center">
   
-![스터디 관리 800](https://user-images.githubusercontent.com/116356234/226551126-1e3d45e1-6367-48af-9d0c-31e10ae5b216.gif)   
+![목록 조회 800](https://user-images.githubusercontent.com/116356234/228622085-b3357a84-e936-4fd9-ab2d-9315aef348c5.gif) 
   
 </div>
 
 - 내용
  
-</div>
-
----
-<br> 
-  
-<div align="center">
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-로그인
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-</div><br>
-<div align="center">
-  
-![스터디 카페 등록 800](https://user-images.githubusercontent.com/116356234/226551119-460ba9ae-6bf4-433f-a3e5-bfb696cc4441.gif)   
-  
-</div>
-
-- 내용
-
-<div align="center"><img src="https://res.cloudinary.com/dnik5jlzd/image/upload/v1679389765/readme/storyboard/%EC%8A%A4%ED%86%A0%EB%A6%AC%EB%B3%B4%EB%93%9C_-_%EC%8A%A4%ED%84%B0%EB%94%94_%EC%B9%B4%ED%8E%98_%EB%93%B1%EB%A1%9D_kc6ggo.png" width="810"></div>
-
 </div>
 </details>
 
@@ -161,12 +118,12 @@
   
 <div align="center">
 <img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-회원가입
+클래스 상세 조회
 <img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
 </div><br>
 <div align="center">
   
-![스터디 관리 800](https://user-images.githubusercontent.com/116356234/226551126-1e3d45e1-6367-48af-9d0c-31e10ae5b216.gif)   
+![상세 페이지 800](https://user-images.githubusercontent.com/116356234/228622097-3c8ac5a5-9e57-4add-aff6-b35f5db9b7ef.gif)  
   
 </div>
 
@@ -179,18 +136,16 @@
   
 <div align="center">
 <img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-로그인
+클래스 신청
 <img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
 </div><br>
 <div align="center">
   
-![스터디 카페 등록 800](https://user-images.githubusercontent.com/116356234/226551119-460ba9ae-6bf4-433f-a3e5-bfb696cc4441.gif)   
+![클래스 신청 800](https://user-images.githubusercontent.com/116356234/228622119-950696fa-cf43-4e77-9549-88f101ce71cc.gif)  
   
 </div>
 
 - 내용
-
-<div align="center"><img src="https://res.cloudinary.com/dnik5jlzd/image/upload/v1679389765/readme/storyboard/%EC%8A%A4%ED%86%A0%EB%A6%AC%EB%B3%B4%EB%93%9C_-_%EC%8A%A4%ED%84%B0%EB%94%94_%EC%B9%B4%ED%8E%98_%EB%93%B1%EB%A1%9D_kc6ggo.png" width="810"></div>
 
 </div>
 </details>
@@ -203,12 +158,12 @@
   
 <div align="center">
 <img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-회원가입
+프로필 수정
 <img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
 </div><br>
 <div align="center">
   
-![스터디 관리 800](https://user-images.githubusercontent.com/116356234/226551126-1e3d45e1-6367-48af-9d0c-31e10ae5b216.gif)   
+![프로필 수정 800](https://user-images.githubusercontent.com/116356234/228622127-f5e470d7-0caf-4c9f-97d3-ce82f6c2fe67.gif) 
   
 </div>
 
@@ -221,18 +176,34 @@
   
 <div align="center">
 <img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-로그인
+신청 취소
 <img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
 </div><br>
 <div align="center">
   
-![스터디 카페 등록 800](https://user-images.githubusercontent.com/116356234/226551119-460ba9ae-6bf4-433f-a3e5-bfb696cc4441.gif)   
+![신청 취소 800](https://user-images.githubusercontent.com/116356234/228622111-9cd6b5f8-52ea-4263-982e-865a67586f19.gif)   
   
 </div>
 
 - 내용
 
-<div align="center"><img src="https://res.cloudinary.com/dnik5jlzd/image/upload/v1679389765/readme/storyboard/%EC%8A%A4%ED%86%A0%EB%A6%AC%EB%B3%B4%EB%93%9C_-_%EC%8A%A4%ED%84%B0%EB%94%94_%EC%B9%B4%ED%8E%98_%EB%93%B1%EB%A1%9D_kc6ggo.png" width="810"></div>
+</div>
+
+---
+<br> 
+  
+<div align="center">
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+리뷰 등록/수정/삭제
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+</div><br>
+<div align="center">
+  
+![리뷰 등록및수정 800](https://user-images.githubusercontent.com/116356234/228622056-43887fb3-805f-4386-8ba5-83020757c558.gif)   
+  
+</div>
+
+- 내용
 
 </div>
 </details>
