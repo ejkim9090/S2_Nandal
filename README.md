@@ -102,9 +102,9 @@
 - 카테고리 클릭 시 해당 클래스 목록 조회 페이지로 이동
 
 <div align="center">
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+<strong>
 목록 출력 및 목록이동 설정
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+</strong>
 </div>
 
 ![메인 페이지](https://user-images.githubusercontent.com/116356234/229087535-5436495f-207d-4692-b098-3807ab3b021d.png)
@@ -134,25 +134,25 @@
 - 총 클래스 개수 표시 및 9개의 클래스 마다 페이징 처리
 
 <div align="center">
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+<strong>
 목록 페이지 진입 시
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+</strong>
 </div>
 
 ![목록-데이터 처리](https://user-images.githubusercontent.com/116356234/229090712-8e506c7e-f9da-4dea-afb7-8e915e5a15dc.png)
 
 <div align="center">
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-조회 시 SQL문
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+<strong>
+조회 시 SQL
+</strong>
 </div>
 
 ![목록-SQL문](https://user-images.githubusercontent.com/116356234/229090720-728f2e8a-d51d-4bb1-b646-691c088eba17.png) 
 
 <div align="center">
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-조회 시 정렬 SQL문
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+<strong>
+조회 시 정렬 SQL
+</strong>
 </div>
 
 ![목록-정렬 기준 SQL문](https://user-images.githubusercontent.com/116356234/229090723-b8757799-df65-4679-a639-29cf3d98c41f.png) 
@@ -186,9 +186,9 @@
 - 후기 별점 우측 ▼버튼 호버 시 드롭다운 상세 점수 표시 
 
 <div align="center">
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+<strong>
 상세 페이지 진입 시
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+</strong>
 </div>
 
 ![상세 페이지 이동](https://user-images.githubusercontent.com/116356234/229093533-93e216ce-108f-4325-b68d-7f263a0c3d4d.png)
@@ -214,19 +214,16 @@
 - 신청 시 비로그인 시 alert 및 로그인 페이지로 이동
 - 일정/인원 미선택 시 alert
 - 신청 시 Ajax를 통해 신청 정보 추가 후 alert 및 페이지 재로드
+  
+<div align="center"><strong>클래스 신청 데이터 처리</strong></div>
+  
 ![상세-클래스 신청](https://user-images.githubusercontent.com/116356234/229094696-719c94b1-d25d-49bc-a7f7-36d392c23dce.png)
 
-<div align="center">
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-날짜 별 일정조회
-<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
-</div>
-
-<div align="center"><strong>JSP</strong></div>
+<div align="center"><strong>날짜 별 일정조회 JSP</strong></div>
 
 ![상세-날짜 별 일정조회](https://user-images.githubusercontent.com/116356234/229094687-36feb70d-2f61-46d8-a65d-26aaccd17222.png)  
 
-<div align="center"><strong>SQL</strong></div>
+<div align="center"><strong>날짜 별 일정조회 SQL</strong></div>
 
 ![상세-날짜 별 일정조회(SQL)](https://user-images.githubusercontent.com/116356234/229094694-2dc9eaab-f21b-4ec0-9103-7fc5cc916ecb.png) 
 
@@ -250,8 +247,29 @@
   
 </div>
 
-- 내용
+- 마이페이지에서 프로필 수정 버튼 클릭 시 수정 모달창 표시
+- 수정이 불가능한 아이디(이메일)/이름은 기존 값 표시
+- 기존 비밀번호 입력 시 하단 안내 표시
+- 새 비밀번호/휴대폰 번호 입력 시 형식 안내
+- 수정 버튼 클릭 시 기존 비밀번호 및 입력된 사항 유효성 검사 후 결과에 따라 alert
  
+<div align="center">
+<strong>
+유효성 체크
+</strong>
+</div>
+
+![회원정보수정-유효성](https://user-images.githubusercontent.com/116356234/229105594-99ceadc2-d121-4c2c-be51-b3d2adaf68db.png)  
+  
+
+<div align="center">
+<strong>
+세션 로그인 정보 수정
+</strong>
+</div>
+
+![회원정보수정-세션 로그인 정보 수정](https://user-images.githubusercontent.com/116356234/229105601-a4f2372f-7c0f-40e2-be70-a925fcc0e6aa.png) 
+  
 </div>
 
 ---
@@ -268,7 +286,9 @@
   
 </div>
 
-- 내용
+- 좌측 네비에 신청/취소 내역 클릭 시 신청/취소 내역 Ajax 조회
+- [취소 신청] 버튼 클릭 시 결과 alert 및 재조회
+- 신청/취소 내역에 클래스명 클릭 시 상세 페이지로 이동
 
 </div>
 
@@ -286,7 +306,35 @@
   
 </div>
 
-- 내용
+- 리뷰 등록
+  - 신청 내역에서 리뷰 등록 여부에 따라 [리뷰 등록] 버튼 표시
+  - [리뷰 등록] 버튼 클릭 시 리뷰 등록 모달창 표시
+  - [등록] 버튼 클릭 시 필수 입력사항 미입력 등 결과에 따른 alert
+  - 등록 시 Commons-fileupload를 통해 첨부파일 처리
+- 좌측 네비에 리뷰 관리 클릭 시 리뷰 내역 Ajax로 조회
+- [더보기▼] 버튼 클릭 시 리뷰 내용 및 사진 표시
+- 리뷰 수정
+  - [수정] 버튼 클릭 시 리뷰 수정 모달창 표시
+  - 사진을 제외한 기존 정보 AJax로 가져온 후 표시
+  - 모달창의 [수정] 버튼 클릭 시 결과 alert
+- 리뷰 삭제
+  - [삭제] 버튼 클릭 시 리뷰 삭제 및 결과 alert
+
+<div align="center">
+<strong>
+리뷰 등록 데이터 처리
+</strong>
+</div>
+
+![리뷰 등록-데이터 처리](https://user-images.githubusercontent.com/116356234/229109199-484a1a19-5195-465e-89e2-03cbb3999f7a.png) 
+
+<div align="center">
+<strong>
+수정 시 기존 리뷰 정보 출력
+</strong>
+</div>
+
+![리뷰 수정-기존 리뷰 정보 출력](https://user-images.githubusercontent.com/116356234/229109203-213fd0cb-3706-4a97-9d49-6e1c36c2f2dc.png)
 
 </div>
 </details>
