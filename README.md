@@ -43,7 +43,17 @@
   
 </div>
 
-- 내용
+- 정보입력 시 문구 안내
+  - 비밀번호 입력 시 "최소 8자 이상, 영문,숫자,특수문자(!@#$%) 각 1개 이상" 형식 확인 안내
+  - 비밀번호 확인 입력 시 비밀번호와 일치 확인 한내
+  - 휴대폰 번호 입력 시 형식 확인 안내
+- 인증번호 받기 버튼 클릭 시 결과에 따라 문구 안내 및 이메일로 인증 메일 발송
+- 인증번호 확인 버튼 클릭 시 결과 alert
+- 회원가입 버튼 클릭 시 유효성 검사에 따른 alert
+  - 아이디 인증 확인
+  - 비밀번호 "최소 8자 이상, 영문,숫자,특수문자(!@#$%) 각 1개 이상" 형식 확인
+  - 휴대폰 번호 형식 확인
+- 회원가입 성공 시 로그인 페이지로 이동
  
 </div>
 
@@ -61,7 +71,8 @@
   
 </div>
 
-- 내용
+- 로그인 시 아이디/비밀번호가 틀릴경우 alert
+- 로그인 성공 시 메인페이지로 이동
 
 </div>
 </details>
@@ -83,7 +94,20 @@
   
 </div>
 
-- 내용
+- 추천 유형에 따라 클래스 목록 노출
+- 좌우 버튼 클릭 시 목록 이동
+  - 클래스 개수에 따라 이동 횟수 설정
+  - 각 방향으로 마지막일 경우 해당 방향 버튼 숨김
+- 클래스, 리뷰 클릭 시 상세 페이지로 이동
+- 카테고리 클릭 시 해당 클래스 목록 조회 페이지로 이동
+
+<div align="center">
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+목록 출력 및 목록이동 설정
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+</div>
+
+![메인 페이지](https://user-images.githubusercontent.com/116356234/229087535-5436495f-207d-4692-b098-3807ab3b021d.png)
  
 </div>
 </details>
@@ -105,8 +129,34 @@
   
 </div>
 
-- 내용
- 
+- 다른 페이지에서 카테고리 선택 및 검색으로 진입 시 해당 값 적용 
+- 페이지 진입/검색버튼 클릭/정렬 기준 선택/페이지 버튼 클릭 시 Ajax로 입력 및 선택 된 키워드, 조건, 정렬기준의 클래스 조회
+- 총 클래스 개수 표시 및 9개의 클래스 마다 페이징 처리
+
+<div align="center">
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+목록 페이지 진입 시
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+</div>
+
+![목록-데이터 처리](https://user-images.githubusercontent.com/116356234/229090712-8e506c7e-f9da-4dea-afb7-8e915e5a15dc.png)
+
+<div align="center">
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+조회 시 SQL문
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+</div>
+
+![목록-SQL문](https://user-images.githubusercontent.com/116356234/229090720-728f2e8a-d51d-4bb1-b646-691c088eba17.png) 
+
+<div align="center">
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+조회 시 정렬 SQL문
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+</div>
+
+![목록-정렬 기준 SQL문](https://user-images.githubusercontent.com/116356234/229090723-b8757799-df65-4679-a639-29cf3d98c41f.png) 
+
 </div>
 </details>
 
@@ -127,7 +177,21 @@
   
 </div>
 
-- 내용
+- 메인/목록 페이지의 목록 클릭 및 마이페이지의 클래스명 클릭 시 상세페이지로 이동
+- 사진 목록 클릭 시 해당 사진으로 확대보기 변경
+- JQuery UI 라이브러리의 datepicker를 사용하여 클래스 신청 시 날짜 선택
+- 네비의 각 부분 클릭 시 해당 부분으로 스크롤 이동 및 일정 이상 내려갈 경우 클래스 신청 버튼 표시
+- 클래스 신청 버튼 클릭 시 신청 일정 선택 UI 노출 및 기존 정보 유지
+- Kakao Maps API 사용하여 지도에 위치 안내
+- 후기 별점 우측 ▼버튼 호버 시 드롭다운 상세 점수 표시 
+
+<div align="center">
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+상세 페이지 진입 시
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+</div>
+
+![상세 페이지 이동](https://user-images.githubusercontent.com/116356234/229093533-93e216ce-108f-4325-b68d-7f263a0c3d4d.png)
  
 </div>
 
@@ -145,7 +209,26 @@
   
 </div>
 
-- 내용
+- JQuery UI 라이브러리의 datepicker를 사용하여 클래스 신청 시 날짜 선택
+- 선택 한 날짜에 따라 Ajax를 통해 해당 날짜의 일정 목록 표시
+- 신청 시 비로그인 시 alert 및 로그인 페이지로 이동
+- 일정/인원 미선택 시 alert
+- 신청 시 Ajax를 통해 신청 정보 추가 후 alert 및 페이지 재로드
+![상세-클래스 신청](https://user-images.githubusercontent.com/116356234/229094696-719c94b1-d25d-49bc-a7f7-36d392c23dce.png)
+
+<div align="center">
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+날짜 별 일정조회
+<img src="https://res.cloudinary.com/dnik5jlzd/image/upload/c_scale,h_10,w_225/v1679302400/readme/%EC%84%A0_vkktmh.png">
+</div>
+
+<div align="center"><strong>JSP</strong></div>
+
+![상세-날짜 별 일정조회](https://user-images.githubusercontent.com/116356234/229094687-36feb70d-2f61-46d8-a65d-26aaccd17222.png)  
+
+<div align="center"><strong>SQL</strong></div>
+
+![상세-날짜 별 일정조회(SQL)](https://user-images.githubusercontent.com/116356234/229094694-2dc9eaab-f21b-4ec0-9103-7fc5cc916ecb.png) 
 
 </div>
 </details>
