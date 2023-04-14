@@ -26,9 +26,9 @@
 
 ## 3️⃣ 주요 기능
 
-<details>
-<summary><h3>✅ 회원가입/로그인 - 펼쳐보기(클릭) </h3></summary>
-<div markdown="1">
+<br>
+
+<h3>✅ 회원가입/로그인 </h3>
   
 <br>
   
@@ -75,11 +75,10 @@
 - 로그인 성공 시 메인페이지로 이동
 
 </div>
-</details>
 
-<details>
-<summary><h3>✅ 메인 페이지 - 펼쳐보기(클릭) </h3></summary>
-<div markdown="1">
+<br>
+
+<h3>✅ 메인 페이지 </h3>
   
 <br>
   
@@ -110,11 +109,10 @@
 ![메인 페이지](https://user-images.githubusercontent.com/116356234/229087535-5436495f-207d-4692-b098-3807ab3b021d.png)
  
 </div>
-</details>
 
-<details>
-<summary><h3>✅ 목록 페이지 - 펼쳐보기(클릭) </h3></summary>
-<div markdown="1">
+<br>
+
+<h3>✅ 목록 페이지 </h3>
   
 <br>
   
@@ -158,11 +156,10 @@
 ![목록-정렬 기준 SQL문](https://user-images.githubusercontent.com/116356234/229090723-b8757799-df65-4679-a639-29cf3d98c41f.png) 
 
 </div>
-</details>
 
-<details>
-<summary><h3>✅ 상세 페이지 - 펼쳐보기(클릭) </h3></summary>
-<div markdown="1">
+<br>
+
+<h3>✅ 상세 페이지 </h3>
   
 <br>
   
@@ -228,10 +225,9 @@
 ![상세-날짜 별 일정조회(SQL)](https://user-images.githubusercontent.com/116356234/229094694-2dc9eaab-f21b-4ec0-9103-7fc5cc916ecb.png) 
 
 </div>
-</details>
 
-<details>
-<summary><h3>✅ 마이 페이지 - 펼쳐보기(클릭) </h3></summary>
+
+<h3>✅ 마이 페이지 - 펼쳐보기(클릭) </h3>
 <div markdown="1">
   
 <br>
@@ -337,7 +333,6 @@
 ![리뷰 수정-기존 리뷰 정보 출력](https://user-images.githubusercontent.com/116356234/229109203-213fd0cb-3706-4a97-9d49-6e1c36c2f2dc.png)
 
 </div>
-</details>
 
 
 ## 4️⃣ 산출물
