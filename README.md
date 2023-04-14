@@ -27,7 +27,7 @@
 ## 3️⃣ 주요 기능
 
 <details>
-<summary><h3>✅ 회원가입/로그인 </h3></summary>
+<summary><h3>✅ 회원가입/로그인 - 펼쳐보기(클릭) </h3></summary>
 <div markdown="1">
   
 <br>
@@ -78,7 +78,7 @@
 </details>
 
 <details>
-<summary><h3>✅ 메인 페이지 </h3></summary>
+<summary><h3>✅ 메인 페이지 - 펼쳐보기(클릭) </h3></summary>
 <div markdown="1">
   
 <br>
@@ -113,7 +113,7 @@
 </details>
 
 <details>
-<summary><h3>✅ 목록 페이지 </h3></summary>
+<summary><h3>✅ 목록 페이지 - 펼쳐보기(클릭) </h3></summary>
 <div markdown="1">
   
 <br>
@@ -161,7 +161,7 @@
 </details>
 
 <details>
-<summary><h3>✅ 상세 페이지 </h3></summary>
+<summary><h3>✅ 상세 페이지 - 펼쳐보기(클릭) </h3></summary>
 <div markdown="1">
   
 <br>
@@ -231,7 +231,7 @@
 </details>
 
 <details>
-<summary><h3>✅ 마이 페이지 </h3></summary>
+<summary><h3>✅ 마이 페이지 - 펼쳐보기(클릭) </h3></summary>
 <div markdown="1">
   
 <br>
